@@ -30,11 +30,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _Velocity = _MoveAction.ReadValue<Vector2>() * _MovementAcceleration;
+        _Velocity = (Vector3)_MoveAction.ReadValue<Vector2>() * _MovementAcceleration;
         transform.position += new Vector3(_Velocity.x, 0.0f, _Velocity.y) * Time.deltaTime;
-        if (_JumpAction.triggered)
-        {
-            transform.position += new Vector3(0.0f, _JumpForce, 0.0f);
-        }
     }
 }
