@@ -11,34 +11,47 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _PlayerInput;
     private InputAction _MoveAction;
     private InputAction _LookAction;
-    [SerializeField] private CinemachineVirtualCamera _PlayerFollowCamera;
+    private Camera _MainCamera;
+    [SerializeField] private LayerMask _GroundLayerMask;
     private Vector3 _Velocity;
     private Vector3 _PlayerMovementInput;
-    private float _lookRotation;
+    private Vector2 _LookRotation;
     [FormerlySerializedAs("_Acceleration")] [SerializeField] [Range(1.0f, 50.0f)] private float _MovementAcceleration = 5.0f;
-    [SerializeField] [Range(1.0f, 50.0f)] private float _LookSpeed = 25.0f;
 
     private void Awake()
     {
         _PlayerInput = GetComponent<PlayerInput>();
         _MoveAction = _PlayerInput.actions["Move"];
         _LookAction = _PlayerInput.actions["Look"];
+        _MainCamera = Camera.main;
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Update()
     {
-        
+        UpdatePlayerPositionAndRotation();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdatePlayerPositionAndRotation()
     {
         _PlayerMovementInput = _MoveAction.ReadValue<Vector3>();
         _Velocity = new Vector3(_PlayerMovementInput.x, 0.0f, _PlayerMovementInput.z) * _MovementAcceleration * Time.deltaTime;
-        _lookRotation += _LookAction.ReadValue<float>() * _LookSpeed * Time.deltaTime;
-        transform.localRotation = Quaternion.Euler(0.0f, _lookRotation, 0.0f);
+        PlayerAim();
         _Velocity = transform.localRotation * _Velocity;
         transform.position += _Velocity;
+    }
+
+    private void PlayerAim()
+    {
+        Vector3 mousePosition = GetMousePosition();
+        Vector3 mouseDirection = mousePosition - transform.position;
+        mouseDirection.y = 0;
+        transform.forward = mouseDirection;
+    }
+
+    private Vector3 GetMousePosition()
+    {
+        Ray mouseRay = _MainCamera.ScreenPointToRay(_LookAction.ReadValue<Vector2>());
+        Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, _GroundLayerMask);
+        return hitInfo.point;
     }
 }
