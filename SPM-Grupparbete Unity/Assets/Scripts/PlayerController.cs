@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
+//Main author: Axel Ingelsson Fredler
+
 public class PlayerController : MonoBehaviour
 {
     private PlayerInput _PlayerInput;
