@@ -594,7 +594,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -619,7 +619,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.52573115, y: 1e-45, z: -1e-45, w: 0.85065085}
+  m_LocalRotation: {x: 0.5257311, y: -0.000000021954929, z: 0.000000013568892, w: 0.85065085}
   m_LocalPosition: {x: 0, y: 11.89, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -899,8 +899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63725985f189e746b0c45c3855933c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PlayerFollowCamera: {fileID: 1760585360}
   _MovementAcceleration: 5
-  _JumpForce: 2
+  _LookSpeed: 25
 --- !u!114 &1258263942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +935,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8bf46c96-a302-4b3c-abd7-def6dd09468d
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a05e016e-736e-4ac2-bcfe-ec73161dfb70
+    m_ActionName: Player/Look[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1243,7 +1248,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1258263939}
   m_Follow: {fileID: 1258263939}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 75
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1264,7 +1269,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760585359}
-  m_LocalRotation: {x: 0.52573115, y: 1e-45, z: -1e-45, w: 0.85065085}
+  m_LocalRotation: {x: 0.5257311, y: -0.000000021954929, z: 0.000000013568892, w: 0.85065085}
   m_LocalPosition: {x: 0, y: 11.89, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
