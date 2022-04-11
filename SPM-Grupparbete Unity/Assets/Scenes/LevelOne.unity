@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -584,9 +584,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: SaveAndLoadObject
       objectReference: {fileID: 0}
+    - target: {fileID: 1320174072011306595, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: f47e509a26ae73746bcdd580dff7aba9, type: 3}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 8722dd59-aa34-4f4b-b6d2-34103c59755a
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: ab102391-f67d-4772-b6b0-ec05fd001b6c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 0b1133f2-305d-4ddb-970e-5441bb5ca848
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: e4616236-fd49-4453-b69f-756b7ae8f0cd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Player/Loaded[/Keyboard/p]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Save/New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928091261976009732, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: Save/Save[/Keyboard/o]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673c655f085a00b4bb5984d0db79c3a7, type: 3}

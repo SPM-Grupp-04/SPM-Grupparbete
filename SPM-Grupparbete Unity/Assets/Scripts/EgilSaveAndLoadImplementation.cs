@@ -12,6 +12,7 @@ public class EgilSaveAndLoadImplementation : MonoBehaviour
 
     private InputAction saveAction;
     private InputAction loadGame;
+   
      
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,6 @@ public class EgilSaveAndLoadImplementation : MonoBehaviour
         PI = GetComponent<PlayerInput>();
         saveAction = PI.actions["Save"];
         loadGame = PI.actions["Loaded"];
-        
         
         if (EgilGlobalControl.Instance.IsSceneBeingLoaded)
         {
@@ -32,6 +32,7 @@ public class EgilSaveAndLoadImplementation : MonoBehaviour
 
     void Update()
     {
+        
         if (saveAction.IsPressed())
         {
             Debug.Log("Pressed O");

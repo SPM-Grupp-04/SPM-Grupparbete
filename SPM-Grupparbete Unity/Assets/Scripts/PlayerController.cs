@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     
     private PlayerInput _PlayerInput;
     private InputAction _MoveAction;
+    
     private InputAction _JumpAction;
     private Vector3 _Velocity;
     [FormerlySerializedAs("_Acceleration")] [SerializeField] [Range(1.0f, 50.0f)] private float _MovementAcceleration = 5.0f;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         _PlayerInput = GetComponent<PlayerInput>();
         _MoveAction = _PlayerInput.actions["Move"];
         _JumpAction = _PlayerInput.actions["Jump"];
+        
     }
 
     // Start is called before the first frame update
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+     
         _Velocity = (Vector3)_MoveAction.ReadValue<Vector2>() * _MovementAcceleration;
         transform.position += new Vector3(_Velocity.x, 0.0f, _Velocity.y) * Time.deltaTime;
     }
