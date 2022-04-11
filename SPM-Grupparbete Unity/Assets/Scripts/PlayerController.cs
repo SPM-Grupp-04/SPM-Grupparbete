@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _PlayerInput;
     private InputAction _MoveAction;
     private InputAction _LookAction;
+    private InputAction _FireAction;
     private Camera _MainCamera;
     [SerializeField] private LayerMask _GroundLayerMask;
     private Vector3 _Velocity;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         _PlayerInput = GetComponent<PlayerInput>();
         _MoveAction = _PlayerInput.actions["Move"];
         _LookAction = _PlayerInput.actions["Look"];
+        _FireAction = _PlayerInput.actions["Fire"];
         _MainCamera = Camera.main;
     }
     
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mousePosition = GetMousePosition();
         Vector3 mouseDirection = mousePosition - transform.position;
+        Debug.DrawRay(transform.position, mouseDirection, Color.green);
         mouseDirection.y = 0;
         transform.forward = mouseDirection;
     }
@@ -52,6 +55,13 @@ public class PlayerController : MonoBehaviour
     {
         Ray mouseRay = _MainCamera.ScreenPointToRay(_LookAction.ReadValue<Vector2>());
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, _GroundLayerMask);
+        if (Physics.Raycast(mouseRay, out var hit, 100))
+        {
+            if (_FireAction.WasPerformedThisFrame() && hit.transform.gameObject.CompareTag("Enemy"))
+            {
+                Debug.Log("BANG!");
+            }
+        }
         return hitInfo.point;
     }
 }
