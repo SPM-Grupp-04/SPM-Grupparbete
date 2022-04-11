@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -5,11 +6,16 @@ using UnityEngine;
 
 public class EgilHealth : MonoBehaviour
 {
-    [SerializeField] [Range(1, 10)] private float health = 5;
-    
+    public PlayerStatistics LocalPlayerData = new PlayerStatistics();
+
+    private void Start()
+    {
+        LocalPlayerData.hp = EgilGlobalControl.Instance.SavedData.hp;
+    }
+
     void Update()
     {
-        if (health < 1)
+        if (LocalPlayerData.hp < 1)
         {
             Destroy(transform.gameObject);
         }
@@ -17,8 +23,12 @@ public class EgilHealth : MonoBehaviour
 
     public void Takedamage()
     {
-        health--;
+        LocalPlayerData.hp--;
+        SavePlayer();
     }
-    
-    
+
+    public void SavePlayer()
+    {
+        EgilGlobalControl.Instance.SavedData = LocalPlayerData;
+    }
 }

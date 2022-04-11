@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    
     private PlayerInput _PlayerInput;
     private InputAction _MoveAction;
     private InputAction _JumpAction;
@@ -33,4 +34,5 @@ public class PlayerController : MonoBehaviour
         _Velocity = (Vector3)_MoveAction.ReadValue<Vector2>() * _MovementAcceleration;
         transform.position += new Vector3(_Velocity.x, 0.0f, _Velocity.y) * Time.deltaTime;
     }
+    
 }
