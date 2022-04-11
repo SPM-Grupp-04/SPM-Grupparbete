@@ -69,7 +69,7 @@ public class EgilEnemyDetectionBehaviour : MonoBehaviour
 
     private void StopFollowPlayer()
     {
-        if (_playerDistance != null && _playerDistance.magnitude < 10)
+        if (_playerDistance != null && _playerDistance.magnitude > 10)
         {
             player = null;
         }
