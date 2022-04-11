@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 [Serializable]
 public class PlayerStatistics
 {
+   
    //TODO: Att implemntera ett sätt att göra detta för två spelare.
    // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
    
