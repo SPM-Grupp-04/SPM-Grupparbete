@@ -8,8 +8,10 @@ public class EgilEnemyDetectionBehaviour : MonoBehaviour
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] [Range(1.0f, 50.0f)] private float _enemyMovementSpeed = 2.5f;
 
+
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
             //Vector3.MoveTowards(_enemyTransform.position, other.transform.position, _enemyMovementSpeed);
