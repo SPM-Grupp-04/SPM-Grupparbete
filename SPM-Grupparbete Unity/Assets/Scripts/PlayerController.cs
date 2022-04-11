@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     private InputAction _MoveAction;
     private InputAction _LookAction;
     [SerializeField] private CinemachineVirtualCamera _PlayerFollowCamera;
-    private Vector2 _Velocity;
-    private Vector2 _PlayerMovementInput;
+    private Vector3 _Velocity;
+    private Vector3 _PlayerMovementInput;
     private float _lookRotation;
     [FormerlySerializedAs("_Acceleration")] [SerializeField] [Range(1.0f, 50.0f)] private float _MovementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 50.0f)] private float _LookSpeed = 25.0f;
@@ -34,11 +34,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _PlayerMovementInput = _MoveAction.ReadValue<Vector2>();
-        _Velocity = _PlayerMovementInput * _MovementAcceleration * Time.deltaTime;
+        _PlayerMovementInput = _MoveAction.ReadValue<Vector3>();
+        _Velocity = new Vector3(_PlayerMovementInput.x, 0.0f, _PlayerMovementInput.z) * _MovementAcceleration * Time.deltaTime;
         _lookRotation += _LookAction.ReadValue<float>() * _LookSpeed * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(0.0f, _lookRotation, 0.0f);
         _Velocity = transform.localRotation * _Velocity;
-        transform.position += new Vector3(_Velocity.x, 0.0f, _Velocity.y);
+        transform.position += _Velocity;
     }
 }
