@@ -7,17 +7,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 public class EgilSaveAndLoadImplementation : MonoBehaviour
 {
-  
+  /*
     private PlayerInput PI;
 
     private InputAction saveAction;
     private InputAction loadGame;
-
+*/
     private void Awake()
     {
     }
 
     // Start is called before the first frame update
+  /*
     void Start()
     {
         
@@ -33,7 +34,26 @@ public class EgilSaveAndLoadImplementation : MonoBehaviour
             EgilGlobalControl.Instance.IsSceneBeingLoaded = false;
         }
     }
+*/
 
+    public void saveGamePress()
+    {
+        Debug.Log("Pressed O");
+        EgilGlobalControl.Instance.SavedData.Scene = SceneManager.GetActiveScene().name;
+
+        EgilGlobalControl.Instance.SaveData();
+    }
+
+    public void LoadGamePress()
+    {
+        Debug.Log("Pressed P");
+        EgilGlobalControl.Instance.LoadData();
+        EgilGlobalControl.Instance.IsSceneBeingLoaded = true;
+
+        String whichScene = EgilGlobalControl.Instance.SavedData.Scene;
+        SceneManager.LoadScene(whichScene);
+    }
+    /*
     void Update()
     {
         
@@ -57,4 +77,5 @@ public class EgilSaveAndLoadImplementation : MonoBehaviour
         }
         
     }
+    */
 }
