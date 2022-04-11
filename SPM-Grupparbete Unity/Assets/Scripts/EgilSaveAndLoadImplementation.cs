@@ -12,13 +12,17 @@ public class EgilSaveAndLoadImplementation : MonoBehaviour
 
     private InputAction saveAction;
     private InputAction loadGame;
-   
-     
+
+    private void Awake()
+    {
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         
         PI = GetComponent<PlayerInput>();
+        
         saveAction = PI.actions["Save"];
         loadGame = PI.actions["Loaded"];
         
