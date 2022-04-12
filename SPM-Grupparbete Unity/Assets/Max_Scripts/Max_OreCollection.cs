@@ -5,11 +5,13 @@ using UnityEngine;
 public class Max_OreCollection : MonoBehaviour
 {
     [SerializeField] string oreName = "Red";
+    private EgilHealth eh;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        eh = GetComponent<EgilHealth>();
+
     }
 
     // Update is called once per frame
@@ -18,10 +20,10 @@ public class Max_OreCollection : MonoBehaviour
         
     }
 
-    public int CollectOre()
+    public void CollectOre()
     {
         DestoryObject();
-        return 1;
+        eh.GainCrystal();
     }
 
     

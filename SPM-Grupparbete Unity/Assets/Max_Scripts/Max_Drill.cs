@@ -141,4 +141,9 @@ public class Max_Drill : MonoBehaviour
 
         }
     }
+
+    public float GetOverheatAmount()
+    {
+        return _overHeatAmount;
+    }
 }

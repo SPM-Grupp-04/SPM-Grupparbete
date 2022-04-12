@@ -58,6 +58,17 @@ public class EgilHealth : MonoBehaviour
         SavePlayer();
     }
 
+    public void GainCrystal()
+    {
+        if (playerName == "PlayerOne")
+        {
+            localEgilPlayerData.Crystals++;
+        }
+        else
+        {
+            localEgilPlayerData.Crystals++;
+        }
+    }
     public void SavePlayer()
     {
         EgilGlobalControl.Instance.SavedData = localEgilPlayerData;

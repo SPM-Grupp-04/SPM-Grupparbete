@@ -34,5 +34,6 @@ public class EgilPlayerStatistics
    public float PlayerTwoHP = 5;
    public string Scene;
    public float PosX, PosY, PosZ;
+   public int Crystals = 0; 
    
 }
