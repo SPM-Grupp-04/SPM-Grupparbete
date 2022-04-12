@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mousePosition = GetMousePosition();
         Vector3 mouseDirection = mousePosition - transform.position;
+        Debug.DrawRay(transform.position, mouseDirection, Color.green);
         mouseDirection.y = 0;
         transform.forward = mouseDirection;
     }
@@ -86,6 +87,13 @@ public class PlayerController : MonoBehaviour
     {
         Ray mouseRay = mainCamera.ScreenPointToRay(mouseLookAction.ReadValue<Vector2>());
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
+        if (Physics.Raycast(mouseRay, out var hit, 100))
+        {
+            if (fireAction.WasPerformedThisFrame() && hit.transform.gameObject.CompareTag("Enemy"))
+            {
+                Debug.Log("BANG!");
+            }
+        }
         return hitInfo.point;
     }
 }
