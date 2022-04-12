@@ -17,12 +17,12 @@ public class PlayerController : MonoBehaviour
     private InputAction _FireAction;
     private Camera _MainCamera;
     [SerializeField] private LayerMask _GroundLayerMask;
+    [FormerlySerializedAs("_Acceleration")] [SerializeField] [Range(1.0f, 50.0f)] private float _MovementAcceleration = 5.0f;
     private Vector3 _Velocity;
     private Vector3 _PlayerMovementInput;
     private Vector2 _LookRotation;
     private String _KEYBOARDANDMOUSECONTROLSCHEME = "Keyboard&Mouse";
     private String _GAMEPADCONTROLSCHEME = "Gamepad";
-    [FormerlySerializedAs("_Acceleration")] [SerializeField] [Range(1.0f, 50.0f)] private float _MovementAcceleration = 5.0f;
 
     private void Awake()
     {
