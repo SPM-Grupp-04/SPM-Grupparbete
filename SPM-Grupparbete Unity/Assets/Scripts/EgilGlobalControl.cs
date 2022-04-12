@@ -12,7 +12,7 @@ public class EgilGlobalControl : MonoBehaviour
     public bool IsSceneBeingLoaded = false;
     // Variabler som ska sparas över scener.
 
-    public PlayerStatistics SavedData = new PlayerStatistics();
+    public PlayerStatistics SavedData = PlayerStatistics.Instance;
     
     private void Awake()
     {

@@ -6,24 +6,54 @@ using UnityEngine;
 
 public class EgilHealth : MonoBehaviour
 {
-    public PlayerStatistics LocalPlayerData = new PlayerStatistics();
+    public PlayerStatistics LocalPlayerData = PlayerStatistics.Instance;
+
+    [SerializeField] private String playerName;
+
 
     private void Start()
     {
-        LocalPlayerData.hp = EgilGlobalControl.Instance.SavedData.hp;
+        if (playerName == "PlayerOne")
+        {
+            LocalPlayerData.PlayerOnehp = EgilGlobalControl.Instance.SavedData.PlayerOnehp;
+        }
+        
+        if (playerName == "PlayerTwo")
+        {
+            LocalPlayerData.PlayerTwoHP = EgilGlobalControl.Instance.SavedData.PlayerTwoHP;
+        }
     }
 
     void Update()
     {
-        if (LocalPlayerData.hp < 1)
+        if (playerName == "PlayerOne")
         {
-            Destroy(transform.gameObject);
+            if (LocalPlayerData.PlayerOnehp < 1)
+            {
+                Destroy(transform.gameObject);
+            }
+        }
+
+        if (playerName == "PlayerTwo")
+        {
+            if (LocalPlayerData.PlayerTwoHP < 1)
+            {
+                Destroy(transform.gameObject);
+            }
         }
     }
 
     public void Takedamage()
     {
-        LocalPlayerData.hp--;
+        if (playerName == "PlayerOne")
+        {
+            LocalPlayerData.PlayerOnehp--;
+        }
+        else
+        {
+            LocalPlayerData.PlayerTwoHP--;
+        }
+
         SavePlayer();
     }
 

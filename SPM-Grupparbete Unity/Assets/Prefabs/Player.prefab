@@ -130,11 +130,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalPlayerData:
-    hp: 5
+    PlayerOnehp: 5
+    PlayerTwoHP: 5
     Scene: 
     PosX: 0
     PosY: 0
     PosZ: 0
+  playerName: PlayerTwo
 --- !u!114 &3689737768433148075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MovementAcceleration: 5
   _JumpForce: 2
+  c: {fileID: 0}
 --- !u!114 &5649840799384998118
 MonoBehaviour:
   m_ObjectHideFlags: 0
