@@ -13,7 +13,10 @@ public class AxelPlayerController : MonoBehaviour
     private InputAction mouseLookAction;
     private InputAction gamePadLookAction;
     private InputAction useAction;
+    private InputAction saveAction;
+    private InputAction LoadAction;
     private Camera mainCamera;
+    private EgilSaveAndLoadImplementation saveAndLoad;  
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     private Vector3 velocity;
@@ -30,10 +33,32 @@ public class AxelPlayerController : MonoBehaviour
         mouseLookAction = playerInput.actions["MouseLook"];
         gamePadLookAction = playerInput.actions["GamePadLook"];
         useAction = playerInput.actions["Use"];
+        saveAction = playerInput.actions["Save"];
+        LoadAction = playerInput.actions["Load"];
+        saveAndLoad = GetComponent<EgilSaveAndLoadImplementation>();
         mainCamera = Camera.main;
     }
     
     private void Update()
+    {
+        PlayerMovement();
+        SaveAndLoadGame();
+    }
+
+    private void SaveAndLoadGame()
+    {
+        if (saveAction.WasPressedThisFrame())
+        {
+            saveAndLoad.saveGamePress();
+        }
+
+        if (LoadAction.WasPressedThisFrame())
+        {
+            saveAndLoad.LoadGamePress();
+        }
+    }
+
+    private void PlayerMovement()
     {
         if (movementEnabled)
         {

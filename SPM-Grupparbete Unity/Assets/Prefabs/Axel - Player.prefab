@@ -13,8 +13,11 @@ GameObject:
   - component: {fileID: 2965090648212625150}
   - component: {fileID: 2965090648212625151}
   - component: {fileID: 2965090648212625147}
-  - component: {fileID: 2965090648212625146}
+  - component: {fileID: 7708049037048568331}
   - component: {fileID: 2965090648212625145}
+  - component: {fileID: 6385055751904336009}
+  - component: {fileID: 5868905720494507359}
+  - component: {fileID: -8244656556404297340}
   m_Layer: 6
   m_Name: Axel - Player
   m_TagString: Player
@@ -115,7 +118,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2965090648212625146
+--- !u!114 &7708049037048568331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,12 +127,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2965090648212624896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c63725985f189e746b0c45c3855933c1, type: 3}
+  m_Script: {fileID: 11500000, guid: fe2f232af7217b94ebbe104266a7da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   movementAcceleration: 5
 --- !u!114 &2965090648212625145
 MonoBehaviour:
@@ -143,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: f47e509a26ae73746bcdd580dff7aba9, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 9aaf622c89cabf040ae9ef0085d468f1, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -170,17 +173,69 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 9dd3f670-02a7-41fa-ad56-180b8775ddeb
-    m_ActionName: Player/Fire
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 5890ab07-2365-4934-9382-1b6af64e2fd2
     m_ActionName: Player/GamePadLook[/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 741944ee-ba64-4a12-b359-25b87c192cf5
+    m_ActionName: Player/Use[/Keyboard/e,/XInputControllerWindows/start,/XInputControllerWindows1/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f68c959f-d42d-4d85-a7b6-417447eb3420
+    m_ActionName: Player/Save[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a029900d-4ced-4bf3-8e0a-8b5056e77328
+    m_ActionName: Player/Load[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6385055751904336009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965090648212624896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3df4e61b519944bb26756e8f57e171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localEgilPlayerData:
+    PlayerOnehp: 5
+    PlayerTwoHP: 5
+    Scene: 
+    PosX: 0
+    PosY: 0
+    PosZ: 0
+  playerName: PlayerOne
+--- !u!114 &5868905720494507359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965090648212624896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f8f03b609dcb146b1b8496e1a490e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8244656556404297340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965090648212624896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240ae670bf0086840a12b5a2fb3cb79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2965090648766077744
 GameObject:
   m_ObjectHideFlags: 0
