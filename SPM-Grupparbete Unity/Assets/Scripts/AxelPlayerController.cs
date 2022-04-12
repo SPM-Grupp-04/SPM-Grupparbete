@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 //Main author: Axel Ingelsson Fredler
 
-public class PlayerController : MonoBehaviour
+public class AxelPlayerController : MonoBehaviour
 {
     private PlayerInput playerInput;
     private InputAction moveAction;

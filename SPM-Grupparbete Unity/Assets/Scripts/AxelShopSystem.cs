@@ -5,7 +5,7 @@ using UnityEngine;
 
 //Main author: Axel Ingelsson Fredler
 
-public class ShopSystem : MonoBehaviour
+public class AxelShopSystem : MonoBehaviour
 {
     [SerializeField] private GameObject shopInterfaceBackground;
     [SerializeField] private LayerMask playerLayerMask;
@@ -31,7 +31,7 @@ public class ShopSystem : MonoBehaviour
         shopColliders = Physics.OverlapSphere(transform.position, shopAreaRadius, playerLayerMask);
         foreach (Collider collider in shopColliders)
         {
-            if (collider.gameObject.GetComponent<PlayerController>().IsUseInputPressed())
+            if (collider.gameObject.GetComponent<AxelPlayerController>().IsUseInputPressed())
             {
                 if (!shopInterfaceOpened)
                 {
@@ -48,14 +48,14 @@ public class ShopSystem : MonoBehaviour
     private void OpenShopInterface(Collider playerCollider)
     {
         shopInterfaceOpened = true;
-        playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(false);
+        playerCollider.gameObject.GetComponent<AxelPlayerController>().SetMovementStatus(false);
         shopInterfaceBackground.SetActive(true);
     }
 
     private void CloseShopInterface(Collider playerCollider)
     {
         shopInterfaceOpened = false;
-        playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(true);
+        playerCollider.gameObject.GetComponent<AxelPlayerController>().SetMovementStatus(true);
         shopInterfaceBackground.SetActive(false);
     }
     void OnDrawGizmos()
