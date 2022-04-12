@@ -7,6 +7,7 @@ public class Max_Drill : MonoBehaviour
 {
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private LayerMask igenoreMask;
     private GameObject _laserPoint;
 
     private GameObject _beamGO;
@@ -14,6 +15,7 @@ public class Max_Drill : MonoBehaviour
     private float _timer = 0;
     private bool _isUsed;
     private bool _canShoot = true;
+
 
 
     private void Awake()
@@ -89,7 +91,7 @@ public class Max_Drill : MonoBehaviour
 
         if (_overHeatAmount < 100 && _canShoot)
         {
-            if (Physics.Raycast(transform.position, fwd, out shootHit, 10f))
+            if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
 

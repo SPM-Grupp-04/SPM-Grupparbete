@@ -7,7 +7,6 @@ public class Max_DestoryableWall : Max_DestroyableObjectBase
     [SerializeField] int materialAmount = 0;
     [SerializeField] int materialHP = 5;
     [SerializeField] int requierdWeaponLevel = 1;
-    [SerializeField] GameObject rubble;
 
 
     public override void ReduceMaterialAmount(int amount)
@@ -47,10 +46,7 @@ public class Max_DestoryableWall : Max_DestroyableObjectBase
 
     private void DestoryObject()
     {
-        for(int i = 0; i < 2; i++)
-        {
-            Instantiate(rubble, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), Quaternion.identity);
-        }
+        
         Destroy(this.gameObject);
     }
 }

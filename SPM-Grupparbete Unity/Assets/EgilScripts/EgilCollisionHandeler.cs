@@ -22,6 +22,10 @@ public class EgilCollisionHandeler : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+        if (collision.transform.tag.Equals("Currency"))
+        {
+           collision.gameObject.SendMessage("CollectOre");
+        }
     }
 
     private void OnCollisionStay(Collision collisionInfo)
