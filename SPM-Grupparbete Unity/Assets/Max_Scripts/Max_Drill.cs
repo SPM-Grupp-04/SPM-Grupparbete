@@ -119,7 +119,7 @@ public class Max_Drill : MonoBehaviour
             if (_timer <= 0)
             {
                 _canShoot = false;
-                _timer = 5;
+                _timer = 2;
             }
             
         }

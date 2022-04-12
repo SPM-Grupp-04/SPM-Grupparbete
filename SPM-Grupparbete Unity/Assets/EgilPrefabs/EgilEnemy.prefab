@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4308763472161346371}
   - component: {fileID: 4308763472161346380}
   - component: {fileID: 7937890704413458594}
+  - component: {fileID: 3500602035323472134}
   m_Layer: 0
   m_Name: EgilEnemy
   m_TagString: Enemy
@@ -126,6 +127,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947c586bd2e490c4890028d8efca582c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3500602035323472134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308763472161346383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c95057cdbf6d643a9e6213996e3de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 5
 --- !u!1 &4308763473153746033
 GameObject:
   m_ObjectHideFlags: 0
