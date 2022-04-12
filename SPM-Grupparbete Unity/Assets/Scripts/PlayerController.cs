@@ -36,10 +36,10 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {   
-        if (playerInput.currentControlScheme.Equals(Keyboardandmousecontrolscheme))
+        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
         {
             UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        } else if (playerInput.currentControlScheme.Equals(Gamepadcontrolscheme))
+        } else if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
