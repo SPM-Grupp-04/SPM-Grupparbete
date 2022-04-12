@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
-public class FollowPlayer :Node
+public class EgilFollowPlayer :EgilNode
 {
     private Transform droneTransform;
     private Transform playerTransform;
-    public FollowPlayer(Transform drone, Transform player)
+    public EgilFollowPlayer(Transform drone, Transform player)
     {
         droneTransform = drone;
         playerTransform = player;

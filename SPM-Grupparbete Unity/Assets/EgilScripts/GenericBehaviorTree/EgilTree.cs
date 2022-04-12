@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    public abstract class Tree : MonoBehaviour
+    public abstract class EgilTree : MonoBehaviour
     {
-        private Node root = null;
+        private EgilNode root = null;
 
         protected void Start()
         {
@@ -23,6 +23,6 @@ namespace BehaviorTree
             }
         }
 
-        protected abstract Node SetUpTree();
+        protected abstract EgilNode SetUpTree();
     }
 }

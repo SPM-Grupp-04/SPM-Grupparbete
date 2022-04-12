@@ -4,11 +4,11 @@ using System.Linq.Expressions;
 using BehaviorTree;
 using UnityEngine;
 
-public class GoToEnemy : Node
+public class EgilGoToEnemy : EgilNode
 {
     private Transform _transform;
 
-    public GoToEnemy(Transform transform)
+    public EgilGoToEnemy(Transform transform)
     {
         _transform = transform;
     }

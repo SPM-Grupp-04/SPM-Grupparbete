@@ -13,31 +13,31 @@ namespace BehaviorTree
         FAILURE
     }
 
-    public class Node
+    public class EgilNode
     {
         protected NodeState state;
-        public Node parent;
-        protected List<Node> children;
+        public EgilNode parent;
+        protected List<EgilNode> children;
 
         private Dictionary<string, object> dataContext = new Dictionary<string, object>();
 
-        public Node()
+        public EgilNode()
         {
             parent = null;
         }
 
-        public Node(List<Node> children)
+        public EgilNode(List<EgilNode> children)
         {
-            foreach (Node child in children)
+            foreach (EgilNode child in children)
             {
                 add(child);
             }
         }
 
-        private void add(Node node)
+        private void add(EgilNode egilNode)
         {
-            node.parent = this;
-            children.Add(node);
+            egilNode.parent = this;
+            children.Add(egilNode);
         }
 
         public virtual NodeState Evaluate() => NodeState.FAILURE;
@@ -56,17 +56,17 @@ namespace BehaviorTree
                 return true;
             }
 
-            Node node = parent;
+            EgilNode egilNode = parent;
 
-            while (node != null)
+            while (egilNode != null)
             {
-                bool cleared = node.ClearData(key);
+                bool cleared = egilNode.ClearData(key);
                 if (cleared)
                 {
                     return true;
                 }
 
-                node = node.parent;
+                egilNode = egilNode.parent;
             }
             return false;
         }
@@ -79,17 +79,17 @@ namespace BehaviorTree
                 return value;
             }
 
-            Node node = parent;
+            EgilNode egilNode = parent;
 
-            while (node != null)
+            while (egilNode != null)
             {
-                value = node.GetData(key);
+                value = egilNode.GetData(key);
                 if (value != null)
                 {
                     return value;
                 }
 
-                node = node.parent;
+                egilNode = egilNode.parent;
             }
 
 

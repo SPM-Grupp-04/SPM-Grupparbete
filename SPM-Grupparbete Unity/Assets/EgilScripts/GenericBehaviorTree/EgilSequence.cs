@@ -7,16 +7,16 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    public class Sequence : Node
+    public class EgilSequence : EgilNode
     {
 
-        public Sequence() : base(){}
-        public  Sequence(List<Node> children) :base(children){}
+        public EgilSequence() : base(){}
+        public  EgilSequence(List<EgilNode> children) :base(children){}
         
         public override NodeState Evaluate()
         {
          bool anyChildRunning = false;
-            foreach (Node node in children)
+            foreach (EgilNode node in children)
             {
                 switch (node.Evaluate())
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EgilEnemyHealth : MonoBehaviour
 {
     private int health = 5;
 

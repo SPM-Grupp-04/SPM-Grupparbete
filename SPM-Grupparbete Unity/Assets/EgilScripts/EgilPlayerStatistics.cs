@@ -6,22 +6,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 [Serializable]
-public class PlayerStatistics
+public class EgilPlayerStatistics
 {
   
-   private static PlayerStatistics instance = null;
+   private static EgilPlayerStatistics instance = null;
 
-   private PlayerStatistics()
+   private EgilPlayerStatistics()
    {
    }
 
-   public static PlayerStatistics Instance
+   public static EgilPlayerStatistics Instance
    {
       get
       {
          if (instance == null)
          {
-            instance = new PlayerStatistics();
+            instance = new EgilPlayerStatistics();
          }
          return instance;
       }

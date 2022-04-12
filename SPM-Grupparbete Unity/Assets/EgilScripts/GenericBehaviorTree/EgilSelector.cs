@@ -4,21 +4,21 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
-    public class Selector : Node
+    public class EgilSelector : EgilNode
 
     {
         
-        public Selector() : base()
+        public EgilSelector() : base()
         {
         }
 
-        public Selector(List<Node> children) : base(children)
+        public EgilSelector(List<EgilNode> children) : base(children)
         {
         }
 
         public override NodeState Evaluate()
         {
-            foreach (Node node in children)
+            foreach (EgilNode node in children)
             {
                 switch (node.Evaluate())
                 {

@@ -12,7 +12,7 @@ public class EgilGlobalControl : MonoBehaviour
     public bool IsSceneBeingLoaded = false;
     // Variabler som ska sparas över scener.
 
-    public PlayerStatistics SavedData = PlayerStatistics.Instance;
+    public EgilPlayerStatistics SavedData = EgilPlayerStatistics.Instance;
     
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class EgilGlobalControl : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Open("Saves/save.binary", FileMode.Open);
 
-        SavedData = (PlayerStatistics) formatter.Deserialize(saveFile);
+        SavedData = (EgilPlayerStatistics) formatter.Deserialize(saveFile);
         saveFile.Close();
     }
     

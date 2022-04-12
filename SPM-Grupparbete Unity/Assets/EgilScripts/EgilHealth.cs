@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EgilHealth : MonoBehaviour
 {
-    public PlayerStatistics LocalPlayerData = PlayerStatistics.Instance;
+    [FormerlySerializedAs("LocalPlayerData")] public EgilPlayerStatistics localEgilPlayerData = EgilPlayerStatistics.Instance;
 
     [SerializeField] private String playerName;
 
@@ -15,12 +16,12 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            LocalPlayerData.PlayerOnehp = EgilGlobalControl.Instance.SavedData.PlayerOnehp;
+            localEgilPlayerData.PlayerOnehp = EgilGlobalControl.Instance.SavedData.PlayerOnehp;
         }
         
         if (playerName == "PlayerTwo")
         {
-            LocalPlayerData.PlayerTwoHP = EgilGlobalControl.Instance.SavedData.PlayerTwoHP;
+            localEgilPlayerData.PlayerTwoHP = EgilGlobalControl.Instance.SavedData.PlayerTwoHP;
         }
     }
 
@@ -28,7 +29,7 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            if (LocalPlayerData.PlayerOnehp < 1)
+            if (localEgilPlayerData.PlayerOnehp < 1)
             {
                 Destroy(transform.gameObject);
             }
@@ -36,7 +37,7 @@ public class EgilHealth : MonoBehaviour
 
         if (playerName == "PlayerTwo")
         {
-            if (LocalPlayerData.PlayerTwoHP < 1)
+            if (localEgilPlayerData.PlayerTwoHP < 1)
             {
                 Destroy(transform.gameObject);
             }
@@ -47,11 +48,11 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            LocalPlayerData.PlayerOnehp--;
+            localEgilPlayerData.PlayerOnehp--;
         }
         else
         {
-            LocalPlayerData.PlayerTwoHP--;
+            localEgilPlayerData.PlayerTwoHP--;
         }
 
         SavePlayer();
@@ -59,6 +60,6 @@ public class EgilHealth : MonoBehaviour
 
     public void SavePlayer()
     {
-        EgilGlobalControl.Instance.SavedData = LocalPlayerData;
+        EgilGlobalControl.Instance.SavedData = localEgilPlayerData;
     }
 }

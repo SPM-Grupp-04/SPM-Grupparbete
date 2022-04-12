@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using BehaviorTree;
 using UnityEngine;
 
-public class CheckIfEnemyIsInRange : Node
+public class EgilCheckIfEnemyIsInRange : EgilNode
 {
 
     public static int enemyLayerMask = 1 << 6;
     private Transform _transform;
 
-    public CheckIfEnemyIsInRange(Transform transform)
+    public EgilCheckIfEnemyIsInRange(Transform transform)
     {
         _transform = transform;
     }
@@ -21,7 +21,7 @@ public class CheckIfEnemyIsInRange : Node
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(
-            _transform.position, DroneBT.fov,enemyLayerMask);
+            _transform.position, EgilDroneBT.fov,enemyLayerMask);
 
             if (colliders.Length > 0)
             {

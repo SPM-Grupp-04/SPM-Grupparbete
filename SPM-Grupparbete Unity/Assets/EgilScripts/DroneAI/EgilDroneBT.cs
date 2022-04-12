@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 using UnityEngine.Animations;
-using Tree = BehaviorTree.Tree;
 
-public class DroneBT : Tree
+public class EgilDroneBT : EgilTree
 {
     public static float fov = 6f;
 
     [SerializeField] private Transform playerTransform;
 
-    protected override Node SetUpTree()
+    protected override EgilNode SetUpTree()
     {
-        Node root = new FollowPlayer(transform,playerTransform);
+        EgilNode root = new EgilFollowPlayer(transform,playerTransform);
      // Node root = new CheckIfEnemyIsInRange(transform);
      //Node root = new GoToEnemy(transform);
     /* 
