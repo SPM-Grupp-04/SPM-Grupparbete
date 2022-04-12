@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2965090648212625147}
   - component: {fileID: 2965090648212625146}
   - component: {fileID: 2965090648212625145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -127,10 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63725985f189e746b0c45c3855933c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GroundLayerMask:
+  groundLayerMask:
     serializedVersion: 2
-    m_Bits: 8
-  _MovementAcceleration: 5
+    m_Bits: 0
+  movementAcceleration: 5
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +172,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9dd3f670-02a7-41fa-ad56-180b8775ddeb
     m_ActionName: Player/Fire
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5890ab07-2365-4934-9382-1b6af64e2fd2
+    m_ActionName: Player/GamePadLook[/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
