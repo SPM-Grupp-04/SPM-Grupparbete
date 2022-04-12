@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Look",
+                    "name": "MouseLook",
                     "type": "Value",
                     "id": "a05e016e-736e-4ac2-bcfe-ec73161dfb70",
                     "expectedControlType": "Vector2",
@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GamePadLook",
+                    "type": "Value",
+                    "id": "5890ab07-2365-4934-9382-1b6af64e2fd2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -182,18 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch;Keyboard&Mouse",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0ab8c092-3103-4331-975e-2debe68e42c2",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Look",
+                    "action": "MouseLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -216,6 +214,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bf35d08-7dfa-4e23-9704-627f683ce51c",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "GamePadLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
