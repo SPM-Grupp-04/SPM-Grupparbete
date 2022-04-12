@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class PlayerController : MonoBehaviour
+public class Max_PlayerController : MonoBehaviour
 {
     private PlayerInput _PlayerInput;
     private InputAction _MoveAction;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDetectionBehaviour : MonoBehaviour
+public class Max_EnemyDetectionBehaviour : MonoBehaviour
 {
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] [Range(1.0f, 50.0f)] private float _enemyMovementSpeed = 2.5f;

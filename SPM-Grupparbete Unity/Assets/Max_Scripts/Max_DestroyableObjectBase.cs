@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DestroyableObjectBase : MonoBehaviour
+public abstract class Max_DestroyableObjectBase : MonoBehaviour
 {
     int materialAmount = -1;
     int materialHP = -1;

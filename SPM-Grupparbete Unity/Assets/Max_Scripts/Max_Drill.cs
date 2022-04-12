@@ -3,67 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Drill : MonoBehaviour
+public class Max_Drill : MonoBehaviour
 {
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject laserPrefab;
     private GameObject _laserPoint;
 
-    private GameObject _drillBeam;
-    private GameObject _laserBeam;
     private GameObject _beamGO;
     private float _overHeatAmount = 0;
-    private float _timer;
+    private float _timer = 0;
     private bool _isUsed;
     private bool _canShoot = true;
-    private bool _isCooldownStarted;
 
 
     private void Awake()
     {
-        // _drillBeam = transform.Find("DrillBeam").gameObject;
-        //laserBeam = transform.Find("LaserBeam").gameObject;
         _laserPoint = transform.Find("LaserPoint").gameObject;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_overHeatAmount);
+        Debug.Log("OHA: " + _overHeatAmount);
+        Debug.Log("Timer" + _timer);
         if (_beamGO != null && _isUsed == false)
         {
             Destroy(_beamGO);
-
-            if (_timer > 0)
-            {
-                _timer -= Time.deltaTime;
-
-                if (_timer < 0)
-                {
-                    _timer = 0;
-                }
-            }
-            if (_timer == 0)
-            {
-                CoolDownDrill();
-            }
-
-
         }
-        
+
+        if (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+            if (_timer < 0)
+            {
+                _timer = 0;
+            }
+        }
+        if (_timer == 0 && _beamGO == null)
+        {
+            CoolDownDrill();
+            if (_overHeatAmount <= 0)
+            {
+                _canShoot = true;
+            }
+        }
+
     }
 
     public void DrillObject()
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-
 
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
@@ -77,10 +67,7 @@ public class Drill : MonoBehaviour
 
         }
 
-
         Destroy(_beamGO);
-
-
 
     }
 
@@ -130,6 +117,7 @@ public class Drill : MonoBehaviour
         }
         else if(_overHeatAmount >= 100)
         {
+            Destroy(_beamGO);
             if (_timer <= 0)
             {
                 _canShoot = false;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestoryableWall : DestroyableObjectBase
+public class Max_DestoryableWall : Max_DestroyableObjectBase
 {
     [SerializeField] int materialAmount = 0;
     [SerializeField] int materialHP = 5;
