@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector2 lookRotation;
-    private String Keyboardandmousecontrolscheme = "Keyboard&Mouse";
-    private String Gamepadcontrolscheme = "Gamepad";
+    private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
+    private String GamepadControlScheme = "Gamepad";
 
     private void Awake()
     {
