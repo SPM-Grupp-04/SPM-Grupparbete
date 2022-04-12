@@ -99,10 +99,11 @@ public class AxelPlayerController : MonoBehaviour
 
     private void UpdatePlayer()
     {
-        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
-        {
-            UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        } else if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
+        // if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
+        // {
+        //     UpdatePlayerPositionAndRotationKeyBoardAndMouse();
+        // }
+        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
@@ -129,6 +130,10 @@ public class AxelPlayerController : MonoBehaviour
         playerMovementInput = moveAction.ReadValue<Vector2>();
         Vector3 gamePadMovement = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
         gamePadMovement = transform.localRotation * gamePadMovement;
+        Vector3 cv = mainCamera.WorldToViewportPoint(transform.position);
+        cv.x = Mathf.Clamp01(cv.x);
+        cv.y = Mathf.Clamp01(cv.y);
+        velocity = (Vector3) moveAction.ReadValue<Vector2>() * movementAcceleration;
         transform.localPosition += gamePadMovement * movementAcceleration * Time.deltaTime;
     }
 
