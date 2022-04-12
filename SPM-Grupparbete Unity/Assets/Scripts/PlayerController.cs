@@ -10,36 +10,36 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput _PlayerInput;
-    private InputAction _MoveAction;
-    private InputAction _MouseLookAction;
-    private InputAction _GamePadLookAction;
-    private InputAction _FireAction;
-    private Camera _MainCamera;
-    [SerializeField] private LayerMask _GroundLayerMask;
-    [FormerlySerializedAs("_Acceleration")] [SerializeField] [Range(1.0f, 50.0f)] private float _MovementAcceleration = 5.0f;
-    private Vector3 _Velocity;
-    private Vector3 _PlayerMovementInput;
-    private Vector2 _LookRotation;
-    private String _KEYBOARDANDMOUSECONTROLSCHEME = "Keyboard&Mouse";
-    private String _GAMEPADCONTROLSCHEME = "Gamepad";
+    private PlayerInput playerInput;
+    private InputAction moveAction;
+    private InputAction mouseLookAction;
+    private InputAction gamePadLookAction;
+    private InputAction fireAction;
+    private Camera mainCamera;
+    [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
+    private Vector3 velocity;
+    private Vector3 playerMovementInput;
+    private Vector2 lookRotation;
+    private String Keyboardandmousecontrolscheme = "Keyboard&Mouse";
+    private String Gamepadcontrolscheme = "Gamepad";
 
     private void Awake()
     {
-        _PlayerInput = GetComponent<PlayerInput>();
-        _MoveAction = _PlayerInput.actions["Move"];
-        _MouseLookAction = _PlayerInput.actions["MouseLook"];
-        _GamePadLookAction = _PlayerInput.actions["GamePadLook"];
-        _FireAction = _PlayerInput.actions["Fire"];
-        _MainCamera = Camera.main;
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions["Move"];
+        mouseLookAction = playerInput.actions["MouseLook"];
+        gamePadLookAction = playerInput.actions["GamePadLook"];
+        fireAction = playerInput.actions["Fire"];
+        mainCamera = Camera.main;
     }
     
     private void Update()
     {   
-        if (_PlayerInput.currentControlScheme.Equals(_KEYBOARDANDMOUSECONTROLSCHEME))
+        if (playerInput.currentControlScheme.Equals(Keyboardandmousecontrolscheme))
         {
             UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        } else if (_PlayerInput.currentControlScheme.Equals(_GAMEPADCONTROLSCHEME))
+        } else if (playerInput.currentControlScheme.Equals(Gamepadcontrolscheme))
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
@@ -53,25 +53,25 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePlayerPositionGamePad()
     {
-        _PlayerMovementInput = _MoveAction.ReadValue<Vector2>();
-        Vector3 _gamePadMovement = new Vector3(_PlayerMovementInput.x, 0.0f, _PlayerMovementInput.y);
-        _gamePadMovement = transform.localRotation * _gamePadMovement;
-        transform.position += _gamePadMovement * _MovementAcceleration * Time.deltaTime;
+        playerMovementInput = moveAction.ReadValue<Vector2>();
+        Vector3 gamePadMovement = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
+        gamePadMovement = transform.localRotation * gamePadMovement;
+        transform.position += gamePadMovement * movementAcceleration * Time.deltaTime;
     }
 
     private void UpdatePlayerRotationGamePad()
     {
-        Vector3 _gamePadLookRotation = _GamePadLookAction.ReadValue<Vector2>();
-        transform.forward += new Vector3(_gamePadLookRotation.x, 0.0f, _gamePadLookRotation.y);
+        Vector3 gamePadLookRotation = gamePadLookAction.ReadValue<Vector2>();
+        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y);
     }
 
     private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()
     {
-        _PlayerMovementInput = _MoveAction.ReadValue<Vector3>();
-        _Velocity = new Vector3(_PlayerMovementInput.x, 0.0f, _PlayerMovementInput.z) * _MovementAcceleration * Time.deltaTime;
+        playerMovementInput = moveAction.ReadValue<Vector3>();
+        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration * Time.deltaTime;
         PlayerMouseAim();
-        _Velocity = transform.localRotation * _Velocity;
-        transform.position += _Velocity;
+        velocity = transform.localRotation * velocity;
+        transform.position += velocity;
     }
 
     private void PlayerMouseAim()
@@ -85,11 +85,11 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 GetMousePosition()
     {
-        Ray mouseRay = _MainCamera.ScreenPointToRay(_MouseLookAction.ReadValue<Vector2>());
-        Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, _GroundLayerMask);
+        Ray mouseRay = mainCamera.ScreenPointToRay(mouseLookAction.ReadValue<Vector2>());
+        Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         if (Physics.Raycast(mouseRay, out var hit, 100))
         {
-            if (_FireAction.WasPerformedThisFrame() && hit.transform.gameObject.CompareTag("Enemy"))
+            if (fireAction.WasPerformedThisFrame() && hit.transform.gameObject.CompareTag("Enemy"))
             {
                 Debug.Log("BANG!");
             }
