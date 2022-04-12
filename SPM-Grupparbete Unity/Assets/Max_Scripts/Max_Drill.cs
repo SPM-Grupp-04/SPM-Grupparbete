@@ -24,8 +24,6 @@ public class Max_Drill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("OHA: " + _overHeatAmount);
-        Debug.Log("Timer" + _timer);
         if (_beamGO != null && _isUsed == false)
         {
             Destroy(_beamGO);

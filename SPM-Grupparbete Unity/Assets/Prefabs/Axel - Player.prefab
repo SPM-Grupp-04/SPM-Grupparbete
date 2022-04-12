@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9aaf622c89cabf040ae9ef0085d468f1, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -159,35 +159,7 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6d432d34-fa18-4175-9843-15add1c6c0c4
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8bf46c96-a302-4b3c-abd7-def6dd09468d
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a05e016e-736e-4ac2-bcfe-ec73161dfb70
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5890ab07-2365-4934-9382-1b6af64e2fd2
-    m_ActionName: Player/GamePadLook[/XInputControllerWindows/rightStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 741944ee-ba64-4a12-b359-25b87c192cf5
-    m_ActionName: Player/Use[/Keyboard/e,/XInputControllerWindows/start,/XInputControllerWindows1/start]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f68c959f-d42d-4d85-a7b6-417447eb3420
-    m_ActionName: Player/Save[/Keyboard/o]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a029900d-4ced-4bf3-8e0a-8b5056e77328
-    m_ActionName: Player/Load[/Keyboard/p]
+  m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

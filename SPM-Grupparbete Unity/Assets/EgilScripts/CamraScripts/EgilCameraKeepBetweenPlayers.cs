@@ -60,9 +60,4 @@ public class EgilCameraKeepBetweenPlayers : MonoBehaviour
             cinemachineVirtualCamera.m_Lens.FieldOfView = FOVMAX;
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(transform.position + midpointAtoB, 1);
-    }
 }
