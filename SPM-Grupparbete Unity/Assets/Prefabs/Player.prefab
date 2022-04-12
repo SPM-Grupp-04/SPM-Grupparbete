@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3689737768433148075}
   - component: {fileID: 3689737768433148069}
   - component: {fileID: 3689737768433148070}
+  - component: {fileID: 5649840799384998118}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -158,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: f47e509a26ae73746bcdd580dff7aba9, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 9aaf622c89cabf040ae9ef0085d468f1, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -181,12 +182,12 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: aceda32f-b873-429f-bdc5-38708a46a743
-    m_ActionName: Player/Save[/Keyboard/o]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: ab102391-f67d-4772-b6b0-ec05fd001b6c
     m_ActionName: Player/Loaded[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c455adb-45e4-4445-888e-1feeca4101de
+    m_ActionName: Player/Save[/Keyboard/o]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -206,3 +207,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MovementAcceleration: 5
   _JumpForce: 2
+--- !u!114 &5649840799384998118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3689737768433147996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240ae670bf0086840a12b5a2fb3cb79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
