@@ -8,6 +8,9 @@ public class EnemyDetectionBehaviour : MonoBehaviour
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] [Range(1.0f, 50.0f)] private float _enemyMovementSpeed = 2.5f;
 
+    
+
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -18,4 +21,6 @@ public class EnemyDetectionBehaviour : MonoBehaviour
             _enemyTransform.rotation = Quaternion.LookRotation(-_playerDistance.normalized, Vector3.up);
         }
     }
+
+   
 }
