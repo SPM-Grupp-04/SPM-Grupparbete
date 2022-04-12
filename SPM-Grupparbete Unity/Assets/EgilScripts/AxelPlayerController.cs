@@ -15,6 +15,9 @@ public class AxelPlayerController : MonoBehaviour
     private InputAction useAction;
     private InputAction saveAction;
     private InputAction LoadAction;
+    private InputAction drillAction;
+    private InputAction shootAction;
+    [SerializeField] private GameObject drill;
     private Camera mainCamera;
     private EgilSaveAndLoadImplementation saveAndLoad;  
     [SerializeField] private LayerMask groundLayerMask;
@@ -35,6 +38,8 @@ public class AxelPlayerController : MonoBehaviour
         useAction = playerInput.actions["Use"];
         saveAction = playerInput.actions["Save"];
         LoadAction = playerInput.actions["Load"];
+        shootAction = playerInput.actions["Shoot"];
+        drillAction = playerInput.actions["Drill"];
         saveAndLoad = GetComponent<EgilSaveAndLoadImplementation>();
         mainCamera = Camera.main;
     }
@@ -42,7 +47,29 @@ public class AxelPlayerController : MonoBehaviour
     private void Update()
     {
         PlayerMovement();
+        ShootOrDrill();
         SaveAndLoadGame();
+    }
+
+    private void ShootOrDrill()
+    {
+        if (shootAction.IsPressed())
+        {
+            drill.gameObject.SendMessage("Shoot");
+            drill.gameObject.SendMessage("DrillInUse", true);
+        }
+        else
+        {
+            if (drillAction.IsPressed())
+            {
+                drill.gameObject.SendMessage("DrillObject");
+                drill.gameObject.SendMessage("DrillInUse", true);
+            }
+            else
+            {
+                drill.gameObject.SendMessage("DrillInUse", false);
+            }
+        }
     }
 
     private void SaveAndLoadGame()
