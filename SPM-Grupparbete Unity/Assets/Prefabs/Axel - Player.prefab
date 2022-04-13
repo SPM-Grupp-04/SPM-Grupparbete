@@ -116,7 +116,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &7708049037048568331
 MonoBehaviour:
@@ -135,6 +135,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   movementAcceleration: 5
+  rotationSmoothing: 0.05
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +160,39 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb34e309-c65a-411e-b7ab-ffb7c27e0eac
+    m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: af4a5197-e8ec-4697-b63e-411da5ecd9d5
+    m_ActionName: Player/Shoot[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0a1cabc-82e1-46cb-9ce3-5e57af4741d6
+    m_ActionName: Player/Drill[/XInputControllerWindows/rightShoulder,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 095019e2-9f3f-4116-bcf9-d4a40caa27de
+    m_ActionName: Player/MouseLook[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a3dbae44-7aeb-4461-9076-1fe9fcc9c76e
+    m_ActionName: Player/GamePadLook[/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cd05f898-4313-4bba-9f39-92385e7ddb64
+    m_ActionName: Player/Save[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b818adfd-ad1f-4b19-9dfd-b2724f918a60
+    m_ActionName: Player/Load[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3020d94b-d1d5-4e6f-aed8-f6e0d2705f77
+    m_ActionName: Player/Use[/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -184,6 +217,7 @@ MonoBehaviour:
     PosX: 0
     PosY: 0
     PosZ: 0
+    Crystals: 0
   playerName: PlayerOne
 --- !u!114 &5868905720494507359
 MonoBehaviour:
@@ -320,6 +354,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beamPrefab: {fileID: 1388927802527584259, guid: 325d2b051a3beac41981d1d571aba21b, type: 3}
   laserPrefab: {fileID: 1388927802527584259, guid: 8a0b9fdf06cafd74387e7c3550330f7b, type: 3}
+  igenoreMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6660500075782167490
 GameObject:
   m_ObjectHideFlags: 0
