@@ -29,7 +29,6 @@ public class AxelPlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
-    private Vector2 screenBounds;
 
     private void Awake()
     {
@@ -160,9 +159,8 @@ public class AxelPlayerController : MonoBehaviour
     private void UpdatePlayerPositionGamePad()
     {
         playerMovementInput = moveAction.ReadValue<Vector2>();
-        Vector3 gamePadMovement = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
-        velocity = (Vector3) moveAction.ReadValue<Vector2>() * movementAcceleration;
-        transform.localPosition += gamePadMovement * movementAcceleration * Time.deltaTime;
+        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y) * movementAcceleration;
+        transform.localPosition += velocity * Time.deltaTime;
     }
 
     private void UpdatePlayerRotationGamePad()
