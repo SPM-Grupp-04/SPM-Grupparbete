@@ -19,7 +19,7 @@ public class AxelPlayerController : MonoBehaviour
     private InputAction shootAction;
     [SerializeField] private GameObject drill;
     private Camera mainCamera;
-    private EgilSaveAndLoadImplementation saveAndLoad;  
+    private EgilSaveAndLoadImplementation saveAndLoad;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(0.01f, 1.0f)] private float rotationSmoothing = 0.05f;
@@ -45,7 +45,7 @@ public class AxelPlayerController : MonoBehaviour
         saveAndLoad = GetComponent<EgilSaveAndLoadImplementation>();
         mainCamera = Camera.main;
     }
-    
+
     private void Update()
     {
         PlayerMovement();
@@ -53,23 +53,34 @@ public class AxelPlayerController : MonoBehaviour
         SaveAndLoadGame();
         RestrictMovement();
     }
-    
+
     private void RestrictMovement()
     {
         Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
         cameraView.x = Mathf.Clamp01(cameraView.x);
         cameraView.y = Mathf.Clamp01(cameraView.y);
-        
+
+        bool isOutSide = false;
+
         if (cameraView.x == 0f || cameraView.x == 1)
         {
-            Debug.Log("Outside X");
-            transform.position += new Vector3(0.0f, 0.0f, playerMovementInput.y);
+            isOutSide = true;
+            Debug.Log("Outside X ");
         }
+
         if (cameraView.y == 0f || cameraView.y == 1)
         {
+            isOutSide = true;
             Debug.Log("Outside Y");
-            transform.position += new Vector3(playerMovementInput.x, 0.0f, 0.0f);
         }
+
+        Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
+        if (isOutSide)
+        {
+            Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
+        }
+
+        transform.position = new Vector3( playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
     }
 
     private void ShootOrDrill()
@@ -123,7 +134,8 @@ public class AxelPlayerController : MonoBehaviour
         if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
         {
             UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        } else if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
+        }
+        else if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
@@ -162,7 +174,8 @@ public class AxelPlayerController : MonoBehaviour
     private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()
     {
         playerMovementInput = moveAction.ReadValue<Vector3>();
-        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration * Time.deltaTime;
+        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration *
+                   Time.deltaTime;
         PlayerMouseAim();
         transform.localPosition += velocity;
     }
