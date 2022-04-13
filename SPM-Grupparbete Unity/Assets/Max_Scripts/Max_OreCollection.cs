@@ -5,12 +5,11 @@ using UnityEngine;
 public class Max_OreCollection : MonoBehaviour
 {
     [SerializeField] string oreName = "Red";
-    private EgilHealth eh;
+    [SerializeField] private EgilHealth eh;
 
     // Start is called before the first frame update
     void Start()
     {
-        eh = GetComponent<EgilHealth>();
 
     }
 
