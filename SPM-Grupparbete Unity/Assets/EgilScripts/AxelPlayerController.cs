@@ -22,6 +22,7 @@ public class AxelPlayerController : MonoBehaviour
     private EgilSaveAndLoadImplementation saveAndLoad;  
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
+    [SerializeField] [Range(0.01f, 1.0f)] private float rotationSmoothing = 0.05f;
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector2 lookRotation;
@@ -128,7 +129,6 @@ public class AxelPlayerController : MonoBehaviour
     {
         playerMovementInput = moveAction.ReadValue<Vector2>();
         Vector3 gamePadMovement = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
-        gamePadMovement = transform.localRotation * gamePadMovement;
         velocity = (Vector3) moveAction.ReadValue<Vector2>() * movementAcceleration;
         transform.localPosition += gamePadMovement * movementAcceleration * Time.deltaTime;
     }
@@ -136,7 +136,7 @@ public class AxelPlayerController : MonoBehaviour
     private void UpdatePlayerRotationGamePad()
     {
         Vector3 gamePadLookRotation = gamePadLookAction.ReadValue<Vector2>();
-        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y);
+        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing;
     }
 
     private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()
@@ -144,14 +144,13 @@ public class AxelPlayerController : MonoBehaviour
         playerMovementInput = moveAction.ReadValue<Vector3>();
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration * Time.deltaTime;
         PlayerMouseAim();
-        velocity = transform.localRotation * velocity;
         transform.localPosition += velocity;
     }
 
     private void PlayerMouseAim()
     {
         Vector3 mousePosition = GetMousePosition();
-        Vector3 mouseDirection = mousePosition - transform.localPosition;
+        Vector3 mouseDirection = (mousePosition - transform.localPosition) * rotationSmoothing;
         mouseDirection.y = 0;
         transform.forward = mouseDirection;
     }
