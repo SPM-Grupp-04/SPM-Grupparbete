@@ -29,6 +29,7 @@ public class AxelPlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
+    private Vector2 screenBounds;
 
     private void Awake()
     {
@@ -50,6 +51,25 @@ public class AxelPlayerController : MonoBehaviour
         PlayerMovement();
         ShootOrDrill();
         SaveAndLoadGame();
+        RestrictMovement();
+    }
+    
+    private void RestrictMovement()
+    {
+        Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
+        cameraView.x = Mathf.Clamp01(cameraView.x);
+        cameraView.y = Mathf.Clamp01(cameraView.y);
+        
+        if (cameraView.x == 0f || cameraView.x == 1)
+        {
+            Debug.Log("Outside X");
+            transform.position += new Vector3(0.0f, 0.0f, playerMovementInput.y);
+        }
+        if (cameraView.y == 0f || cameraView.y == 1)
+        {
+            Debug.Log("Outside Y");
+            transform.position += new Vector3(playerMovementInput.x, 0.0f, 0.0f);
+        }
     }
 
     private void ShootOrDrill()
