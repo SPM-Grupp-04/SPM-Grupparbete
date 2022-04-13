@@ -16,7 +16,7 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            localEgilPlayerData.PlayerOnehp = EgilGlobalControl.Instance.SavedData.PlayerOnehp;
+            localEgilPlayerData.PlayerOneHP = EgilGlobalControl.Instance.SavedData.PlayerOneHP;
         }
         
         if (playerName == "PlayerTwo")
@@ -29,7 +29,7 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            if (localEgilPlayerData.PlayerOnehp < 1)
+            if (localEgilPlayerData.PlayerOneHP < 1)
             {
                 Destroy(transform.gameObject);
             }
@@ -48,7 +48,7 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            localEgilPlayerData.PlayerOnehp--;
+            localEgilPlayerData.PlayerOneHP--;
         }
         else
         {
@@ -58,17 +58,7 @@ public class EgilHealth : MonoBehaviour
         SavePlayer();
     }
 
-    public void GainCrystal()
-    {
-        if (playerName == "PlayerOne")
-        {
-            localEgilPlayerData.Crystals++;
-        }
-        else
-        {
-            localEgilPlayerData.Crystals++;
-        }
-    }
+    
     public void SavePlayer()
     {
         EgilGlobalControl.Instance.SavedData = localEgilPlayerData;

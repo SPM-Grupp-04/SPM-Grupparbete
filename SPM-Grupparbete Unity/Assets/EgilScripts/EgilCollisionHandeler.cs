@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class EgilCollisionHandeler : MonoBehaviour
 {
     private EgilHealth eh;
+    private EgilPlayerStatistics localEgilPlayerDataTest = EgilPlayerStatistics.Instance;
+
     private float cooldownTime = 2f; // Varför måste den vara i hela sekunder.
     private float timeRemaning;
     private void Start()
@@ -14,7 +16,6 @@ public class EgilCollisionHandeler : MonoBehaviour
         eh = GetComponent<EgilHealth>();
         timeRemaning = cooldownTime;
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -24,7 +25,11 @@ public class EgilCollisionHandeler : MonoBehaviour
         }
         if (collision.transform.tag.Equals("Currency"))
         {
-           collision.gameObject.SendMessage("CollectOre");
+            collision.gameObject.SendMessage("CollectOre");
+
+            localEgilPlayerDataTest.Crystals++;
+            SavePlayer();
+
         }
     }
 
@@ -35,7 +40,7 @@ public class EgilCollisionHandeler : MonoBehaviour
             Debug.Log("gettingHIt");
             
             eh.Takedamage();
-           
+
         }
 
         if (timeRemaning < 0)
@@ -46,5 +51,10 @@ public class EgilCollisionHandeler : MonoBehaviour
 
     }
 
-    
+    private void SavePlayer()
+    {
+        EgilGlobalControl.Instance.SavedData = localEgilPlayerDataTest;
+    }
+
+
 }

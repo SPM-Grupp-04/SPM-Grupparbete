@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Max_OreCollection : MonoBehaviour
 {
-    [SerializeField] string oreName = "Red";
-    [SerializeField] private EgilHealth eh;
+    [SerializeField] string oreName = "Blue";
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +21,6 @@ public class Max_OreCollection : MonoBehaviour
     public void CollectOre()
     {
         DestoryObject();
-        eh.GainCrystal();
     }
 
     
