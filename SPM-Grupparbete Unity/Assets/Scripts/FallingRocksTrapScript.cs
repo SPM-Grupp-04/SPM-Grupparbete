@@ -27,6 +27,11 @@ public class FallingRocksTrapScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpawnRock();
+    }
+
+    private void SpawnRock()
+    {
         if (Random.value < SpawnThreshold)
             return;
 
@@ -35,10 +40,10 @@ public class FallingRocksTrapScript : MonoBehaviour
 
         do
         {
-            x = (Random.value - 0.5f) * 2.0f * bounds.extents.x;
+            x = (Random.value - 0.5f) * 2.0f * bounds.extents.x; //[0.0f, 1.0f] -> [-1.0f, 1.0f]
             z = (Random.value - 0.5f) * 2.0f * bounds.extents.z;
         } while (!(bounds.Contains(
-            new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z)))
+            new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z))) //reject coordinates outside bounds
             );
 
         Instantiate(rockPrefab, new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z), Quaternion.identity).GetComponent<Rigidbody>();
