@@ -9,7 +9,7 @@ public class Max_UI_ObjectHP : MonoBehaviour
 
     private void Start()
     {
-        slider.enabled = false;
+        slider.gameObject.SetActive(false);
         
     }
 
@@ -19,13 +19,14 @@ public class Max_UI_ObjectHP : MonoBehaviour
         
     }
 
-    private void OreTakeDamage(int amount)
+    public void OreTakeDamage(int amount)
     {
-        slider.enabled = true;
+        slider.gameObject.SetActive(true);
         slider.value -= amount;
+        Invoke("HideUI", 2);
     }
     private void HideUI()
     {
-        slider.enabled = false;
+        slider.gameObject.SetActive(false);
     }
 }

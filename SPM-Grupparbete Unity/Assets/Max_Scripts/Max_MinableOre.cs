@@ -8,18 +8,23 @@ public class Max_MinableOre : Max_DestroyableObjectBase
     [SerializeField] int materialHP = 10;
     [SerializeField] int requierdWeaponLevel = 1;
     [SerializeField] GameObject ore;
-    
+    [SerializeField] GameObject uiHP;
 
+    private void Start()
+    {
+    }
 
     public override void ReduceMaterialHP(int amount)
     {
-        materialHP -= amount;
-        ReduceMaterialAmount(amount);
-        Debug.Log("Hit");
-        if (materialHP <= 0)
-        {
-            DestoryObject();
-        }
+       
+            materialHP -= amount;
+            uiHP.GetComponent<Max_UI_ObjectHP>().OreTakeDamage(amount);
+            if (materialHP <= 0)
+            {
+                DestoryObject();
+            }
+        
+        
     }
 
     public override int GetRequierdWeaponLevel()

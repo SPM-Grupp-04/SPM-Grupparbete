@@ -7,20 +7,35 @@ public class Max_Drill : MonoBehaviour
 {
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject laserPrefab;
+
     [SerializeField] private LayerMask igenoreMask;
+
+    [SerializeField] private float _overHeatAmount = 0;
+    [SerializeField] private float overHeatIncreaseAmount = 0.5f;
+    [SerializeField] private float overHeatDecreaseAmount = 1f;
+    [SerializeField] private float coolDownTimerStart = 2f;
+
+    [SerializeField] private int drillLevel = 1;
+    [SerializeField] private int drillDamageOres = 1;
+    [SerializeField] private int drillDamageMonsters = 1;
+
+
+    private float _timer = 0;
+
     private GameObject _laserPoint;
+    private GameObject _drillPoint;
 
     private GameObject _beamGO;
-    private float _overHeatAmount = 0;
-    private float _timer = 0;
+
     private bool _isUsed;
     private bool _canShoot = true;
-
-
+    private bool _isShooting;
 
     private void Awake()
     {
         _laserPoint = transform.Find("LaserPoint").gameObject;
+        _drillPoint = transform.Find("DrillPoint").gameObject;
+        DrillDamage(drillLevel);
     }
 
     // Update is called once per frame
@@ -39,7 +54,7 @@ public class Max_Drill : MonoBehaviour
                 _timer = 0;
             }
         }
-        if (_timer == 0 && _beamGO == null)
+        if (_timer == 0 && _isShooting == false)
         {
             CoolDownDrill();
             if (_overHeatAmount <= 0)
@@ -47,6 +62,7 @@ public class Max_Drill : MonoBehaviour
                 _canShoot = true;
             }
         }
+
 
     }
 
@@ -61,13 +77,21 @@ public class Max_Drill : MonoBehaviour
 
             CreateCylinderBetweenPoints(transform.position, hit.point, 0.25f, beamPrefab);
 
-            hit.collider.gameObject.SendMessage("ReduceMaterialHP", 1);
+            if (hit.collider.gameObject.GetComponent<Max_MinableOre>().GetRequierdWeaponLevel() <= drillLevel)
+            {
+                hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            }
 
             return;
 
         }
+        else
+        {
 
-        Destroy(_beamGO);
+            CreateCylinderBetweenPoints(transform.position, _drillPoint.transform.position, 0.25f, beamPrefab);
+            return;
+
+        }
 
     }
 
@@ -85,6 +109,8 @@ public class Max_Drill : MonoBehaviour
 
     public void Shoot()
     {
+
+
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
@@ -101,7 +127,7 @@ public class Max_Drill : MonoBehaviour
                     shootHit.collider.gameObject.SendMessage("TakeDamage");
 
                 }
-                _overHeatAmount += 0.5f;
+                _overHeatAmount += overHeatIncreaseAmount;
 
                 return;
 
@@ -110,22 +136,27 @@ public class Max_Drill : MonoBehaviour
             {
 
                 CreateCylinderBetweenPoints(transform.position, _laserPoint.transform.position, 0.25f, laserPrefab);
-                _overHeatAmount += 0.5f;
+                _overHeatAmount += overHeatIncreaseAmount;
                 return;
 
             }
         }
-        else if(_overHeatAmount >= 100)
+        else if (_overHeatAmount >= 100)
         {
             Destroy(_beamGO);
             if (_timer <= 0)
             {
                 _canShoot = false;
-                _timer = 2;
+                _timer = coolDownTimerStart;
+
             }
-            
+
         }
+
     }
+
+
+
 
     public void DrillInUse(bool state)
     {
@@ -135,9 +166,9 @@ public class Max_Drill : MonoBehaviour
 
     private void CoolDownDrill()
     {
-        if(_overHeatAmount > 0)
+        if (_overHeatAmount > 0)
         {
-            _overHeatAmount -= 0.5f;
+            _overHeatAmount -= overHeatDecreaseAmount;
 
         }
     }
@@ -145,5 +176,27 @@ public class Max_Drill : MonoBehaviour
     public float GetOverheatAmount()
     {
         return _overHeatAmount;
+    }
+
+    public int GetDrillDamageOres()
+    {
+        return drillDamageOres;
+    }
+
+    public int GetDrillDamageMonsters()
+    {
+        return drillDamageMonsters;
+    }
+
+    private void DrillDamage(int drillLevel)
+    {
+        switch (drillLevel)
+        {
+            case 1:
+                drillDamageOres = 1;
+                drillDamageMonsters = 1;
+                return;
+        }
+
     }
 }
