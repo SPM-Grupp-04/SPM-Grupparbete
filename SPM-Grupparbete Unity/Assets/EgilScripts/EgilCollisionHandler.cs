@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EgilCollisionHandeler : MonoBehaviour
+public class EgilCollisionHandler : MonoBehaviour
 {
     private EgilHealth eh;
     private float cooldownTime = 2f; // Varför måste den vara i hela sekunder.
-    private float timeRemaning;
+    private float timeRemaining;
+
     private void Start()
     {
         eh = GetComponent<EgilHealth>();
-        timeRemaning = cooldownTime;
+        timeRemaining = cooldownTime;
     }
 
 
@@ -30,19 +31,19 @@ public class EgilCollisionHandeler : MonoBehaviour
 
     private void OnCollisionStay(Collision collisionInfo)
     {
-        if (collisionInfo.transform.tag.Equals("Enemy") && timeRemaning < 0  )
+        if (collisionInfo.transform.tag.Equals("Enemy") && timeRemaining < 0.0f  )
         {
             Debug.Log("gettingHIt");
             
-            eh.Takedamage();
-           
+            eh.DealDamage(1);
         }
 
-        if (timeRemaning < 0)
+        if (timeRemaining < 0.0f)
         {
-            timeRemaning = cooldownTime;
+            timeRemaining = cooldownTime;
         }
-        timeRemaning -= Time.deltaTime;
+
+        timeRemaining -= Time.deltaTime;
 
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class FallingRocksTrapScript : MonoBehaviour
 {
     [SerializeField, Range(0.1f, 1.0f), Tooltip("Percentage chance of spawning per second.")] private float spawnThreshold = 0.5f;
+    [SerializeField] private Vector3 rockStartingForce;
     private float SpawnThreshold
     {
         get
@@ -46,6 +47,7 @@ public class FallingRocksTrapScript : MonoBehaviour
             new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z))) //reject coordinates outside bounds
             );
 
-        Instantiate(rockPrefab, new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z), Quaternion.identity).GetComponent<Rigidbody>();
+        GameObject tempRock = Instantiate(rockPrefab, new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z), Quaternion.identity);
+        tempRock.GetComponent<Rigidbody>().AddForce(rockStartingForce);
     }
 }

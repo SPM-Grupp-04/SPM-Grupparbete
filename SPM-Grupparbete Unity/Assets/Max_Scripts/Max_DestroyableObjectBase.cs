@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class Max_DestroyableObjectBase : MonoBehaviour
 {
-    int materialAmount = -1;
-    int materialHP = -1;
-    int requierdWeaponLevel = -1;
+    [SerializeField] protected int materialAmount = -1;
+    [SerializeField] protected int materialHP = -1;
+    [SerializeField] protected int requiredWeaponLevel = -1;
 
 
     public virtual void ReduceMaterialAmount(int amount)
@@ -19,13 +19,13 @@ public abstract class Max_DestroyableObjectBase : MonoBehaviour
 
         if(materialHP <= 0)
         {
-            DestoryObject();
+            DestroyObject();
         }
     }
 
-    public virtual int GetRequierdWeaponLevel()
+    public virtual int GetRequiredWeaponLevel()
     {
-        return requierdWeaponLevel;
+        return requiredWeaponLevel;
     }
 
     public virtual int MinedMaterial(int amount)
@@ -33,7 +33,7 @@ public abstract class Max_DestroyableObjectBase : MonoBehaviour
         return -1;
     }
 
-    private void DestoryObject()
+    private void DestroyObject()
     {
         Destroy(this.gameObject);
     }

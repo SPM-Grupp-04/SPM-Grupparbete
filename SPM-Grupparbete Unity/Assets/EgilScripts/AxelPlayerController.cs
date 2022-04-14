@@ -29,8 +29,17 @@ public class AxelPlayerController : MonoBehaviour
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
 
+    public float MovementAcceleration
+    {
+        get
+        {
+            return EgilPlayerStatistics.Instance.PlayerOneAcceleration;
+        }
+    }
+
     private void Awake()
     {
+        EgilPlayerStatistics.Instance.PlayerOneAcceleration = movementAcceleration; 
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         mouseLookAction = playerInput.actions["MouseLook"];
@@ -129,8 +138,8 @@ public class AxelPlayerController : MonoBehaviour
         playerMovementInput = moveAction.ReadValue<Vector2>();
         Vector3 gamePadMovement = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
         gamePadMovement = transform.localRotation * gamePadMovement;
-        velocity = (Vector3) moveAction.ReadValue<Vector2>() * movementAcceleration;
-        transform.localPosition += gamePadMovement * movementAcceleration * Time.deltaTime;
+        velocity = (Vector3) moveAction.ReadValue<Vector2>() * MovementAcceleration;
+        transform.localPosition += gamePadMovement * MovementAcceleration * Time.deltaTime;
     }
 
     private void UpdatePlayerRotationGamePad()
@@ -142,7 +151,7 @@ public class AxelPlayerController : MonoBehaviour
     private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()
     {
         playerMovementInput = moveAction.ReadValue<Vector3>();
-        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration * Time.deltaTime;
+        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * MovementAcceleration * Time.deltaTime;
         PlayerMouseAim();
         velocity = transform.localRotation * velocity;
         transform.localPosition += velocity;
