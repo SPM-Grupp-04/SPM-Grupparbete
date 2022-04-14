@@ -52,7 +52,7 @@ public class AxelLaunchArcMesh : MonoBehaviour
         }
         else
         {
-            trajectoryMesh.Clear();
+            DisableTrajectoryPrediction();
         }
     }
 
@@ -66,7 +66,7 @@ public class AxelLaunchArcMesh : MonoBehaviour
 
     private void DisableTrajectoryPrediction()
     {
-        velocity = 0.0f;
+        trajectoryMesh.Clear();
     }
 
     private void RenderThrowTrajectoryMesh(Vector3[] trajectoryVerts)
