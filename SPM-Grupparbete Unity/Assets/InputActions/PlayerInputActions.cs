@@ -98,6 +98,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TrajectoryIncrease"",
+                    ""type"": ""Value"",
+                    ""id"": ""eb8c1fc6-ce89-4ff0-a433-3e2df54c46d1"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""EnterDynamiteThrowMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a6c6e6f-4221-430c-816c-77e0f2210986"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -265,6 +283,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Drill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b5ee70c-0ee1-4f5d-93bc-ff7f17656396"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TrajectoryIncrease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15df9ba3-00f1-4fec-bcd7-7521d7408a3f"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""EnterDynamiteThrowMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -342,6 +382,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_TrajectoryIncrease = m_Player.FindAction("TrajectoryIncrease", throwIfNotFound: true);
+        m_Player_EnterDynamiteThrowMode = m_Player.FindAction("EnterDynamiteThrowMode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -409,6 +451,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Save;
     private readonly InputAction m_Player_Load;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_TrajectoryIncrease;
+    private readonly InputAction m_Player_EnterDynamiteThrowMode;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -421,6 +465,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Save => m_Wrapper.m_Player_Save;
         public InputAction @Load => m_Wrapper.m_Player_Load;
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @TrajectoryIncrease => m_Wrapper.m_Player_TrajectoryIncrease;
+        public InputAction @EnterDynamiteThrowMode => m_Wrapper.m_Player_EnterDynamiteThrowMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -454,6 +500,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @TrajectoryIncrease.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTrajectoryIncrease;
+                @TrajectoryIncrease.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTrajectoryIncrease;
+                @TrajectoryIncrease.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTrajectoryIncrease;
+                @EnterDynamiteThrowMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
+                @EnterDynamiteThrowMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
+                @EnterDynamiteThrowMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -482,6 +534,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Use.started += instance.OnUse;
                 @Use.performed += instance.OnUse;
                 @Use.canceled += instance.OnUse;
+                @TrajectoryIncrease.started += instance.OnTrajectoryIncrease;
+                @TrajectoryIncrease.performed += instance.OnTrajectoryIncrease;
+                @TrajectoryIncrease.canceled += instance.OnTrajectoryIncrease;
+                @EnterDynamiteThrowMode.started += instance.OnEnterDynamiteThrowMode;
+                @EnterDynamiteThrowMode.performed += instance.OnEnterDynamiteThrowMode;
+                @EnterDynamiteThrowMode.canceled += instance.OnEnterDynamiteThrowMode;
             }
         }
     }
@@ -541,5 +599,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnTrajectoryIncrease(InputAction.CallbackContext context);
+        void OnEnterDynamiteThrowMode(InputAction.CallbackContext context);
     }
 }

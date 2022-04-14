@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TrajectoryIncrease",
+                    "type": "Value",
+                    "id": "eb8c1fc6-ce89-4ff0-a433-3e2df54c46d1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "EnterDynamiteThrowMode",
+                    "type": "Button",
+                    "id": "0a6c6e6f-4221-430c-816c-77e0f2210986",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -241,6 +259,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Drill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b5ee70c-0ee1-4f5d-93bc-ff7f17656396",
+                    "path": "<Gamepad>/rightStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "TrajectoryIncrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15df9ba3-00f1-4fec-bcd7-7521d7408a3f",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "EnterDynamiteThrowMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
