@@ -19,19 +19,19 @@ public class Max_UI_PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        ChangeHealthPlayerOne(localEgilPlayerDataTest.PlayerOneHP);
-        ChangeHealthPlayerTwo(localEgilPlayerDataTest.PlayerTwoHP);
+        ChangeHealthPlayerOne(localEgilPlayerDataTest.PlayerOneHealth);
+        ChangeHealthPlayerTwo(localEgilPlayerDataTest.PlayerTwoHealth);
 
     }
 
     private void ChangeHealthPlayerOne(int amount)
     {
         sliderPlayerOne.value = amount;
-        if (localEgilPlayerDataTest.PlayerOneHP >= 4)
+        if (localEgilPlayerDataTest.PlayerOneHealth >= 4)
         {
             barColourPlayerOne.color = green;
         }
-        else if (localEgilPlayerDataTest.PlayerOneHP > 1 && localEgilPlayerDataTest.PlayerOneHP <= 3)
+        else if (localEgilPlayerDataTest.PlayerOneHealth > 1 && localEgilPlayerDataTest.PlayerOneHealth <= 3)
         {
             barColourPlayerOne.color = yellow;
         }
@@ -44,11 +44,11 @@ public class Max_UI_PlayerHealth : MonoBehaviour
     private void ChangeHealthPlayerTwo(int amount)
     {
         sliderPlayerTwo.value = amount;
-        if (localEgilPlayerDataTest.PlayerTwoHP >= 4)
+        if (localEgilPlayerDataTest.PlayerTwoHealth >= 4)
         {
             barColourPlayerTwo.color = green;
         }
-        else if (localEgilPlayerDataTest.PlayerTwoHP > 1 && localEgilPlayerDataTest.PlayerTwoHP <= 3)
+        else if (localEgilPlayerDataTest.PlayerTwoHealth > 1 && localEgilPlayerDataTest.PlayerTwoHealth <= 3)
         {
             barColourPlayerTwo.color = yellow;
         }

@@ -40,8 +40,8 @@ public class EgilPlayerStatistics
     //TODO: Att implemntera ett sätt att göra detta för två spelare.
     // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
 
-    public float PlayerOneHealth = 5;
-    public float PlayerTwoHealth = 5;
+    public int PlayerOneHealth = 5;
+    public int PlayerTwoHealth = 5;
     public float PlayerOneAcceleration = 5.0f;
     public float PlayerTwoAcceleration = 5.0f;
     public bool PlayerOneDisco = false;
