@@ -54,7 +54,7 @@ public class Max_Drill : MonoBehaviour
                 _timer = 0;
             }
         }
-        if (_timer == 0 && _isShooting == false)
+        if (_timer == 0 && _beamGO == null)
         {
             CoolDownDrill();
             if (_overHeatAmount <= 0)
