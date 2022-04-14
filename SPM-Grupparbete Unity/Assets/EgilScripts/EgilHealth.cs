@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class EgilHealth : MonoBehaviour
+public class EgilHealth : MonoBehaviour, IDamagable
 {
     [FormerlySerializedAs("LocalPlayerData")] public EgilPlayerStatistics localEgilPlayerData = EgilPlayerStatistics.Instance;
 
@@ -16,12 +16,16 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            localEgilPlayerData.PlayerOneHP = EgilGlobalControl.Instance.SavedData.PlayerOneHP;
+            localEgilPlayerData.PlayerOneHealth = EgilGlobalControl.Instance.SavedData.PlayerOneHealth;
+            localEgilPlayerData.PlayerOneAcceleration = EgilGlobalControl.Instance.SavedData.PlayerOneAcceleration;
+            localEgilPlayerData.PlayerOneDisco = EgilGlobalControl.Instance.SavedData.PlayerOneDisco;
         }
-        
+
         if (playerName == "PlayerTwo")
         {
-            localEgilPlayerData.PlayerTwoHP = EgilGlobalControl.Instance.SavedData.PlayerTwoHP;
+            localEgilPlayerData.PlayerTwoHealth = EgilGlobalControl.Instance.SavedData.PlayerTwoHealth;
+            localEgilPlayerData.PlayerTwoAcceleration = EgilGlobalControl.Instance.SavedData.PlayerTwoAcceleration;
+            localEgilPlayerData.PlayerTwoDisco = EgilGlobalControl.Instance.SavedData.PlayerTwoDisco;
         }
     }
 
@@ -29,7 +33,7 @@ public class EgilHealth : MonoBehaviour
     {
         if (playerName == "PlayerOne")
         {
-            if (localEgilPlayerData.PlayerOneHP < 1)
+            if (localEgilPlayerData.PlayerOneHealth < 1)
             {
                 Destroy(transform.gameObject);
             }
@@ -37,30 +41,74 @@ public class EgilHealth : MonoBehaviour
 
         if (playerName == "PlayerTwo")
         {
-            if (localEgilPlayerData.PlayerTwoHP < 1)
+            if (localEgilPlayerData.PlayerTwoHealth < 1)
             {
                 Destroy(transform.gameObject);
             }
         }
     }
 
-    public void Takedamage()
+    public void DealDamage(int damage)
     {
         if (playerName == "PlayerOne")
         {
-            localEgilPlayerData.PlayerOneHP--;
+            localEgilPlayerData.PlayerOneHealth -= damage;
         }
         else
         {
-            localEgilPlayerData.PlayerTwoHP--;
+            localEgilPlayerData.PlayerTwoHealth -= damage;
         }
 
-        SavePlayer();
+        SavePlayers();
     }
 
-    
-    public void SavePlayer()
+    public void Heal(int healAmount)
+    {
+        localEgilPlayerData.PlayerOneHealth += healAmount;
+        localEgilPlayerData.PlayerTwoHealth += healAmount;
+
+        SavePlayers();
+    }
+
+    public void SetAcceleration(float newAcceleration)
+    {
+        localEgilPlayerData.PlayerOneAcceleration = newAcceleration;
+        localEgilPlayerData.PlayerTwoAcceleration = newAcceleration;
+
+        SavePlayers();
+    }
+
+    public void SetDisco(bool isDisco)
+    {
+        localEgilPlayerData.PlayerOneDisco = isDisco;
+        localEgilPlayerData.PlayerTwoDisco = isDisco;
+
+        SavePlayers();
+    }
+
+    public void GainCrystal()
+    {
+        if (playerName == "PlayerOne")
+        {
+            localEgilPlayerData.Crystals++;
+        }
+        else
+        {
+            localEgilPlayerData.Crystals++;
+        }
+    }
+
+    public void SavePlayers()
     {
         EgilGlobalControl.Instance.SavedData = localEgilPlayerData;
+    }
+
+    //using a bitmask
+    public enum PlayerSelection
+    {
+        None = 0b_0000_0000, //0
+        PlayerOne = 0b_0000_0001, //1
+        PlayerTwo = 0b_0000_0010, //2
+        Both = PlayerOne | PlayerTwo //3, stored as 0b_0000_0011
     }
 }

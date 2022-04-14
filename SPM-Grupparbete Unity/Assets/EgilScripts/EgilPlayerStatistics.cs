@@ -8,32 +8,46 @@ using UnityEngine.Serialization;
 [Serializable]
 public class EgilPlayerStatistics
 {
-  
-   private static EgilPlayerStatistics instance = null;
 
-   private EgilPlayerStatistics()
-   {
-   }
+    private static EgilPlayerStatistics instance = null;
 
-   public static EgilPlayerStatistics Instance
-   {
-      get
-      {
-         if (instance == null)
-         {
-            instance = new EgilPlayerStatistics();
-         }
-         return instance;
-      }
-   }
-   
-   //TODO: Att implemntera ett sätt att göra detta för två spelare.
-   // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
-   
-   public int PlayerOneHP = 5;
-   public int PlayerTwoHP = 5;
-   public string Scene;
-   public float PosX, PosY, PosZ;
-   public int Crystals = 0; 
-   
+    private EgilPlayerStatistics()
+    {
+    }
+
+    public static EgilPlayerStatistics Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new EgilPlayerStatistics();
+
+                //foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+                //{
+                //    if (go.GetComponent<EgilHealth>().name == "PlayerOne")
+                //        instance.PlayerOneAcceleration = go.GetComponent<AxelPlayerController>().MovementAcceleration;
+                //    else if (go.GetComponent<EgilHealth>().name == "PlayerTwo")
+                //        instance.PlayerTwoAcceleration = go.GetComponent<AxelPlayerController>().MovementAcceleration;
+                        
+                //}
+            }
+
+            return instance;
+        }
+    }
+
+    //TODO: Att implemntera ett sätt att göra detta för två spelare.
+    // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
+
+    public float PlayerOneHealth = 5;
+    public float PlayerTwoHealth = 5;
+    public float PlayerOneAcceleration = 5.0f;
+    public float PlayerTwoAcceleration = 5.0f;
+    public bool PlayerOneDisco = false;
+    public bool PlayerTwoDisco = false;
+    public string Scene;
+    public float PosX, PosY, PosZ;
+    public int Crystals = 0;
+
 }

@@ -27,7 +27,7 @@ public class Max_MinableOre : Max_DestroyableObjectBase
         
     }
 
-    public override int GetRequierdWeaponLevel()
+    public override int GetRequiredWeaponLevel()
     {
         return requierdWeaponLevel;
     }

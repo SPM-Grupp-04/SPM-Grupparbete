@@ -6,6 +6,7 @@ using UnityEngine;
 public class FallingRocksTrapScript : MonoBehaviour
 {
     [SerializeField, Range(0.1f, 1.0f), Tooltip("Percentage chance of spawning per second.")] private float spawnThreshold = 0.5f;
+    [SerializeField] private Vector3 rockStartingForce;
     private float SpawnThreshold
     {
         get
@@ -27,6 +28,11 @@ public class FallingRocksTrapScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpawnRock();
+    }
+
+    private void SpawnRock()
+    {
         if (Random.value < SpawnThreshold)
             return;
 
@@ -35,12 +41,13 @@ public class FallingRocksTrapScript : MonoBehaviour
 
         do
         {
-            x = (Random.value - 0.5f) * 2.0f * bounds.extents.x;
+            x = (Random.value - 0.5f) * 2.0f * bounds.extents.x; //[0.0f, 1.0f] -> [-1.0f, 1.0f]
             z = (Random.value - 0.5f) * 2.0f * bounds.extents.z;
         } while (!(bounds.Contains(
-            new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z)))
+            new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z))) //reject coordinates outside bounds
             );
 
-        Instantiate(rockPrefab, new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z), Quaternion.identity).GetComponent<Rigidbody>();
+        GameObject tempRock = Instantiate(rockPrefab, new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z), Quaternion.identity);
+        tempRock.GetComponent<Rigidbody>().AddForce(rockStartingForce);
     }
 }

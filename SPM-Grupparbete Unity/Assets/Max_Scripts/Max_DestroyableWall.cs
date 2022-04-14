@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Max_DestoryableWall : Max_DestroyableObjectBase
+public class Max_DestroyableWall : Max_DestroyableObjectBase
 {
-    [SerializeField] int materialAmount = 0;
-    [SerializeField] int materialHP = 5;
-    [SerializeField] int requierdWeaponLevel = 1;
-    GameObject deleteRock;
+    protected new int materialAmount = 0;
+    protected new int materialHP = 5;
+    protected new int requiredWeaponLevel = 1;
+
 
     public override void ReduceMaterialAmount(int amount)
     {
-        if(materialAmount > 0)
+        if (materialAmount > 0)
         {
-            if(amount > materialAmount)
+            if (amount > materialAmount)
             {
                 int remaingingMaterials = materialAmount % 0;
                 MinedMaterial(remaingingMaterials);
             }
+
             materialAmount -= amount;
             MinedMaterial(amount);
         }
@@ -30,13 +29,13 @@ public class Max_DestoryableWall : Max_DestroyableObjectBase
         Debug.Log("Hit");
         if (materialHP <= 0)
         {
-            DestoryObject();
+            DestroyObject();
         }
     }
 
-    public override int GetRequierdWeaponLevel()
+    public override int GetRequiredWeaponLevel()
     {
-        return requierdWeaponLevel;
+        return requiredWeaponLevel;
     }
 
     public override int MinedMaterial(int minedMaterial)
@@ -44,10 +43,9 @@ public class Max_DestoryableWall : Max_DestroyableObjectBase
         return minedMaterial;
     }
 
-    private void DestoryObject()
+    private void DestroyObject()
     {
+
         Destroy(this.gameObject);
-        
     }
-    
 }

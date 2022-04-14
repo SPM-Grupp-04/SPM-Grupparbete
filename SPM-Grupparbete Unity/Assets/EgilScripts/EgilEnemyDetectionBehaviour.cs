@@ -50,10 +50,10 @@ public class EgilEnemyDetectionBehaviour : MonoBehaviour
         {
             EgilHealth egh = col.GetComponent<EgilHealth>();
 
-            if (egh.localEgilPlayerData.PlayerOneHP < tempHealth)
+            if (egh.localEgilPlayerData.PlayerOneHealth < tempHealth)
             {
                 player = col.gameObject;
-                tempHealth = egh.localEgilPlayerData.PlayerOneHP;
+                tempHealth = egh.localEgilPlayerData.PlayerOneHealth;
             }
         }
 
