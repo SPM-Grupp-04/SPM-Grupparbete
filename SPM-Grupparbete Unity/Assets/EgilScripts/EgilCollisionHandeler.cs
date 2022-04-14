@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class EgilCollisionHandeler : MonoBehaviour
 {
+    [SerializeField] int level;
+
     private EgilHealth eh;
     private EgilPlayerStatistics localEgilPlayerDataTest = EgilPlayerStatistics.Instance;
 
@@ -21,7 +23,8 @@ public class EgilCollisionHandeler : MonoBehaviour
     {
         if (collision.transform.tag.Equals("Goal"))
         {
-            SceneManager.LoadScene(1);
+            int current = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(level);
         }
         if (collision.transform.tag.Equals("Currency"))
         {

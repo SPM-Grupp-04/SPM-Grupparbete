@@ -22,7 +22,7 @@ public class AxelPlayerController : MonoBehaviour
     private EgilSaveAndLoadImplementation saveAndLoad;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
-    [SerializeField] [Range(0.01f, 1.0f)] private float rotationSmoothing = 0.05f;
+    [SerializeField] [Range(1.0f, 10f)] private float rotationSmoothing = 5.0f;
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector2 lookRotation;
@@ -166,7 +166,7 @@ public class AxelPlayerController : MonoBehaviour
     private void UpdatePlayerRotationGamePad()
     {
         Vector3 gamePadLookRotation = gamePadLookAction.ReadValue<Vector2>();
-        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing;
+        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing * Time.deltaTime;
     }
 
     private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()

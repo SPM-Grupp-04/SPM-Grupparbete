@@ -77,10 +77,9 @@ public class Max_Drill : MonoBehaviour
 
             CreateCylinderBetweenPoints(transform.position, hit.point, 0.25f, beamPrefab);
 
-            if (hit.collider.gameObject.GetComponent<Max_MinableOre>().GetRequierdWeaponLevel() <= drillLevel)
-            {
+            
                 hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
-            }
+            
 
             return;
 
