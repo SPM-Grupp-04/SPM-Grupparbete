@@ -9,6 +9,7 @@ public class Max_UI_Overheat : MonoBehaviour
     [SerializeField]private Slider slider;
     [SerializeField] private GameObject drill;
     [SerializeField]Image barColour;
+    [SerializeField] Max_Drill max_Drill;
 
     Color green = new Color(0, 255, 0);
     Color yellow = new Color(255, 255, 0);
@@ -17,14 +18,14 @@ public class Max_UI_Overheat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        max_Drill = drill.GetComponent<Max_Drill>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        IncreaseOverheatSlider(drill.GetComponent<Max_Drill>().GetOverheatAmount());
+        IncreaseOverheatSlider(max_Drill.GetOverheatAmount());
     }
 
     private void IncreaseOverheatSlider(float amount)
