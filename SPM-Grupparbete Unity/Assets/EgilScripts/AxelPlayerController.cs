@@ -130,11 +130,11 @@ public class AxelPlayerController : MonoBehaviour
 
     private void UpdatePlayer()
     {
-        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
-        {
-            UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        }
-        else if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
+        // if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
+        // {
+        //     UpdatePlayerPositionAndRotationKeyBoardAndMouse();
+        // }
+        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
