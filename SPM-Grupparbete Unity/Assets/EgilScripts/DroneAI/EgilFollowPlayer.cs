@@ -19,9 +19,9 @@ public class EgilFollowPlayer :EgilNode
     {
 
         // Follow Player Logic
-        if (Vector3.Distance(droneTransform.position, playerTransform.position) > 4f)
+        if (Vector3.Distance(droneTransform.position, playerTransform.position) > 2f)
         {
-            droneTransform.position = Vector3.MoveTowards(droneTransform.position, playerTransform.position, 2f * Time.deltaTime);
+            droneTransform.position = Vector3.MoveTowards(droneTransform.position, playerTransform.position, 4f * Time.deltaTime );
             droneTransform.LookAt(playerTransform.position);
         }
         

@@ -6,7 +6,7 @@ using UnityEngine;
 public class EgilCheckIfEnemyIsInRange : EgilNode
 {
 
-    public static int enemyLayerMask = 1 << 6;
+    public static int enemyLayerMask = 1 << 7;
     private Transform _transform;
 
     public EgilCheckIfEnemyIsInRange(Transform transform)
@@ -27,9 +27,10 @@ public class EgilCheckIfEnemyIsInRange : EgilNode
             {
                 parent.parent.SetData("target",colliders[0].transform);
                 state = NodeState.SUCCESS;
+                
                 return state;
             }
-
+            
             state = NodeState.FAILURE;
             return state;
         }
