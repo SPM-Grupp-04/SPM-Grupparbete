@@ -17,7 +17,7 @@ namespace BehaviorTree
     {
         protected NodeState state;
         public EgilNode parent;
-        protected List<EgilNode> children;
+        protected List<EgilNode> children = new List<EgilNode>();
 
         private Dictionary<string, object> dataContext = new Dictionary<string, object>();
 
