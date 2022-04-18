@@ -6,21 +6,27 @@ public class IsCoverAvaliableNode : EgilNode
 {
     private Cover[] avaliabbaleCover;
     private Transform playerTransorm;
+    private Transform[] playerTransforms;
     private EnemyAI ai;
 
 
-    public IsCoverAvaliableNode(Cover[] avaliabbaleCover, Transform playerTransorm, EnemyAI ai)
+    public IsCoverAvaliableNode(Cover[] avaliabbaleCover, Transform[] playerTransforms, EnemyAI ai)
     {
         this.avaliabbaleCover = avaliabbaleCover;
-        this.playerTransorm = playerTransorm;
+        this.playerTransforms = playerTransforms;
         this.ai = ai;
     }
 
     public override NodeState Evaluate()
     {
+        foreach (Transform player in playerTransforms)
+        {
+            playerTransorm = player;
+        }
+
         Transform bestSpot = FindBestCoverSpot();
         ai.SetBestCover(bestSpot);
-        
+
         state = bestSpot != null ? NodeState.SUCCESS : NodeState.FAILURE;
 
         return state;

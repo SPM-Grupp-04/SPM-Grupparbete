@@ -22,7 +22,7 @@ public class EnemyAI : EgilTree
     [SerializeField] private float chasingRange;
     [SerializeField] private float shootingRange;
 
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform[] playerTransform;
 
     private Transform bestCoveSpot;
     [SerializeField] private Cover[] avaliableCovers;
@@ -39,13 +39,12 @@ public class EnemyAI : EgilTree
         SetUpTree();
     }
 
-    void OnMouseDown()
-    {
-        Debug.Log("Clicked");
-    }
+   
 
     private void Update()
     {
+        
+        
         if (_currentHealth < startingHealth)
         {
             _currentHealth += Time.deltaTime * healthRestoreRate;
@@ -69,10 +68,12 @@ public class EnemyAI : EgilTree
         HealthNode healthNode = new HealthNode(this, lowHealthThresseHold);
         IsCoverdNode isCoveredNode = new IsCoverdNode(playerTransform, transform);
         ChaseNode chaseNode = new ChaseNode(playerTransform, agent, this);
+        
         RangeNode chasingRangeNode = new RangeNode(chasingRange, playerTransform, transform);
+        
         RangeNode shootingRangeNode = new RangeNode(shootingRange, playerTransform, transform);
+        
         ShootNode shootNode = new ShootNode(agent, this, playerTransform);
-
         EgilSequence chaseSequence = new EgilSequence(new List<EgilNode> {chasingRangeNode, chaseNode});
         EgilSequence shootSequence = new EgilSequence(new List<EgilNode> {shootingRangeNode, shootNode});
 
@@ -82,6 +83,7 @@ public class EnemyAI : EgilTree
         EgilSequence mainCoverSequence = new EgilSequence(new List<EgilNode> {healthNode, tryToTakeCoverSelector});
 
         topNode = new EgilSelector(new List<EgilNode> {mainCoverSequence, shootSequence, chaseSequence});
+        
         return topNode;
     }
 

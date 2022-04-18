@@ -4,16 +4,22 @@ using UnityEngine;
     public class IsCoverdNode : EgilNode
     {
         private Transform target;
+        private Transform[] targets;
         private Transform origin;
 
-        public IsCoverdNode(Transform target, Transform origin)
+        public IsCoverdNode(Transform[] targets, Transform origin)
         {
-            this.target = target;
+            this.targets = targets;
             this.origin = origin;
         }
 
         public override NodeState Evaluate()
         {
+            foreach (Transform target in targets)
+            {
+                this.target = target;
+            }
+            
             RaycastHit hit;
             if(Physics.Raycast(origin.position, target.position - origin.position, out hit))
             {

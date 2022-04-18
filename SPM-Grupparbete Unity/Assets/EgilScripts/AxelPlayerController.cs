@@ -79,7 +79,7 @@ public class AxelPlayerController : MonoBehaviour
             Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
         }
 
-        transform.position = new Vector3( playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
+        transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
     }
 
     private void ShootOrDrill()
@@ -130,10 +130,11 @@ public class AxelPlayerController : MonoBehaviour
 
     private void UpdatePlayer()
     {
-        // if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
-        // {
-        //     UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        // }
+        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
+        {
+            UpdatePlayerPositionAndRotationKeyBoardAndMouse();
+        }
+
         if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
         {
             UpdatePlayerPositionAndRotationGamePad();
@@ -166,7 +167,8 @@ public class AxelPlayerController : MonoBehaviour
     private void UpdatePlayerRotationGamePad()
     {
         Vector3 gamePadLookRotation = gamePadLookAction.ReadValue<Vector2>();
-        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing * Time.deltaTime;
+        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing *
+                             Time.deltaTime;
     }
 
     private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()

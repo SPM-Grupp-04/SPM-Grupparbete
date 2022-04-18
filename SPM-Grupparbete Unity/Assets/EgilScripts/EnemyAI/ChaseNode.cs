@@ -4,34 +4,48 @@ using BehaviorTree;
 using UnityEngine;
 using UnityEngine.AI;
 
-   
-    public class ChaseNode : EgilNode
+
+public class ChaseNode : EgilNode
+{
+    private Transform target;
+    private Transform[] targets;
+    private NavMeshAgent agent;
+    private EnemyAI ai;
+
+    public ChaseNode(Transform[] targets, NavMeshAgent agent, EnemyAI ai)
     {
-        private Transform target;
-        private NavMeshAgent agent;
-        private EnemyAI ai;
+        this.targets = targets;
+        this.agent = agent;
+        this.ai = ai;
+    }
 
-        public ChaseNode(Transform target, NavMeshAgent agent, EnemyAI ai)
-        {
-            this.target = target;
-            this.agent = agent;
-            this.ai = ai;
-        }
+    public override NodeState Evaluate()
+    {
+        ai.SetColor(Color.yellow);
 
-        public override NodeState Evaluate()
+        float distance = 100;
+        foreach (Transform target in targets)
         {
-            ai.SetColor(Color.yellow);
-            float distance = Vector3.Distance(target.position, agent.transform.position);
-            if(distance > 0.2f)
+            float tempdistance = Vector3.Distance(target.position, agent.transform.position);
+
+            if (tempdistance < distance)
             {
-                agent.isStopped = false;
-                agent.SetDestination(target.position);
-                return NodeState.RUNNING;
-            } else
-            {
-                agent.isStopped = true;
-                state = NodeState.SUCCESS;
-                return state;
+                distance = tempdistance;
+                this.target = target;
             }
         }
+
+        if (distance > 0.2f)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(target.position);
+            return NodeState.RUNNING;
+        }
+        else
+        {
+            agent.isStopped = true;
+            state = NodeState.SUCCESS;
+            return state;
+        }
     }
+}

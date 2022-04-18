@@ -5,19 +5,32 @@ public class RangeNode : EgilNode
 {
     private float range;
     private Transform target;
+    private Transform[] targets;
     private Transform orgin;
 
-    public RangeNode(float range, Transform target, Transform orgin)
+    public RangeNode(float range, Transform[] targets, Transform orgin)
     {
         this.range = range;
-        this.target = target;
+        this.targets = targets;
         this.orgin = orgin;
     }
 
     public override NodeState Evaluate()
     {
-        float distance = Vector3.Distance(target.position, orgin.position);
+        float distance = 100;
+        foreach (Transform target in targets)
+        {
+            float tempdistance = Vector3.Distance(target.position, orgin.position);
 
+            if (tempdistance < distance)
+            {
+                distance = tempdistance;
+                this.target = target;
+            }
+
+                
+        }
+        
         state = distance <= range ? NodeState.SUCCESS : NodeState.FAILURE;
         return state;
     }

@@ -35,7 +35,7 @@ public class EgilHealth : MonoBehaviour, IDamagable
         {
             if (localEgilPlayerData.PlayerOneHealth < 1)
             {
-                Destroy(transform.gameObject);
+                transform.gameObject.SetActive(false);
             }
         }
 
@@ -43,7 +43,7 @@ public class EgilHealth : MonoBehaviour, IDamagable
         {
             if (localEgilPlayerData.PlayerTwoHealth < 1)
             {
-                Destroy(transform.gameObject);
+                transform.gameObject.SetActive(false);
             }
         }
     }
