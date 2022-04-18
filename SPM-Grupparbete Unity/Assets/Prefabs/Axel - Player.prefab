@@ -135,11 +135,11 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.972549, b: 0.7137255, a: 1}
-  m_Intensity: 35
+  m_Color: {r: 0.990566, g: 0.9834716, b: 0.864409, a: 1}
+  m_Intensity: 80
   m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 53.32235
+  m_InnerSpotAngle: 30.124435
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -355,7 +355,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 17f2698758b0dc148916abe48e35008b, type: 2}
+  - {fileID: 2100000, guid: 8f18e61732b01f144a2b02ad662391cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   movementAcceleration: 5
-  rotationSmoothing: 0.05
+  rotationSmoothing: 5
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +490,7 @@ MonoBehaviour:
     m_ActionId: 0a6c6e6f-4221-430c-816c-77e0f2210986
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -507,8 +507,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localEgilPlayerData:
-    PlayerOneHP: 5
-    PlayerTwoHP: 5
+    PlayerOneHealth: 5
+    PlayerTwoHealth: 5
+    PlayerOneAcceleration: 5
+    PlayerTwoAcceleration: 5
+    PlayerOneDisco: 0
+    PlayerTwoDisco: 0
     Scene: 
     PosX: 0
     PosY: 0
@@ -632,7 +636,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7047b8ec4dd892c4d8f45b993748b6d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
