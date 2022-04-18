@@ -10,7 +10,7 @@ public class Max_EnemyTakeDamage : MonoBehaviour
         HP -= 1;
         if (HP <= 0)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

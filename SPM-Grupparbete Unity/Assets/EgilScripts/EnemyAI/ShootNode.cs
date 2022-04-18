@@ -10,15 +10,13 @@ public class ShootNode : EgilNode
     private EnemyAI ai;
     private Transform target;
     private Transform[] targets;
-    private Vector3 orgin;
-    
+
     private Vector3 currentVelocity;
     private float smoothDamp;
 
-    public ShootNode(NavMeshAgent agent, EnemyAI ai, Transform[] targets, Vector3 orgin)
+    public ShootNode(NavMeshAgent agent, EnemyAI ai, Transform[] targets)
     {
         this.agent = agent;
-        this.orgin = orgin;
         this.ai = ai;
         this.targets = targets;
         smoothDamp = 1f;
@@ -26,25 +24,18 @@ public class ShootNode : EgilNode
 
     public override NodeState Evaluate()
     {
-
-        foreach (Transform target in targets)
-        {
-            this.target = target;
-        }
         float distance = 100;
         foreach (Transform target in targets)
         {
-            float tempdistance = Vector3.Distance(target.position, orgin);
+            float tempdistance = Vector3.Distance(target.position, agent.transform.position);
 
             if (tempdistance < distance)
             {
                 distance = tempdistance;
                 this.target = target;
             }
-               
         }
-        
-        
+
         agent.isStopped = true;
         ai.SetColor(Color.green);
         Vector3 direction = target.position - ai.transform.position;

@@ -11,6 +11,8 @@ public class EgilCameraHandler : MonoBehaviour
     // Kolla de två trasform vi tar in. Räkna ut vart mittpunkten är och flytta dig dit
     [SerializeField] private Transform playerOne; // First object of pair
     [SerializeField] private Transform playerTwo; // Second object of pair
+
+
     private Vector3 midpointAtoB = new Vector3(0, 0, 0);
     [SerializeField] private CinemachineVirtualCamera virtualCameraTwoPlayers;
 
@@ -25,16 +27,13 @@ public class EgilCameraHandler : MonoBehaviour
     private const int FOVMIN = 80;
     private const int FOVMAX = 100;
 
-    private const int ActivateCamera = 10;
-    private const int DeactivateCamera = 0;
-
     private Vector3 LenghtBetweenPlayers;
 
 
     private void Start()
     {
-        virtualCameraPlayerOne.Priority = 0;
-        virtualCameraPlayerTwo.Priority = 0;
+        virtualCameraPlayerOne.gameObject.SetActive(false);
+        virtualCameraPlayerTwo.gameObject.SetActive(false);
     }
 
 
@@ -53,31 +52,26 @@ public class EgilCameraHandler : MonoBehaviour
 
     private void CheckWhatCameraShouldHavePriority()
     {
-
-
         if (playerOne.gameObject.activeInHierarchy && playerTwo.gameObject.activeInHierarchy)
         {
-            virtualCameraPlayerOne.Priority = DeactivateCamera;
-            virtualCameraPlayerTwo.Priority = DeactivateCamera;
-            virtualCameraTwoPlayers.Priority = ActivateCamera;
+            virtualCameraPlayerOne.gameObject.SetActive(false);
+            virtualCameraPlayerTwo.gameObject.SetActive(false);
+            virtualCameraTwoPlayers.gameObject.SetActive(true);
         }
-        
-        if (virtualCameraTwoPlayers.Priority > 0 && (playerOne.gameObject.activeInHierarchy == false ||
-                                                     playerTwo.gameObject.activeInHierarchy == false))
+
+        if ((playerOne.gameObject.activeInHierarchy == false || playerTwo.gameObject.activeInHierarchy == false))
         {
-            virtualCameraTwoPlayers.Priority = DeactivateCamera;
+            virtualCameraTwoPlayers.gameObject.SetActive(false);
         }
 
         if (playerOne.gameObject.activeInHierarchy == false)
         {
-            virtualCameraTwoPlayers.Priority = DeactivateCamera;
-            virtualCameraPlayerTwo.Priority = ActivateCamera;
+            virtualCameraPlayerTwo.gameObject.SetActive(true);
         }
 
         if (playerTwo.gameObject.activeInHierarchy == false)
         {
-            virtualCameraTwoPlayers.Priority = DeactivateCamera;
-            virtualCameraPlayerOne.Priority = ActivateCamera;
+            virtualCameraPlayerOne.gameObject.SetActive(true);
         }
     }
 

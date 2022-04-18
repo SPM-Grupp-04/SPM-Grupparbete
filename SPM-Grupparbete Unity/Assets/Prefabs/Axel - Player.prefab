@@ -355,7 +355,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 17f2698758b0dc148916abe48e35008b, type: 2}
+  - {fileID: 2100000, guid: 8f18e61732b01f144a2b02ad662391cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   movementAcceleration: 5
-  rotationSmoothing: 0.05
+  rotationSmoothing: 5
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +490,7 @@ MonoBehaviour:
     m_ActionId: 0a6c6e6f-4221-430c-816c-77e0f2210986
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -507,14 +507,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localEgilPlayerData:
-    PlayerOneHP: 5
-    PlayerTwoHP: 5
+    PlayerOneHealth: 5
+    PlayerTwoHealth: 5
+    PlayerOneAcceleration: 5
+    PlayerTwoAcceleration: 5
+    PlayerOneDisco: 0
+    PlayerTwoDisco: 0
     Scene: 
     PosX: 0
     PosY: 0
     PosZ: 0
     Crystals: 0
-  playerName: PlayerTwo
+  playerName: PlayerOne
 --- !u!114 &5868905720494507359
 MonoBehaviour:
   m_ObjectHideFlags: 0
