@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using BehaviorTree;
+using EgilScripts.EnemyAI;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -42,6 +44,9 @@ public class ShootNode : EgilNode
         Vector3 currentDirection = Vector3.SmoothDamp(ai.transform.forward, direction, ref currentVelocity, smoothDamp);
         Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         ai.transform.rotation = rotation;
+
+        //TODO: Fire bullet Event.
+
 
         state = NodeState.RUNNING;
         return state;

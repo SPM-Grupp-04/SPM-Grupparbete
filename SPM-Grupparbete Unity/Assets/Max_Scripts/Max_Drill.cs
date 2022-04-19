@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using EgilEventSystem;
+using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -123,8 +125,10 @@ public class Max_Drill : MonoBehaviour
                 CreateCylinderBetweenPoints(transform.position, shootHit.point, 0.25f, laserPrefab);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    shootHit.collider.gameObject.SendMessage("TakeDamage");
-
+                    //shootHit.collider.gameObject.SendMessage("TakeDamage");
+                    var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
+        
+                    EventSystem.current.FireEvent(takeDamge);
                 }
                 _overHeatAmount += overHeatIncreaseAmount;
 

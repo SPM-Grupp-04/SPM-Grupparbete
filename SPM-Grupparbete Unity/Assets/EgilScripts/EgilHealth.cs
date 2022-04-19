@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using EgilEventSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -31,11 +32,13 @@ public class EgilHealth : MonoBehaviour, IDamagable
 
     void Update()
     {
+        
         if (playerName == "PlayerOne")
         {
             if (localEgilPlayerData.PlayerOneHealth < 1)
             {
-                transform.gameObject.SetActive(false);
+                die(gameObject);
+                //transform.gameObject.SetActive(false);
             }
         }
 
@@ -43,13 +46,23 @@ public class EgilHealth : MonoBehaviour, IDamagable
         {
             if (localEgilPlayerData.PlayerTwoHealth < 1)
             {
-                transform.gameObject.SetActive(false);
+                die(gameObject);
+               // transform.gameObject.SetActive(false);
             }
         }
     }
 
+    void die(GameObject gameObject)
+    {
+        var dieEvent = new DieEvenInfo(gameObject);
+        
+        EventSystem.current.FireEvent(dieEvent);
+    }
+    
+
     public void DealDamage(int damage)
     {
+        
         if (playerName == "PlayerOne")
         {
             localEgilPlayerData.PlayerOneHealth -= damage;

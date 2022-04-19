@@ -31,19 +31,21 @@ public class EgilCollisionHandler : MonoBehaviour
 
     private void OnCollisionStay(Collision collisionInfo)
     {
-        if (collisionInfo.transform.tag.Equals("Enemy") && timeRemaining < 0.0f  )
+        /*if (collisionInfo.transform.tag.Equals("Enemy") && timeRemaining < 0.0f  )
         {
             Debug.Log("gettingHIt");
             
             eh.DealDamage(1);
-        }
+        }*/
 
+        /*
         if (timeRemaining < 0.0f)
         {
             timeRemaining = cooldownTime;
         }
 
         timeRemaining -= Time.deltaTime;
+        */
 
     }
 

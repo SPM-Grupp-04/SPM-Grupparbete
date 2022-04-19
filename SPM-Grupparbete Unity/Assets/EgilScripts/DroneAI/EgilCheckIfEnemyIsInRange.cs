@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class EgilCheckIfEnemyIsInRange : EgilNode
 {
-
+    /*Klassen implementeras på liknande sätt som att kolla på om man är i attackrange bara det att man kollar med
+     DroneBT.FOV Istället för DroneBT.AttackFOV.
+     */
     public static int enemyLayerMask = 1 << 7;
     private Transform _transform;
 

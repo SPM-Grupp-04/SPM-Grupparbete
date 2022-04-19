@@ -22,7 +22,7 @@ public class RangeNode : EgilNode
         {
             float tempdistance = Vector3.Distance(target.position, orgin.position);
 
-            if (tempdistance < distance)
+            if (tempdistance < distance && target.gameObject.activeInHierarchy)
             {
                 distance = tempdistance;
                 this.target = target;

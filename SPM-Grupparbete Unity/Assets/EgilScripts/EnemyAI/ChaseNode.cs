@@ -28,7 +28,7 @@ public class ChaseNode : EgilNode
         {
             float tempdistance = Vector3.Distance(target.position, agent.transform.position);
 
-            if (tempdistance < distance)
+            if (tempdistance < distance && target.gameObject.activeInHierarchy)
             {
                 distance = tempdistance;
                 this.target = target;

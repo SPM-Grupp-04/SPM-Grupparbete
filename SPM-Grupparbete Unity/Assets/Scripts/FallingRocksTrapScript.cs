@@ -1,4 +1,4 @@
-//Author: Simon Canbäck, sica 4801
+//Author: Simon Canbï¿½ck, sica 4801
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +21,8 @@ public class FallingRocksTrapScript : MonoBehaviour
     void Start()
     {
         bounds = GetComponent<Collider>().bounds;
-        print(SpawnThreshold);
-        print(Application.targetFrameRate);
+       // print(SpawnThreshold);
+        //print(Application.targetFrameRate);
     }
 
     // Update is called once per frame

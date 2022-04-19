@@ -1,6 +1,8 @@
-//Author: Simon Canbäck, sica4801
+//Author: Simon Canbï¿½ck, sica4801
 using System.Collections;
 using System.Collections.Generic;
+using EgilEventSystem;
+using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -47,10 +49,12 @@ public class FallingRockScript : MonoBehaviour
     {
         if (Utility.LayerMaskExtensions.IsInLayerMask(collision.gameObject, layerMask))
         {
-            if (collision.gameObject.GetComponent<IDamagable>() != null)
+            /*if (collision.gameObject.GetComponent<IDamagable>() != null)
             {
                 collision.gameObject.GetComponent<IDamagable>().DealDamage(damage);
-            }
+            }*/
+            var damageEvent = new DealDamageEventInfo(collision.gameObject, 1);
+            EventSystem.current.FireEvent(damageEvent);
 
             Destroy(telegraphMarker);
             Destroy(gameObject);

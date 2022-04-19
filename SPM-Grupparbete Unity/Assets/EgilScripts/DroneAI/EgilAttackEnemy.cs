@@ -1,52 +1,57 @@
 ﻿using UnityEngine;
 using BehaviorTree;
-
+using EgilEventSystem;
+using EgilScripts.DieEvents;
+using UnityEngine.InputSystem;
 
 public class EgilAttackEnemy : EgilNode
 {
-    // This scrip shoud attack the enemy
-    private Transform lastTarget;
-    private Egil_EnemyTakeDamage enemyTakeDamage;
-
-
-    private float attackTime = 1f;
-    private float attackCounter = 0f;
+    private Transform _transform;
+    private float cooldownTime = 0.5f;
+    private float timeRemaining;
 
     public EgilAttackEnemy(Transform transform)
     {
+        timeRemaining = cooldownTime;
+        _transform = transform;
     }
+
 
     public override NodeState Evaluate()
     {
-        
-        Transform target = (Transform) GetData("Target");
-        if (target != lastTarget)
+        Transform target = (Transform) GetData("target");
+
+        // Kollar om fienden har  dött.
+        if (!target.gameObject.activeInHierarchy)
         {
-            enemyTakeDamage = target.GetComponent<Egil_EnemyTakeDamage>();
+            ClearData("target");
+            state = NodeState.FAILURE;
+            return state;
         }
 
-        attackCounter += Time.deltaTime;
-
-        if (attackCounter >= attackTime)
+        // KOllar om fienden är för långt ifrån
+        if (Vector3.Distance(_transform.position, target.position) > EgilDroneBT.fovAttackRange)
         {
-            bool enemyIsDead = enemyTakeDamage.getIsDead();
-            if (enemyIsDead)
-            {
-                enemyTakeDamage.killEnemy();
-                ClearData("target");
-            }
-            else
-            {
-                enemyTakeDamage.TakeDamage();
-                attackCounter = 0;
-            }
+            ClearData("target");
+            state = NodeState.FAILURE;
+            return state;
         }
 
+        // Kör ett event när cooldownen tillåter.
+        if (timeRemaining < 0.0f)
+        {
+            var damageEvent = new DealDamageEventInfo(target.gameObject, 1);
+            EventSystem.current.FireEvent(damageEvent);
+        }
 
-        // Implement attackScript!.
+        // OM cooldownen är klar reset.
+        if (timeRemaining < 0.0f)
+        {
+            timeRemaining = cooldownTime;
+        }
 
-        Debug.Log("Attacking Enemy");
-
+        // Minska tid.
+        timeRemaining -= Time.deltaTime;
         state = NodeState.RUNNING;
         return state;
     }

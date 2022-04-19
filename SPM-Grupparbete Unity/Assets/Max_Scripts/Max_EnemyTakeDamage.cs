@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EgilEventSystem;
 using UnityEngine;
 
 public class Max_EnemyTakeDamage : MonoBehaviour
@@ -10,7 +11,10 @@ public class Max_EnemyTakeDamage : MonoBehaviour
         HP -= 1;
         if (HP <= 0)
         {
-            gameObject.SetActive(false);
+           // gameObject.SetActive(false);
+           var dieEvent = new DieEvenInfo(gameObject);
+           
+           EventSystem.current.FireEvent(dieEvent);
         }
     }
 }
