@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
     public class GoToCoverNode : EgilNode
     {
-        private NavMeshAgent agent;
+        /*private NavMeshAgent agent;
         private EnemyAI ai;
 
         public GoToCoverNode(NavMeshAgent agent, EnemyAI ai)
@@ -35,7 +35,7 @@ using UnityEngine.AI;
                 state = NodeState.SUCCESS;
                 return state;
             }
-        }
+        }*/
         
         
     }

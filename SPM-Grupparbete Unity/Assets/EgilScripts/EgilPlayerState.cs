@@ -6,13 +6,11 @@ using EgilEventSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class EgilHealth : MonoBehaviour, IDamagable
+public class EgilPlayerState : MonoBehaviour, IDamagable
 {
-    [FormerlySerializedAs("LocalPlayerData")] public EgilPlayerStatistics localEgilPlayerData = EgilPlayerStatistics.Instance;
+    private EgilPlayerStatistics localEgilPlayerData = EgilPlayerStatistics.Instance;
 
     [SerializeField] private String playerName;
-
-
     private void Start()
     {
         if (playerName == "PlayerOne")
@@ -38,7 +36,7 @@ public class EgilHealth : MonoBehaviour, IDamagable
             if (localEgilPlayerData.PlayerOneHealth < 1)
             {
                 die(gameObject);
-                //transform.gameObject.SetActive(false);
+                
             }
         }
 
@@ -47,7 +45,7 @@ public class EgilHealth : MonoBehaviour, IDamagable
             if (localEgilPlayerData.PlayerTwoHealth < 1)
             {
                 die(gameObject);
-               // transform.gameObject.SetActive(false);
+               
             }
         }
     }

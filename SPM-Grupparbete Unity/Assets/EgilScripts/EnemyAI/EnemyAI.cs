@@ -6,32 +6,31 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class EnemyAI : EgilTree, IDamagable
 {
     [SerializeField] private float startingHealth;
 
-    public float _currentHealth;
+    private float currentHealth;
 
-    public float currentHealth
+    public float CurrentHealth
     {
-        get { return _currentHealth; }
-        set { _currentHealth = Mathf.Clamp(value, 0, startingHealth); }
+        get { return currentHealth; }
+        set { currentHealth = Mathf.Clamp(value, 0, startingHealth); }
     }
 
-    [SerializeField] private float lowHealthThresseHold;
+    [SerializeField] private float lowHealthThreseHold;
     [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
     [SerializeField] private float shootingRange;
 
     [SerializeField] private Transform[] playerTransform;
 
-    private Transform bestCoveSpot;
-    [SerializeField] private Cover[] avaliableCovers;
+    // private Transform bestCoveSpot;
+    //[SerializeField] private Cover[] avaliableCovers;
     private NavMeshAgent agent;
-
     private Material material;
-
     private EgilNode topNode;
 
 
@@ -39,22 +38,22 @@ public class EnemyAI : EgilTree, IDamagable
     {
         base.Start();
         timeRemaining = cooldownTime;
-        _currentHealth = startingHealth;
+        currentHealth = startingHealth;
         SetUpTree();
     }
 
 
     private void Update()
     {
-        if (_currentHealth < startingHealth)
+        if (currentHealth < startingHealth)
         {
-            _currentHealth += Time.deltaTime * healthRestoreRate;
+            currentHealth += Time.deltaTime * healthRestoreRate;
         }
 
-        if (_currentHealth <= 1)
+        if (currentHealth <= 1)
         {
             var die = new DieEvenInfo(gameObject);
-            
+
             EventSystem.current.FireEvent(die);
             return;
         }
@@ -92,7 +91,7 @@ public class EnemyAI : EgilTree, IDamagable
     {
         //IsCoverAvaliableNode coverAvaliableNode = new IsCoverAvaliableNode(avaliableCovers, playerTransform, this);
         // GoToCoverNode goToCoverNode = new GoToCoverNode(agent, this);
-        HealthNode healthNode = new HealthNode(this, lowHealthThresseHold);
+        HealthNode healthNode = new HealthNode(this, lowHealthThreseHold);
         IsCoverdNode isCoveredNode = new IsCoverdNode(playerTransform, transform);
         ChaseNode chaseNode = new ChaseNode(playerTransform, agent, this);
 
@@ -121,7 +120,7 @@ public class EnemyAI : EgilTree, IDamagable
         material.color = color;
     }
 
-    public void SetBestCover(Transform bestSpot)
+    /*public void SetBestCover(Transform bestSpot)
     {
         this.bestCoveSpot = bestSpot;
     }
@@ -129,10 +128,10 @@ public class EnemyAI : EgilTree, IDamagable
     public Transform GetBestCoverSpot()
     {
         return bestCoveSpot;
-    }
+    }*/
 
     public void DealDamage(int damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
     }
 }

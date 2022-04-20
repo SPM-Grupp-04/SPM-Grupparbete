@@ -9,6 +9,16 @@ using Vector3 = UnityEngine.Vector3;
 
 public class EgilEnemyDetectionBehaviour : MonoBehaviour
 {
+    
+    
+    
+    /*
+     *
+     *OLD SCRIPT DON'T USE
+     * 
+     *
+     * 
+     */
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] [Range(1.0f, 50.0f)] private float _enemyMovementSpeed = 2.5f;
     [SerializeField] private LayerMask _layerMask;
@@ -31,6 +41,8 @@ public class EgilEnemyDetectionBehaviour : MonoBehaviour
 
     private void Update()
     {
+        
+        throw new NotImplementedException("THIS SCRIPT SHOULD NOT BE IN USE");
         CheckForPlayer();
 
         if (player != null)
@@ -43,7 +55,7 @@ public class EgilEnemyDetectionBehaviour : MonoBehaviour
 
     private void CheckForPlayer()
     {
-        colliders = Physics.OverlapSphere(transform.position + c.center, c.radius, _layerMask);
+        /*colliders = Physics.OverlapSphere(transform.position + c.center, c.radius, _layerMask);
 
 
         foreach (var col in colliders)
@@ -57,7 +69,7 @@ public class EgilEnemyDetectionBehaviour : MonoBehaviour
             }
         }
 
-        tempHealth = LARGENUMBER;
+        tempHealth = LARGENUMBER;*/
     }
 
     private void StartFollowPlayer()

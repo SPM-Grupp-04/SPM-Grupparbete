@@ -5,10 +5,10 @@ using Event = EgilEventSystem.Event;
 
 public class DieEvenInfo : Event
 {
-    public GameObject GameObject;
+    public GameObject gameObject;
 
     public DieEvenInfo(GameObject gameObject)
     {
-        this.GameObject = gameObject;
+        this.gameObject = gameObject;
     }
 }

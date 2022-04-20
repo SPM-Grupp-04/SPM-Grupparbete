@@ -7,6 +7,7 @@ public class RangeNode : EgilNode
     private Transform target;
     private Transform[] targets;
     private Transform orgin;
+    private const int largeDistanceNumber = 100;
 
     public RangeNode(float range, Transform[] targets, Transform orgin)
     {
@@ -17,7 +18,7 @@ public class RangeNode : EgilNode
 
     public override NodeState Evaluate()
     {
-        float distance = 100;
+        float distance = largeDistanceNumber;
         foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, orgin.position);

@@ -17,7 +17,7 @@ public class HealthNode : EgilNode
     
     public override NodeState Evaluate()
     {
-        state =  ai.currentHealth <= threshold ? NodeState.SUCCESS : NodeState.FAILURE;
+        state =  ai.CurrentHealth <= threshold ? NodeState.SUCCESS : NodeState.FAILURE;
         return state;
     }
 }

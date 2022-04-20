@@ -1,5 +1,5 @@
 //Main author: Axel Ingelsson Fredler
-//Additional programming: Simon Canb‰ck, sica4801
+//Additional programming: Simon Canb√§ck, sica4801
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ public class ShopScript : MonoBehaviour
     private Collider[] shopColliders;
     //private Button[] buttons;
     private bool shopInterfaceOpened;
-    private EgilHealth egilHealth;
+    private EgilPlayerState _egilPlayerState;
 
     // Update is called once per frame
 
@@ -26,7 +26,7 @@ public class ShopScript : MonoBehaviour
         shopInterfaceBackground.SetActive(false);
         shopInterfaceOpened = false;
 
-        egilHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<EgilHealth>();
+        _egilPlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<EgilPlayerState>();
 
         //buttons = GetComponentsInChildren<Button>();
     }
@@ -103,7 +103,7 @@ public class ShopScript : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        egilHealth.Heal(healAmount);
+        _egilPlayerState.Heal(healAmount);
 
         healButton.gameObject.SetActive(false);
         CloseShopInterface(null);
@@ -111,7 +111,7 @@ public class ShopScript : MonoBehaviour
 
     public void Accelerate(float addedAcceleration)
     {
-        egilHealth.SetAcceleration(EgilPlayerStatistics.Instance.PlayerOneAcceleration + addedAcceleration);
+        _egilPlayerState.SetAcceleration(EgilPlayerStatistics.Instance.PlayerOneAcceleration + addedAcceleration);
 
         accelerateButton.gameObject.SetActive(false);
         CloseShopInterface(null);
@@ -120,7 +120,7 @@ public class ShopScript : MonoBehaviour
     public void Disco(bool isDisco)
     {
         Debug.Log("DISCO!");
-        egilHealth.SetDisco(isDisco);
+        _egilPlayerState.SetDisco(isDisco);
 
         discoButton.gameObject.SetActive(false);
         CloseShopInterface(null);

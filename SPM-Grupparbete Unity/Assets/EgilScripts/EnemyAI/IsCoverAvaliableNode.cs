@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IsCoverAvaliableNode : EgilNode
 {
-    private Cover[] avaliabbaleCover;
+    /*private Cover[] avaliabbaleCover;
     private Transform playerTransorm;
     private Transform[] playerTransforms;
     private EnemyAI ai;
@@ -83,5 +83,5 @@ public class IsCoverAvaliableNode : EgilNode
         }
 
         return false;
-    }
+    }*/
 }

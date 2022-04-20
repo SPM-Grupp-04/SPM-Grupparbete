@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using BehaviorTree;
-using EgilScripts.EnemyAI;
+
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,7 +15,9 @@ public class ShootNode : EgilNode
 
     private Vector3 currentVelocity;
     private float smoothDamp;
-
+    private const int largeDistanceNumber = 100;
+    
+    
     public ShootNode(NavMeshAgent agent, EnemyAI ai, Transform[] targets)
     {
         this.agent = agent;
@@ -26,7 +28,7 @@ public class ShootNode : EgilNode
 
     public override NodeState Evaluate()
     {
-        float distance = 100;
+        float distance = largeDistanceNumber;
         foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, agent.transform.position);
@@ -45,9 +47,9 @@ public class ShootNode : EgilNode
         Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         ai.transform.rotation = rotation;
 
-        //TODO: Fire bullet Event.
-
-
+        
+        
+       
         state = NodeState.RUNNING;
         return state;
     }

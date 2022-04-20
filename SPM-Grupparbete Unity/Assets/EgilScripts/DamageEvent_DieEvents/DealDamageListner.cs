@@ -11,9 +11,9 @@ public class DealDamageListner : MonoBehaviour
 
     void OnGiveDamgeToUnit(DealDamageEventInfo dieEvenInfo)
     {
-        if (dieEvenInfo.GameObject.GetComponent<IDamagable>() != null)
+        if (dieEvenInfo.gameObject.GetComponent<IDamagable>() != null)
         {
-            dieEvenInfo.GameObject.GetComponent<IDamagable>().DealDamage(dieEvenInfo.amountOfDamage);
+            dieEvenInfo.gameObject.GetComponent<IDamagable>().DealDamage(dieEvenInfo.amountOfDamage);
         }
     }
 }
