@@ -6,6 +6,7 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 using UnityEngine.Serialization;
 using Tree = BehaviorTree.Tree;
 
@@ -25,8 +26,10 @@ public class EnemyAI : Tree, IDamagable
     [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
     [SerializeField] private float shootingRange;
-
+    [SerializeField] private float movementSpeed;
     [SerializeField] private Transform[] playerTransform;
+
+    private IObjectPool<EnemyAI> pool;
 
     // private Transform bestCoveSpot;
     //[SerializeField] private Cover[] avaliableCovers;
@@ -34,12 +37,19 @@ public class EnemyAI : Tree, IDamagable
     private Material material;
     private TreeNode m_TopTreeNode;
 
+    public void SetPool(IObjectPool<EnemyAI> pool) => this.pool = pool;
+    
+        
+    
+
 
     void Start()
     {
+        agent.speed = movementSpeed;
         base.Start();
         timeRemaining = cooldownTime;
         currentHealth = startingHealth;
+       
         SetUpTree();
     }
 
@@ -53,9 +63,15 @@ public class EnemyAI : Tree, IDamagable
 
         if (currentHealth <= 1)
         {
-            var die = new DieEvenInfo(gameObject);
+            if (pool != null)
+            {
+                Debug.Log("Pool inte null");
+                pool.Release(this);
+                
+                EnemySpawner.totalAmountOfEnemies--;
+            }
 
-            EventSystem.current.FireEvent(die);
+
             return;
         }
 
@@ -69,7 +85,7 @@ public class EnemyAI : Tree, IDamagable
         material = GetComponent<MeshRenderer>().material;
     }
 
-    private float cooldownTime = 2f; // Varför måste den vara i hela sekunder.
+    private float cooldownTime = 0.5f; 
     private float timeRemaining;
 
     private void OnCollisionStay(Collision collision)

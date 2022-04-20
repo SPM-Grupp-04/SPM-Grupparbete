@@ -39,6 +39,7 @@ public class ChaseTreeNode : TreeNode
         {
             agent.isStopped = false;
             agent.SetDestination(target.position);
+            
             return NodeState.RUNNING;
         }
         else

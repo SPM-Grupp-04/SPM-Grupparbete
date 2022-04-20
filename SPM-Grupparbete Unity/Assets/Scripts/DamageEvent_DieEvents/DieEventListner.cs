@@ -15,5 +15,8 @@ public class DieEventListner : MonoBehaviour
     {
         //Debug.Log(dieEvenInfo.GameObject.name + " Has died");
         dieEvenInfo.gameObject.SetActive(false);
+
+       
+        
     }
 }
