@@ -31,25 +31,26 @@ public class EnemyAI : Tree, IDamagable
 
     private IObjectPool<EnemyAI> pool;
 
+    //[SerializeField]private EnemySpawner pool;
+
     // private Transform bestCoveSpot;
     //[SerializeField] private Cover[] avaliableCovers;
     private NavMeshAgent agent;
     private Material material;
     private TreeNode m_TopTreeNode;
+    public MeshRenderer _meshRenderer;
 
     public void SetPool(IObjectPool<EnemyAI> pool) => this.pool = pool;
-    
-        
-    
 
 
     void Start()
     {
+        _meshRenderer = GetComponent<MeshRenderer>();
         agent.speed = movementSpeed;
         base.Start();
         timeRemaining = cooldownTime;
         currentHealth = startingHealth;
-       
+
         SetUpTree();
     }
 
@@ -65,11 +66,17 @@ public class EnemyAI : Tree, IDamagable
         {
             if (pool != null)
             {
-                Debug.Log("Pool inte null");
+                
+                _meshRenderer.enabled = false;
                 pool.Release(this);
                 
-                EnemySpawner.totalAmountOfEnemies--;
             }
+            else
+            {
+                Debug.Log("Pool is null");
+                gameObject.SetActive(false);
+            }
+         
 
 
             return;
@@ -85,7 +92,7 @@ public class EnemyAI : Tree, IDamagable
         material = GetComponent<MeshRenderer>().material;
     }
 
-    private float cooldownTime = 0.5f; 
+    private float cooldownTime = 0.5f;
     private float timeRemaining;
 
     private void OnCollisionStay(Collision collision)

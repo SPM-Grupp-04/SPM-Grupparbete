@@ -1,50 +1,62 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private IObjectPool<EnemyAI> pool;
-   [SerializeField] private EnemyAI enemyPrefab;
-    public static int totalAmountOfEnemies = 0;
-    private void Awake() => pool = new ObjectPool<EnemyAI>(creatEnamy,OnTakeEnemyAIFromPool, OnReturnBallToPool);
+    private ObjectPool<EnemyAI> pool;
+    [SerializeField] private EnemyAI enemyPrefab;
 
+   private  int totalAmountOfEnemies = 0;
+
+   [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
+    //private  int totalSpawnedEnemies = 0;
+    private void Awake() => pool = new ObjectPool<EnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+
+
+  
 
     private void Update()
     {
-        for (;totalAmountOfEnemies < 10; totalAmountOfEnemies++)
+        /*if (totalSpawnedEnemies < 10)
         {
             creatEnamy();
-            OnTakeEnemyAIFromPool(enemyPrefab);
-        }   
+            Debug.Log(totalAmountOfEnemies + " Total amout of enimes.");
+            totalSpawnedEnemies++;
+        }*/
+
+        // Spawna finenderna från poolen!
+
+        if (totalAmountOfEnemies < totalAllowedEnimesAtSpawner)
+        {
+            pool.Get();
+        }
     }
-    
+
     EnemyAI creatEnamy()
     {
-        var enemy = Instantiate(enemyPrefab);
+        var enemy = Instantiate(enemyPrefab, transform.position, quaternion.identity);
         enemy.SetPool(pool);
-        return enemy;
 
+        return enemy;
     }
 
     void OnTakeEnemyAIFromPool(EnemyAI enemyAI)
     {
+        enemyAI.transform.position = gameObject.transform.position;
+        enemyAI._meshRenderer.enabled = true;
         enemyAI.gameObject.SetActive(true);
         
+        totalAmountOfEnemies++;
     }
 
 
-    void OnReturnBallToPool(EnemyAI enemyAi)
+    public void OnReturnBallToPool(EnemyAI enemyAi)
     {
         enemyAi.gameObject.SetActive(false);
+        totalAmountOfEnemies--;
     }
-   
-    private void Start()
-    {
-        
-    }
-
-    
 }
