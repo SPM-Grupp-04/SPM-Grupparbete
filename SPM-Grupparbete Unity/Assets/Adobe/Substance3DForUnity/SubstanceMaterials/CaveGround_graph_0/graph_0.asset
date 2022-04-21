@@ -19,21 +19,19 @@ MonoBehaviour:
     Index: 0
     Owner: {fileID: 11400000}
     Input:
-    - rid: 1000
-    - rid: 1001
-    - rid: 1002
-    - rid: 1003
-    - rid: 1004
-    - rid: 1005
-    - rid: 1006
-    - rid: 1007
-    - rid: 1008
-    - rid: 1009
-    - rid: 1010
-    - rid: 1011
-    - rid: 1012
-    - rid: 1013
-    - rid: 1014
+    - rid: 2409675879674281997
+    - rid: 2409675879674281998
+    - rid: 2409675879674281999
+    - rid: 2409675879674282000
+    - rid: 2409675879674282001
+    - rid: 2409675879674282002
+    - rid: 2409675879674282003
+    - rid: 2409675879674282004
+    - rid: 2409675879674282005
+    - rid: 2409675879674282006
+    - rid: 2409675879674282007
+    - rid: 2409675879674282008
+    - rid: 2409675879674282009
     Output:
     - Index: 0
       VirtualOutputIndex: 6
@@ -80,7 +78,7 @@ MonoBehaviour:
         Index: 2
         Type: 8
         Channel: roughness
-      OutputTexture: {fileID: 0}
+      OutputTexture: {fileID: 2800000, guid: 3ac9e831c6bf46b44aa536df421936c5, type: 3}
       sRGB: 0
       IsVirtual: 0
       IsStandardOutput: 0
@@ -134,12 +132,12 @@ MonoBehaviour:
         Index: 5
         Type: 8
         Channel: ambientOcclusion
-      OutputTexture: {fileID: 0}
+      OutputTexture: {fileID: 2800000, guid: 0d33609476dc57742b3925a19e21dacb, type: 3}
       sRGB: 0
       IsVirtual: 0
       IsStandardOutput: 0
       IsAlphaAssignable: 1
-      AlphaChannel: 
+      AlphaChannel: ambientocclusion
       InvertAssignedAlpha: 0
       BGRATexture: 0
       Flags: 0
@@ -149,27 +147,29 @@ MonoBehaviour:
     HasThumbnail: 0
     OutputMaterial: {fileID: 2100000, guid: 3715c82ffa6aab24ab44e6daead6ebcf, type: 2}
     MaterialShader: Universal Render Pipeline/Lit
-    GenerateAllOutputs: 0
+    GenerateAllOutputs: 1
     GenerateAllMipmaps: 0
     DefaultPreset: " <sbspreset pkgurl=\"pkg://CaveGround\" label=\"\" >\n  <presetinput
       identifier=\"$outputsize\" uid=\"2726479364\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
     CurrentStatePreset: " <sbspreset pkgurl=\"pkg://CaveGround\" label=\"\" >\n 
       <presetinput identifier=\"$outputsize\" uid=\"2726479364\" type=\"8\" value=\"10,10\"
       />\n  <presetinput identifier=\"dirt_level\" uid=\"3461836519\" type=\"0\"
-      value=\"0.123\" />\n  <presetinput identifier=\"grunge_amount\" uid=\"3461646214\"
-      type=\"0\" value=\"0.272\" />\n  <presetinput identifier=\"opacitymult\" uid=\"3461449541\"
-      type=\"0\" value=\"0\" />\n  <presetinput identifier=\"opacitymult_1\" uid=\"3462373290\"
-      type=\"0\" value=\"1\" />\n </sbspreset>\n"
+      value=\"0.24\" />\n  <presetinput identifier=\"grunge_amount\" uid=\"3461646214\"
+      type=\"0\" value=\"0.35\" />\n  <presetinput identifier=\"opacitymult\" uid=\"3461449541\"
+      type=\"0\" value=\"0.246\" />\n  <presetinput identifier=\"height_depth\" uid=\"3461415426\"
+      type=\"0\" value=\"0.15\" />\n  <presetinput identifier=\"opacitymult_1\" uid=\"3462373290\"
+      type=\"0\" value=\"1\" />\n  <presetinput identifier=\"opacitymult_2\" uid=\"3450768250\"
+      type=\"0\" value=\"0.021\" />\n </sbspreset>\n"
     IsRuntimeOnly: 0
   RefreshMaterial: 1
   Name: graph_0
   IsRoot: 1
   FlagedForDelete: 0
-  GUID: ccffe550-691d-493e-8176-5c7f13c77e46
+  GUID: 2582e11e-c414-465c-903a-5ea2934a511d
   references:
     version: 2
     RefIds:
-    - rid: 1000
+    - rid: 2409675879674281997
       type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -193,7 +193,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 1001
+    - rid: 2409675879674281998
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -220,7 +220,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 1002
+    - rid: 2409675879674281999
       type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 2
@@ -246,7 +246,7 @@ MonoBehaviour:
           _SliderClamp: 0
           _EnumValueCount: 0
           _EnumValues: []
-    - rid: 1003
+    - rid: 2409675879674282000
       type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 3
@@ -272,11 +272,11 @@ MonoBehaviour:
           _SliderClamp: 0
           _EnumValueCount: 0
           _EnumValues: []
-    - rid: 1004
+    - rid: 2409675879674282001
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 4
-        _Data: 0.123
+        _Data: 0.24
         _isVisible: 1
         _Description:
           Identifier: dirt_level
@@ -297,11 +297,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1005
+    - rid: 2409675879674282002
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 5
-        _Data: 0.272
+        _Data: 0.35
         _isVisible: 1
         _Description:
           Identifier: grunge_amount
@@ -322,11 +322,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1006
+    - rid: 2409675879674282003
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 6
-        _Data: 0
+        _Data: 0.246
         _isVisible: 1
         _Description:
           Identifier: opacitymult
@@ -348,7 +348,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1007
+    - rid: 2409675879674282004
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 7
@@ -373,7 +373,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1008
+    - rid: 2409675879674282005
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 8
@@ -398,11 +398,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1009
+    - rid: 2409675879674282006
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 9
-        _Data: 0.14
+        _Data: 0.15
         _isVisible: 1
         _Description:
           Identifier: height_depth
@@ -427,7 +427,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1010
+    - rid: 2409675879674282007
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 10
@@ -453,11 +453,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1011
+    - rid: 2409675879674282008
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 11
-        _Data: 0.9
+        _Data: 0.021
         _isVisible: 1
         _Description:
           Identifier: opacitymult_2
@@ -479,79 +479,28 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 1012
-      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+    - rid: 2409675879674282009
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
-        _Index: 12
-        _Data: 1
-        _isVisible: 1
         _Description:
-          Identifier: scale
-          Label: Scale
-          GuiGroup: Tiling
-          GuiDescription: 
+          Identifier: inversedy
+          Label: Normal Format
+          GuiGroup: Normal Format
+          GuiDescription: The <b>Normal Format</b> parameter inverts y coordinates
+            of height map (Open-GL)
           GuiVisibleIf: 
           Index: 12
-          Type: 0
-          WidgetType: 1
-        _HasChanged: 0
+          Type: 4
+          WidgetType: 4
+        _Index: 12
+        _Data: 0
+        _isVisible: 1
+        _GraphID: 0
         _NumericalDescription:
-          _DefaultValue: 1
+          _DefaultValue: 0
           _MinValue: 0
-          _MaxValue: 10
-          _SliderStep: 0.01
-          _SliderClamp: 0
-          _EnumValueCount: 0
-          _EnumValues: []
-        _GraphID: 0
-    - rid: 1013
-      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
-      data:
-        _Description:
-          Identifier: x_amount
-          Label: X Amount
-          GuiGroup: Tiling
-          GuiDescription: 
-          GuiVisibleIf: 
-          Index: 13
-          Type: 4
-          WidgetType: 1
-        _Index: 13
-        _Data: 1
-        _isVisible: 1
-        _GraphID: 0
-        _NumericalDescription:
-          _DefaultValue: 1
-          _MinValue: 1
-          _MaxValue: 256
-          _SliderStep: 1
-          _SliderClamp: 0
-          _LabelFalse: 
-          _LabelTrue: 
-          _EnumValueCount: 0
-          _EnumValues: []
-        _HasChanged: 0
-    - rid: 1014
-      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
-      data:
-        _Description:
-          Identifier: y_amount
-          Label: Y Amount
-          GuiGroup: Tiling
-          GuiDescription: 
-          GuiVisibleIf: 
-          Index: 14
-          Type: 4
-          WidgetType: 1
-        _Index: 14
-        _Data: 1
-        _isVisible: 1
-        _GraphID: 0
-        _NumericalDescription:
-          _DefaultValue: 1
-          _MinValue: 1
-          _MaxValue: 256
-          _SliderStep: 1
+          _MaxValue: 0
+          _SliderStep: 0
           _SliderClamp: 0
           _LabelFalse: 
           _LabelTrue: 
