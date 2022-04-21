@@ -1,6 +1,9 @@
 ﻿using BehaviorTree;
+using EgilEventSystem;
+using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.AI;
+using Event = UnityEngine.Event;
 
 namespace Utility.EnemyAI
 {
@@ -45,10 +48,11 @@ namespace Utility.EnemyAI
             Vector3 currentDirection = Vector3.SmoothDamp(gameObject.transform.forward, direction, ref currentVelocity, smoothDamp);
             Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
             gameObject.transform.rotation = rotation;
+
+            // Fire a shoot Event.
+            var shootEventInfo = new ShootEventInfo(target.gameObject, this.gameObject);
+            EventSystem.current.FireEvent(shootEventInfo);
             
-            
-            // Attack 
-       
             state = NodeState.RUNNING;
             return state;
         }
