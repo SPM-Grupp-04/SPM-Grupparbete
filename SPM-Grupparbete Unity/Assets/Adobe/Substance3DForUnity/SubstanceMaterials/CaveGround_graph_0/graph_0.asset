@@ -32,6 +32,8 @@ MonoBehaviour:
     - rid: 1010
     - rid: 1011
     - rid: 1012
+    - rid: 1013
+    - rid: 1014
     Output:
     - Index: 0
       VirtualOutputIndex: 6
@@ -153,15 +155,17 @@ MonoBehaviour:
       identifier=\"$outputsize\" uid=\"2726479364\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
     CurrentStatePreset: " <sbspreset pkgurl=\"pkg://CaveGround\" label=\"\" >\n 
       <presetinput identifier=\"$outputsize\" uid=\"2726479364\" type=\"8\" value=\"10,10\"
-      />\n  <presetinput identifier=\"opacitymult\" uid=\"3461449541\" type=\"0\"
-      value=\"0.116\" />\n  <presetinput identifier=\"opacitymult_2\" uid=\"3450768250\"
-      type=\"0\" value=\"0.894\" />\n </sbspreset>\n"
+      />\n  <presetinput identifier=\"dirt_level\" uid=\"3461836519\" type=\"0\"
+      value=\"0.123\" />\n  <presetinput identifier=\"grunge_amount\" uid=\"3461646214\"
+      type=\"0\" value=\"0.272\" />\n  <presetinput identifier=\"opacitymult\" uid=\"3461449541\"
+      type=\"0\" value=\"0\" />\n  <presetinput identifier=\"opacitymult_1\" uid=\"3462373290\"
+      type=\"0\" value=\"1\" />\n </sbspreset>\n"
     IsRuntimeOnly: 0
   RefreshMaterial: 1
   Name: graph_0
   IsRoot: 1
   FlagedForDelete: 0
-  GUID: 0a802873-b2aa-41af-8b6f-7138c6391802
+  GUID: ccffe550-691d-493e-8176-5c7f13c77e46
   references:
     version: 2
     RefIds:
@@ -272,7 +276,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 4
-        _Data: 0.5
+        _Data: 0.123
         _isVisible: 1
         _Description:
           Identifier: dirt_level
@@ -297,7 +301,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 5
-        _Data: 0.4
+        _Data: 0.272
         _isVisible: 1
         _Description:
           Identifier: grunge_amount
@@ -322,7 +326,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 6
-        _Data: 0.116
+        _Data: 0
         _isVisible: 1
         _Description:
           Identifier: opacitymult
@@ -427,7 +431,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 10
-        _Data: 0
+        _Data: 1
         _isVisible: 1
         _Description:
           Identifier: opacitymult_1
@@ -453,7 +457,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 11
-        _Data: 0.894
+        _Data: 0.9
         _isVisible: 1
         _Description:
           Identifier: opacitymult_2
@@ -476,27 +480,78 @@ MonoBehaviour:
           _EnumValues: []
         _GraphID: 0
     - rid: 1012
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        _Index: 12
+        _Data: 1
+        _isVisible: 1
+        _Description:
+          Identifier: scale
+          Label: Scale
+          GuiGroup: Tiling
+          GuiDescription: 
+          GuiVisibleIf: 
+          Index: 12
+          Type: 0
+          WidgetType: 1
+        _HasChanged: 0
+        _NumericalDescription:
+          _DefaultValue: 1
+          _MinValue: 0
+          _MaxValue: 10
+          _SliderStep: 0.01
+          _SliderClamp: 0
+          _EnumValueCount: 0
+          _EnumValues: []
+        _GraphID: 0
+    - rid: 1013
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
-          Identifier: inversedy
-          Label: Normal Format
-          GuiGroup: Normal Format
-          GuiDescription: The <b>Normal Format</b> parameter inverts y coordinates
-            of height map (Open-GL)
+          Identifier: x_amount
+          Label: X Amount
+          GuiGroup: Tiling
+          GuiDescription: 
           GuiVisibleIf: 
-          Index: 12
+          Index: 13
           Type: 4
-          WidgetType: 4
-        _Index: 12
-        _Data: 0
+          WidgetType: 1
+        _Index: 13
+        _Data: 1
         _isVisible: 1
         _GraphID: 0
         _NumericalDescription:
-          _DefaultValue: 0
-          _MinValue: 0
-          _MaxValue: 0
-          _SliderStep: 0
+          _DefaultValue: 1
+          _MinValue: 1
+          _MaxValue: 256
+          _SliderStep: 1
+          _SliderClamp: 0
+          _LabelFalse: 
+          _LabelTrue: 
+          _EnumValueCount: 0
+          _EnumValues: []
+        _HasChanged: 0
+    - rid: 1014
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        _Description:
+          Identifier: y_amount
+          Label: Y Amount
+          GuiGroup: Tiling
+          GuiDescription: 
+          GuiVisibleIf: 
+          Index: 14
+          Type: 4
+          WidgetType: 1
+        _Index: 14
+        _Data: 1
+        _isVisible: 1
+        _GraphID: 0
+        _NumericalDescription:
+          _DefaultValue: 1
+          _MinValue: 1
+          _MaxValue: 256
+          _SliderStep: 1
           _SliderClamp: 0
           _LabelFalse: 
           _LabelTrue: 
