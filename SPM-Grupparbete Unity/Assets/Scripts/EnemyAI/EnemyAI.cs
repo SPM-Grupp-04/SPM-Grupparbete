@@ -32,7 +32,6 @@ public class EnemyAI : Tree, IDamagable
     private IObjectPool<EnemyAI> pool;
 
     //[SerializeField]private EnemySpawner pool;
-
     // private Transform bestCoveSpot;
     //[SerializeField] private Cover[] avaliableCovers;
     private NavMeshAgent agent;
@@ -117,15 +116,15 @@ public class EnemyAI : Tree, IDamagable
         // GoToCoverTreeNode goToCoverNode = new GoToCoverTreeNode(agent, this);
         HealthTreeNode healthTreeNode = new HealthTreeNode(this, lowHealthThreseHold);
         IsCoverdTreeNode isCoveredTreeNode = new IsCoverdTreeNode(playerTransform, transform);
-        ChaseTreeNode chaseTreeNode = new ChaseTreeNode(playerTransform, agent, this);
+        ChaseTreeNode chaseTreeNode = new ChaseTreeNode(playerTransform, agent);
 
         RangeTreeNode chasingRangeTreeNode = new RangeTreeNode(chasingRange, playerTransform, transform);
 
         RangeTreeNode shootingRangeTreeNode = new RangeTreeNode(shootingRange, playerTransform, transform);
 
-        ShootTreeNode shootTreeNode = new ShootTreeNode(agent, this, playerTransform);
+        MeeleAttackTreeNode meeleAttackTreeNode = new MeeleAttackTreeNode(agent, gameObject, playerTransform);
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNode, chaseTreeNode});
-        Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNode, shootTreeNode});
+        Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNode, meeleAttackTreeNode});
 
         //Sequence goToCoverSequence = new Sequence(new List<TreeNode> {coverAvaliableNode, goToCoverNode});
         //Selector findCoverSelector = new Selector(new List<TreeNode> {goToCoverSequence, chaseSequence});
