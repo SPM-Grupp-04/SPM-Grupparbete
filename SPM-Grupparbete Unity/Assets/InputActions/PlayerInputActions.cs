@@ -116,6 +116,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowDynamite"",
+                    ""type"": ""Button"",
+                    ""id"": ""76a171cb-99d3-44cb-8574-4bc04708a83f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -305,6 +314,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""EnterDynamiteThrowMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fc07002-43da-4540-bfd3-4f8bb8a23ed0"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ThrowDynamite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -384,6 +404,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_TrajectoryIncrease = m_Player.FindAction("TrajectoryIncrease", throwIfNotFound: true);
         m_Player_EnterDynamiteThrowMode = m_Player.FindAction("EnterDynamiteThrowMode", throwIfNotFound: true);
+        m_Player_ThrowDynamite = m_Player.FindAction("ThrowDynamite", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -453,6 +474,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_TrajectoryIncrease;
     private readonly InputAction m_Player_EnterDynamiteThrowMode;
+    private readonly InputAction m_Player_ThrowDynamite;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -467,6 +489,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @TrajectoryIncrease => m_Wrapper.m_Player_TrajectoryIncrease;
         public InputAction @EnterDynamiteThrowMode => m_Wrapper.m_Player_EnterDynamiteThrowMode;
+        public InputAction @ThrowDynamite => m_Wrapper.m_Player_ThrowDynamite;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -506,6 +529,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @EnterDynamiteThrowMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
+                @ThrowDynamite.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
+                @ThrowDynamite.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
+                @ThrowDynamite.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -540,6 +566,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @EnterDynamiteThrowMode.started += instance.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.performed += instance.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.canceled += instance.OnEnterDynamiteThrowMode;
+                @ThrowDynamite.started += instance.OnThrowDynamite;
+                @ThrowDynamite.performed += instance.OnThrowDynamite;
+                @ThrowDynamite.canceled += instance.OnThrowDynamite;
             }
         }
     }
@@ -601,5 +630,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnUse(InputAction.CallbackContext context);
         void OnTrajectoryIncrease(InputAction.CallbackContext context);
         void OnEnterDynamiteThrowMode(InputAction.CallbackContext context);
+        void OnThrowDynamite(InputAction.CallbackContext context);
     }
 }

@@ -21,6 +21,18 @@ public class LaunchArcMesh : MonoBehaviour
     private float gravity;
     private float radianAngle;
 
+    public float GetLaunchVelocity()
+    {
+        return velocity;
+    }
+
+    public Vector3 GetLaunchAngle()
+    {
+        Quaternion rotation = Quaternion.AngleAxis(angle, transform.forward);
+        Vector3 lDirection = rotation * transform.forward + transform.up;
+        return lDirection.normalized;
+    }
+
     private void OnValidate()
     {
         if (trajectoryMesh != null && Application.isPlaying)
@@ -37,15 +49,10 @@ public class LaunchArcMesh : MonoBehaviour
         trajectoryMesh = GetComponent<MeshFilter>().mesh;
         gravity = Mathf.Abs(Physics.gravity.y);
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Update()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        Debug.Log(transform.forward);
         if (enterDynamiteThrowModeInputAction.IsPressed())
         {
             TrajectoryPrediction();
@@ -58,7 +65,6 @@ public class LaunchArcMesh : MonoBehaviour
 
     private void TrajectoryPrediction()
     {
-        //Debug.Log(increaseTrajectoryArcInputAction.ReadValue<float>());
         velocity += increaseTrajectoryArcInputAction.ReadValue<float>() * trajectoryArcIncreaseSpeed;
         angle += increaseTrajectoryArcInputAction.ReadValue<float>() * 0.005f;
         RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
