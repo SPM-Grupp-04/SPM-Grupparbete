@@ -6,6 +6,7 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 using UnityEngine.Serialization;
 using Tree = BehaviorTree.Tree;
 
@@ -25,21 +26,31 @@ public class EnemyAI : Tree, IDamagable
     [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
     [SerializeField] private float shootingRange;
-
+    [SerializeField] private float movementSpeed;
     [SerializeField] private Transform[] playerTransform;
+
+    private IObjectPool<EnemyAI> pool;
+
+    //[SerializeField]private EnemySpawner pool;
 
     // private Transform bestCoveSpot;
     //[SerializeField] private Cover[] avaliableCovers;
     private NavMeshAgent agent;
     private Material material;
     private TreeNode m_TopTreeNode;
+    public MeshRenderer _meshRenderer;
+
+    public void SetPool(IObjectPool<EnemyAI> pool) => this.pool = pool;
 
 
     void Start()
     {
+        _meshRenderer = GetComponent<MeshRenderer>();
+        agent.speed = movementSpeed;
         base.Start();
         timeRemaining = cooldownTime;
         currentHealth = startingHealth;
+
         SetUpTree();
     }
 
@@ -53,9 +64,21 @@ public class EnemyAI : Tree, IDamagable
 
         if (currentHealth <= 1)
         {
-            var die = new DieEvenInfo(gameObject);
+            if (pool != null)
+            {
+                
+                _meshRenderer.enabled = false;
+                pool.Release(this);
+                
+            }
+            else
+            {
+                Debug.Log("Pool is null");
+                gameObject.SetActive(false);
+            }
+         
 
-            EventSystem.current.FireEvent(die);
+
             return;
         }
 
@@ -69,7 +92,7 @@ public class EnemyAI : Tree, IDamagable
         material = GetComponent<MeshRenderer>().material;
     }
 
-    private float cooldownTime = 2f; // Varför måste den vara i hela sekunder.
+    private float cooldownTime = 0.5f;
     private float timeRemaining;
 
     private void OnCollisionStay(Collision collision)
