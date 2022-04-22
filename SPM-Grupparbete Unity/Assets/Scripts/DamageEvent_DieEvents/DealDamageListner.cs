@@ -2,14 +2,14 @@
 using EgilScripts.DieEvents;
 using UnityEngine;
 
-public class DealDamageListner : MonoBehaviour
+public class DealDamageListener : MonoBehaviour
 {
     private void Start()
     {
-        EventSystem.current.RegisterListner<DealDamageEventInfo>(OnGiveDamgeToUnit);
+        EventSystem.current.RegisterListner<DealDamageEventInfo>(OnDealDamageToUnit);
     }
 
-    void OnGiveDamgeToUnit(DealDamageEventInfo dieEvenInfo)
+    void OnDealDamageToUnit(DealDamageEventInfo dieEvenInfo)
     {
         if (dieEvenInfo.gameObject.GetComponent<IDamagable>() != null)
         {

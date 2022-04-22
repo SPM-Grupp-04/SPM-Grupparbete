@@ -10,19 +10,16 @@ public class ChaseTreeNode : TreeNode
     private Transform target;
     private Transform[] targets;
     private NavMeshAgent agent;
-    private EnemyAI ai;
 
-    public ChaseTreeNode(Transform[] targets, NavMeshAgent agent, EnemyAI ai)
+
+    public ChaseTreeNode(Transform[] targets, NavMeshAgent agent)
     {
         this.targets = targets;
         this.agent = agent;
-        this.ai = ai;
     }
 
     public override NodeState Evaluate()
     {
-        ai.SetColor(Color.yellow);
-
         float distance = 100;
         foreach (Transform target in targets)
         {
@@ -39,7 +36,7 @@ public class ChaseTreeNode : TreeNode
         {
             agent.isStopped = false;
             agent.SetDestination(target.position);
-            
+
             return NodeState.RUNNING;
         }
         else
