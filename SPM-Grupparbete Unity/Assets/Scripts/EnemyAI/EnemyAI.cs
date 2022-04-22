@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
+using Event = UnityEngine.Event;
 using Tree = BehaviorTree.Tree;
 
 public class EnemyAI : Tree, IDamagable
@@ -28,7 +29,7 @@ public class EnemyAI : Tree, IDamagable
     [SerializeField] private float shootingRange;
     [SerializeField] private float movementSpeed;
     [SerializeField] private Transform[] playerTransform;
-
+ 
     private IObjectPool<EnemyAI> pool;
 
     //[SerializeField]private EnemySpawner pool;
@@ -44,10 +45,11 @@ public class EnemyAI : Tree, IDamagable
 
     void Start()
     {
+       
         _meshRenderer = GetComponent<MeshRenderer>();
         agent.speed = movementSpeed;
         base.Start();
-        timeRemaining = cooldownTime;
+    
         currentHealth = startingHealth;
 
         SetUpTree();
@@ -56,6 +58,8 @@ public class EnemyAI : Tree, IDamagable
 
     private void Update()
     {
+        
+      
         if (currentHealth < startingHealth)
         {
             currentHealth += Time.deltaTime * healthRestoreRate;
@@ -65,17 +69,14 @@ public class EnemyAI : Tree, IDamagable
         {
             if (pool != null)
             {
-                
                 _meshRenderer.enabled = false;
                 pool.Release(this);
-                
             }
             else
             {
                 Debug.Log("Pool is null");
                 gameObject.SetActive(false);
             }
-         
 
 
             return;
@@ -91,24 +92,10 @@ public class EnemyAI : Tree, IDamagable
         material = GetComponent<MeshRenderer>().material;
     }
 
-    private float cooldownTime = 0.5f;
-    private float timeRemaining;
+   
+    
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (timeRemaining < 0.0f)
-        {
-            var damageEvent = new DealDamageEventInfo(collision.gameObject, 1);
-            EventSystem.current.FireEvent(damageEvent);
-        }
 
-        if (timeRemaining < 0.0f)
-        {
-            timeRemaining = cooldownTime;
-        }
-
-        timeRemaining -= Time.deltaTime;
-    }
 
     protected override TreeNode SetUpTree()
     {
@@ -143,15 +130,7 @@ public class EnemyAI : Tree, IDamagable
         material.color = color;
     }
 
-    /*public void SetBestCover(Transform bestSpot)
-    {
-        this.bestCoveSpot = bestSpot;
-    }
-
-    public Transform GetBestCoverSpot()
-    {
-        return bestCoveSpot;
-    }*/
+   
 
     public void DealDamage(int damage)
     {
