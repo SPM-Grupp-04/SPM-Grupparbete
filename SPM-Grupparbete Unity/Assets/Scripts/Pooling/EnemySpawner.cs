@@ -15,8 +15,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
 
 
-    [SerializeField] private int enimesSpawned = 0;
-
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
 
@@ -32,7 +30,6 @@ public class EnemySpawner : MonoBehaviour
             for (var i = 0; i < totalAllowedEnimesAtSpawner; i++)
             {
                 creatEnamy();
-                enimesSpawned++;
             }
         }
     }
@@ -40,10 +37,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake() => pool = new ObjectPool<MeeleEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
-   
+    [SerializeField] private float timer = 5;
+
     private void FixedUpdate()
     {
-        if (pool.CountActive < totalAllowedEnimesAtSpawner)
+        if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
         {
             SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
             for (var i = 0; i < pool.CountInactive; i++)
@@ -51,6 +49,13 @@ public class EnemySpawner : MonoBehaviour
                 pool.Get();
             }
         }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
+
+        timer -= Time.deltaTime;
     }
 
     MeeleEnemyAI creatEnamy()
