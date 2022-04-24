@@ -8,10 +8,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
+using Utility.EnemyAI;
 using Event = UnityEngine.Event;
 using Tree = BehaviorTree.Tree;
 
-public class EnemyAI : Tree, IDamagable
+public class MeeleEnemyAI : Tree, IDamagable
 {
     [SerializeField] private float startingHealth;
 
@@ -30,7 +31,7 @@ public class EnemyAI : Tree, IDamagable
     [SerializeField] private float movementSpeed;
     [SerializeField] private Transform[] playerTransform;
  
-    private IObjectPool<EnemyAI> pool;
+    private IObjectPool<MeeleEnemyAI> pool;
 
     //[SerializeField]private EnemySpawner pool;
     // private Transform bestCoveSpot;
@@ -40,8 +41,15 @@ public class EnemyAI : Tree, IDamagable
     private TreeNode m_TopTreeNode;
     public MeshRenderer _meshRenderer;
 
-    public void SetPool(IObjectPool<EnemyAI> pool) => this.pool = pool;
+    public void SetPool(IObjectPool<MeeleEnemyAI> pool)
+    {
+        this.pool = pool;
+    }
 
+    public void SetPool()
+    {
+     
+    }
 
     void Start()
     {
@@ -136,4 +144,7 @@ public class EnemyAI : Tree, IDamagable
     {
         CurrentHealth -= damage;
     }
+
+
+   
 }
