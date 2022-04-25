@@ -52,7 +52,6 @@ public class LaunchArcMesh : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(transform.forward);
         if (enterDynamiteThrowModeInputAction.IsPressed())
         {
             TrajectoryPrediction();
