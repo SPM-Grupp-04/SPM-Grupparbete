@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class HealthTreeNode : TreeNode
 {
-    private EnemyAI ai;
+    private MeeleEnemyAI ai;
     private float threshold;
 
-    public HealthTreeNode(EnemyAI ai, float threshold)
+    public HealthTreeNode(MeeleEnemyAI ai, float threshold)
     {
         this.ai = ai;
         this.threshold = threshold;

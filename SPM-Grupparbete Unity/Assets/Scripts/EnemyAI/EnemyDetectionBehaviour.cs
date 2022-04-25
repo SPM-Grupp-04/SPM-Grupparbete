@@ -43,14 +43,14 @@ public class EnemyDetectionBehaviour : MonoBehaviour
     {
         
         throw new NotImplementedException("THIS SCRIPT SHOULD NOT BE IN USE");
-        CheckForPlayer();
+        /*CheckForPlayer();
 
         if (player != null)
         {
             StartFollowPlayer();
         }
 
-        StopFollowPlayer();
+        StopFollowPlayer();*/
     }
 
     private void CheckForPlayer()
