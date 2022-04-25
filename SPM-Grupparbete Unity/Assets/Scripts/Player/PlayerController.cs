@@ -47,8 +47,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        PlayerMovement();
-        ShootOrDrill();
+        if (PausMenu.GameIsPause == false)
+        {
+            PlayerMovement();
+            ShootOrDrill();
+        }
+
         SaveAndLoadGame();
         RestrictMovement();
     }
