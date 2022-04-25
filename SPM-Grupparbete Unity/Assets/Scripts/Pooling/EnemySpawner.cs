@@ -4,59 +4,79 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<EnemyAI> pool;
-    [SerializeField] private EnemyAI enemyPrefab;
-
-   private  int totalAmountOfEnemies = 0;
-
-   [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
-    //private  int totalSpawnedEnemies = 0;
-    private void Awake() => pool = new ObjectPool<EnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+    private ObjectPool<MeeleEnemyAI> pool;
+    [SerializeField] private MeeleEnemyAI meeleEnemyPrefab;
 
 
-  
+    [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
 
-    private void Update()
+
+    private Vector3 SpawnPos;
+    private BoxCollider boxCollider;
+
+
+    private void Start()
     {
-        /*if (totalSpawnedEnemies < 10)
-        {
-            creatEnamy();
-            Debug.Log(totalAmountOfEnemies + " Total amout of enimes.");
-            totalSpawnedEnemies++;
-        }*/
+        boxCollider = GetComponent<BoxCollider>();
+        SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
 
-        // Spawna finenderna från poolen!
-
-        if (totalAmountOfEnemies < totalAllowedEnimesAtSpawner)
+        if (pool.CountActive < totalAllowedEnimesAtSpawner)
         {
-            pool.Get();
+            SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
+            for (var i = 0; i < totalAllowedEnimesAtSpawner; i++)
+            {
+                creatEnamy();
+            }
         }
     }
 
-    EnemyAI creatEnamy()
+
+    private void Awake() => pool = new ObjectPool<MeeleEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+
+    [SerializeField] private float timer = 5;
+
+    private void FixedUpdate()
     {
-        var enemy = Instantiate(enemyPrefab, transform.position, quaternion.identity);
+        if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
+        {
+            SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
+            for (var i = 0; i < pool.CountInactive; i++)
+            {
+                pool.Get();
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
+
+        timer -= Time.deltaTime;
+    }
+
+    MeeleEnemyAI creatEnamy()
+    {
+        var enemy = Instantiate(meeleEnemyPrefab, transform.position, quaternion.identity);
+
         enemy.SetPool(pool);
 
         return enemy;
     }
 
-    void OnTakeEnemyAIFromPool(EnemyAI enemyAI)
+    void OnTakeEnemyAIFromPool(MeeleEnemyAI meeleEnemyAI)
     {
-        enemyAI.transform.position = gameObject.transform.position;
-        enemyAI._meshRenderer.enabled = true;
-        enemyAI.gameObject.SetActive(true);
-        
-        totalAmountOfEnemies++;
+        meeleEnemyAI.transform.position = SpawnPos;
+        meeleEnemyAI._meshRenderer.enabled = true;
+        meeleEnemyAI.gameObject.SetActive(true);
     }
 
 
-    public void OnReturnBallToPool(EnemyAI enemyAi)
+    public void OnReturnBallToPool(MeeleEnemyAI meeleEnemyAI)
     {
-        enemyAi.gameObject.SetActive(false);
-        totalAmountOfEnemies--;
+        meeleEnemyAI.gameObject.SetActive(false);
     }
 }

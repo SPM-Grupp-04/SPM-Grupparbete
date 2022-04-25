@@ -96,13 +96,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ThrowDynamite",
+                    "name": "Pause",
                     "type": "Button",
-                    "id": "76a171cb-99d3-44cb-8574-4bc04708a83f",
+                    "id": "87d8f1e3-1346-44b2-9a5b-991b9747d3fd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "53f1b9f5-eb38-4d9c-b52c-82f1bb3ce4db",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Navigate",
+                    "type": "Value",
+                    "id": "7cc816d5-f5dc-4ca6-a3f8-36fd322a962e",
+                    "expectedControlType": "Dpad",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -295,16 +313,55 @@
                 },
                 {
                     "name": "",
-                    "id": "5fc07002-43da-4540-bfd3-4f8bb8a23ed0",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "b94ae215-47ea-412e-ae07-aec951e19c58",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90d8ac06-d8b1-46b2-896e-bdefe6d20bcb",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ThrowDynamite",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3cd860f8-aff7-4d53-8934-428802894ac8",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ee1c596-1fa5-461e-b337-777e178dafda",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "dfb0cc71-c2bc-441a-bea8-a23f38ef36a5",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

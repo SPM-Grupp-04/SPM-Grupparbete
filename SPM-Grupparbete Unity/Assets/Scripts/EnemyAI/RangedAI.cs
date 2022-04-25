@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using Utility.EnemyAI;
@@ -16,6 +17,18 @@ public class RangedAI : Tree, IDamagable
     [SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
     [SerializeField] private Transform[] playerTransform;
+
+    /*
+     * Settings for a good granade: Rb mass = 3.7 for grande.
+     * throwCd = 2;
+     * throwUpForce = 12;
+     * throwForce = 30;
+     */
+    [Header("Throw Weapon settings")]
+    [SerializeField] private GameObject throwabelObject;
+    [SerializeField] private float throwCooldown;
+    [SerializeField] private float throwUpForce;
+    [SerializeField] private float throwForce = 30;
 
     void Start()
     {
@@ -43,7 +56,9 @@ public class RangedAI : Tree, IDamagable
 
         RangeTreeNode shootingRangeTreeNode = new RangeTreeNode(rangedAttackRange, playerTransform, transform);
 
-        RangedAttackTreeNode meeleAttackTreeNode = new RangedAttackTreeNode(agent, gameObject, playerTransform);
+        RangedAttackTreeNode meeleAttackTreeNode =
+            new RangedAttackTreeNode(agent, gameObject, playerTransform,
+                throwabelObject, throwCooldown, throwUpForce, throwForce);
 
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNode, chaseTreeNode});
         Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNode, meeleAttackTreeNode});
