@@ -10,7 +10,10 @@ public class PausMenu : MonoBehaviour
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
     public PlayerInput playerInput;
+    public PlayerInput PlayerInputTwo;
     private InputAction pause;
+    private InputAction pausePlayerTwo;
+    
    
     
     [Header("MenuButtonFirstSelection")]
@@ -21,7 +24,7 @@ public class PausMenu : MonoBehaviour
     {
       // playerInput = GetComponent<PlayerInput>();
       pause = playerInput.actions["Pause"];
-      
+      pausePlayerTwo = PlayerInputTwo.actions["Pause"];
 
 
     }
@@ -29,7 +32,7 @@ public class PausMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pause.WasPressedThisFrame())
+        if (pause.WasPressedThisFrame() || pausePlayerTwo.WasPressedThisFrame())
         {
             if (GameIsPause)
             {
