@@ -289,6 +289,9 @@ MonoBehaviour:
   angle: 45
   trajectoryArcIncreaseSpeed: 0.1
   lineSegments: 20
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &2965090648212624896
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +499,18 @@ MonoBehaviour:
     m_ActionId: 0a6c6e6f-4221-430c-816c-77e0f2210986
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87d8f1e3-1346-44b2-9a5b-991b9747d3fd
+    m_ActionName: Player/Pause[/Keyboard/k,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53f1b9f5-eb38-4d9c-b52c-82f1bb3ce4db
+    m_ActionName: Player/Select[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7cc816d5-f5dc-4ca6-a3f8-36fd322a962e
+    m_ActionName: Player/Navigate[/XInputControllerWindows/dpad]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1873504614452511864}
         m_TargetAssemblyTypeName: DynamiteThrow, Assembly-CSharp
@@ -509,7 +524,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 76a171cb-99d3-44cb-8574-4bc04708a83f
+    m_ActionId: b87b3c2d-6782-4ee9-ab3d-7e98d27eb487
     m_ActionName: Player/ThrowDynamite[/XInputControllerWindows/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse

@@ -18,6 +18,8 @@ public class LaunchArcMesh : MonoBehaviour
     [SerializeField] private float trajectoryArcIncreaseSpeed = 0.01f;
     [SerializeField] private int lineSegments = 10;
 
+    [SerializeField] private LayerMask groundLayerMask;
+
     private float gravity;
     private float radianAngle;
 
@@ -29,8 +31,8 @@ public class LaunchArcMesh : MonoBehaviour
     public Vector3 GetLaunchAngle()
     {
         Quaternion rotation = Quaternion.AngleAxis(angle, transform.forward);
-        Vector3 lDirection = rotation * transform.forward + transform.up;
-        return lDirection.normalized;
+        Vector3 localDirection = rotation * transform.forward + transform.up;
+        return localDirection.normalized;
     }
 
     private void OnValidate()
@@ -112,7 +114,8 @@ public class LaunchArcMesh : MonoBehaviour
         for (int i = 0; i <= lineSegments; i++)
         {
             float t = (float) i / (float) lineSegments;
-            throwTrajectoryArray[i] = CalculateTrajectoryPoint(t, maxDistance);
+            Vector3 newTrajectoryPoint = CalculateTrajectoryPoint(t, maxDistance);
+            throwTrajectoryArray[i] = newTrajectoryPoint;
         }
         return throwTrajectoryArray;
     }

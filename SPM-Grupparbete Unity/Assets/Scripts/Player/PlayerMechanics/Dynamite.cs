@@ -16,7 +16,7 @@ public class Dynamite : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
     private float explosionCountdown;
-    private bool hasExploded = false;
+    private bool hasExploded;
 
     private CapsuleCollider capsuleCollider;
     private Rigidbody capsuleRigidBody;

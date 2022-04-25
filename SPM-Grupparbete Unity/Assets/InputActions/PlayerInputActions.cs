@@ -143,6 +143,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThrowDynamite"",
+                    ""type"": ""Button"",
+                    ""id"": ""b87b3c2d-6782-4ee9-ab3d-7e98d27eb487"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -376,6 +385,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57e25a7e-e0a7-4264-a0ad-85dc3237af22"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ThrowDynamite"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -464,6 +484,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Navigate = m_Player.FindAction("Navigate", throwIfNotFound: true);
+        m_Player_ThrowDynamite = m_Player.FindAction("ThrowDynamite", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -538,6 +559,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_Navigate;
+    private readonly InputAction m_Player_ThrowDynamite;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -555,6 +577,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @Navigate => m_Wrapper.m_Player_Navigate;
+        public InputAction @ThrowDynamite => m_Wrapper.m_Player_ThrowDynamite;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -603,6 +626,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Navigate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNavigate;
                 @Navigate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNavigate;
                 @Navigate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNavigate;
+                @ThrowDynamite.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
+                @ThrowDynamite.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
+                @ThrowDynamite.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -646,6 +672,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Navigate.started += instance.OnNavigate;
                 @Navigate.performed += instance.OnNavigate;
                 @Navigate.canceled += instance.OnNavigate;
+                @ThrowDynamite.started += instance.OnThrowDynamite;
+                @ThrowDynamite.performed += instance.OnThrowDynamite;
+                @ThrowDynamite.canceled += instance.OnThrowDynamite;
             }
         }
     }
@@ -735,6 +764,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnNavigate(InputAction.CallbackContext context);
+        void OnThrowDynamite(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
