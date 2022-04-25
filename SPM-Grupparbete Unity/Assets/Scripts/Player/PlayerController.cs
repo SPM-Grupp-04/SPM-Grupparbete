@@ -68,19 +68,19 @@ public class PlayerController : MonoBehaviour
         if (cameraView.x == 0f || cameraView.x == 1)
         {
             isOutSide = true;
-            Debug.Log("Outside X ");
+            //  Debug.Log("Outside X ");
         }
 
         if (cameraView.y == 0f || cameraView.y == 1)
         {
             isOutSide = true;
-            Debug.Log("Outside Y");
+            //  Debug.Log("Outside Y");
         }
 
         Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
         if (isOutSide)
         {
-            Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
+            //    Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
         }
 
         transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);

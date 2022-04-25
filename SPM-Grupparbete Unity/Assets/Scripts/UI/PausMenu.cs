@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PausMenu : MonoBehaviour
 {
@@ -10,13 +11,19 @@ public class PausMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public PlayerInput playerInput;
     private InputAction pause;
+   
+    
+    [Header("MenuButtonFirstSelection")]
+    [SerializeField] private GameObject pauseFirstButton;
 
     
     private void Start()
     {
-       // playerInput = GetComponent<PlayerInput>();
-        pause = playerInput.actions["Pause"];
-        
+      // playerInput = GetComponent<PlayerInput>();
+      pause = playerInput.actions["Pause"];
+      
+
+
     }
 
     // Update is called once per frame
@@ -30,12 +37,13 @@ public class PausMenu : MonoBehaviour
             }
             else
             {
+                
                 Pause();
             }
             
         }
-        
-        
+
+       
         
     }
 
@@ -43,6 +51,8 @@ public class PausMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
         GameIsPause = true;
 
     }
