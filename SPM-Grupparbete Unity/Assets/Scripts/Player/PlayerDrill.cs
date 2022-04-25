@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using EgilEventSystem;
@@ -99,12 +100,12 @@ public class PlayerDrill : MonoBehaviour
     void CreateCylinderBetweenPoints(Vector3 start, Vector3 end, float width, GameObject beamMaterial)
     {
         var offset = end - start;
-        var scale = new Vector3(width, offset.magnitude / 2.0f, width);
-        var position = start + (offset / 2.0f);
+       // var scale = new Vector3(width, offset.magnitude / 2.0f, width);
+        var position = start + (offset / 4.0f) ;
         Destroy(_beamGO);
-        _beamGO = Instantiate(beamMaterial, position, Quaternion.identity);
-        _beamGO.transform.up = offset;
-        _beamGO.transform.localScale = scale;
+        _beamGO = Instantiate(beamMaterial, position, transform.rotation);
+       // _beamGO.transform.up = offset;
+        //_beamGO.transform.localScale = scale;
 
     }
 
