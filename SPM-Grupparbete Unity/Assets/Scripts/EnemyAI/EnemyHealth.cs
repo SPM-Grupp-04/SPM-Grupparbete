@@ -16,7 +16,7 @@ public class EnemyHealth : MonoBehaviour
     private void Update()
     {
         throw new NotImplementedException("THIS SCRIPT SHOULD NOT BE IN USE");
-        Debug.Log("THIS SCRIPT SHOULD NOT BE IN USE!");
+        //Debug.Log("THIS SCRIPT SHOULD NOT BE IN USE!");
     }
 
     public void EnemyTakeDamage()

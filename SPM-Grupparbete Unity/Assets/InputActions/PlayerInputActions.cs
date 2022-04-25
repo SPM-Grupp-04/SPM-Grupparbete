@@ -116,6 +116,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""29273503-81db-47cf-a0dd-7bc5049db044"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -305,6 +314,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""EnterDynamiteThrowMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""294335cd-083e-477d-ac74-47954cf308bc"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0292010a-914c-4e74-bce9-dda2432b830c"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -384,6 +415,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_TrajectoryIncrease = m_Player.FindAction("TrajectoryIncrease", throwIfNotFound: true);
         m_Player_EnterDynamiteThrowMode = m_Player.FindAction("EnterDynamiteThrowMode", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -453,6 +485,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_TrajectoryIncrease;
     private readonly InputAction m_Player_EnterDynamiteThrowMode;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -467,6 +500,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @TrajectoryIncrease => m_Wrapper.m_Player_TrajectoryIncrease;
         public InputAction @EnterDynamiteThrowMode => m_Wrapper.m_Player_EnterDynamiteThrowMode;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -506,6 +540,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @EnterDynamiteThrowMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -540,6 +577,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @EnterDynamiteThrowMode.started += instance.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.performed += instance.OnEnterDynamiteThrowMode;
                 @EnterDynamiteThrowMode.canceled += instance.OnEnterDynamiteThrowMode;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -601,5 +641,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnUse(InputAction.CallbackContext context);
         void OnTrajectoryIncrease(InputAction.CallbackContext context);
         void OnEnterDynamiteThrowMode(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
