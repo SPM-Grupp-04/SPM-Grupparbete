@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<MeeleEnemyAI> pool;
-    [SerializeField] private MeeleEnemyAI meeleEnemyPrefab;
+    private ObjectPool<BaseClassEnemyAI> pool;
+    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
 
 
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
@@ -35,7 +35,8 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    private void Awake() => pool = new ObjectPool<MeeleEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+    private void Awake() =>
+        pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
     [SerializeField] private float timer = 5;
 
@@ -58,24 +59,43 @@ public class EnemySpawner : MonoBehaviour
         timer -= Time.deltaTime;
     }
 
-    MeeleEnemyAI creatEnamy()
+    BaseClassEnemyAI enemy = null;
+    BaseClassEnemyAI creatEnamy()
     {
-        var enemy = Instantiate(meeleEnemyPrefab, transform.position, quaternion.identity);
+      // så att man kan sätta hur många % av en typ man vill ska finnas.
+        
+        foreach (var prefab in genericListOfBaseClassEnemyAI)
+        {
+            if (enemy != prefab)
+            {
+                
+                enemy = prefab;
+                break;
+            }
+           
+            enemy = prefab;
+            
+        }
 
+        if (enemy == null)
+        {
+            return null;
+        }
+        Instantiate(enemy, transform.position, quaternion.identity);
+        
         enemy.SetPool(pool);
 
         return enemy;
     }
 
-    void OnTakeEnemyAIFromPool(MeeleEnemyAI meeleEnemyAI)
+    void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.transform.position = SpawnPos;
-        meeleEnemyAI._meshRenderer.enabled = true;
         meeleEnemyAI.gameObject.SetActive(true);
     }
 
 
-    public void OnReturnBallToPool(MeeleEnemyAI meeleEnemyAI)
+    public void OnReturnBallToPool(BaseClassEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.gameObject.SetActive(false);
     }

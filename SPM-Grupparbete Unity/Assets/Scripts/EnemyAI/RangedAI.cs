@@ -4,10 +4,11 @@ using BehaviorTree;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 using Utility.EnemyAI;
 using Tree = BehaviorTree.Tree;
 
-public class RangedAI : Tree, IDamagable
+public class RangedAI : BaseClassEnemyAI, IDamagable
 {
     private TreeNode topTreeNode;
     private float currentHealth;
@@ -17,6 +18,8 @@ public class RangedAI : Tree, IDamagable
     [SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
     [SerializeField] private Transform[] playerTransform;
+    
+    private IObjectPool<BaseClassEnemyAI> pool;
 
     /*
      * Settings for a good granade: Rb mass = 3.7 for grande.
@@ -65,7 +68,7 @@ public class RangedAI : Tree, IDamagable
 
         //Sequence goToCoverSequence = new Sequence(new List<TreeNode> {coverAvaliableNode, goToCoverNode});
         //Selector findCoverSelector = new Selector(new List<TreeNode> {goToCoverSequence, chaseSequence});
-        //  Selector tryToTakeCoverSelector = new Selector(new List<TreeNode> {isCoveredTreeNode, findCoverSelector});
+        //Selector tryToTakeCoverSelector = new Selector(new List<TreeNode> {isCoveredTreeNode, findCoverSelector});
         //Sequence mainCoverSequence = new Sequence(new List<TreeNode> {healthTreeNode, tryToTakeCoverSelector});
 
         //m_TopTreeNode = new Selector(new List<TreeNode> {mainCoverSequence, shootSequence, chaseSequence});
@@ -73,6 +76,12 @@ public class RangedAI : Tree, IDamagable
 
 
         return topTreeNode;
+    }
+
+   
+    public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
+    {
+        this.pool = pool;
     }
 
     public void DealDamage(int damage)

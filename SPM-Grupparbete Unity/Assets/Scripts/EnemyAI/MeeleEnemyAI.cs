@@ -12,7 +12,7 @@ using Utility.EnemyAI;
 using Event = UnityEngine.Event;
 using Tree = BehaviorTree.Tree;
 
-public class MeeleEnemyAI : Tree, IDamagable
+public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 {
     [SerializeField] private float startingHealth;
 
@@ -30,8 +30,8 @@ public class MeeleEnemyAI : Tree, IDamagable
     [SerializeField] private float shootingRange;
     [SerializeField] private float movementSpeed;
     [SerializeField] private Transform[] playerTransform;
- 
-    private IObjectPool<MeeleEnemyAI> pool;
+
+    private IObjectPool<BaseClassEnemyAI> pool;
 
     //[SerializeField]private EnemySpawner pool;
     // private Transform bestCoveSpot;
@@ -41,23 +41,12 @@ public class MeeleEnemyAI : Tree, IDamagable
     private TreeNode m_TopTreeNode;
     public MeshRenderer _meshRenderer;
 
-    public void SetPool(IObjectPool<MeeleEnemyAI> pool)
-    {
-        this.pool = pool;
-    }
-
-    public void SetPool()
-    {
-     
-    }
-
     void Start()
     {
-       
         _meshRenderer = GetComponent<MeshRenderer>();
         agent.speed = movementSpeed;
         base.Start();
-    
+
         currentHealth = startingHealth;
 
         SetUpTree();
@@ -66,8 +55,6 @@ public class MeeleEnemyAI : Tree, IDamagable
 
     private void Update()
     {
-        
-      
         if (currentHealth < startingHealth)
         {
             currentHealth += Time.deltaTime * healthRestoreRate;
@@ -77,7 +64,7 @@ public class MeeleEnemyAI : Tree, IDamagable
         {
             if (pool != null)
             {
-                _meshRenderer.enabled = false;
+             //   _meshRenderer.enabled = false;
                 pool.Release(this);
             }
             else
@@ -99,10 +86,6 @@ public class MeeleEnemyAI : Tree, IDamagable
         agent = GetComponent<NavMeshAgent>();
         material = GetComponent<MeshRenderer>().material;
     }
-
-   
-    
-
 
 
     protected override TreeNode SetUpTree()
@@ -138,13 +121,14 @@ public class MeeleEnemyAI : Tree, IDamagable
         material.color = color;
     }
 
-   
+
+    public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
+    {
+        this.pool = pool;
+    }
 
     public void DealDamage(int damage)
     {
         CurrentHealth -= damage;
     }
-
-
-   
 }
