@@ -3,26 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
     public PlayerInput playerInput;
+    public PlayerInput PlayerInputTwo;
     private InputAction pause;
+    private InputAction pausePlayerTwo;
+    
+   
+    
+    [Header("MenuButtonFirstSelection")]
+    [SerializeField] private GameObject pauseFirstButton;
 
     
     private void Start()
     {
-       // playerInput = GetComponent<PlayerInput>();
-        pause = playerInput.actions["Pause"];
-        
+      // playerInput = GetComponent<PlayerInput>();
+      pause = playerInput.actions["Pause"];
+      pausePlayerTwo = PlayerInputTwo.actions["Pause"];
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pause.WasPressedThisFrame())
+        if (pause.WasPressedThisFrame() || pausePlayerTwo.WasPressedThisFrame())
         {
             if (GameIsPause)
             {
@@ -30,12 +40,13 @@ public class PausMenu : MonoBehaviour
             }
             else
             {
+                
                 Pause();
             }
             
         }
-        
-        
+
+       
         
     }
 
@@ -43,6 +54,8 @@ public class PausMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
         GameIsPause = true;
 
     }
