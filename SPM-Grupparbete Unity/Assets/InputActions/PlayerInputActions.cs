@@ -120,20 +120,29 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""29273503-81db-47cf-a0dd-7bc5049db044"",
+                    ""id"": ""87d8f1e3-1346-44b2-9a5b-991b9747d3fd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shield"",
+                    ""name"": ""Select"",
                     ""type"": ""Button"",
-                    ""id"": ""d1e6860d-7597-45b6-8f00-93e876fb3424"",
+                    ""id"": ""53f1b9f5-eb38-4d9c-b52c-82f1bb3ce4db"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Navigate"",
+                    ""type"": ""Value"",
+                    ""id"": ""7cc816d5-f5dc-4ca6-a3f8-36fd322a962e"",
+                    ""expectedControlType"": ""Dpad"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -326,7 +335,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""294335cd-083e-477d-ac74-47954cf308bc"",
+                    ""id"": ""b94ae215-47ea-412e-ae07-aec951e19c58"",
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -337,7 +346,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0292010a-914c-4e74-bce9-dda2432b830c"",
+                    ""id"": ""90d8ac06-d8b1-46b2-896e-bdefe6d20bcb"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -348,27 +357,33 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""de9f3561-fc68-44cc-af0a-9f8576ebed8f"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""3cd860f8-aff7-4d53-8934-428802894ac8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shield"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0f3cba98-69e1-4bc7-950d-1f11b663997b"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""id"": ""6ee1c596-1fa5-461e-b337-777e178dafda"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shield"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""dfb0cc71-c2bc-441a-bea8-a23f38ef36a5"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -447,7 +462,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_TrajectoryIncrease = m_Player.FindAction("TrajectoryIncrease", throwIfNotFound: true);
         m_Player_EnterDynamiteThrowMode = m_Player.FindAction("EnterDynamiteThrowMode", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
-        m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
+        m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
+        m_Player_Navigate = m_Player.FindAction("Navigate", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -518,7 +536,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_TrajectoryIncrease;
     private readonly InputAction m_Player_EnterDynamiteThrowMode;
     private readonly InputAction m_Player_Pause;
-    private readonly InputAction m_Player_Shield;
+    private readonly InputAction m_Player_Select;
+    private readonly InputAction m_Player_Navigate;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -534,7 +553,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @TrajectoryIncrease => m_Wrapper.m_Player_TrajectoryIncrease;
         public InputAction @EnterDynamiteThrowMode => m_Wrapper.m_Player_EnterDynamiteThrowMode;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
-        public InputAction @Shield => m_Wrapper.m_Player_Shield;
+        public InputAction @Select => m_Wrapper.m_Player_Select;
+        public InputAction @Navigate => m_Wrapper.m_Player_Navigate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -577,9 +597,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
-                @Shield.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
-                @Shield.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
-                @Shield.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                @Select.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Navigate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNavigate;
+                @Navigate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNavigate;
+                @Navigate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNavigate;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -617,13 +640,41 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
-                @Shield.started += instance.OnShield;
-                @Shield.performed += instance.OnShield;
-                @Shield.canceled += instance.OnShield;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Navigate.started += instance.OnNavigate;
+                @Navigate.performed += instance.OnNavigate;
+                @Navigate.canceled += instance.OnNavigate;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    public struct UIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -682,6 +733,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnTrajectoryIncrease(InputAction.CallbackContext context);
         void OnEnterDynamiteThrowMode(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnShield(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnNavigate(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
     }
 }
