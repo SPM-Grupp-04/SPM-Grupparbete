@@ -31,7 +31,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float movementSpeed;
     [SerializeField] private Transform[] playerTransform;
 
-    private IObjectPool<BaseClassEnemyAI> pool;
+    private  IObjectPool<BaseClassEnemyAI> pool  ;
 
     //[SerializeField]private EnemySpawner pool;
     // private Transform bestCoveSpot;
@@ -62,7 +62,8 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
         if (currentHealth <= 1)
         {
-            if (pool != null)
+            // Varför blir pool null?
+            if (this.pool != null)
             {
              //   _meshRenderer.enabled = false;
                 pool.Release(this);
@@ -124,7 +125,10 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
     public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
     {
+        // Inte null
         this.pool = pool;
+        
+        
     }
 
     public void DealDamage(int damage)

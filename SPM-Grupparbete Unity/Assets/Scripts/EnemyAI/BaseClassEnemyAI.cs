@@ -6,7 +6,9 @@ using Tree = BehaviorTree.Tree;
 
 public abstract class BaseClassEnemyAI : Tree
 {
-    
+    /*protected IObjectPool<BaseClassEnemyAI> pool;*/
+
     public abstract void SetPool(IObjectPool<BaseClassEnemyAI> pool);
-   
+
+
 }

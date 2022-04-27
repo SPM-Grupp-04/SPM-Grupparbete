@@ -8,10 +8,12 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<BaseClassEnemyAI> pool;
+    private  ObjectPool<BaseClassEnemyAI> pool;
     [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
+    [SerializeField] private float[] prioListMatchingObjektOrder;
 
-
+    // [SerializeField] private BaseClassEnemyAI meleeAIEnemy;
+    // [SerializeField] private BaseClassEnemyAI rangedAIEnemy;
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
 
 
@@ -19,21 +21,36 @@ public class EnemySpawner : MonoBehaviour
     private BoxCollider boxCollider;
 
 
+    private float totalProcent;
+
     private void Start()
     {
+        // Räknar ut vad som är 100%
+        for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
+        {
+            totalProcent += prioListMatchingObjektOrder[i];
+        }
+
+        //Sätter procent av den totala summan prioNummret är.
+        for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
+        {
+            prioListMatchingObjektOrder[i] /= totalProcent;
+        }
+
         boxCollider = GetComponent<BoxCollider>();
         SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
 
-        if (pool.CountActive < totalAllowedEnimesAtSpawner)
+        for (var i = 0; i < genericListOfBaseClassEnemyAI.Length; i++) // 2 gånger
         {
-            SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
-            for (var i = 0; i < totalAllowedEnimesAtSpawner; i++)
+            for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
+                enemy = genericListOfBaseClassEnemyAI[i];
                 creatEnamy();
             }
         }
     }
 
+    private BaseClassEnemyAI enemy;
 
     private void Awake() =>
         pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
@@ -55,34 +72,16 @@ public class EnemySpawner : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-
         timer -= Time.deltaTime;
     }
 
-    BaseClassEnemyAI enemy = null;
+
     BaseClassEnemyAI creatEnamy()
     {
-      // så att man kan sätta hur många % av en typ man vill ska finnas.
-        
-        foreach (var prefab in genericListOfBaseClassEnemyAI)
-        {
-            if (enemy != prefab)
-            {
-                
-                enemy = prefab;
-                break;
-            }
-           
-            enemy = prefab;
-            
-        }
+        // så att man kan sätta hur många % av en typ man vill ska finnas.
 
-        if (enemy == null)
-        {
-            return null;
-        }
         Instantiate(enemy, transform.position, quaternion.identity);
-        
+
         enemy.SetPool(pool);
 
         return enemy;
