@@ -2,30 +2,18 @@ using UnityEngine;
 
 public class DestroyableWall : DestroyableObjectBase
 {
-    protected new int materialAmount = 0;
-    protected new int materialHP = 5;
-    protected new int requiredWeaponLevel = 1;
+    [SerializeField] int WallHP = 5;
+    [SerializeField] int WallRequiredWeaponLevel = 1;
 
-
-    public override void ReduceMaterialAmount(int amount)
+    private void Awake()
     {
-        if (materialAmount > 0)
-        {
-            if (amount > materialAmount)
-            {
-                int remaingingMaterials = materialAmount % 0;
-                MinedMaterial(remaingingMaterials);
-            }
-
-            materialAmount -= amount;
-            MinedMaterial(amount);
-        }
+        materialHP = WallHP;
+        requiredWeaponLevel = WallRequiredWeaponLevel;
     }
 
     public override void ReduceMaterialHP(int amount)
     {
         materialHP -= amount;
-        ReduceMaterialAmount(amount);
         Debug.Log("Hit");
         if (materialHP <= 0)
         {
@@ -36,11 +24,6 @@ public class DestroyableWall : DestroyableObjectBase
     public override int GetRequiredWeaponLevel()
     {
         return requiredWeaponLevel;
-    }
-
-    public override int MinedMaterial(int minedMaterial)
-    {
-        return minedMaterial;
     }
 
     private void DestroyObject()

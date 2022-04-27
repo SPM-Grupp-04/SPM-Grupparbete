@@ -14,18 +14,26 @@ namespace Utility.EnemyAI
         private GameObject gameObject;
         private Transform target;
         private Transform[] targets;
-
+        private GameObject throwableObject;
         private Vector3 currentVelocity;
         private float smoothDamp;
         private const int largeDistanceNumber = 100;
+       
+        [Header("ThrowSettings")]
+        private float throwCD;
+        private float throwUpForce;
+        private float throwForce;
     
-    
-        public RangedAttackTreeNode(NavMeshAgent agent, GameObject gameObject, Transform[] targets)
+        public RangedAttackTreeNode(NavMeshAgent agent, GameObject gameObject, Transform[] targets, GameObject throwabelObject, float throwCD, float throwUpForce, float throwForce)
         {
             this.agent = agent;
             this.gameObject = gameObject;
             this.targets = targets;
+            this.throwableObject = throwabelObject;
             smoothDamp = 1f;
+            this.throwCD = throwCD;
+            this.throwUpForce = throwUpForce;
+            this.throwForce = throwForce;
         }
 
         public override NodeState Evaluate()
@@ -50,7 +58,8 @@ namespace Utility.EnemyAI
             gameObject.transform.rotation = rotation;
 
             // Fire a shoot Event.
-            var shootEventInfo = new ShootEventInfo(target.gameObject, this.gameObject);
+            var shootEventInfo = new ShootEventInfo(target.gameObject, this.gameObject, 
+                this.throwableObject, throwCD,throwUpForce, throwForce);
             EventSystem.current.FireEvent(shootEventInfo);
             
             state = NodeState.RUNNING;

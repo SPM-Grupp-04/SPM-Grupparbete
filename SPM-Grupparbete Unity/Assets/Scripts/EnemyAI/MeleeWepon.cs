@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class MeleeWepon : MonoBehaviour
 {
-    private float cooldownTime = 0.5f;
+    private float cooldownTime = 0.2f;
     private float timeRemaining;
 
     private void Start()
@@ -15,13 +15,13 @@ public class MeleeWepon : MonoBehaviour
         timeRemaining = cooldownTime;
     }
 
-
+   
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("HIt player");
         
         if (timeRemaining < 0.0f)
         {
+           
             var damageEvent = new DealDamageEventInfo(other.gameObject, 1);
             EventSystem.current.FireEvent(damageEvent);
         }
