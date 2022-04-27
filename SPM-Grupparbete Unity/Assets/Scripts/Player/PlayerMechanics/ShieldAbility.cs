@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class ShieldAbility : MonoBehaviour
 {
-    private static bool canUseShield;
 
-    [SerializeField] private static float coolDownTimerStart = 2f;
+    [SerializeField] private float timerToDestroyShield = 2f;
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] GameObject player;
+    [SerializeField] private float cooldownToNextUse = 5f;
+    
 
     private PlayerInput playerInput;
 
@@ -18,12 +20,17 @@ public class ShieldAbility : MonoBehaviour
 
     private GameObject shieldGO;
     private float timer = 0;
+    
+    private float nextShieldTime;
+
+    private static bool canUseShield;
 
     private void Awake()
     {
-        canUseShield = true;
+        
         playerInput = GetComponent<PlayerInput>();
         shieldAction = playerInput.actions["Shield"];
+        canUseShield = true;
 
     }
 
@@ -41,30 +48,38 @@ public class ShieldAbility : MonoBehaviour
         }
         if(timer == 0 && shieldGO != null)
         {
-            DestoryShield();
+            DestroyShield();
         }
+
+        
+        
         if (shieldAction.IsPressed())
-        {     
-           
+        {
             ActivateShield();
         }
+        
+       
 
 
     }
 
     public void ActivateShield()
     {
-        if (canUseShield)
+        if (canUseShield && Time.time > nextShieldTime)
         {
-            canUseShield = false;
-            timer = coolDownTimerStart;
+            timer = timerToDestroyShield;
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
+            canUseShield = false;
+            Debug.Log("Activate " + nextShieldTime);
         }
+
     }
 
-    private void DestoryShield()
+    private void DestroyShield()
     {
          Destroy(shieldGO);
-        canUseShield = true;
+         nextShieldTime = Time.time + cooldownToNextUse;
+         canUseShield = true;
+         Debug.Log("Destroy " + cooldownToNextUse + " " + nextShieldTime);
     }
 }

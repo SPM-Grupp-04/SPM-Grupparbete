@@ -8,6 +8,8 @@ public class DynamiteThrow : MonoBehaviour
 {
     [SerializeField] private GameObject dynamitePrefab;
     [SerializeField] private LaunchArcMesh launchArcMesh;
+    [SerializeField] private float coolDownTime = 5f;
+    private float nextFireTime;
 
     private void Update()
     {
@@ -16,10 +18,15 @@ public class DynamiteThrow : MonoBehaviour
 
     public void ThrowDynamite(InputAction.CallbackContext value)
     {
-        if (value.performed)
+        if (Time.time > nextFireTime)
         {
-            GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
-            thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
+            if (value.performed)
+            {
+                GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
+                thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
+                nextFireTime = Time.time + coolDownTime;
+            }
         }
+        
     }
 }
