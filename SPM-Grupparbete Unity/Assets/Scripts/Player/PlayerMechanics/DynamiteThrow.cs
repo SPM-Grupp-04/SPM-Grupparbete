@@ -9,24 +9,36 @@ public class DynamiteThrow : MonoBehaviour
     [SerializeField] private GameObject dynamitePrefab;
     [SerializeField] private LaunchArcMesh launchArcMesh;
     [SerializeField] private float coolDownTime = 5f;
-    private float nextFireTime;
+    [SerializeField] private UI_Cooldowns uiCooldowns;
+    private float nextFireTime = 5f;
 
     private void Update()
     {
-        //Debug.Log(transform.forward);
+        nextFireTime += Time.deltaTime;
+        
+        if (nextFireTime <= coolDownTime)
+        {
+            uiCooldowns.GetGrenadeText().text = ((int)coolDownTime - (int)nextFireTime).ToString();
+        }
+
+        if (nextFireTime >= coolDownTime)
+        {
+            uiCooldowns.GetGrenadeText().text = "Kasta";
+        }
+
+        
     }
 
     public void ThrowDynamite(InputAction.CallbackContext value)
     {
-        if (Time.time > nextFireTime)
+        if (nextFireTime >= coolDownTime)
         {
             if (value.performed)
             {
                 GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
                 thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
-                nextFireTime = Time.time + coolDownTime;
+                nextFireTime = 0;
             }
         }
-        
     }
 }

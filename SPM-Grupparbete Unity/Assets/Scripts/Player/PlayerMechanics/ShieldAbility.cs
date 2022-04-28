@@ -11,6 +11,7 @@ public class ShieldAbility : MonoBehaviour
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] GameObject player;
     [SerializeField] private float cooldownToNextUse = 5f;
+    [SerializeField] private UI_Cooldowns uiCooldowns;
     
 
     private PlayerInput playerInput;
@@ -21,7 +22,7 @@ public class ShieldAbility : MonoBehaviour
     private GameObject shieldGO;
     private float timer = 0;
     
-    private float nextShieldTime;
+    private float nextShieldTime = 5f;
 
     private static bool canUseShield;
 
@@ -50,27 +51,40 @@ public class ShieldAbility : MonoBehaviour
         {
             DestroyShield();
         }
-
-        
         
         if (shieldAction.IsPressed())
         {
             ActivateShield();
         }
+
+        nextShieldTime += Time.deltaTime;
+
+        if (nextShieldTime <= cooldownToNextUse) {}
+
+        {
+            uiCooldowns.GetShieldText().text = ((int) cooldownToNextUse - (int) nextShieldTime).ToString();
+        }
         
-       
+        if (nextShieldTime >= cooldownToNextUse)
+        {
+            uiCooldowns.GetShieldText().text = "Sköld";
+        }
+
+
 
 
     }
 
     public void ActivateShield()
     {
-        if (canUseShield && Time.time > nextShieldTime)
+        if (canUseShield && nextShieldTime >= cooldownToNextUse)
         {
             timer = timerToDestroyShield;
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
-            Debug.Log("Activate " + nextShieldTime);
+            nextShieldTime = 0;
+            
+
         }
 
     }
@@ -78,8 +92,6 @@ public class ShieldAbility : MonoBehaviour
     private void DestroyShield()
     {
          Destroy(shieldGO);
-         nextShieldTime = Time.time + cooldownToNextUse;
          canUseShield = true;
-         Debug.Log("Destroy " + cooldownToNextUse + " " + nextShieldTime);
     }
 }
