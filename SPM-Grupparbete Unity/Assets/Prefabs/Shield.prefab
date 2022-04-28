@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7761490395954348710}
+  - {fileID: 2437632335380702266}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4422724548094833572}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &4956796807865595491
+--- !u!1 &7153500142416774587
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,9 +106,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7761490395954348710}
-  - component: {fileID: 1011644066953709095}
-  - component: {fileID: 1789144030577427082}
+  - component: {fileID: 2437632335380702266}
+  - component: {fileID: 8285219984557267156}
+  - component: {fileID: 5906759982088443481}
   m_Layer: 0
   m_Name: SphereVFX
   m_TagString: Untagged
@@ -116,13 +116,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7761490395954348710
+--- !u!4 &2437632335380702266
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4956796807865595491}
+  m_GameObject: {fileID: 7153500142416774587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -131,13 +131,13 @@ Transform:
   m_Father: {fileID: 2277269462606335664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &1011644066953709095
+--- !u!2083052967 &8285219984557267156
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4956796807865595491}
+  m_GameObject: {fileID: 7153500142416774587}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 662bc25a4dc42084eaabd3c4aa04eb0d, type: 3}
   m_InitialEventName: OnPlay
@@ -168,14 +168,14 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &1789144030577427082
+--- !u!73398921 &5906759982088443481
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4956796807865595491}
+  m_GameObject: {fileID: 7153500142416774587}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0

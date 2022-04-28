@@ -22,8 +22,10 @@ public class UI_ObjectHP : MonoBehaviour
     public void OreTakeDamage(int amount)
     {
         slider.gameObject.SetActive(true);
+        transform.LookAt(Camera.main.transform);
         slider.value -= amount;
         Invoke("HideUI", 2);
+        
     }
     private void HideUI()
     {

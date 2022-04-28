@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 2139519182}
   - component: {fileID: 2139519181}
   - component: {fileID: 2139519180}
+  - component: {fileID: 1968085593151929628}
   m_Layer: 0
   m_Name: Launch Mesh
   m_TagString: Untagged
@@ -331,6 +332,23 @@ MonoBehaviour:
   angle: 45
   trajectoryArcIncreaseSpeed: 0.01
   lineSegments: 20
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &1968085593151929628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139519179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamitePrefab: {fileID: 7467092179448219033, guid: f19dfc90978220346b75ab4ab42b5699, type: 3}
+  launchArcMesh: {fileID: 2139519180}
 --- !u!1 &2965090648212624896
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,8 +557,36 @@ MonoBehaviour:
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 29273503-81db-47cf-a0dd-7bc5049db044
-    m_ActionName: Player/Pause[/Keyboard/k]
+    m_ActionId: 87d8f1e3-1346-44b2-9a5b-991b9747d3fd
+    m_ActionName: Player/Pause[/Keyboard/k,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53f1b9f5-eb38-4d9c-b52c-82f1bb3ce4db
+    m_ActionName: Player/Select[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7cc816d5-f5dc-4ca6-a3f8-36fd322a962e
+    m_ActionName: Player/Navigate[/XInputControllerWindows/dpad]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b7275ac2-e73d-4a35-8dab-7e6832e3dde1
+    m_ActionName: Player/Shield[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1968085593151929628}
+        m_TargetAssemblyTypeName: DynamiteThrow, Assembly-CSharp
+        m_MethodName: ThrowDynamite
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dc2ed2d0-0cfd-4cb1-9485-d4130f4c0bcd
+    m_ActionName: Player/ThrowDynamite[/XInputControllerWindows/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
