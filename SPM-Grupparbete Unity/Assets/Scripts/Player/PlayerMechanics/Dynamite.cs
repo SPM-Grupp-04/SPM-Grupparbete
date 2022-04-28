@@ -74,6 +74,9 @@ public class Dynamite : MonoBehaviour
             Debug.Log(enemyObject.gameObject.name);
             var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 2);
             EventSystem.current.FireEvent(damageEvent);
+            
         }
+        
+        
     }
 }
