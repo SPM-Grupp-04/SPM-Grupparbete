@@ -43,6 +43,8 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
     void Start()
     {
+        
+        Debug.Log("MelleEnemyAI POOL in START " + this.pool);
         _meshRenderer = GetComponent<MeshRenderer>();
         agent.speed = movementSpeed;
         base.Start();
@@ -54,7 +56,12 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
 
     private void Update()
+    
+    
     {
+        
+        Debug.Log("MelleEnemyAI POOL in UPDATE " + this.pool);
+        
         if (currentHealth < startingHealth)
         {
             currentHealth += Time.deltaTime * healthRestoreRate;
@@ -126,8 +133,10 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
     {
         // Inte null
+        
         this.pool = pool;
         
+        Debug.Log("MelleEnemyAI POOL in SetPool " + this.pool);
         
     }
 

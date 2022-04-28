@@ -8,20 +8,15 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private  ObjectPool<BaseClassEnemyAI> pool;
-    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
-    [SerializeField] private float[] prioListMatchingObjektOrder;
-
-    // [SerializeField] private BaseClassEnemyAI meleeAIEnemy;
-    // [SerializeField] private BaseClassEnemyAI rangedAIEnemy;
-    [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
-
-
+    private ObjectPool<BaseClassEnemyAI> pool ;
+    private BaseClassEnemyAI enemy;
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
-
-
     private float totalProcent;
+
+    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
+    [SerializeField] private float[] prioListMatchingObjektOrder;
+    [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
 
     private void Start()
     {
@@ -42,15 +37,14 @@ public class EnemySpawner : MonoBehaviour
 
         for (var i = 0; i < genericListOfBaseClassEnemyAI.Length; i++) // 2 gånger
         {
+            enemy = genericListOfBaseClassEnemyAI[i];
             for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
-                enemy = genericListOfBaseClassEnemyAI[i];
                 creatEnamy();
             }
         }
     }
 
-    private BaseClassEnemyAI enemy;
 
     private void Awake() =>
         pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
@@ -80,8 +74,9 @@ public class EnemySpawner : MonoBehaviour
     {
         // så att man kan sätta hur många % av en typ man vill ska finnas.
 
-        Instantiate(enemy, transform.position, quaternion.identity);
+       enemy =  Instantiate(enemy, transform.position, quaternion.identity);
 
+        Debug.Log(" EnemySpawner Pool " + pool); // Inte null.
         enemy.SetPool(pool);
 
         return enemy;

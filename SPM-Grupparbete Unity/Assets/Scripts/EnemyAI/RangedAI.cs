@@ -18,7 +18,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
     [SerializeField] private Transform[] playerTransform;
-    
+
     private IObjectPool<BaseClassEnemyAI> pool;
 
     /*
@@ -27,8 +27,9 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
      * throwUpForce = 12;
      * throwForce = 30;
      */
-    [Header("Throw Weapon settings")]
-    [SerializeField] private GameObject throwabelObject;
+    [Header("Throw Weapon settings")] [SerializeField]
+    private GameObject throwabelObject;
+
     [SerializeField] private float throwCooldown;
     [SerializeField] private float throwUpForce;
     [SerializeField] private float throwForce = 30;
@@ -44,7 +45,15 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     {
         if (currentHealth < 1)
         {
-            gameObject.SetActive(false);
+            if (pool != null)
+            {
+                pool.Release(this);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+
             return;
         }
 
@@ -78,7 +87,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         return topTreeNode;
     }
 
-   
+
     public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
     {
         this.pool = pool;

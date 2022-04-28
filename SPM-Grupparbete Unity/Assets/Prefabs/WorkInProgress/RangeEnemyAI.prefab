@@ -94,7 +94,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4460789450242686155}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -111,16 +111,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f5e10b97c20194eb71abfbe75c99c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 4
-  rangedAttackRange: 5
+  startHealth: 15
+  rangedAttackRange: 10
   movementSpeed: 4
   chasingRange: 30
   playerTransform:
   - {fileID: 0}
   - {fileID: 0}
   throwabelObject: {fileID: 7157600032701877694, guid: 7322602a807ef2c48af8f1a501c194c4, type: 3}
-  throwCooldown: 0
-  throwUpForce: 0
+  throwCooldown: 2
+  throwUpForce: 12
   throwForce: 30
 --- !u!195 &2587360424363575302
 NavMeshAgent:
