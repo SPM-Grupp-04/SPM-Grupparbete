@@ -15,11 +15,16 @@ public class Dynamite : MonoBehaviour
     [Header("Explosion Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
+    [Header("Particle System")]
+    [SerializeField] private ParticleSystem explosionParticleSystem;
+    private float particleSystemCountdown;
     private float explosionCountdown;
     private bool hasExploded;
 
     private CapsuleCollider capsuleCollider;
     private Rigidbody capsuleRigidBody;
+
+    [SerializeField] private MeshRenderer meshRenderer;
     
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
@@ -33,6 +38,7 @@ public class Dynamite : MonoBehaviour
     private void Start()
     {
         explosionCountdown = explosionDelay;
+        particleSystemCountdown = 2.0f;
     }
 
     void Update()
@@ -63,7 +69,14 @@ public class Dynamite : MonoBehaviour
             explosionCountdown -= Time.deltaTime;
             yield return null;
         } while (explosionCountdown > 0.0f);
+        explosionParticleSystem.Play();
         Explode();
+        do
+        {
+            particleSystemCountdown -= Time.deltaTime;
+            yield return null;
+        } while (particleSystemCountdown > 0.0f);
+        Destroy(this.gameObject);
     }
 
     private void Explode()
@@ -74,9 +87,8 @@ public class Dynamite : MonoBehaviour
             Debug.Log(enemyObject.gameObject.name);
             var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 2);
             EventSystem.current.FireEvent(damageEvent);
-            
         }
-        
-        
+
+        meshRenderer.enabled = false; 
     }
 }
