@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class MeleeWepon : MonoBehaviour
 {
-    private float cooldownTime = 0.3f;
-    private float timeRemaining;
+    public float cooldownTime = 0.5f;
+    public float timeRemaining;
 
     private void Start()
     {

@@ -8,18 +8,22 @@ using UnityEngine.AI;
 public class ChaseTreeNode : TreeNode
 {
     private Transform target;
-    private Transform[] targets;
+    private List<Transform> targets;
     private NavMeshAgent agent;
+    private Animator _animator;
 
 
-    public ChaseTreeNode(Transform[] targets, NavMeshAgent agent)
+    public ChaseTreeNode(List<Transform> targets, NavMeshAgent agent, Animator animator)
     {
+        _animator = animator;
         this.targets = targets;
         this.agent = agent;
+        
     }
 
     public override NodeState Evaluate()
     {
+        _animator.SetBool("Run", true);
         float distance = 100;
         foreach (Transform target in targets)
         {

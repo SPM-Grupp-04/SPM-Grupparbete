@@ -17,8 +17,8 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float rangedAttackRange;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
-    [SerializeField] private Transform[] playerTransform;
-
+    private List<Transform> playerTransform = new List<Transform>();
+    private Animator _animator;
     private IObjectPool<BaseClassEnemyAI> pool;
 
     /*
@@ -36,6 +36,11 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     void Start()
     {
+        playerTransform.Add(GameObject.Find("Player1").transform);
+        playerTransform.Add(GameObject.Find("Player2").transform);
+
+
+        _animator = GetComponent<Animator>();
         currentHealth = startHealth;
         agent = GetComponent<NavMeshAgent>();
         SetUpTree();
@@ -43,6 +48,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     void Update()
     {
+     
         if (currentHealth < 1)
         {
             if (pool != null)
@@ -62,7 +68,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     protected override TreeNode SetUpTree()
     {
-        ChaseTreeNode chaseTreeNode = new ChaseTreeNode(playerTransform, agent);
+        ChaseTreeNode chaseTreeNode = new ChaseTreeNode(playerTransform, agent,_animator );
 
         RangeTreeNode chasingRangeTreeNode = new RangeTreeNode(chasingRange, playerTransform, transform);
 

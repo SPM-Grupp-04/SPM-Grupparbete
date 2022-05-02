@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using BehaviorTree;
 
 using UnityEditor.Timeline.Actions;
@@ -12,23 +13,28 @@ public class MeeleAttackTreeNode : TreeNode
     private NavMeshAgent agent;
     private GameObject gameObject;
     private Transform target;
-    private Transform[] targets;
-
+    private List<Transform> targets;
     private Vector3 currentVelocity;
     private float smoothDamp;
     private const int largeDistanceNumber = 100;
+    private Animator _animator;
+    private MeleeWepon _meleeWepon;
+
     
     
-    public MeeleAttackTreeNode(NavMeshAgent agent, GameObject gameObject, Transform[] targets)
+    public MeeleAttackTreeNode(NavMeshAgent agent, GameObject gameObject, List<Transform> targets, Animator animator, MeleeWepon meleeWepon)
     {
         this.agent = agent;
         this.gameObject = gameObject;
         this.targets = targets;
         smoothDamp = 1f;
+        _animator = animator;
+        _meleeWepon = meleeWepon;
     }
 
     public override NodeState Evaluate()
     {
+        
         float distance = largeDistanceNumber;
         foreach (Transform target in targets)
         {
@@ -40,17 +46,21 @@ public class MeeleAttackTreeNode : TreeNode
                 this.target = target;
             }
         }
-
-        //agent.isStopped = true;
+        
+        
+        agent.isStopped = true;
         //ai.SetColor(Color.red);
         Vector3 direction = target.position - gameObject.transform.position;
         Vector3 currentDirection = Vector3.SmoothDamp(gameObject.transform.forward, direction, ref currentVelocity, smoothDamp);
         Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         gameObject.transform.rotation = rotation;
 
+        // TODO: Ändra senare.!!!!!!!
+        if (_meleeWepon.timeRemaining <= 0.1f)
+        {
+            _animator.SetTrigger("Attack");
+        }
         
-        
-       
         state = NodeState.RUNNING;
         return state;
     }

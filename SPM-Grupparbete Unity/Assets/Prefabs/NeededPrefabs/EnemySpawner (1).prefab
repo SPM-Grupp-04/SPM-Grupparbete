@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82f279e6348ac9409953e6ccda9ffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meeleEnemyPrefab: {fileID: 0}
+  genericListOfBaseClassEnemyAI:
+  - {fileID: 0}
+  prioListMatchingObjektOrder: []
   totalAllowedEnimesAtSpawner: 5
   timer: 2
 --- !u!65 &8472183783228933263

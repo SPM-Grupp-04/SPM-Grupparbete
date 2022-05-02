@@ -1,13 +1,14 @@
-﻿using BehaviorTree;
+﻿using System.Collections.Generic;
+using BehaviorTree;
 using UnityEngine;
 
     public class IsCoverdTreeNode : TreeNode
     {
         private Transform target;
-        private Transform[] targets;
+        private List<Transform> targets;
         private Transform origin;
 
-        public IsCoverdTreeNode(Transform[] targets, Transform origin)
+        public IsCoverdTreeNode(List<Transform> targets, Transform origin)
         {
             this.targets = targets;
             this.origin = origin;

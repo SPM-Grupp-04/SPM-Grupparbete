@@ -1,15 +1,16 @@
-﻿using BehaviorTree;
+﻿using System.Collections.Generic;
+using BehaviorTree;
 using UnityEngine;
 
 public class RangeTreeNode : TreeNode
 {
     private float range;
     private Transform target;
-    private Transform[] targets;
+    private List<Transform> targets;
     private Transform orgin;
     private const int largeDistanceNumber = 100;
 
-    public RangeTreeNode(float range, Transform[] targets, Transform orgin)
+    public RangeTreeNode(float range, List<Transform> targets, Transform orgin)
     {
         this.range = range;
         this.targets = targets;

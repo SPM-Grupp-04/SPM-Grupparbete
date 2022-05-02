@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
@@ -14,12 +15,19 @@ public class EnemySpawner : MonoBehaviour
     private BoxCollider boxCollider;
     private float totalProcent;
 
-    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
+    
+   [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
     [SerializeField] private float[] prioListMatchingObjektOrder;
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
 
     private void Start()
     {
+
+        /*for (int i = 0; i < gameObjects.Length; i++)
+        {
+            genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
+        }*/
+        
         // Räknar ut vad som är 100%
         for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
         {
