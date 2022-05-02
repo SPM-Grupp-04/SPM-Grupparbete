@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class ChaseTreeNode : TreeNode
+public class ChaseTreeNodeRanged : TreeNode
 {
     private Transform target;
     private List<Transform> targets;
@@ -13,7 +13,7 @@ public class ChaseTreeNode : TreeNode
     private Animator _animator;
 
 
-    public ChaseTreeNode(List<Transform> targets, NavMeshAgent agent, Animator animator)
+    public ChaseTreeNodeRanged(List<Transform> targets, NavMeshAgent agent, Animator animator)
     {
         _animator = animator;
         this.targets = targets;
@@ -23,7 +23,7 @@ public class ChaseTreeNode : TreeNode
 
     public override NodeState Evaluate()
     {
-        _animator.SetBool("Run", true);
+        
         float distance = 100;
         foreach (Transform target in targets)
         {
@@ -50,4 +50,6 @@ public class ChaseTreeNode : TreeNode
             return state;
         }
     }
+    
+    
 }

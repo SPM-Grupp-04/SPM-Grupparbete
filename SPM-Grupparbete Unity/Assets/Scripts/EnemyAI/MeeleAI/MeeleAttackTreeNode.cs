@@ -10,6 +10,12 @@ using UnityEngine.InputSystem;
 
 public class MeeleAttackTreeNode : TreeNode
 {
+    
+    /*
+     * Klassen gör så att fienden vänder sig mot sitt mål och sedan attackerar det. Här väljer den också
+     * Vilket mål den ska attackera
+     * 
+     */
     private NavMeshAgent agent;
     private GameObject gameObject;
     private Transform target;
@@ -40,7 +46,7 @@ public class MeeleAttackTreeNode : TreeNode
         {
             float tempdistance = Vector3.Distance(target.position, agent.transform.position);
 
-            if (tempdistance < distance)
+            if (tempdistance < distance && target.gameObject.activeInHierarchy )
             {
                 distance = tempdistance;
                 this.target = target;

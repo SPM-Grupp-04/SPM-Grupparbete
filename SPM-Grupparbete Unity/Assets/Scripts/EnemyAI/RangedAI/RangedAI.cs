@@ -38,8 +38,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     {
         playerTransform.Add(GameObject.Find("Player1").transform);
         playerTransform.Add(GameObject.Find("Player2").transform);
-
-
+        
         _animator = GetComponent<Animator>();
         currentHealth = startHealth;
         agent = GetComponent<NavMeshAgent>();
@@ -48,7 +47,6 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     void Update()
     {
-     
         if (currentHealth < 1)
         {
             if (pool != null)
@@ -68,28 +66,21 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     protected override TreeNode SetUpTree()
     {
-        ChaseTreeNode chaseTreeNode = new ChaseTreeNode(playerTransform, agent,_animator );
+        ChaseTreeNodeRanged chaseTreeNodeMelee = new ChaseTreeNodeRanged(playerTransform, agent,_animator );
 
-        RangeTreeNode chasingRangeTreeNode = new RangeTreeNode(chasingRange, playerTransform, transform);
+        RangeTreeNodeRange chasingRangeTreeNodeMelee = new RangeTreeNodeRange(chasingRange, playerTransform, transform, _animator);
 
-        RangeTreeNode shootingRangeTreeNode = new RangeTreeNode(rangedAttackRange, playerTransform, transform);
+        RangeTreeNodeRange shootingRangeTreeNodeMelee = new RangeTreeNodeRange(rangedAttackRange, playerTransform, transform, _animator);
 
         RangedAttackTreeNode meeleAttackTreeNode =
             new RangedAttackTreeNode(agent, gameObject, playerTransform,
                 throwabelObject, throwCooldown, throwUpForce, throwForce);
 
-        Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNode, chaseTreeNode});
-        Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNode, meeleAttackTreeNode});
-
-        //Sequence goToCoverSequence = new Sequence(new List<TreeNode> {coverAvaliableNode, goToCoverNode});
-        //Selector findCoverSelector = new Selector(new List<TreeNode> {goToCoverSequence, chaseSequence});
-        //Selector tryToTakeCoverSelector = new Selector(new List<TreeNode> {isCoveredTreeNode, findCoverSelector});
-        //Sequence mainCoverSequence = new Sequence(new List<TreeNode> {healthTreeNode, tryToTakeCoverSelector});
-
-        //m_TopTreeNode = new Selector(new List<TreeNode> {mainCoverSequence, shootSequence, chaseSequence});
+        Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
+        Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, meeleAttackTreeNode});
+        
         topTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
-
-
+        
         return topTreeNode;
     }
 

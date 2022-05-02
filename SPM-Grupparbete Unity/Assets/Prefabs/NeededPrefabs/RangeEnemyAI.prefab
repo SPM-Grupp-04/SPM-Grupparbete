@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7945620684516909239}
   - component: {fileID: -9158013848336497969}
   - component: {fileID: 2587360424363575302}
+  - component: {fileID: 9085713346767909727}
   m_Layer: 7
   m_Name: RangeEnemyAI
   m_TagString: Enemy
@@ -115,9 +116,6 @@ MonoBehaviour:
   rangedAttackRange: 10
   movementSpeed: 4
   chasingRange: 30
-  playerTransform:
-  - {fileID: 0}
-  - {fileID: 0}
   throwabelObject: {fileID: 7467092179448219033, guid: c5963268bcb0e1f4ab6794facc11586b, type: 3}
   throwCooldown: 2
   throwUpForce: 12
@@ -144,3 +142,23 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &9085713346767909727
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460789450242686155}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
