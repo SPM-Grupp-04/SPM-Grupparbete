@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f5e10b97c20194eb71abfbe75c99c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 15
+  startHealth: 2
   rangedAttackRange: 10
   movementSpeed: 4
   chasingRange: 30
@@ -120,6 +120,9 @@ MonoBehaviour:
   throwCooldown: 2
   throwUpForce: 12
   throwForce: 30
+  target: {x: 100, y: 0, z: 100}
+  distanceToTargetPlayer: 100
+  timer: 0
 --- !u!195 &2587360424363575302
 NavMeshAgent:
   m_ObjectHideFlags: 0

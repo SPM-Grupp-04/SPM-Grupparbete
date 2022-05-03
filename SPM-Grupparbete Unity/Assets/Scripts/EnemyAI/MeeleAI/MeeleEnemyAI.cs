@@ -18,7 +18,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
     [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
-    [SerializeField] private float shootingRange;
+    [SerializeField] private float hitRange;
     [SerializeField] private float movementSpeed;
 
     [SerializeField] private MeleeWepon _meleeWepon;
@@ -93,10 +93,10 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
             new ChaseTreeNodeMelee(target, distanceToTargetPlayer, agent, _animator); // Animator.
 
         RangeTreeNodeMelee inChaseRange =
-            new RangeTreeNodeMelee(chasingRange, target, distanceToTargetPlayer, _animator);
+            new RangeTreeNodeMelee(chasingRange,  distanceToTargetPlayer, _animator);
 
         RangeTreeNodeMelee inMeleeRange =
-            new RangeTreeNodeMelee(shootingRange, target, distanceToTargetPlayer, _animator);
+            new RangeTreeNodeMelee(hitRange,  distanceToTargetPlayer, _animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
             new MeeleAttackTreeNode(target, agent, _animator, _meleeWepon);

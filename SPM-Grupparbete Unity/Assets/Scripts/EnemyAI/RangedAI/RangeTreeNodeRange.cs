@@ -5,22 +5,23 @@ using UnityEngine;
 public class RangeTreeNodeRange : TreeNode
 {
     private float range;
-    private Transform target;
-    private List<Transform> targets;
-    private Transform orgin;
-    private const int largeDistanceNumber = 100;
+    private Vector3 target;
+    private float distanceToTarget;
+
+
     private Animator _animator;
-    public RangeTreeNodeRange(float range, List<Transform> targets, Transform orgin, Animator animator)
+
+    public RangeTreeNodeRange(Vector3 target, float distanceToTarget, float range, Animator animator)
     {
         this.range = range;
-        this.targets = targets;
-        this.orgin = orgin;
+        this.target = target;
+        this.distanceToTarget = distanceToTarget;
         _animator = animator;
     }
 
     public override NodeState Evaluate()
     {
-        float distance = largeDistanceNumber;
+        /*float distance = largeDistanceNumber;
         foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, orgin.position);
@@ -32,10 +33,10 @@ public class RangeTreeNodeRange : TreeNode
             }
 
                 
-        }
-        
-        state = distance <= range ? NodeState.SUCCESS : NodeState.FAILURE;
-      
+        }*/
+
+        state = distanceToTarget <= range ? NodeState.SUCCESS : NodeState.FAILURE;
+
         return state;
     }
 }

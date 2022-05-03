@@ -18,7 +18,7 @@ public class EnemyAIHandler : MonoBehaviour
     private Transform playerOne;
     private Transform playerTwo;
 
-   [SerializeField][Range(0.1f, 5f)] private float raidusAroundTarget = 0.5f;
+    [SerializeField] [Range(0.1f, 5f)] private float raidusAroundTarget = 0.5f;
 
     private void Start()
     {
@@ -55,7 +55,7 @@ public class EnemyAIHandler : MonoBehaviour
                         playerOnePosition.y,
                         playerOnePosition.z + raidusAroundTarget *
                         Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count));
-                    //closestTarget = playerOnePosition;
+                    /*closestTarget = playerOnePosition;*/
                     closestDistance = distancePlayerOne;
                 }
                 else if (playerTwoIsActive)
@@ -65,7 +65,7 @@ public class EnemyAIHandler : MonoBehaviour
                         playerTowPosition.y,
                         playerTowPosition.z + raidusAroundTarget *
                         Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count));
-                   // closestTarget = playerTowPosition;
+                    /*closestTarget = playerTowPosition;*/
                     closestDistance = distancePlayerTwo;
                 }
 

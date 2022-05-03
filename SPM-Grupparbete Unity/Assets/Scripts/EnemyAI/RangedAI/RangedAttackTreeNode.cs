@@ -11,73 +11,52 @@ namespace Utility.EnemyAI
     public class RangedAttackTreeNode : TreeNode
     {
         private NavMeshAgent agent;
-        private GameObject gameObject;
-        private Transform target;
-        private List<Transform> targets;
+        private Vector3 target;
+
         private GameObject throwableObject;
         private Vector3 currentVelocity;
         private float smoothDamp;
-        private const int largeDistanceNumber = 100;
 
-        [Header("ThrowSettings")] 
-        private float throwCD;
+        [Header("ThrowSettings")] private float throwCD = 2;
         private float throwUpForce;
         private float throwForce;
-        private float timer;
-        
-  
+        private RangedAI _rangedAI;
 
-        public RangedAttackTreeNode(NavMeshAgent agent, GameObject gameObject, List<Transform> targets,
-            GameObject throwabelObject, float throwCD, float throwUpForce, float throwForce)
+
+        public RangedAttackTreeNode(Vector3 target, NavMeshAgent agent,
+            GameObject throwabelObject, float throwUpForce, float throwForce, RangedAI rangedAI)
         {
             this.agent = agent;
-            this.gameObject = gameObject;
-            this.targets = targets;
+            this.target = target;
             this.throwableObject = throwabelObject;
             smoothDamp = 1f;
-            this.throwCD = throwCD;
+            _rangedAI = rangedAI;
             this.throwUpForce = throwUpForce;
             this.throwForce = throwForce;
-            timer = throwCD;
         }
 
         public override NodeState Evaluate()
         {
-            float distance = largeDistanceNumber;
-            foreach (Transform target in targets)
-            {
-                float tempdistance = Vector3.Distance(target.position, agent.transform.position);
-
-                if (tempdistance < distance)
-                {
-                    distance = tempdistance;
-                    this.target = target;
-                }
-            }
-
             agent.isStopped = true;
+            Transform agentT = agent.transform;
 
-            Vector3 direction = target.position - gameObject.transform.position;
+            Vector3 direction = target - agentT.position;
             Vector3 currentDirection =
-                Vector3.SmoothDamp(gameObject.transform.forward, direction, ref currentVelocity, smoothDamp);
+                Vector3.SmoothDamp(agentT.forward, direction, ref currentVelocity, smoothDamp);
             Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
-            gameObject.transform.rotation = rotation;
+            agentT.rotation = rotation;
 
-
-            var shootEventInfo = new ShootEventInfo(this.gameObject,
-                this.throwableObject, throwUpForce, throwForce);
-
-            if (timer > throwCD)
+            if (_rangedAI.timer < 0)
             {
+                var shootEventInfo = new ShootEventInfo(agent.gameObject,
+                    this.throwableObject, throwUpForce, throwForce);
                 EventSystem.current.FireEvent(shootEventInfo);
-                timer = 0;
+                _rangedAI.timer = throwCD;
             }
 
-            timer += Time.deltaTime;
+
             state = NodeState.RUNNING;
             return state;
         }
-
-       
     }
 }

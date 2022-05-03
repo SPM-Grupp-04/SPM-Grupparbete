@@ -42,7 +42,7 @@ public class ChaseTreeNodeMelee : TreeNode
             }
         }*/
 
-        if (distanceToPlayer > 0.5f)
+        if (distanceToPlayer > 0.2f)
         {
             agent.isStopped = false;
             agent.SetDestination(target);

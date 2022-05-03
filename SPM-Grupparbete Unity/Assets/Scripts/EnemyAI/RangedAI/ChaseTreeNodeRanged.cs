@@ -7,16 +7,17 @@ using UnityEngine.AI;
 
 public class ChaseTreeNodeRanged : TreeNode
 {
-    private Transform target;
-    private List<Transform> targets;
+    private Vector3 target;
+    private float distanceToTarget;
     private NavMeshAgent agent;
     private Animator _animator;
 
 
-    public ChaseTreeNodeRanged(List<Transform> targets, NavMeshAgent agent, Animator animator)
+    public ChaseTreeNodeRanged(Vector3 target,float distanceToTarget, NavMeshAgent agent, Animator animator)
     {
         _animator = animator;
-        this.targets = targets;
+        this.target = target;
+        this.distanceToTarget = distanceToTarget;
         this.agent = agent;
         
     }
@@ -24,7 +25,7 @@ public class ChaseTreeNodeRanged : TreeNode
     public override NodeState Evaluate()
     {
         
-        float distance = 100;
+        /*float distance = 100;
         foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, agent.transform.position);
@@ -34,12 +35,12 @@ public class ChaseTreeNodeRanged : TreeNode
                 distance = tempdistance;
                 this.target = target;
             }
-        }
+        }*/
 
-        if (distance > 0.2f)
+        if (distanceToTarget > 0.2f)
         {
             agent.isStopped = false;
-            agent.SetDestination(target.position);
+            agent.SetDestination(target);
 
             return NodeState.RUNNING;
         }
