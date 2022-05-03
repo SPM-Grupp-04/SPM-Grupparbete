@@ -152,13 +152,18 @@ MonoBehaviour:
       identifier=\"$outputsize\" uid=\"3842219088\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
     CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Stalagmites\" label=\"\" >\n 
       <presetinput identifier=\"$outputsize\" uid=\"3842219088\" type=\"8\" value=\"10,10\"
-      />\n </sbspreset>\n"
+      />\n  <presetinput identifier=\"dirt_level\" uid=\"2312774630\" type=\"0\"
+      value=\"0.655\" />\n  <presetinput identifier=\"hue\" uid=\"2312768436\" type=\"0\"
+      value=\"0.458\" />\n  <presetinput identifier=\"saturation\" uid=\"2312768438\"
+      type=\"0\" value=\"0.347\" />\n  <presetinput identifier=\"luminosity\" uid=\"2312768440\"
+      type=\"0\" value=\"0.477\" />\n  <presetinput identifier=\"scale\" uid=\"2312771082\"
+      type=\"4\" value=\"4\" />\n </sbspreset>\n"
     IsRuntimeOnly: 0
   RefreshMaterial: 1
   Name: graph_0
   IsRoot: 1
   FlagedForDelete: 0
-  GUID: a8971f5b-2d20-4ff0-bd80-1c1cf8ff6288
+  GUID: 620da0b3-4f8a-4810-b5a7-1fdd36170576
   references:
     version: 2
     RefIds:
@@ -243,7 +248,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 3
-        _Data: 0.57
+        _Data: 0.655
         _isVisible: 1
         _Description:
           Identifier: dirt_level
@@ -319,7 +324,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 6
-        _Data: 0.48
+        _Data: 0.458
         _isVisible: 1
         _Description:
           Identifier: hue
@@ -344,7 +349,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 7
-        _Data: 0.48
+        _Data: 0.347
         _isVisible: 1
         _Description:
           Identifier: saturation
@@ -369,7 +374,7 @@ MonoBehaviour:
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 8
-        _Data: 0.48
+        _Data: 0.477
         _isVisible: 1
         _Description:
           Identifier: luminosity
@@ -403,7 +408,7 @@ MonoBehaviour:
           Type: 4
           WidgetType: 1
         _Index: 9
-        _Data: 1
+        _Data: 4
         _isVisible: 1
         _GraphID: 0
         _NumericalDescription:
