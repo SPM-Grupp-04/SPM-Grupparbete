@@ -32,6 +32,8 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     private NavMeshAgent agent;
     //public TreeNode m_TopTreeNode;
 
+    public Vector3 target = new Vector3(100, 0, 100);
+    public float distanceToTargetPlayer = 100;
 
     void Start()
     {
@@ -42,12 +44,15 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
         agent.speed = movementSpeed;
         base.Start();
         currentHealth = startingHealth;
-        SetUpTree();
+        // SetUpTree();
+       // SetUpTree();
     }
 
 
     private void Update()
     {
+        SetUpTree();
+       
         if (currentHealth < startingHealth)
         {
             currentHealth += Time.deltaTime * healthRestoreRate;
@@ -81,14 +86,20 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
     protected override TreeNode SetUpTree()
     {
-        ChaseTreeNodeMelee chaseTreeNodeMelee = new ChaseTreeNodeMelee(playerTransform, agent, _animator); // Animator.
+        // Istället för att skcika med spelarens transform hela tiden så skicka bara med platsen.
 
-        RangeTreeNodeMelee inChaseRange = new RangeTreeNodeMelee(chasingRange, playerTransform, transform, _animator);
+        
+        ChaseTreeNodeMelee chaseTreeNodeMelee =
+            new ChaseTreeNodeMelee(target, distanceToTargetPlayer, agent, _animator); // Animator.
 
-        RangeTreeNodeMelee inMeleeRange = new RangeTreeNodeMelee(shootingRange, playerTransform, transform, _animator);
+        RangeTreeNodeMelee inChaseRange =
+            new RangeTreeNodeMelee(chasingRange, target, distanceToTargetPlayer, _animator);
+
+        RangeTreeNodeMelee inMeleeRange =
+            new RangeTreeNodeMelee(shootingRange, target, distanceToTargetPlayer, _animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
-            new MeeleAttackTreeNode(agent, gameObject, playerTransform, _animator, _meleeWepon);
+            new MeeleAttackTreeNode(target, agent, _animator, _meleeWepon);
 
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
@@ -103,6 +114,16 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
     {
         this.pool = pool;
+    }
+
+    public override void TargetPlayerPos(Vector3 targeDistance)
+    {
+        target = targeDistance;
+    }
+
+    public override void DistanceToPlayerPos(float distance)
+    {
+        this.distanceToTargetPlayer = distance;
     }
 
     public void DealDamage(int damage)

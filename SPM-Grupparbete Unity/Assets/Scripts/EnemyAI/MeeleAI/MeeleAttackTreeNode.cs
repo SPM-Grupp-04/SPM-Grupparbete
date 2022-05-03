@@ -6,6 +6,7 @@ using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
 
 
 public class MeeleAttackTreeNode : TreeNode
@@ -18,21 +19,23 @@ public class MeeleAttackTreeNode : TreeNode
      */
     private NavMeshAgent agent;
     private GameObject gameObject;
-    private Transform target;
+   // private Transform target;
     private List<Transform> targets;
     private Vector3 currentVelocity;
     private float smoothDamp;
     private const int largeDistanceNumber = 100;
     private Animator _animator;
     private MeleeWepon _meleeWepon;
-
+    private Vector3 target;
     
     
-    public MeeleAttackTreeNode(NavMeshAgent agent, GameObject gameObject, List<Transform> targets, Animator animator, MeleeWepon meleeWepon)
+    public MeeleAttackTreeNode(Vector3 target,NavMeshAgent agent,   Animator animator, MeleeWepon meleeWepon)
     {
         this.agent = agent;
-        this.gameObject = gameObject;
-        this.targets = targets;
+      //  this.gameObject = gameObject;
+
+        this.target = target;
+        
         smoothDamp = 1f;
         _animator = animator;
         _meleeWepon = meleeWepon;
@@ -41,25 +44,27 @@ public class MeeleAttackTreeNode : TreeNode
     public override NodeState Evaluate()
     {
         
-        float distance = largeDistanceNumber;
+        /*float distance = largeDistanceNumber;
         foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, agent.transform.position);
-
+           
             if (tempdistance < distance && target.gameObject.activeInHierarchy )
             {
                 distance = tempdistance;
+                
                 this.target = target;
             }
-        }
+        }*/
         
         
         agent.isStopped = true;
+        Transform agentT = agent.transform;
         //ai.SetColor(Color.red);
-        Vector3 direction = target.position - gameObject.transform.position;
-        Vector3 currentDirection = Vector3.SmoothDamp(gameObject.transform.forward, direction, ref currentVelocity, smoothDamp);
+        Vector3 direction = target - agentT.position;
+        Vector3 currentDirection = Vector3.SmoothDamp(agentT.forward, direction, ref currentVelocity, smoothDamp);
         Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
-        gameObject.transform.rotation = rotation;
+        agentT.rotation = rotation;
 
         // TODO: Ändra senare.!!!!!!!
         if (_meleeWepon.timeRemaining <= 0.1f)

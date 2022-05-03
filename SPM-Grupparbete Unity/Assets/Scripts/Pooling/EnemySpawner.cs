@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private BaseClassEnemyAI enemy;
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
+
     private float totalProcent;
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
@@ -22,16 +23,23 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
     [SerializeField] private float[] prioListMatchingObjektOrder;
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
-    
+    [SerializeField] private float totalAllowedSpawnTime = 5;
+    private float timer;
+
     private void Start()
     {
-      
+    }
+
+    private void OnEnable()
+    {
+        timer = totalAllowedSpawnTime;
     }
 
     private void Awake()
     {
+        timer = totalAllowedSpawnTime;
         pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
-      
+
         enemyAIHandler = GetComponent<EnemyAIHandler>();
         /*for (int i = 0; i < gameObjects.Length; i++)
         {
@@ -59,13 +67,10 @@ public class EnemySpawner : MonoBehaviour
             for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
                 creatEnamy();
-                
-           
             }
         }
     }
 
-    [SerializeField] private float timer = 5;
 
     private void FixedUpdate()
     {
@@ -79,35 +84,34 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-          
-            gameObject.SetActive(false);
+            this.enabled = false;
         }
 
         timer -= Time.deltaTime;
     }
 
-    
+
     BaseClassEnemyAI creatEnamy()
-        {
-            // så att man kan sätta hur många % av en typ man vill ska finnas.
+    {
+        // så att man kan sätta hur många % av en typ man vill ska finnas.
 
-            enemy = Instantiate(enemy, transform.position, quaternion.identity);
-            enemyAIHandler.units.Add(enemy);
-            Debug.Log(" EnemySpawner Pool " + pool); // Inte null.
-            enemy.SetPool(pool);
+        enemy = Instantiate(enemy, transform.position, quaternion.identity);
+        enemyAIHandler.units.Add(enemy);
 
-            return enemy;
-        }
+        enemy.SetPool(pool);
 
-        void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
-        {
-            meeleEnemyAI.transform.position = SpawnPos;
-            meeleEnemyAI.gameObject.SetActive(true);
-        }
-
-
-        public void OnReturnBallToPool(BaseClassEnemyAI meeleEnemyAI)
-        {
-            meeleEnemyAI.gameObject.SetActive(false);
-        }
+        return enemy;
     }
+
+    void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
+    {
+        meeleEnemyAI.transform.position = SpawnPos;
+        meeleEnemyAI.gameObject.SetActive(true);
+    }
+
+
+    public void OnReturnBallToPool(BaseClassEnemyAI meeleEnemyAI)
+    {
+        meeleEnemyAI.gameObject.SetActive(false);
+    }
+}

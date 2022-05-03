@@ -91,6 +91,16 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         this.pool = pool;
     }
 
+    public override void TargetPlayerPos(Vector3 TargetPos)
+    {
+        
+    }
+
+    public override void DistanceToPlayerPos(float distance)
+    {
+        
+    }
+    
     public void DealDamage(int damage)
     {
         currentHealth -= damage;

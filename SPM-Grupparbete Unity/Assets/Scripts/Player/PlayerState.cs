@@ -35,6 +35,7 @@ public class PlayerState : MonoBehaviour, IDamagable
         {
             if (m_LocalPlayerData.PlayerOneHealth < 1)
             {
+                
                 die(gameObject);
             }
         }
@@ -43,6 +44,7 @@ public class PlayerState : MonoBehaviour, IDamagable
         {
             if (m_LocalPlayerData.PlayerTwoHealth < 1)
             {
+                
                 die(gameObject);
             }
         }
@@ -50,9 +52,16 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     void die(GameObject gameObject)
     {
+     
+        
+        
         var dieEvent = new DieEvenInfo(gameObject);
 
         EventSystem.current.FireEvent(dieEvent);
+
+        
+       
+
     }
 
 

@@ -7,39 +7,45 @@ using UnityEngine.AI;
 
 public class ChaseTreeNodeMelee : TreeNode
 {
-    private Transform target;
-    private List<Transform> targets;
+  // private Transform target;
+   // private List<Transform> targets;
+   //private float target;
     private NavMeshAgent agent;
     private Animator _animator;
+    private Vector3 target;
+    private float distanceToPlayer;
 
 
-    public ChaseTreeNodeMelee(List<Transform> targets, NavMeshAgent agent, Animator animator)
+    public ChaseTreeNodeMelee(Vector3 playerPos,float distanceToPlayer ,NavMeshAgent agent, Animator animator)
     {
         _animator = animator;
-        this.targets = targets;
+       // this.targets = targets;
         this.agent = agent;
-        
+        target = playerPos;
+        this.distanceToPlayer = distanceToPlayer;
+
     }
 
     public override NodeState Evaluate()
     {
         _animator.SetBool("Run", true);
-        float distance = 100;
-        foreach (Transform target in targets)
+        
+        /*foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, agent.transform.position);
-
+           
             if (tempdistance < distance && target.gameObject.activeInHierarchy)
             {
                 distance = tempdistance;
+               
                 this.target = target;
             }
-        }
+        }*/
 
-        if (distance > 0.2f)
+        if (distanceToPlayer > 0.5f)
         {
             agent.isStopped = false;
-            agent.SetDestination(target.position);
+            agent.SetDestination(target);
 
             return NodeState.RUNNING;
         }
