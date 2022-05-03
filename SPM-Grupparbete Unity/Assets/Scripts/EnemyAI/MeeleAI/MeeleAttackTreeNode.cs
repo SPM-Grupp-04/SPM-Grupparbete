@@ -64,7 +64,7 @@ public class MeeleAttackTreeNode : TreeNode
         Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         agentT.rotation = rotation;
 
-            Debug.Log("Kommer vi hit då?");
+        
         // TODO: Ändra senare.!!!!!!!
         if (_meleeWepon.timeRemaining <= 0.1f)
         {
