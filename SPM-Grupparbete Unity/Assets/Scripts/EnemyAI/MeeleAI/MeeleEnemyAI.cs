@@ -9,6 +9,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 {
     [SerializeField] private float startingHealth;
     private float currentHealth;
+
     public float CurrentHealth
     {
         get { return currentHealth; }
@@ -21,7 +22,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float movementSpeed;
 
     [SerializeField] private MeleeWepon _meleeWepon;
-    
+
     private List<Transform> playerTransform = new List<Transform>();
 
     private IObjectPool<BaseClassEnemyAI> pool;
@@ -29,7 +30,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     private Animator _animator;
 
     private NavMeshAgent agent;
-    private TreeNode m_TopTreeNode;
+    //public TreeNode m_TopTreeNode;
 
 
     void Start()
@@ -68,7 +69,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
             return;
         }
 
-        m_TopTreeNode.Evaluate();
+        // m_TopTreeNode.Evaluate();
     }
 
 
@@ -79,22 +80,22 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
 
     protected override TreeNode SetUpTree()
-    { ;
-
+    {
         ChaseTreeNodeMelee chaseTreeNodeMelee = new ChaseTreeNodeMelee(playerTransform, agent, _animator); // Animator.
 
-        RangeTreeNodeMelee inChaseRange = new RangeTreeNodeMelee(chasingRange, playerTransform, transform,_animator);
+        RangeTreeNodeMelee inChaseRange = new RangeTreeNodeMelee(chasingRange, playerTransform, transform, _animator);
 
-        RangeTreeNodeMelee inMeleeRange = new RangeTreeNodeMelee(shootingRange, playerTransform, transform,_animator);
+        RangeTreeNodeMelee inMeleeRange = new RangeTreeNodeMelee(shootingRange, playerTransform, transform, _animator);
 
-        MeeleAttackTreeNode meeleAttackTreeNode = new MeeleAttackTreeNode(agent, gameObject, playerTransform, _animator,_meleeWepon);
-        
+        MeeleAttackTreeNode meeleAttackTreeNode =
+            new MeeleAttackTreeNode(agent, gameObject, playerTransform, _animator, _meleeWepon);
+
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
         m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
-        
+
         return m_TopTreeNode;
     }
 

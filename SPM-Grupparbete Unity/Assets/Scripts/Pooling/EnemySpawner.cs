@@ -18,13 +18,21 @@ public class EnemySpawner : MonoBehaviour
     private float totalProcent;
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
-
+    private EnemyAIHandler enemyAIHandler;
     [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
     [SerializeField] private float[] prioListMatchingObjektOrder;
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
     
     private void Start()
     {
+      
+    }
+
+    private void Awake()
+    {
+        pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+      
+        enemyAIHandler = GetComponent<EnemyAIHandler>();
         /*for (int i = 0; i < gameObjects.Length; i++)
         {
             genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
@@ -51,13 +59,11 @@ public class EnemySpawner : MonoBehaviour
             for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
                 creatEnamy();
+                
            
             }
         }
     }
-    
-    private void Awake() =>
-        pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
     [SerializeField] private float timer = 5;
 
@@ -73,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Varför bara varöfr?!");
+          
             gameObject.SetActive(false);
         }
 
@@ -86,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
             // så att man kan sätta hur många % av en typ man vill ska finnas.
 
             enemy = Instantiate(enemy, transform.position, quaternion.identity);
-
+            enemyAIHandler.units.Add(enemy);
             Debug.Log(" EnemySpawner Pool " + pool); // Inte null.
             enemy.SetPool(pool);
 

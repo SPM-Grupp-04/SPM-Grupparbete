@@ -610,11 +610,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 5
-  lowHealthThreseHold: 0
   healthRestoreRate: 0
   chasingRange: 30
   shootingRange: 1.5
-  movementSpeed: 6
+  movementSpeed: 8
   _meleeWepon: {fileID: 2684010117394386391}
 --- !u!1 &5674085065593037230
 GameObject:
@@ -803,7 +802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82570d18c7502aa45803e5591210c06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 0.5
   timeRemaining: 0
 --- !u!1 &7359884062611439017
 GameObject:

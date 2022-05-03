@@ -1,26 +1,36 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using BehaviorTree;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.PlayerLoop;
+using UnityEngine.Pool;
+using Tree = BehaviorTree.Tree;
 
 
 public class EnemyAIHandler : MonoBehaviour
 {
-    private static EnemyAIHandler instance;
-
-    public static EnemyAIHandler Instance
-    {
-        get
-        {
-            return instance;
-        }
-        private set
-        {
-            instance = value;
-        }
-    }
-
+    // Ref till spelarna:
+    //[SerializeField] private GameObject targetOne;
+    //[SerializeField] private GameObject targetTwo;
+    
     public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
 
-    
-    
+    private void Start()
+    {
+       
+    }
+
+    private void Update()
+    {
+        
+        foreach (BaseClassEnemyAI enemyAI in units)
+        {
+            if (enemyAI.gameObject.activeInHierarchy)
+            {
+                enemyAI.m_TopTreeNode.Evaluate();
+                
+            }
+        }
+    }
 }

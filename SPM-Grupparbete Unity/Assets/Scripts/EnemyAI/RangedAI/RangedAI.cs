@@ -10,7 +10,7 @@ using Tree = BehaviorTree.Tree;
 
 public class RangedAI : BaseClassEnemyAI, IDamagable
 {
-    private TreeNode topTreeNode;
+  //  private TreeNode topTreeNode;
     private float currentHealth;
     private NavMeshAgent agent;
     [SerializeField] private float startHealth;
@@ -61,7 +61,8 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
             return;
         }
 
-        topTreeNode.Evaluate();
+        // ToptreeNodeEvaluate();
+      
     }
 
     protected override TreeNode SetUpTree()
@@ -79,9 +80,9 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, meeleAttackTreeNode});
         
-        topTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
         
-        return topTreeNode;
+        return m_TopTreeNode;
     }
 
 

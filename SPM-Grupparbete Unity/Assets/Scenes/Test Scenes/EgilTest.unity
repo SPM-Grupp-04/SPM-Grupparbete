@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &39721483
 Transform:
   m_ObjectHideFlags: 0
@@ -2480,6 +2480,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
   m_PrefabInstance: {fileID: 1830458607}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1595088186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595088180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d3f2973f208df4e87234b4ad162856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  units: []
 --- !u!1 &1617683903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5711041550793873810, guid: b5fdc3d936a7d444da8cfd7381220277, type: 3}
@@ -2762,7 +2775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.size
