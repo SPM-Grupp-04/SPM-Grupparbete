@@ -25,8 +25,6 @@ public class LaunchArcMesh : MonoBehaviour
 
     private Vector3 newTrajectoryPoint;
 
-    [SerializeField] private Transform playerTransform;
-
     public float GetLaunchVelocity()
     {
         return velocity;
@@ -119,12 +117,12 @@ public class LaunchArcMesh : MonoBehaviour
         {
             float t = (float) i / (float) lineSegments;
             newTrajectoryPoint = CalculateTrajectoryPoint(t, maxDistance);
-            throwTrajectoryArray[i] = newTrajectoryPoint;
-            
+
             if (Physics.OverlapSphere(transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f, groundLayerMask).Length > 0)
             {
                 break;
             }
+            throwTrajectoryArray[i] = newTrajectoryPoint;
         }
         return throwTrajectoryArray;
     }
