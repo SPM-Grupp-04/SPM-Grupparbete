@@ -14,7 +14,7 @@ public class DynamiteThrow : MonoBehaviour
 
     private void Update()
     {
-        nextFireTime += Time.deltaTime;
+        /*nextFireTime += Time.deltaTime;
         
         if (nextFireTime <= coolDownTime)
         {
@@ -24,7 +24,7 @@ public class DynamiteThrow : MonoBehaviour
         if (nextFireTime >= coolDownTime)
         {
             uiCooldowns.GetGrenadeText().text = "Kasta";
-        }
+        }*/
 
         
     }

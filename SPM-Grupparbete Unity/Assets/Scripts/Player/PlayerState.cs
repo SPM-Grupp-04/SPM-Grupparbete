@@ -71,6 +71,10 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     }
 
+    public void Heal(int amount)
+    {
+        
+    }
 
     public void DealDamage(int damage)
     {

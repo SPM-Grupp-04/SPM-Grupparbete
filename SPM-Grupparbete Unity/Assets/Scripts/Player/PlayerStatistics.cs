@@ -21,6 +21,9 @@ public class PlayerStatistics
    // public string Scene;
     public float PosX, PosY, PosZ;
     public int Crystals;
+    public int BlueCrystals;
+    public int RedCrystals;
+
     private PlayerStatistics()
     {
        
