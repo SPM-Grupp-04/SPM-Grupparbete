@@ -16,8 +16,7 @@ public class PlayerState : MonoBehaviour, IDamagable
     
     private void Start()
     {
-        GlobalControl.Instance.LoadData();
-        GlobalControl.Instance.IsSceneBeingLoaded = true;
+       
         
         m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
       

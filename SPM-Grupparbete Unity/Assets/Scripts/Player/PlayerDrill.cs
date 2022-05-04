@@ -22,6 +22,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
 
+    [SerializeField] Material lrMaterial;
     private LineRenderer lr;
 
     private float timer = 0;
@@ -33,6 +34,14 @@ public class PlayerDrill : MonoBehaviour
     private bool canShoot = true;
     private bool isShooting;
     private bool isDrilling;
+
+    Color c1 = Color.white;
+    Color c2;
+    int randomColour1;
+    int randomColour2;
+    int randomColour3;
+    float nextColour;
+    [SerializeField] private float delayTimer = 1;
 
     private void Awake()
     {
@@ -66,6 +75,21 @@ public class PlayerDrill : MonoBehaviour
                 canShoot = true;
             }
         }
+
+        if(Time.time >= nextColour)
+        {
+
+            randomColour1 = Random.Range(0, 255);
+            randomColour2 = Random.Range(0, 255);
+            randomColour3 = Random.Range(0, 255);
+            lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
+          
+            nextColour = Time.time + delayTimer;
+        }
+        
+
+       
+       
     }
 
     private void FixedUpdate()
@@ -155,6 +179,7 @@ public class PlayerDrill : MonoBehaviour
             Destroy(beamGO);
             if (timer <= 0)
             {
+                lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
             }
