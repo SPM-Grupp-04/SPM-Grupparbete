@@ -18,6 +18,8 @@ public class PlayerState : MonoBehaviour, IDamagable
     {
         
         m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
+        m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
+        m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
       
         if (playerName == "PlayerOne")
         {

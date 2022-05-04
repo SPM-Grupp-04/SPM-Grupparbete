@@ -5,7 +5,7 @@
 
     public class Load : MonoBehaviour
     {
-        private void Awake()
+        private void Start()
         {
             if (!Directory.Exists("Saves"))
             {
