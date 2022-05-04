@@ -12,21 +12,30 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     [SerializeField] private String playerName;
 
+   
+    
     private void Start()
     {
-        m_LocalPlayerData.Crystals = GlobalControl.Instance.SavedData.Crystals;
+        GlobalControl.Instance.LoadData();
+        GlobalControl.Instance.IsSceneBeingLoaded = true;
+        
+        m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
+      
         if (playerName == "PlayerOne")
         {
-            m_LocalPlayerData.PlayerOneHealth = GlobalControl.Instance.SavedData.PlayerOneHealth;
-            m_LocalPlayerData.PlayerOneAcceleration = GlobalControl.Instance.SavedData.PlayerOneAcceleration;
-            m_LocalPlayerData.PlayerOneDisco = GlobalControl.Instance.SavedData.PlayerOneDisco;
+            m_LocalPlayerData.PlayerOneHealth = GlobalControl.Instance.playerStatistics.PlayerOneHealth;
+            m_LocalPlayerData.PlayerOneAcceleration = GlobalControl.Instance.playerStatistics.PlayerOneAcceleration;
+            m_LocalPlayerData.PlayerOneDisco = GlobalControl.Instance.playerStatistics.PlayerOneDisco;
         }
 
+        Debug.Log(m_LocalPlayerData.Crystals + " Crystals in Instance of Playerstatistics");
+        Debug.Log(GlobalControl.Instance.playerStatistics.Crystals + " Sparade Crystals");
+       
         if (playerName == "PlayerTwo")
         {
-            m_LocalPlayerData.PlayerTwoHealth = GlobalControl.Instance.SavedData.PlayerTwoHealth;
-            m_LocalPlayerData.PlayerTwoAcceleration = GlobalControl.Instance.SavedData.PlayerTwoAcceleration;
-            m_LocalPlayerData.PlayerTwoDisco = GlobalControl.Instance.SavedData.PlayerTwoDisco;
+            m_LocalPlayerData.PlayerTwoHealth = GlobalControl.Instance.playerStatistics.PlayerTwoHealth;
+            m_LocalPlayerData.PlayerTwoAcceleration = GlobalControl.Instance.playerStatistics.PlayerTwoAcceleration;
+            m_LocalPlayerData.PlayerTwoDisco = GlobalControl.Instance.playerStatistics.PlayerTwoDisco;
         }
     }
 
@@ -119,7 +128,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     public void SavePlayers()
     {
-        GlobalControl.Instance.SavedData = m_LocalPlayerData;
+        GlobalControl.Instance.playerStatistics = m_LocalPlayerData;
     }
 
     //using a bitmask

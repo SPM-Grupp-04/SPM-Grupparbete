@@ -5,16 +5,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-[Serializable]
+[System.Serializable]
 public class PlayerStatistics
 {
 
     private static PlayerStatistics instance = null;
-
+    
+    public int PlayerMaxHealth = 5;
+    public int PlayerOneHealth = 5;
+    public int PlayerTwoHealth = 5;
+    public float PlayerOneAcceleration = 5.0f;
+    public float PlayerTwoAcceleration = 5.0f;
+    public bool PlayerOneDisco = false;
+    public bool PlayerTwoDisco = false;
+    public string Scene;
+    public float PosX, PosY, PosZ;
+    public int Crystals;
     private PlayerStatistics()
     {
+       
     }
-
     public static PlayerStatistics Instance
     {
         get
@@ -37,18 +47,6 @@ public class PlayerStatistics
         }
     }
 
-    //TODO: Att implemntera ett sätt att göra detta för två spelare.
-    // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
-
-    public int PlayerMaxHealth = 5;
-    public int PlayerOneHealth = 5;
-    public int PlayerTwoHealth = 5;
-    public float PlayerOneAcceleration = 5.0f;
-    public float PlayerTwoAcceleration = 5.0f;
-    public bool PlayerOneDisco = false;
-    public bool PlayerTwoDisco = false;
-    public string Scene;
-    public float PosX, PosY, PosZ;
-    public int Crystals = 0;
+  
 
 }
