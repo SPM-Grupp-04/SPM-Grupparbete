@@ -23,6 +23,8 @@ public class LaunchArcMesh : MonoBehaviour
     private float gravity;
     private float radianAngle;
 
+    private Vector3 newTrajectoryPoint;
+
     public float GetLaunchVelocity()
     {
         return velocity;
@@ -114,7 +116,12 @@ public class LaunchArcMesh : MonoBehaviour
         for (int i = 0; i <= lineSegments; i++)
         {
             float t = (float) i / (float) lineSegments;
-            Vector3 newTrajectoryPoint = CalculateTrajectoryPoint(t, maxDistance);
+            newTrajectoryPoint = CalculateTrajectoryPoint(t, maxDistance);
+
+            if (Physics.OverlapSphere(transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f, groundLayerMask).Length > 0)
+            {
+                break;
+            }
             throwTrajectoryArray[i] = newTrajectoryPoint;
         }
         return throwTrajectoryArray;
@@ -127,5 +134,11 @@ public class LaunchArcMesh : MonoBehaviour
                           ((gravity * xDistance * xDistance) / 
                            (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
         return new Vector3(xDistance, yDistance);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(  transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f);
     }
 }
