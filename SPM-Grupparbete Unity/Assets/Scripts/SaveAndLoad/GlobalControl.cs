@@ -34,7 +34,6 @@ public class GlobalControl : MonoBehaviour
         {
             Directory.CreateDirectory("Saves");
         }
-
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Create("Saves/save.binary");
 
