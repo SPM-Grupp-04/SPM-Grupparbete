@@ -13,6 +13,7 @@ public class UI_ObjectHP : MonoBehaviour
     {
         slider.gameObject.SetActive(false);
         slider.maxValue = minableOre.GetComponent<MinableOre>().GetOreMaterialHP();
+        slider.value = minableOre.GetComponent<MinableOre>().GetOreMaterialHP();
     }
 
     // Update is called once per frame
