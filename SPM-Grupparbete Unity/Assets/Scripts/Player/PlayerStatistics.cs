@@ -23,6 +23,7 @@ public class PlayerStatistics
     public int Crystals;
     public int BlueCrystals;
     public int RedCrystals;
+    public int drillLevel = 0;
 
     private PlayerStatistics()
     {

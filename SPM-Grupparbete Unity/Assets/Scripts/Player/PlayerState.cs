@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class PlayerState : MonoBehaviour, IDamagable
 {
-    private PlayerStatistics m_LocalPlayerData = PlayerStatistics.Instance;
+    public PlayerStatistics m_LocalPlayerData = PlayerStatistics.Instance;
 
     [SerializeField] private String playerName;
 
@@ -73,6 +73,12 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     public void Heal(int amount)
     {
+        m_LocalPlayerData.PlayerMaxHealth ++;
+
+        m_LocalPlayerData.PlayerOneHealth = m_LocalPlayerData.PlayerMaxHealth;
+        m_LocalPlayerData.PlayerTwoHealth = m_LocalPlayerData.PlayerMaxHealth;
+        
+        GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
         
     }
 
@@ -107,6 +113,8 @@ public class PlayerState : MonoBehaviour, IDamagable
         SavePlayers();
     }
 
+    
+    
     public void SetDisco(bool isDisco)
     {
         m_LocalPlayerData.PlayerOneDisco = isDisco;

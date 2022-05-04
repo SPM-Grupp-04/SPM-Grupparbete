@@ -19,6 +19,7 @@ public class EnemyDetectionBehaviour : MonoBehaviour
      *
      * 
      */
+    /*
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] [Range(1.0f, 50.0f)] private float _enemyMovementSpeed = 2.5f;
     [SerializeField] private LayerMask _layerMask;
@@ -32,11 +33,14 @@ public class EnemyDetectionBehaviour : MonoBehaviour
     private const float LARGENUMBER = 100;
 
     private float tempHealth = LARGENUMBER;
+    */
 
+    /*
     private void Start()
     {
         c = GetComponent<SphereCollider>();
     }
+    */
 
 
     private void Update()
@@ -72,6 +76,7 @@ public class EnemyDetectionBehaviour : MonoBehaviour
         tempHealth = LARGENUMBER;*/
     }
 
+    /*
     private void StartFollowPlayer()
     {
         _playerDistance = player.transform.position - _enemyTransform.position;
@@ -86,6 +91,7 @@ public class EnemyDetectionBehaviour : MonoBehaviour
             player = null;
         }
     }
+    */
 
 
     /*
