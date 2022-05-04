@@ -66,8 +66,6 @@ public class PlayerDrill : MonoBehaviour
                 canShoot = true;
             }
         }
-
-
     }
 
     private void FixedUpdate()
@@ -90,44 +88,31 @@ public class PlayerDrill : MonoBehaviour
         isDrilling = true;
     }
 
-
     private void DrillObject()
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
-            CreateCylinderBetweenPoints(transform.position, hit.point);
-            
+            LaserBetweenPoints(transform.position, hit.point);
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
-            
-
             return;
-
         }
         else
         {
-
-            CreateCylinderBetweenPoints(transform.position, drillPoint.transform.position);
+            LaserBetweenPoints(transform.position, drillPoint.transform.position);
             return;
-
         }
 
     }
 
-    private void LaserBetweenPoints()
-    {
 
-    }
-
-    void CreateCylinderBetweenPoints(Vector3 start, Vector3 end)
+    void LaserBetweenPoints(Vector3 start, Vector3 end)
     {
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-
 
         //var offset = end - start;
         //var scale = new Vector3(width, offset.magnitude / 2.0f, width);
@@ -141,38 +126,28 @@ public class PlayerDrill : MonoBehaviour
 
     private void ShootObject()
     {
-
-
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-
         if (overHeatAmount < 100 && canShoot)
         {
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
-
-                CreateCylinderBetweenPoints(transform.position, shootHit.point);
+                LaserBetweenPoints(transform.position, shootHit.point);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
-        
                     EventSystem.current.FireEvent(takeDamge);
                 }
                 overHeatAmount += overHeatIncreaseAmount;
-
                 return;
-
             }
             else
             {
-
-                CreateCylinderBetweenPoints(transform.position, laserPoint.transform.position);
+                LaserBetweenPoints(transform.position, laserPoint.transform.position);
                 overHeatAmount += overHeatIncreaseAmount;
                 return;
-
             }
         }
         else if (overHeatAmount >= 100)
@@ -182,15 +157,9 @@ public class PlayerDrill : MonoBehaviour
             {
                 canShoot = false;
                 timer = coolDownTimerStart;
-
             }
-
         }
-
     }
-
-
-
 
     public void DrillInUse(bool state)
     {
@@ -208,7 +177,6 @@ public class PlayerDrill : MonoBehaviour
         if (overHeatAmount > 0)
         {
             overHeatAmount -= overHeatDecreaseAmount;
-
         }
     }
 
