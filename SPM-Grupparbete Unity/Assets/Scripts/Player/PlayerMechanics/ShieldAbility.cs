@@ -60,7 +60,7 @@ public class ShieldAbility : MonoBehaviour
 
         nextShieldTime += Time.deltaTime;
 
-        if (nextShieldTime <= cooldownToNextUse) {}
+       /* if (nextShieldTime <= cooldownToNextUse) {}
 
         {
             uiCooldowns.GetShieldText().text = ((int) cooldownToNextUse - (int) nextShieldTime).ToString();
@@ -70,7 +70,7 @@ public class ShieldAbility : MonoBehaviour
         {
             uiCooldowns.GetShieldText().text = "Sköld";
         }
-
+       */
 
 
 

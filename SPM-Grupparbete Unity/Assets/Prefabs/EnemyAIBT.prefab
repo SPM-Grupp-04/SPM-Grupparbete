@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 67914529985804270}
   - component: {fileID: 67914529985804271}
   - component: {fileID: 67914529985804266}
+  - component: {fileID: 7487229570057863329}
   m_Layer: 7
   m_Name: EnemyAIBT
   m_TagString: Enemy
@@ -176,9 +177,6 @@ MonoBehaviour:
   chasingRange: 30
   shootingRange: 2
   movementSpeed: 7.5
-  playerTransform:
-  - {fileID: 0}
-  - {fileID: 0}
   _meshRenderer: {fileID: 67914529985804269}
 --- !u!195 &67914529985804266
 NavMeshAgent:
@@ -202,3 +200,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &7487229570057863329
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67914529985804256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: f1f9310e3f507634b80562317d8b958c, type: 3}
+  m_Controller: {fileID: 9100000, guid: 587fdae63bbd3934f88b5582fc37ca05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
