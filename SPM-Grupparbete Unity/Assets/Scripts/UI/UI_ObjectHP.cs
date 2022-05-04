@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class UI_ObjectHP : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    [SerializeField] private GameObject minableOre;
     
 
     private void Start()
     {
         slider.gameObject.SetActive(false);
-        
+        slider.maxValue = minableOre.GetComponent<MinableOre>().GetOreMaterialHP();
     }
 
     // Update is called once per frame

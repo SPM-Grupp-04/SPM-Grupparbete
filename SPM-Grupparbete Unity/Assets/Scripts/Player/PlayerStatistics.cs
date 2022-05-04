@@ -48,6 +48,7 @@ public class PlayerStatistics
     public bool PlayerTwoDisco = false;
     public string Scene;
     public float PosX, PosY, PosZ;
-    public int Crystals = 0;
+    public int BlueCrystals;
+    public int RedCrystals;
 
 }

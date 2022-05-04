@@ -103,17 +103,7 @@ public class PlayerState : MonoBehaviour, IDamagable
         SavePlayers();
     }
 
-    public void GainCrystal()
-    {
-        if (playerName == "PlayerOne")
-        {
-            m_LocalPlayerData.Crystals++;
-        }
-        else
-        {
-            m_LocalPlayerData.Crystals++;
-        }
-    }
+
 
     public void SavePlayers()
     {

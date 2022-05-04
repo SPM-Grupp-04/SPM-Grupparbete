@@ -45,4 +45,9 @@ public class MinableOre : DestroyableObjectBase
         }
         Destroy(this.gameObject);
     }
+
+    public int GetOreMaterialHP()
+    {
+        return oreMaterialHP;
+    }
 }

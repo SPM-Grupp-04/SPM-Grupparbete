@@ -32,6 +32,7 @@ public class PlayerDrill : MonoBehaviour
     private bool isUsed;
     private bool canShoot = true;
     private bool isShooting;
+    private bool isDrilling;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class PlayerDrill : MonoBehaviour
                 timer = 0;
             }
         }
-        if (timer == 0)
+        if (timer == 0 && isUsed == false)
         {
             CoolDownDrill();
             if (overHeatAmount <= 0)
@@ -69,7 +70,28 @@ public class PlayerDrill : MonoBehaviour
 
     }
 
-    public void DrillObject()
+    private void FixedUpdate()
+    {
+        if (isShooting)
+        {
+            ShootObject();
+        } else if (isDrilling)
+        {
+            DrillObject();
+        }
+    }
+
+    public void Shoot(bool state)
+    {
+        isShooting = state;
+    }
+    public void Drill(bool state)
+    {
+        isDrilling = true;
+    }
+
+
+    private void DrillObject()
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
@@ -77,11 +99,9 @@ public class PlayerDrill : MonoBehaviour
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
-
             CreateCylinderBetweenPoints(transform.position, hit.point);
-
             
-                hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             
 
             return;
@@ -119,7 +139,7 @@ public class PlayerDrill : MonoBehaviour
 
     }
 
-    public void Shoot()
+    private void ShootObject()
     {
 
 
@@ -175,6 +195,11 @@ public class PlayerDrill : MonoBehaviour
     public void DrillInUse(bool state)
     {
         isUsed = state;
+        if(isUsed == false)
+        {
+            isDrilling = false;
+            isShooting = false;
+        }
 
     }
 

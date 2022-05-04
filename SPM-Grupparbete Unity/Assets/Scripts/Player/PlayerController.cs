@@ -90,19 +90,20 @@ public class PlayerController : MonoBehaviour
     {
         if (shootAction.IsPressed())
         {
-            drill.gameObject.SendMessage("Shoot");
+            drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
         }
         else
         {
             if (drillAction.IsPressed())
             {
-                drill.gameObject.SendMessage("DrillObject");
+                drill.gameObject.SendMessage("Drill", true);
                 drill.gameObject.SendMessage("DrillInUse", true);
             }
             else
             {
                 drill.gameObject.SendMessage("DrillInUse", false);
+                
             }
         }
     }
