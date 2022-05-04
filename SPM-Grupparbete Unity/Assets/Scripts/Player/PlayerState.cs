@@ -27,10 +27,7 @@ public class PlayerState : MonoBehaviour, IDamagable
             m_LocalPlayerData.PlayerOneAcceleration = GlobalControl.Instance.playerStatistics.PlayerOneAcceleration;
             m_LocalPlayerData.PlayerOneDisco = GlobalControl.Instance.playerStatistics.PlayerOneDisco;
         }
-
-        Debug.Log(m_LocalPlayerData.Crystals + " Crystals in Instance of Playerstatistics");
-        Debug.Log(GlobalControl.Instance.playerStatistics.Crystals + " Sparade Crystals");
-       
+        
         if (playerName == "PlayerTwo")
         {
             m_LocalPlayerData.PlayerTwoHealth = GlobalControl.Instance.playerStatistics.PlayerTwoHealth;

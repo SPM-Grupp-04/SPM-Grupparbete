@@ -18,7 +18,7 @@ public class PlayerStatistics
     public float PlayerTwoAcceleration = 5.0f;
     public bool PlayerOneDisco = false;
     public bool PlayerTwoDisco = false;
-    public string Scene;
+   // public string Scene;
     public float PosX, PosY, PosZ;
     public int Crystals;
     private PlayerStatistics()

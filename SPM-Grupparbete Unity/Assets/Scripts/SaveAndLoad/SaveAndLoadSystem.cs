@@ -17,30 +17,13 @@ public class SaveAndLoadSystem : MonoBehaviour
     {
     }
 
-    // Start is called before the first frame update
-  /*
-    void Start()
-    {
-        
-        PI = GetComponent<PlayerInput>();
-        
-        saveAction = PI.actions["Save"];
-        loadGame = PI.actions["Loaded"];
-        
-        if (GlobalControl.Instance.IsSceneBeingLoaded)
-        {
-            GlobalControl.Instance.SavedData = GlobalControl.Instance.SavedData;
 
-            GlobalControl.Instance.IsSceneBeingLoaded = false;
-        }
-    }
-*/
     PlayerStatistics playerStatistics = PlayerStatistics.Instance;
   
     public void saveGamePress()
     {
         Debug.Log("Pressed O");
-        GlobalControl.Instance.playerStatistics.Scene = SceneManager.GetActiveScene().name;
+      //  GlobalControl.Instance.playerStatistics.Scene = SceneManager.GetActiveScene().name;
         GlobalControl.Instance.playerStatistics.Crystals = playerStatistics.Crystals;
         
         GlobalControl.Instance.SaveData();
@@ -51,32 +34,7 @@ public class SaveAndLoadSystem : MonoBehaviour
         Debug.Log("Pressed P");
         GlobalControl.Instance.LoadData();
         GlobalControl.Instance.IsSceneBeingLoaded = true;
-        String whichScene = GlobalControl.Instance.playerStatistics.Scene;
-        SceneManager.LoadScene(whichScene);
+       
     }
-    /*
-    void Update()
-    {
-        
-        if (saveAction.IsPressed())
-        {
-            Debug.Log("Pressed O");
-            GlobalControl.Instance.SavedData.Scene = SceneManager.GetActiveScene().name;
-
-            GlobalControl.Instance.SaveData();
-        }
-        
-
-        if (loadGame.IsPressed())
-        {
-            Debug.Log("Pressed P");
-            GlobalControl.Instance.LoadData();
-            GlobalControl.Instance.IsSceneBeingLoaded = true;
-
-            String whichScene = GlobalControl.Instance.SavedData.Scene;
-            SceneManager.LoadScene(whichScene);
-        }
-        
-    }
-    */
+    
 }
