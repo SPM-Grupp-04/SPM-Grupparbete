@@ -12,20 +12,27 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     [SerializeField] private String playerName;
 
+   
+    
     private void Start()
     {
+        
+        m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
+        m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
+        m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
+      
         if (playerName == "PlayerOne")
         {
-            m_LocalPlayerData.PlayerOneHealth = GlobalControl.Instance.SavedData.PlayerOneHealth;
-            m_LocalPlayerData.PlayerOneAcceleration = GlobalControl.Instance.SavedData.PlayerOneAcceleration;
-            m_LocalPlayerData.PlayerOneDisco = GlobalControl.Instance.SavedData.PlayerOneDisco;
+            m_LocalPlayerData.PlayerOneHealth = GlobalControl.Instance.playerStatistics.PlayerOneHealth;
+            m_LocalPlayerData.PlayerOneAcceleration = GlobalControl.Instance.playerStatistics.PlayerOneAcceleration;
+            m_LocalPlayerData.PlayerOneDisco = GlobalControl.Instance.playerStatistics.PlayerOneDisco;
         }
-
+        
         if (playerName == "PlayerTwo")
         {
-            m_LocalPlayerData.PlayerTwoHealth = GlobalControl.Instance.SavedData.PlayerTwoHealth;
-            m_LocalPlayerData.PlayerTwoAcceleration = GlobalControl.Instance.SavedData.PlayerTwoAcceleration;
-            m_LocalPlayerData.PlayerTwoDisco = GlobalControl.Instance.SavedData.PlayerTwoDisco;
+            m_LocalPlayerData.PlayerTwoHealth = GlobalControl.Instance.playerStatistics.PlayerTwoHealth;
+            m_LocalPlayerData.PlayerTwoAcceleration = GlobalControl.Instance.playerStatistics.PlayerTwoAcceleration;
+            m_LocalPlayerData.PlayerTwoDisco = GlobalControl.Instance.playerStatistics.PlayerTwoDisco;
         }
     }
 
@@ -64,6 +71,10 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     }
 
+    public void Heal(int amount)
+    {
+        
+    }
 
     public void DealDamage(int damage)
     {
@@ -79,10 +90,11 @@ public class PlayerState : MonoBehaviour, IDamagable
         SavePlayers();
     }
 
-    public void Heal(int healAmount)
+    public void IncreaseMaxHealth(int maxHealthIncreaseAmount)
     {
-        m_LocalPlayerData.PlayerOneHealth += healAmount;
-        m_LocalPlayerData.PlayerTwoHealth += healAmount;
+        m_LocalPlayerData.PlayerMaxHealth += maxHealthIncreaseAmount;
+        m_LocalPlayerData.PlayerOneHealth = m_LocalPlayerData.PlayerMaxHealth;
+        m_LocalPlayerData.PlayerTwoHealth = m_LocalPlayerData.PlayerMaxHealth;
 
         SavePlayers();
     }
@@ -117,7 +129,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     public void SavePlayers()
     {
-        GlobalControl.Instance.SavedData = m_LocalPlayerData;
+        GlobalControl.Instance.playerStatistics = m_LocalPlayerData;
     }
 
     //using a bitmask

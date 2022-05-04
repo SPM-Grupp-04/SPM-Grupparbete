@@ -13,7 +13,7 @@ public class PlayerDrill : MonoBehaviour
 
     [SerializeField] private LayerMask igenoreMask;
 
-    [SerializeField] private float _overHeatAmount = 0;
+    [SerializeField] private float overHeatAmount = 0;
     [SerializeField] private float overHeatIncreaseAmount = 0.5f;
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
@@ -22,164 +22,167 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
 
+    private LineRenderer lr;
 
-    private float _timer = 0;
+    private float timer = 0;
+    private GameObject laserPoint;
+    private GameObject drillPoint;
+    private GameObject beamGO; 
 
-    private GameObject _laserPoint;
-    private GameObject _drillPoint;
-
-    private GameObject _beamGO;
-
-    private bool _isUsed;
-    private bool _canShoot = true;
-    private bool _isShooting;
+    private bool isUsed;
+    private bool canShoot = true;
+    private bool isShooting;
+    private bool isDrilling;
 
     private void Awake()
     {
-        _laserPoint = transform.Find("LaserPoint").gameObject;
-        _drillPoint = transform.Find("DrillPoint").gameObject;
+        laserPoint = transform.Find("LaserPoint").gameObject;
+        drillPoint = transform.Find("DrillPoint").gameObject;
+        lr = GetComponent<LineRenderer>();
         DrillDamage(drillLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_beamGO != null && _isUsed == false)
+        if (isUsed == false)
         {
-            Destroy(_beamGO);
+            lr.enabled = false;
         }
 
-        if (_timer > 0)
+        if (timer > 0)
         {
-            _timer -= Time.deltaTime;
-            if (_timer < 0)
+            timer -= Time.deltaTime;
+            if (timer < 0)
             {
-                _timer = 0;
+                timer = 0;
             }
         }
-        if (_timer == 0 && _beamGO == null)
+        if (timer == 0 && isUsed == false)
         {
             CoolDownDrill();
-            if (_overHeatAmount <= 0)
+            if (overHeatAmount <= 0)
             {
-                _canShoot = true;
+                canShoot = true;
             }
         }
-
-
     }
 
-    public void DrillObject()
+    private void FixedUpdate()
+    {
+        if (isShooting)
+        {
+            ShootObject();
+        } else if (isDrilling)
+        {
+            DrillObject();
+        }
+    }
+
+    public void Shoot(bool state)
+    {
+        isShooting = state;
+    }
+    public void Drill(bool state)
+    {
+        isDrilling = true;
+    }
+
+    private void DrillObject()
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
-
-            CreateCylinderBetweenPoints(transform.position, hit.point, 0.25f, beamPrefab);
-
-            
-                hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
-            
-
+            LaserBetweenPoints(transform.position, hit.point);
+            hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
-
         }
         else
         {
-
-            CreateCylinderBetweenPoints(transform.position, _drillPoint.transform.position, 0.25f, beamPrefab);
+            LaserBetweenPoints(transform.position, drillPoint.transform.position);
             return;
-
         }
 
     }
 
-    void CreateCylinderBetweenPoints(Vector3 start, Vector3 end, float width, GameObject beamMaterial)
+
+    void LaserBetweenPoints(Vector3 start, Vector3 end)
     {
-        var offset = end - start;
-       // var scale = new Vector3(width, offset.magnitude / 2.0f, width);
-        var position = start + (offset / 4.0f) ;
-        Destroy(_beamGO);
-        _beamGO = Instantiate(beamMaterial, position, transform.rotation);
-       // _beamGO.transform.up = offset;
-        //_beamGO.transform.localScale = scale;
+        lr.enabled = true;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
+
+        //var offset = end - start;
+        //var scale = new Vector3(width, offset.magnitude / 2.0f, width);
+        //var position = start + (offset / 4.0f) ;
+        //Destroy(beamGO);
+        //beamGO = Instantiate(beamMaterial, position, transform.rotation);
+        //beamGO.transform.up = offset;
+        //beamGO.transform.localScale = scale;
 
     }
 
-    public void Shoot()
+    private void ShootObject()
     {
-
-
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-
-        if (_overHeatAmount < 100 && _canShoot)
+        if (overHeatAmount < 100 && canShoot)
         {
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
-
-                CreateCylinderBetweenPoints(transform.position, shootHit.point, 0.25f, laserPrefab);
+                LaserBetweenPoints(transform.position, shootHit.point);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
-        
                     EventSystem.current.FireEvent(takeDamge);
                 }
-                _overHeatAmount += overHeatIncreaseAmount;
-
+                overHeatAmount += overHeatIncreaseAmount;
                 return;
-
             }
             else
             {
-
-                CreateCylinderBetweenPoints(transform.position, _laserPoint.transform.position, 0.25f, laserPrefab);
-                _overHeatAmount += overHeatIncreaseAmount;
+                LaserBetweenPoints(transform.position, laserPoint.transform.position);
+                overHeatAmount += overHeatIncreaseAmount;
                 return;
-
             }
         }
-        else if (_overHeatAmount >= 100)
+        else if (overHeatAmount >= 100)
         {
-            Destroy(_beamGO);
-            if (_timer <= 0)
+            Destroy(beamGO);
+            if (timer <= 0)
             {
-                _canShoot = false;
-                _timer = coolDownTimerStart;
-
+                canShoot = false;
+                timer = coolDownTimerStart;
             }
-
         }
-
     }
-
-
-
 
     public void DrillInUse(bool state)
     {
-        _isUsed = state;
+        isUsed = state;
+        if(isUsed == false)
+        {
+            isDrilling = false;
+            isShooting = false;
+        }
 
     }
 
     private void CoolDownDrill()
     {
-        if (_overHeatAmount > 0)
+        if (overHeatAmount > 0)
         {
-            _overHeatAmount -= overHeatDecreaseAmount;
-
+            overHeatAmount -= overHeatDecreaseAmount;
         }
     }
 
     public float GetOverheatAmount()
     {
-        return _overHeatAmount;
+        return overHeatAmount;
     }
 
     public int GetDrillDamageOres()
@@ -200,6 +203,15 @@ public class PlayerDrill : MonoBehaviour
                 drillDamageOres = 1;
                 drillDamageMonsters = 1;
                 return;
+            case 2:
+                drillDamageOres = 2;
+                drillDamageMonsters = 2;
+                return;
+            case 3:
+                drillDamageOres = 3;
+                drillDamageMonsters = 3;
+                return;
+
         }
 
     }

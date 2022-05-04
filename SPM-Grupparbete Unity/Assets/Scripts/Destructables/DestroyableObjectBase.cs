@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class DestroyableObjectBase : MonoBehaviour
 {
-    protected int materialHP = -1;
-    protected int requiredWeaponLevel = -1;
+    protected int materialHP;
+    protected int requiredWeaponLevel;
 
     public virtual void ReduceMaterialHP(int amount){
         materialHP -= amount;
