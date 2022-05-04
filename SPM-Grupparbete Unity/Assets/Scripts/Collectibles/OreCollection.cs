@@ -20,6 +20,7 @@ public class OreCollection : MonoBehaviour
 
     public void CollectOre()
     {
+        
         DestoryObject();
     }
 

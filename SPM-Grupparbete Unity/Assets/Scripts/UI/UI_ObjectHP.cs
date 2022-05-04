@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UI_ObjectHP : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    
 
     private void Start()
     {
@@ -22,7 +23,9 @@ public class UI_ObjectHP : MonoBehaviour
     public void OreTakeDamage(int amount)
     {
         slider.gameObject.SetActive(true);
-        transform.LookAt(Camera.main.transform);
+
+        transform.rotation = Camera.main.transform.rotation;
+
         slider.value -= amount;
         Invoke("HideUI", 2);
         
