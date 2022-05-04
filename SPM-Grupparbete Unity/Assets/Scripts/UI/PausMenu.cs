@@ -13,8 +13,8 @@ public class PausMenu : MonoBehaviour
     public PlayerInput PlayerInputTwo;
     private InputAction pause;
     private InputAction pausePlayerTwo;
-    
-   
+
+    private bool pauseButtonPressed;
     
     [Header("MenuButtonFirstSelection")]
     [SerializeField] private GameObject pauseFirstButton;
@@ -23,16 +23,14 @@ public class PausMenu : MonoBehaviour
     private void Start()
     {
       // playerInput = GetComponent<PlayerInput>();
-      pause = playerInput.actions["Pause"];
-      pausePlayerTwo = PlayerInputTwo.actions["Pause"];
-
-
+      // pause = playerInput.actions["Pause"];
+      // pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pause.WasPressedThisFrame() || pausePlayerTwo.WasPressedThisFrame())
+        if (pauseButtonPressed)
         {
             if (GameIsPause)
             {
@@ -45,11 +43,15 @@ public class PausMenu : MonoBehaviour
             }
             
         }
-
-       
-        
     }
 
+    public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
+    {
+        if (pauseButtonValue.performed)
+        {
+            pauseButtonPressed = !pauseButtonPressed;
+        }
+    }
     private void Pause()
     {
         pauseMenuUI.SetActive(true);

@@ -417,6 +417,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0ddd7f07-c03a-4118-845b-723e09e67fcc"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""62afb796-adc1-46f2-a40c-5de88e1257b0"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",

@@ -12,13 +12,6 @@ public class ShieldAbility : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] private float cooldownToNextUse = 5f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
-    
-
-    private PlayerInput playerInput;
-
-    private InputAction shieldAction;
-    
-
 
     private GameObject shieldGO;
     private float timer = 0;
@@ -27,13 +20,11 @@ public class ShieldAbility : MonoBehaviour
 
     private static bool canUseShield;
 
+    private bool shieldButtonPressed;
+
     private void Awake()
     {
-        
-        playerInput = GetComponent<PlayerInput>();
-        shieldAction = playerInput.actions["Shield"];
         canUseShield = true;
-
     }
 
 
@@ -53,7 +44,7 @@ public class ShieldAbility : MonoBehaviour
             DestroyShield();
         }
         
-        if (shieldAction.IsPressed())
+        if (shieldButtonPressed)
         {
             ActivateShield();
         }
@@ -70,10 +61,12 @@ public class ShieldAbility : MonoBehaviour
         {
             uiCooldowns.GetShieldText().text = "Sköld";
         }
+        
+    }
 
-
-
-
+    public void ShieldButtonInput(InputAction.CallbackContext shieldButtonValue)
+    {
+        shieldButtonPressed = shieldButtonValue.performed;
     }
 
     public void ActivateShield()
@@ -84,10 +77,7 @@ public class ShieldAbility : MonoBehaviour
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
             nextShieldTime = 0;
-            
-
         }
-
     }
 
     private void DestroyShield()
