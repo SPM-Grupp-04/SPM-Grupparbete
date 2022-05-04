@@ -161,15 +161,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Open Shop"",
-                    ""type"": ""Button"",
-                    ""id"": ""c55bd429-9865-46e1-9dca-5321ff139b9e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -425,17 +416,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ThrowDynamite"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2197dca3-9426-4d10-9683-07d82ae4fef6"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Open Shop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -526,7 +506,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Navigate = m_Player.FindAction("Navigate", throwIfNotFound: true);
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_ThrowDynamite = m_Player.FindAction("ThrowDynamite", throwIfNotFound: true);
-        m_Player_OpenShop = m_Player.FindAction("Open Shop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -603,7 +582,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Navigate;
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_ThrowDynamite;
-    private readonly InputAction m_Player_OpenShop;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -623,7 +601,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Navigate => m_Wrapper.m_Player_Navigate;
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @ThrowDynamite => m_Wrapper.m_Player_ThrowDynamite;
-        public InputAction @OpenShop => m_Wrapper.m_Player_OpenShop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -678,9 +655,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ThrowDynamite.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
                 @ThrowDynamite.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
                 @ThrowDynamite.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
-                @OpenShop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenShop;
-                @OpenShop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenShop;
-                @OpenShop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenShop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -730,9 +704,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ThrowDynamite.started += instance.OnThrowDynamite;
                 @ThrowDynamite.performed += instance.OnThrowDynamite;
                 @ThrowDynamite.canceled += instance.OnThrowDynamite;
-                @OpenShop.started += instance.OnOpenShop;
-                @OpenShop.performed += instance.OnOpenShop;
-                @OpenShop.canceled += instance.OnOpenShop;
             }
         }
     }
@@ -824,7 +795,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnNavigate(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
         void OnThrowDynamite(InputAction.CallbackContext context);
-        void OnOpenShop(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
-    private bool enteredShopArea;
 
     private void Awake()
     {
@@ -91,19 +90,20 @@ public class PlayerController : MonoBehaviour
     {
         if (shootAction.IsPressed())
         {
-            drill.gameObject.SendMessage("Shoot");
+            drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
         }
         else
         {
             if (drillAction.IsPressed())
             {
-                drill.gameObject.SendMessage("DrillObject");
+                drill.gameObject.SendMessage("Drill", true);
                 drill.gameObject.SendMessage("DrillInUse", true);
             }
             else
             {
                 drill.gameObject.SendMessage("DrillInUse", false);
+                
             }
         }
     }
@@ -133,16 +133,6 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
-    }
-
-    public bool hasEnteredShopArea()
-    {
-        return enteredShopArea;
-    }
-
-    public void setEnteredShopArea(bool enteredShopAreaState)
-    {
-        enteredShopArea = enteredShopAreaState;
     }
 
     public bool IsUseInputPressed()
