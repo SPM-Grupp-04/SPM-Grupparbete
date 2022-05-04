@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
+    private bool enteredShopArea;
 
     private void Awake()
     {
@@ -143,6 +144,16 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerPositionAndRotationGamePad();
         }
+    }
+
+    public bool hasEnteredShopArea()
+    {
+        return enteredShopArea;
+    }
+
+    public void setEnteredShopArea(bool enteredShopAreaState)
+    {
+        enteredShopArea = enteredShopAreaState;
     }
 
     public bool IsUseInputPressed()

@@ -40,6 +40,7 @@ public class PlayerStatistics
     //TODO: Att implemntera ett sätt att göra detta för två spelare.
     // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
 
+    public int PlayerMaxHealth = 5;
     public int PlayerOneHealth = 5;
     public int PlayerTwoHealth = 5;
     public float PlayerOneAcceleration = 5.0f;

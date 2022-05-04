@@ -419,7 +419,6 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 2048
-  playerTransform: {fileID: 2965090648212625148}
 --- !u!114 &1968085593151929628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +677,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dc2ed2d0-0cfd-4cb1-9485-d4130f4c0bcd
     m_ActionName: Player/ThrowDynamite[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5868905720494507359}
+        m_TargetAssemblyTypeName: PlayerCollisionHandler, Assembly-CSharp
+        m_MethodName: setOpenShopState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c55bd429-9865-46e1-9dca-5321ff139b9e
+    m_ActionName: Player/Open Shop[/XInputControllerWindows/select]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

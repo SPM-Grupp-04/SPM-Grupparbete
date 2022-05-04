@@ -40,7 +40,7 @@ public class SaveAndLoadSystem : MonoBehaviour
     {
         Debug.Log("Pressed O");
         GlobalControl.Instance.SavedData.Scene = SceneManager.GetActiveScene().name;
-
+        GlobalControl.Instance.SavedData.Crystals = PlayerStatistics.Instance.Crystals;
         GlobalControl.Instance.SaveData();
     }
 
@@ -49,7 +49,7 @@ public class SaveAndLoadSystem : MonoBehaviour
         Debug.Log("Pressed P");
         GlobalControl.Instance.LoadData();
         GlobalControl.Instance.IsSceneBeingLoaded = true;
-
+        GlobalControl.Instance.SavedData.Crystals = GlobalControl.Instance.SavedData.Crystals;
         String whichScene = GlobalControl.Instance.SavedData.Scene;
         SceneManager.LoadScene(whichScene);
     }

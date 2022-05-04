@@ -14,6 +14,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
     [SerializeField] private Button discoButton;
+    private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
     private Collider[] shopColliders;
     //private Button[] buttons;
     private bool shopInterfaceOpened;
@@ -97,32 +98,25 @@ public class ShopScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
     }
 
-    //void OnClick(GameObject go)
-    //{
-    //}
-
     public void Heal(int healAmount)
     {
-        m_PlayerState.Heal(healAmount);
-
-        healButton.gameObject.SetActive(false);
-        CloseShopInterface(null);
+        if (playerStatistics.Crystals > 2)
+        {
+            Debug.Log(playerStatistics.Crystals);
+            m_PlayerState.IncreaseMaxHealth(healAmount);
+            playerStatistics.Crystals -= 2;
+            Debug.Log(playerStatistics.Crystals);
+        }
     }
 
     public void Accelerate(float addedAcceleration)
     {
         m_PlayerState.SetAcceleration(PlayerStatistics.Instance.PlayerOneAcceleration + addedAcceleration);
-
-        accelerateButton.gameObject.SetActive(false);
-        CloseShopInterface(null);
     }
 
     public void Disco(bool isDisco)
     {
         Debug.Log("DISCO!");
         m_PlayerState.SetDisco(isDisco);
-
-        discoButton.gameObject.SetActive(false);
-        CloseShopInterface(null);
     }
 }

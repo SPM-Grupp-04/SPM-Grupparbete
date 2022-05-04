@@ -14,6 +14,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     private void Start()
     {
+        m_LocalPlayerData.Crystals = GlobalControl.Instance.SavedData.Crystals;
         if (playerName == "PlayerOne")
         {
             m_LocalPlayerData.PlayerOneHealth = GlobalControl.Instance.SavedData.PlayerOneHealth;
@@ -79,10 +80,11 @@ public class PlayerState : MonoBehaviour, IDamagable
         SavePlayers();
     }
 
-    public void Heal(int healAmount)
+    public void IncreaseMaxHealth(int maxHealthIncreaseAmount)
     {
-        m_LocalPlayerData.PlayerOneHealth += healAmount;
-        m_LocalPlayerData.PlayerTwoHealth += healAmount;
+        m_LocalPlayerData.PlayerMaxHealth += maxHealthIncreaseAmount;
+        m_LocalPlayerData.PlayerOneHealth = m_LocalPlayerData.PlayerMaxHealth;
+        m_LocalPlayerData.PlayerTwoHealth = m_LocalPlayerData.PlayerMaxHealth;
 
         SavePlayers();
     }
