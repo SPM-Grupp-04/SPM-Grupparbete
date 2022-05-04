@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OreCollection : MonoBehaviour
 {
-    [SerializeField] string oreName = "Blue";
+    [SerializeField] string oreName = "";
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class OreCollection : MonoBehaviour
 
     public void CollectOre()
     {
+        
         DestoryObject();
     }
 
@@ -28,6 +29,10 @@ public class OreCollection : MonoBehaviour
     private void DestoryObject()
     {
         Destroy(this.gameObject);
+    }
+    public string GetName()
+    {
+        return oreName;
     }
 
 }

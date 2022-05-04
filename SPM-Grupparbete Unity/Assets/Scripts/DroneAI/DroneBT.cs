@@ -33,6 +33,9 @@ public class DroneBT : Tree
                 
             }),
             
+            // New Sequence kolla om det finns kristaller i närheten.
+            // Om det finns gå till dessa och collecta dom.
+            
             
             new FollowPlayer(transform, playerTransform), // Fall back Action.
         });
