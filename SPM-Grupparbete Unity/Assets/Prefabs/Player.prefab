@@ -499,6 +499,7 @@ MonoBehaviour:
   velocity: 1
   angle: 45
   trajectoryArcIncreaseSpeed: 0.01
+  trajectoryArcAngleIncreaseSpeed: 1
   lineSegments: 20
   groundLayerMask:
     serializedVersion: 2
@@ -691,23 +692,83 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PlayerMovementInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: fb34e309-c65a-411e-b7ab-ffb7c27e0eac
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: ShootInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: af4a5197-e8ec-4697-b63e-411da5ecd9d5
     m_ActionName: Player/Shoot[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DrillInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a0a1cabc-82e1-46cb-9ce3-5e57af4741d6
     m_ActionName: Player/Drill[/XInputControllerWindows/rightShoulder,/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PlayerMousePositionInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 095019e2-9f3f-4116-bcf9-d4a40caa27de
     m_ActionName: Player/MouseLook[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PlayerRotationGamePadInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a3dbae44-7aeb-4461-9076-1fe9fcc9c76e
     m_ActionName: Player/GamePadLook[/XInputControllerWindows/rightStick]
   - m_PersistentCalls:
@@ -723,7 +784,19 @@ MonoBehaviour:
     m_ActionId: 3020d94b-d1d5-4e6f-aed8-f6e0d2705f77
     m_ActionName: Player/Use[/XInputControllerWindows/start]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2139519180}
+        m_TargetAssemblyTypeName: LaunchArcMesh, Assembly-CSharp
+        m_MethodName: TrajectoryInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: eb8c1fc6-ce89-4ff0-a433-3e2df54c46d1
     m_ActionName: Player/TrajectoryIncrease[/XInputControllerWindows/rightStick/y,/XInputControllerWindows1/rightStick/y]
   - m_PersistentCalls:
@@ -743,7 +816,19 @@ MonoBehaviour:
     m_ActionId: 7cc816d5-f5dc-4ca6-a3f8-36fd322a962e
     m_ActionName: Player/Navigate[/XInputControllerWindows/dpad]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 668299164}
+        m_TargetAssemblyTypeName: ShieldAbility, Assembly-CSharp
+        m_MethodName: ShieldButtonInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b7275ac2-e73d-4a35-8dab-7e6832e3dde1
     m_ActionName: Player/Shield[/Keyboard/z]
   - m_PersistentCalls:
@@ -762,6 +847,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dc2ed2d0-0cfd-4cb1-9485-d4130f4c0bcd
     m_ActionName: Player/ThrowDynamite[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98f56f97-bd2c-40bb-afde-24324cd08a96
+    m_ActionName: UI/Pause[/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -1011,7 +1100,7 @@ MonoBehaviour:
   coolDownTimerStart: 2
   drillDamageOres: 1
   drillDamageMonsters: 1
-  lrMaterial: {fileID: 0}
+  lrMaterial: {fileID: 2100000, guid: 17e41abbc04d83440bb40763f1b4236e, type: 2}
   delayTimer: 1
 --- !u!120 &515942599
 LineRenderer:
