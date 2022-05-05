@@ -11,7 +11,8 @@ public class LaunchArcMesh : MonoBehaviour
     
     [SerializeField] private float velocity;
     [SerializeField] private float angle;
-    [SerializeField] private float trajectoryArcIncreaseSpeed = 10.0f;
+    [SerializeField] private float trajectoryArcIncreaseSpeed = 2.0f;
+    [SerializeField] private float trajectoryArcAngleIncreaseSpeed = 1.0f;
     [SerializeField] private int lineSegments = 10;
 
     [SerializeField] private LayerMask groundLayerMask;
@@ -19,6 +20,8 @@ public class LaunchArcMesh : MonoBehaviour
     private Mesh trajectoryMesh;
 
     private bool isDynamiteThrowModeEntered;
+    private bool increaseDynamiteArc;
+    private bool keepDynamiteArcLength;
     
     private float gravity;
     private float radianAngle;
@@ -37,13 +40,13 @@ public class LaunchArcMesh : MonoBehaviour
         return localDirection.normalized;
     }
 
-    private void OnValidate()
-    {
-        if (trajectoryMesh != null && Application.isPlaying)
-        {
-            RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
-        }
-    }
+    // private void OnValidate()
+    // {
+    //     if (trajectoryMesh != null && Application.isPlaying)
+    //     {
+    //         RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
+    //     }
+    // }
 
     private void Awake()
     {
@@ -55,38 +58,53 @@ public class LaunchArcMesh : MonoBehaviour
     {
         if (isDynamiteThrowModeEntered)
         {
-            TrajectoryPrediction();
-        }
-        else
-        {
-            DisableTrajectoryPrediction();
-        }
-    }
-
-    public void EnterDynamiteThrowModeInput(InputAction.CallbackContext enterDynamiteThrowModevalue)
-    {
-        if (enterDynamiteThrowModevalue.performed)
-        {
-            isDynamiteThrowModeEntered = true;
-        } else if (enterDynamiteThrowModevalue.canceled)
+            RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
+            if (increaseDynamiteArc)
+            {
+                TrajectoryArcIncrease();
+            }
+            else
+            {
+                TrajectoryArcDecrease();
+            }
+        } 
+        else if (velocity <= 1.0f)
         {
             isDynamiteThrowModeEntered = false;
+            DisableTrajectoryArc();
         }
     }
-    
+
     public void TrajectoryInput(InputAction.CallbackContext trajectoryInputValue)
     {
-        velocity += trajectoryInputValue.ReadValue<float>() * trajectoryArcIncreaseSpeed * Time.deltaTime;
-        angle += trajectoryInputValue.ReadValue<float>() * 0.005f;
+        if (trajectoryInputValue.performed)
+        {
+            isDynamiteThrowModeEntered = true;
+            increaseDynamiteArc = true;
+        }
+        else if (trajectoryInputValue.canceled)
+        {
+            increaseDynamiteArc = false;
+        }
     }
 
-    private void TrajectoryPrediction()
+    private void TrajectoryArcIncrease()
     {
-        RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
+        velocity += (trajectoryArcIncreaseSpeed + trajectoryArcIncreaseSpeed) * Time.deltaTime;
+        velocity = Mathf.Clamp(velocity, 0.0f, 10.0f);
+        angle += trajectoryArcAngleIncreaseSpeed * Time.deltaTime;
+        angle = Mathf.Clamp(angle, 45.0f, 90.0f);
     }
 
-    private void DisableTrajectoryPrediction()
+    private void TrajectoryArcDecrease()
     {
+        velocity -= trajectoryArcIncreaseSpeed * Time.deltaTime;
+        velocity = Mathf.Clamp(velocity, 0.0f, 10.0f);
+    }
+
+    private void DisableTrajectoryArc()
+    {
+        velocity = 0.0f;
         trajectoryMesh.Clear();
     }
 

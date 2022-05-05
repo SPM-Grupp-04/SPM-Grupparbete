@@ -31,7 +31,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""fb34e309-c65a-411e-b7ab-ffb7c27e0eac"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -101,12 +101,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""TrajectoryIncrease"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""eb8c1fc6-ce89-4ff0-a433-3e2df54c46d1"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""EnterDynamiteThrowMode"",
@@ -178,7 +178,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""WASD"",
                     ""id"": ""00ca640b-d935-4593-8157-c05846ea39b3"",
-                    ""path"": ""3DVector"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -187,7 +187,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Left"",
+                    ""name"": ""left"",
                     ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -198,7 +198,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Right"",
+                    ""name"": ""right"",
                     ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -209,7 +209,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Forward"",
+                    ""name"": ""up"",
                     ""id"": ""d2581a9b-1d11-4566-b27d-b92aff5fabbc"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
@@ -220,7 +220,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Backward"",
+                    ""name"": ""down"",
                     ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -332,7 +332,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8b5ee70c-0ee1-4f5d-93bc-ff7f17656396"",
-                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

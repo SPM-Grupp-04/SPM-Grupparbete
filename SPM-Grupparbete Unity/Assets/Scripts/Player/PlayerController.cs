@@ -76,7 +76,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-            drill.gameObject.SendMessage("Shoot");
+            Debug.Log("SHOOT");
+            drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
         }
         else
@@ -93,6 +94,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PlayerMovement()
+    {
+        if (movementEnabled)
+        {
+            UpdatePlayer();
+        }
+        else
+        {
+            velocity = Vector3.zero;
+        }
+    }
+
+    private void UpdatePlayer()
+    {
+        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
+        {
+            UpdatePlayerRotationKeyBoardAndMouse();
+        }
+
+        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
+        {
+            UpdatePlayerRotationGamePad();
+        }
+        transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+
+    public bool IsUseButtonPressed()
+    {
+        return useButtonPressed;
+    }
+    
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
         if (shootValue.performed)
@@ -115,74 +147,41 @@ public class PlayerController : MonoBehaviour
             isDrilling = false;
         }
     }
-
-    private void PlayerMovement()
-    {
-        if (movementEnabled)
-        {
-            UpdatePlayer();
-        }
-        else
-        {
-            velocity = Vector3.zero;
-        }
-    }
-
-    private void UpdatePlayer()
-    {
-        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
-        {
-            UpdatePlayerPositionAndRotationKeyBoardAndMouse();
-        }
-
-        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
-        {
-            UpdatePlayerPositionAndRotationGamePad();
-        }
-        transform.position += velocity;
-    }
     
     public void UseInput(InputAction.CallbackContext useValue)
     {
         useButtonPressed = useValue.performed;
     }
 
-    public bool IsUseButtonPressed()
-    {
-        return useButtonPressed;
-    }
-
     public void SetMovementStatus(bool movementStatus)
     {
         movementEnabled = movementStatus;
     }
-
-    private void UpdatePlayerPositionAndRotationGamePad()
-    {
-        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing *
-                             Time.deltaTime;
-    }
-
-    public void PlayerPositionGamePadInput(InputAction.CallbackContext moveValue)
+    
+    public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
-        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y) * movementAcceleration * Time.deltaTime;
+        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
     }
 
     public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)
     {
         gamePadLookRotation = rotationValue.ReadValue<Vector2>();
     }
-
-    public void PlayerMovementKeyboardInput(InputAction.CallbackContext moveValue)
+    
+    public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
     {
-        playerMovementInput = moveValue.ReadValue<Vector3>();
+        mousePosition = mouseValue.ReadValue<Vector2>();
     }
 
-    private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()
+    private void UpdatePlayerRotationGamePad()
     {
-        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration *
-                   Time.deltaTime;
+        transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing *
+                             Time.deltaTime;
+    }
+
+    private void UpdatePlayerRotationKeyBoardAndMouse()
+    {
         PlayerMouseAim();
     }
 
@@ -199,10 +198,5 @@ public class PlayerController : MonoBehaviour
         Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
-    }
-
-    public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
-    {
-        mousePosition = mouseValue.ReadValue<Vector2>();
     }
 }

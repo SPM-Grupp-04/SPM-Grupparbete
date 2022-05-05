@@ -87,7 +87,7 @@ public class PlayerDrill : MonoBehaviour
     }
     public void Drill(bool state)
     {
-        isDrilling = true;
+        isDrilling = state;
     }
 
     private void DrillObject()
