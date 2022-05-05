@@ -11,7 +11,7 @@ public class LaunchArcMesh : MonoBehaviour
     
     [SerializeField] private float velocity;
     [SerializeField] private float angle;
-    [SerializeField] private float trajectoryArcIncreaseSpeed = 0.2f;
+    [SerializeField] private float trajectoryArcIncreaseSpeed = 10.0f;
     [SerializeField] private int lineSegments = 10;
 
     [SerializeField] private LayerMask groundLayerMask;
@@ -76,7 +76,7 @@ public class LaunchArcMesh : MonoBehaviour
     
     public void TrajectoryInput(InputAction.CallbackContext trajectoryInputValue)
     {
-        velocity += trajectoryInputValue.ReadValue<float>() * trajectoryArcIncreaseSpeed;
+        velocity += trajectoryInputValue.ReadValue<float>() * trajectoryArcIncreaseSpeed * Time.deltaTime;
         angle += trajectoryInputValue.ReadValue<float>() * 0.005f;
     }
 

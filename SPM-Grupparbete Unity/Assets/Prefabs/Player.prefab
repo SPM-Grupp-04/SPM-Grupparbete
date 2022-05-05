@@ -414,7 +414,7 @@ MonoBehaviour:
   meshWidth: 0.5
   velocity: 1
   angle: 45
-  trajectoryArcIncreaseSpeed: 0.01
+  trajectoryArcIncreaseSpeed: 50
   lineSegments: 20
   groundLayerMask:
     serializedVersion: 2
@@ -813,6 +813,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c55bd429-9865-46e1-9dca-5321ff139b9e
     m_ActionName: Player/Open Shop[/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
+        m_TargetAssemblyTypeName: PausMenu, Assembly-CSharp
+        m_MethodName: PauseButtonInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 98f56f97-bd2c-40bb-afde-24324cd08a96
+    m_ActionName: UI/Pause[/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

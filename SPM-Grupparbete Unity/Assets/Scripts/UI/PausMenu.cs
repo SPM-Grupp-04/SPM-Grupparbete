@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
-    public GameObject pauseMenuUI;
+    [SerializeField] private GameObject pauseMenuUI;
     public PlayerInput playerInput;
     public PlayerInput PlayerInputTwo;
     private InputAction pause;
@@ -30,19 +30,18 @@ public class PausMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pauseButtonPressed)
-        {
-            if (GameIsPause)
-            {
-                Resume();
-            }
-            else
-            {
-                
-                Pause();
-            }
-            
-        }
+        // if (pauseButtonPressed)
+        // {
+        //     if (GameIsPause)
+        //     {
+        //         Resume();
+        //     }
+        //     else
+        //     {
+        //         
+        //         Pause();
+        //     }
+        // }
     }
 
     public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
@@ -51,7 +50,16 @@ public class PausMenu : MonoBehaviour
         {
             pauseButtonPressed = !pauseButtonPressed;
         }
+        if (pauseButtonPressed)
+        {
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
     }
+    
     private void Pause()
     {
         pauseMenuUI.SetActive(true);

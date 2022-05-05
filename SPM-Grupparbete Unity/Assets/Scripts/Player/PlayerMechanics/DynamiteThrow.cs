@@ -25,8 +25,6 @@ public class DynamiteThrow : MonoBehaviour
         {
             uiCooldowns.GetGrenadeText().text = "Kasta";
         }
-
-        
     }
 
     public void ThrowDynamite(InputAction.CallbackContext value)
