@@ -118,11 +118,11 @@ public class ShopScript : MonoBehaviour
         //  CloseShopInterface(null);
     }
 
-    public void drillUpgrade()
+    public void drillUpgrade(int level)
     {
         drillLevelCostBlue = 5;
         drillLevelCostRed = 0;
-        m_PlayerState.m_LocalPlayerData.drillLevel++;
+        m_PlayerState.m_LocalPlayerData.drillLevel = level;
         GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
     }
 
