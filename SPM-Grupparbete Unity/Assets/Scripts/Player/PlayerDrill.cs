@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerDrill : MonoBehaviour
 {
+    private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject laserPrefab;
 
@@ -18,10 +19,11 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
 
-    [SerializeField] private int drillLevel = 1;
+     private int drillLevel;
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
 
+    [SerializeField] Material lrMaterial;
     private LineRenderer lr;
 
     private float timer = 0;
@@ -34,10 +36,20 @@ public class PlayerDrill : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
 
+    private bool isDisco = false;
+    Color c1 = Color.white;
+    Color c2;
+    int randomColour1;
+    int randomColour2;
+    int randomColour3;
+    float nextColour;
+    [SerializeField] private float delayTimer = 1;
+
     private void Awake()
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
+        drillLevel = playerStatistics.drillLevel;
         lr = GetComponent<LineRenderer>();
         DrillDamage(drillLevel);
     }
@@ -58,14 +70,22 @@ public class PlayerDrill : MonoBehaviour
                 timer = 0;
             }
         }
-        if (timer == 0 && isUsed == false)
+       
+
+        if(Time.time >= nextColour && isDisco == true)
         {
-            CoolDownDrill();
-            if (overHeatAmount <= 0)
-            {
-                canShoot = true;
-            }
+
+            randomColour1 = Random.Range(0, 255);
+            randomColour2 = Random.Range(0, 255);
+            randomColour3 = Random.Range(0, 255);
+            lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
+          
+            nextColour = Time.time + delayTimer;
         }
+        
+
+       
+       
     }
 
     private void FixedUpdate()
@@ -77,6 +97,15 @@ public class PlayerDrill : MonoBehaviour
         {
             DrillObject();
         }
+        
+        if (timer == 0 && isUsed == false)
+        {
+            CoolDownDrill();
+            if (overHeatAmount <= 0)
+            {
+                canShoot = true;
+            }
+        }
     }
 
     public void Shoot(bool state)
@@ -85,7 +114,7 @@ public class PlayerDrill : MonoBehaviour
     }
     public void Drill(bool state)
     {
-        isDrilling = true;
+        isDrilling = state;
     }
 
     private void DrillObject()
@@ -155,6 +184,7 @@ public class PlayerDrill : MonoBehaviour
             Destroy(beamGO);
             if (timer <= 0)
             {
+                lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
             }
@@ -199,18 +229,22 @@ public class PlayerDrill : MonoBehaviour
     {
         switch (drillLevel)
         {
+            case 0:
+                drillDamageOres = 1;
+                drillDamageMonsters = 1;
+                break;
             case 1:
                 drillDamageOres = 1;
                 drillDamageMonsters = 1;
-                return;
+                break;
             case 2:
                 drillDamageOres = 2;
                 drillDamageMonsters = 2;
-                return;
+                break;
             case 3:
                 drillDamageOres = 3;
                 drillDamageMonsters = 3;
-                return;
+                break;
 
         }
 

@@ -2,22 +2,33 @@ using UnityEngine;
 
 public class DestroyableWall : DestroyableObjectBase
 {
-    [SerializeField] int WallHP = 5;
-    [SerializeField] int WallRequiredWeaponLevel = 1;
+    PlayerStatistics playerStatistics = PlayerStatistics.Instance;
+    
+    [SerializeField] int wallHP = 5;
+    [SerializeField] int wallRequiredWeaponLevel = 1;
+    [SerializeField] GameObject wall;
+    [SerializeField] GameObject uiHP;
+    UI_ObjectHP uiObjectHp;
 
     private void Awake()
     {
-        materialHP = WallHP;
-        requiredWeaponLevel = WallRequiredWeaponLevel;
+        materialHP = wallHP;
+        requiredWeaponLevel = wallRequiredWeaponLevel;
+        uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
+
     }
 
     public override void ReduceMaterialHP(int amount)
     {
-        materialHP -= amount;
-        Debug.Log("Hit");
-        if (materialHP <= 0)
+        if (playerStatistics.drillLevel >= requiredWeaponLevel)
         {
-            DestroyObject();
+            materialHP -= amount;
+            uiObjectHp.ObjectTakeDamage(amount);
+            Debug.Log("Hit");
+            if (materialHP <= 0)
+            {
+                DestroyObject();
+            }
         }
     }
 
@@ -30,5 +41,10 @@ public class DestroyableWall : DestroyableObjectBase
     {
 
         Destroy(this.gameObject);
+    }
+
+    public int GetWallHP()
+    {
+        return materialHP;
     }
 }

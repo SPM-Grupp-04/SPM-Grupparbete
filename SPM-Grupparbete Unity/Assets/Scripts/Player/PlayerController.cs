@@ -8,40 +8,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private InputAction mouseLookAction;
-    private InputAction gamePadLookAction;
-    private InputAction useAction;
-    private InputAction saveAction;
-    private InputAction LoadAction;
-    private InputAction drillAction;
-    private InputAction shootAction;
     [SerializeField] private GameObject drill;
-    private Camera mainCamera;
-    private SaveAndLoadSystem saveAndLoad;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 10f)] private float rotationSmoothing = 5.0f;
+    private PlayerInput playerInput;
+    private Camera mainCamera;
     private Vector3 velocity;
     private Vector3 playerMovementInput;
+    private Vector3 gamePadLookRotation;
     private Vector2 lookRotation;
+    private Vector2 mousePosition;
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
+    private bool enteredShopArea;
+    private bool isShooting;
+    private bool isDrilling;
+    private bool useButtonPressed;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
-        mouseLookAction = playerInput.actions["MouseLook"];
-        gamePadLookAction = playerInput.actions["GamePadLook"];
-        useAction = playerInput.actions["Use"];
-        saveAction = playerInput.actions["Save"];
-        LoadAction = playerInput.actions["Load"];
-        shootAction = playerInput.actions["Shoot"];
-        drillAction = playerInput.actions["Drill"];
-        saveAndLoad = GetComponent<SaveAndLoadSystem>();
         mainCamera = Camera.main;
     }
 
@@ -52,8 +40,6 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             ShootOrDrill();
         }
-
-        SaveAndLoadGame();
         RestrictMovement();
     }
 
@@ -88,36 +74,23 @@ public class PlayerController : MonoBehaviour
 
     private void ShootOrDrill()
     {
-        if (shootAction.IsPressed())
+        if (isShooting)
         {
+            Debug.Log("SHOOT");
             drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
         }
         else
         {
-            if (drillAction.IsPressed())
+            if (isDrilling)
             {
-                drill.gameObject.SendMessage("Drill", true);
+                drill.gameObject.SendMessage("DrillObject");
                 drill.gameObject.SendMessage("DrillInUse", true);
             }
             else
             {
                 drill.gameObject.SendMessage("DrillInUse", false);
-                
             }
-        }
-    }
-
-    private void SaveAndLoadGame()
-    {
-        if (saveAction.WasPressedThisFrame())
-        {
-            saveAndLoad.saveGamePress();
-        }
-
-        if (LoadAction.WasPressedThisFrame())
-        {
-            saveAndLoad.LoadGamePress();
         }
     }
 
@@ -137,52 +110,79 @@ public class PlayerController : MonoBehaviour
     {
         if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
         {
-            UpdatePlayerPositionAndRotationKeyBoardAndMouse();
+            UpdatePlayerRotationKeyBoardAndMouse();
         }
 
         if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
         {
-            UpdatePlayerPositionAndRotationGamePad();
+            UpdatePlayerRotationGamePad();
+        }
+        transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+
+    public bool IsUseButtonPressed()
+    {
+        return useButtonPressed;
+    }
+    
+    public void ShootInput(InputAction.CallbackContext shootValue)
+    {
+        if (shootValue.performed)
+        {
+            isShooting = true;
+        } else if (shootValue.canceled)
+        {
+            isShooting = false;
         }
     }
 
-    public bool IsUseInputPressed()
+    public void DrillInput(InputAction.CallbackContext drillValue)
     {
-        return useAction.WasPressedThisFrame();
+        if (drillValue.performed)
+        {
+            isDrilling = true;
+        }
+        else if (drillValue.canceled)
+        {
+            isDrilling = false;
+        }
+    }
+    
+    public void UseInput(InputAction.CallbackContext useValue)
+    {
+        useButtonPressed = useValue.performed;
     }
 
     public void SetMovementStatus(bool movementStatus)
     {
         movementEnabled = movementStatus;
     }
-
-    private void UpdatePlayerPositionAndRotationGamePad()
+    
+    public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
-        UpdatePlayerRotationGamePad();
-        UpdatePlayerPositionGamePad();
+        playerMovementInput = moveValue.ReadValue<Vector2>();
+        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
     }
 
-    private void UpdatePlayerPositionGamePad()
+    public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)
     {
-        playerMovementInput = moveAction.ReadValue<Vector2>();
-        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y) * movementAcceleration;
-        transform.localPosition += velocity * Time.deltaTime;
+        gamePadLookRotation = rotationValue.ReadValue<Vector2>();
+    }
+    
+    public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
+    {
+        mousePosition = mouseValue.ReadValue<Vector2>();
     }
 
     private void UpdatePlayerRotationGamePad()
     {
-        Vector3 gamePadLookRotation = gamePadLookAction.ReadValue<Vector2>();
         transform.forward += new Vector3(gamePadLookRotation.x, 0.0f, gamePadLookRotation.y) * rotationSmoothing *
                              Time.deltaTime;
     }
 
-    private void UpdatePlayerPositionAndRotationKeyBoardAndMouse()
+    private void UpdatePlayerRotationKeyBoardAndMouse()
     {
-        playerMovementInput = moveAction.ReadValue<Vector3>();
-        velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.z) * movementAcceleration *
-                   Time.deltaTime;
         PlayerMouseAim();
-        transform.localPosition += velocity;
     }
 
     private void PlayerMouseAim()
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 GetMousePosition()
     {
-        Ray mouseRay = mainCamera.ScreenPointToRay(mouseLookAction.ReadValue<Vector2>());
+        Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
     }

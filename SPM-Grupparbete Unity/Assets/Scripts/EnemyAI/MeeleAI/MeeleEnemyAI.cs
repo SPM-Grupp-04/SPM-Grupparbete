@@ -34,7 +34,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
     public Vector3 target = new Vector3(100, 0, 100);
     public float distanceToTargetPlayer = 100;
-
+    public Vector3 playerPos = new Vector3(100, 0, 100);
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -99,7 +99,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
             new RangeTreeNodeMelee(hitRange,  distanceToTargetPlayer, _animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
-            new MeeleAttackTreeNode(target, agent, _animator, _meleeWepon);
+            new MeeleAttackTreeNode(playerPos, agent, _animator, _meleeWepon);
 
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
@@ -116,7 +116,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
         this.pool = pool;
     }
 
-    public override void TargetPlayerPos(Vector3 targeDistance)
+    public override void PositionAroundTarget(Vector3 targeDistance)
     {
         target = targeDistance;
     }
@@ -124,6 +124,11 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     public override void DistanceToPlayerPos(float distance)
     {
         this.distanceToTargetPlayer = distance;
+    }
+
+    public override void PlayerPos(Vector3 playerPos)
+    {
+        this.playerPos = playerPos;
     }
 
     public void DealDamage(int damage)

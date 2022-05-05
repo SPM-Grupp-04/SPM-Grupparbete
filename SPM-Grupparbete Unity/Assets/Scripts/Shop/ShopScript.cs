@@ -1,5 +1,6 @@
 //Main author: Axel Ingelsson Fredler
 //Additional programming: Simon Canbäck, sica4801
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,12 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
     [SerializeField] private Button discoButton;
+
+    private int drillLevelCostBlue = 5;
+    private int drillLevelCostRed = 0;
+    
     private Collider[] shopColliders;
+
     //private Button[] buttons;
     private bool shopInterfaceOpened;
     private PlayerState m_PlayerState;
@@ -42,7 +48,7 @@ public class ShopScript : MonoBehaviour
 
         foreach (Collider collider in shopColliders)
         {
-            if (collider.gameObject.GetComponent<PlayerController>().IsUseInputPressed())
+            if (collider.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
             {
                 if (!shopInterfaceOpened)
                 {
@@ -103,15 +109,26 @@ public class ShopScript : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        m_PlayerState.Heal(healAmount);
+        if (m_PlayerState.m_LocalPlayerData.BlueCrystals > 2)
+        {
+            m_PlayerState.Heal(healAmount);
+        }
 
-        healButton.gameObject.SetActive(false);
-        CloseShopInterface(null);
+        //  healButton.gameObject.SetActive(false);
+        //  CloseShopInterface(null);
+    }
+
+    public void drillUpgrade(int level)
+    {
+        drillLevelCostBlue = 5;
+        drillLevelCostRed = 0;
+        m_PlayerState.m_LocalPlayerData.drillLevel = level;
+        GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
     }
 
     public void Accelerate(float addedAcceleration)
     {
-        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.PlayerOneAcceleration + addedAcceleration);
+        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
 
         accelerateButton.gameObject.SetActive(false);
         CloseShopInterface(null);
