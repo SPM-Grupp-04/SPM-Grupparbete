@@ -8,6 +8,19 @@ public class VictoryConditionsScript : MonoBehaviour
 {
     [SerializeField, Tooltip("")] private VictoryComponents victoryLayerMask;
 
+    private void Start()
+    {
+        //remember to set a value
+        try
+        {
+            UnityEngine.Assertions.Assert.AreNotEqual(expected: VictoryComponents.UNASSIGNED, actual: victoryLayerMask);
+        }
+        catch (UnityEngine.Assertions.AssertionException)
+        {
+            Application.Quit();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.collider.CompareTag("Player"))
@@ -35,6 +48,7 @@ public class VictoryConditionsScript : MonoBehaviour
     [Flags]
     private enum VictoryComponents
     {
+        UNASSIGNED = 0b_0000_0000,
         COMPONENT_1 = 0b_0000_0001,
         COMPONENT_2 = 0b_0000_0010,
         COMPONENT_3 = 0b_0000_0100,
