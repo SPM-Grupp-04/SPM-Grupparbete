@@ -30,6 +30,8 @@ public class PlayerCollisionHandler : MonoBehaviour
 
             }
         }
+
+        GlobalControl.Instance.playerStatistics = m_LocalPlayerDataTest;
     }
 
     

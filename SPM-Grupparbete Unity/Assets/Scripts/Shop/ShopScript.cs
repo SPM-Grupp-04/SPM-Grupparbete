@@ -125,6 +125,7 @@ public class ShopScript : MonoBehaviour
         if (GlobalControl.Instance.playerStatistics.BlueCrystals > drillLevelCostBlue)
         {
             m_PlayerState.m_LocalPlayerData.drillLevel = level;
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
 
             GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
         }

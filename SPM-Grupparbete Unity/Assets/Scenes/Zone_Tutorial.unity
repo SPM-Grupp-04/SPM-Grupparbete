@@ -13182,6 +13182,10 @@ PrefabInstance:
       value: Ore_Blue (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
       value: 0
       objectReference: {fileID: 0}
@@ -14690,6 +14694,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -17977,6 +17985,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -26649,6 +26661,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4323223495364660599, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
+      propertyPath: wallHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323223495364660599, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
       propertyPath: wallRequiredWeaponLevel
       value: 0
       objectReference: {fileID: 0}
@@ -30037,6 +30053,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 14f37aeb80c0bbc4780b73ca2ef66467, type: 2}
     - target: {fileID: 4323223495364660599, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
+      propertyPath: wallHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323223495364660599, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
       propertyPath: wallRequiredWeaponLevel
       value: 0
       objectReference: {fileID: 0}
@@ -33088,6 +33108,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 14f37aeb80c0bbc4780b73ca2ef66467, type: 2}
+    - target: {fileID: 4323223495364660599, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
+      propertyPath: wallHP
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4323223495364660604, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
       propertyPath: m_Name
       value: WallTest (2)
@@ -33305,14 +33329,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6425197954357338050, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
 --- !u!4 &1155517421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8388054274308269339, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
   m_PrefabInstance: {fileID: 1155517420}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1155517426
+--- !u!114 &1155517431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33321,9 +33346,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 531234975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c182ce04f1451044f806c846991a0776, type: 3}
+  m_Script: {fileID: 11500000, guid: 109df77911ef4d95a370dbac74b745e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToSwitchTo: 2
   goalCondition: 1
 --- !u!1 &1157687237 stripped
 GameObject:
@@ -35184,6 +35210,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -46568,6 +46598,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 254404803984606745, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 254404803984606747, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -47784,6 +47818,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -52734,6 +52772,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
