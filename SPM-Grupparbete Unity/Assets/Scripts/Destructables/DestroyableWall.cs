@@ -6,11 +6,16 @@ public class DestroyableWall : DestroyableObjectBase
     
     [SerializeField] int wallHP = 5;
     [SerializeField] int wallRequiredWeaponLevel = 1;
+    [SerializeField] GameObject wall;
+    [SerializeField] GameObject uiHP;
+    UI_ObjectHP uiObjectHp;
 
     private void Awake()
     {
         materialHP = wallHP;
         requiredWeaponLevel = wallRequiredWeaponLevel;
+        uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
+
     }
 
     public override void ReduceMaterialHP(int amount)
@@ -18,6 +23,7 @@ public class DestroyableWall : DestroyableObjectBase
         if (playerStatistics.drillLevel >= requiredWeaponLevel)
         {
             materialHP -= amount;
+            uiObjectHp.ObjectTakeDamage(amount);
             Debug.Log("Hit");
             if (materialHP <= 0)
             {
@@ -35,5 +41,10 @@ public class DestroyableWall : DestroyableObjectBase
     {
 
         Destroy(this.gameObject);
+    }
+
+    public int GetWallHP()
+    {
+        return materialHP;
     }
 }

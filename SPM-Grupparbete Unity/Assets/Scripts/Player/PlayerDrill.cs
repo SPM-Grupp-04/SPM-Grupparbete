@@ -36,6 +36,7 @@ public class PlayerDrill : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
 
+    private bool isDisco = false;
     Color c1 = Color.white;
     Color c2;
     int randomColour1;
@@ -71,7 +72,7 @@ public class PlayerDrill : MonoBehaviour
         }
        
 
-        if(Time.time >= nextColour)
+        if(Time.time >= nextColour && isDisco == true)
         {
 
             randomColour1 = Random.Range(0, 255);
