@@ -11,11 +11,13 @@ public class MinableOre : DestroyableObjectBase
     [SerializeField] GameObject ore;
     [SerializeField] GameObject uiHP;
 
+    UI_ObjectHP uiObjectHp;
+
     private void Start()
     {
         requiredWeaponLevel = oreRequierdWeaponLevel;
         materialHP = oreMaterialHP;
-
+        uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
     }
 
     public override void ReduceMaterialHP(int amount)
@@ -23,7 +25,7 @@ public class MinableOre : DestroyableObjectBase
         if (playerStatistics.drillLevel >= requiredWeaponLevel)
         {
             materialHP -= amount;
-            uiHP.GetComponent<UI_ObjectHP>().OreTakeDamage(amount);
+            uiObjectHp.ObjectTakeDamage(amount);
             if (materialHP <= 0)
             {
                 DestoryObject();

@@ -48,7 +48,7 @@ public class ShopScript : MonoBehaviour
 
         foreach (Collider collider in shopColliders)
         {
-            if (collider.gameObject.GetComponent<PlayerController>().IsUseInputPressed())
+            if (collider.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
             {
                 if (!shopInterfaceOpened)
                 {

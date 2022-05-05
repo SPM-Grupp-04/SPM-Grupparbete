@@ -36,6 +36,7 @@ public class PlayerDrill : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
 
+    private bool isDisco = false;
     Color c1 = Color.white;
     Color c2;
     int randomColour1;
@@ -71,7 +72,7 @@ public class PlayerDrill : MonoBehaviour
         }
        
 
-        if(Time.time >= nextColour)
+        if(Time.time >= nextColour && isDisco == true)
         {
 
             randomColour1 = Random.Range(0, 255);
@@ -113,7 +114,7 @@ public class PlayerDrill : MonoBehaviour
     }
     public void Drill(bool state)
     {
-        isDrilling = true;
+        isDrilling = state;
     }
 
     private void DrillObject()
@@ -164,6 +165,7 @@ public class PlayerDrill : MonoBehaviour
                 LaserBetweenPoints(transform.position, shootHit.point);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
+                    Debug.Log("Enemy getting hit");
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);
