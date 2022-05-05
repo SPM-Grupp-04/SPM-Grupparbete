@@ -1,3 +1,5 @@
+//primary author:
+//additional programming: Simon Canbäck, sica4801
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,26 +10,27 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class PlayerStatistics
 {
-
     private static PlayerStatistics instance = null;
-    
-    public int PlayerMaxHealth = 5;
-    public int PlayerOneHealth = 5;
-    public int PlayerTwoHealth = 5;
-    public float PlayerOneAcceleration = 5.0f;
-    public float PlayerTwoAcceleration = 5.0f;
-    public bool PlayerOneDisco = false;
-    public bool PlayerTwoDisco = false;
-   // public string Scene;
+
+    public int playerMaxHealth = 5;
+    public int playerOneHealth = 5;
+    public int playerTwoHealth = 5;
+    public float playerOneAcceleration = 5.0f;
+    public float playerTwoAcceleration = 5.0f;
+    public bool playerOneDisco = false;
+    public bool playerTwoDisco = false;
+    // public string Scene;
     public float PosX, PosY, PosZ;
     public int Crystals;
     public int BlueCrystals;
     public int RedCrystals;
+    public int drillLevel = 0;
+    public int componentsCollectedMask = 0;
 
     private PlayerStatistics()
     {
-       
     }
+
     public static PlayerStatistics Instance
     {
         get
@@ -42,7 +45,7 @@ public class PlayerStatistics
                 //        instance.PlayerOneAcceleration = go.GetComponent<PlayerController>().MovementAcceleration;
                 //    else if (go.GetComponent<EgilHealth>().name == "PlayerTwo")
                 //        instance.PlayerTwoAcceleration = go.GetComponent<PlayerController>().MovementAcceleration;
-                        
+
                 //}
             }
 
@@ -50,6 +53,6 @@ public class PlayerStatistics
         }
     }
 
-  
+
 
 }

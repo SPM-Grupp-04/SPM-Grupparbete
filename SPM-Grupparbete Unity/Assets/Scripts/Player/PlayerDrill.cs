@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerDrill : MonoBehaviour
 {
+    private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject laserPrefab;
 
@@ -18,7 +19,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
 
-    [SerializeField] private int drillLevel = 1;
+     private int drillLevel;
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
 
@@ -47,6 +48,7 @@ public class PlayerDrill : MonoBehaviour
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
+        drillLevel = playerStatistics.drillLevel;
         lr = GetComponent<LineRenderer>();
         DrillDamage(drillLevel);
     }
@@ -224,18 +226,22 @@ public class PlayerDrill : MonoBehaviour
     {
         switch (drillLevel)
         {
+            case 0:
+                drillDamageOres = 1;
+                drillDamageMonsters = 1;
+                break;
             case 1:
                 drillDamageOres = 1;
                 drillDamageMonsters = 1;
-                return;
+                break;
             case 2:
                 drillDamageOres = 2;
                 drillDamageMonsters = 2;
-                return;
+                break;
             case 3:
                 drillDamageOres = 3;
                 drillDamageMonsters = 3;
-                return;
+                break;
 
         }
 

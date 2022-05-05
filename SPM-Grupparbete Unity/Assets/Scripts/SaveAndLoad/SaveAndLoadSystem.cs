@@ -13,25 +13,43 @@ public class SaveAndLoadSystem : MonoBehaviour
     private InputAction saveAction;
     private InputAction loadGame;
 */
+  [Header("When you exit a scen Save and set a scene to load")]
+  [SerializeField] private bool save;
+  [SerializeField] private int sceneToLoad;
+ 
+  [Header("When You Enter Scene")]
+  [SerializeField] private bool load;
     private void Awake()
     {
+    }
+
+    private void Start()
+    {
+        
+        if (save)
+        {
+            saveGamePress();
+        }
+
+        if (load)
+        {
+            LoadGamePress();
+        }
     }
 
 
     PlayerStatistics playerStatistics = PlayerStatistics.Instance;
   
-    public void saveGamePress()
+    private void saveGamePress()
     {
-        Debug.Log("Pressed O");
-      //  GlobalControl.Instance.playerStatistics.Scene = SceneManager.GetActiveScene().name;
         GlobalControl.Instance.playerStatistics.Crystals = playerStatistics.Crystals;
-        
         GlobalControl.Instance.SaveData();
+        SceneManager.LoadScene(sceneToLoad);
     }
 
-    public void LoadGamePress()
+    private void LoadGamePress()
     {
-        Debug.Log("Pressed P");
+       
         GlobalControl.Instance.LoadData();
         GlobalControl.Instance.IsSceneBeingLoaded = true;
        

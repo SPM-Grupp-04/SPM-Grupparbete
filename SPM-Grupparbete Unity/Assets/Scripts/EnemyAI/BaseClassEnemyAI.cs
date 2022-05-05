@@ -12,6 +12,7 @@ public abstract class BaseClassEnemyAI : Tree
     
     
     public abstract void SetPool(IObjectPool<BaseClassEnemyAI> pool);
-    public abstract void TargetPlayerPos(Vector3 TargetPos);
+    public abstract void PositionAroundTarget(Vector3 TargetPos);
     public abstract void DistanceToPlayerPos(float distance);
+    public abstract void PlayerPos(Vector3 playerPos);
 }

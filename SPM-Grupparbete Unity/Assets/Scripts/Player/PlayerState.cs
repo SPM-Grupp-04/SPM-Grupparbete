@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class PlayerState : MonoBehaviour, IDamagable
 {
-    private PlayerStatistics m_LocalPlayerData = PlayerStatistics.Instance;
+    public PlayerStatistics m_LocalPlayerData = PlayerStatistics.Instance;
 
     [SerializeField] private String playerName;
 
@@ -16,22 +16,23 @@ public class PlayerState : MonoBehaviour, IDamagable
     
     private void Start()
     {
-       
         
         m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
+        m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
+        m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
       
         if (playerName == "PlayerOne")
         {
-            m_LocalPlayerData.PlayerOneHealth = GlobalControl.Instance.playerStatistics.PlayerOneHealth;
-            m_LocalPlayerData.PlayerOneAcceleration = GlobalControl.Instance.playerStatistics.PlayerOneAcceleration;
-            m_LocalPlayerData.PlayerOneDisco = GlobalControl.Instance.playerStatistics.PlayerOneDisco;
+            m_LocalPlayerData.playerOneHealth = GlobalControl.Instance.playerStatistics.playerOneHealth;
+            m_LocalPlayerData.playerOneAcceleration = GlobalControl.Instance.playerStatistics.playerOneAcceleration;
+            m_LocalPlayerData.playerOneDisco = GlobalControl.Instance.playerStatistics.playerOneDisco;
         }
         
         if (playerName == "PlayerTwo")
         {
-            m_LocalPlayerData.PlayerTwoHealth = GlobalControl.Instance.playerStatistics.PlayerTwoHealth;
-            m_LocalPlayerData.PlayerTwoAcceleration = GlobalControl.Instance.playerStatistics.PlayerTwoAcceleration;
-            m_LocalPlayerData.PlayerTwoDisco = GlobalControl.Instance.playerStatistics.PlayerTwoDisco;
+            m_LocalPlayerData.playerTwoHealth = GlobalControl.Instance.playerStatistics.playerTwoHealth;
+            m_LocalPlayerData.playerTwoAcceleration = GlobalControl.Instance.playerStatistics.playerTwoAcceleration;
+            m_LocalPlayerData.playerTwoDisco = GlobalControl.Instance.playerStatistics.playerTwoDisco;
         }
     }
 
@@ -39,7 +40,7 @@ public class PlayerState : MonoBehaviour, IDamagable
     {
         if (playerName == "PlayerOne")
         {
-            if (m_LocalPlayerData.PlayerOneHealth < 1)
+            if (m_LocalPlayerData.playerOneHealth < 1)
             {
                 
                 die(gameObject);
@@ -48,7 +49,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
         if (playerName == "PlayerTwo")
         {
-            if (m_LocalPlayerData.PlayerTwoHealth < 1)
+            if (m_LocalPlayerData.playerTwoHealth < 1)
             {
                 
                 die(gameObject);
@@ -72,6 +73,12 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     public void Heal(int amount)
     {
+        m_LocalPlayerData.playerMaxHealth ++;
+
+        m_LocalPlayerData.playerOneHealth = m_LocalPlayerData.playerMaxHealth;
+        m_LocalPlayerData.playerTwoHealth = m_LocalPlayerData.playerMaxHealth;
+        
+        GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
         
     }
 
@@ -79,11 +86,11 @@ public class PlayerState : MonoBehaviour, IDamagable
     {
         if (playerName == "PlayerOne")
         {
-            m_LocalPlayerData.PlayerOneHealth -= damage;
+            m_LocalPlayerData.playerOneHealth -= damage;
         }
         else
         {
-            m_LocalPlayerData.PlayerTwoHealth -= damage;
+            m_LocalPlayerData.playerTwoHealth -= damage;
         }
 
         SavePlayers();
@@ -91,25 +98,27 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     public void IncreaseMaxHealth(int maxHealthIncreaseAmount)
     {
-        m_LocalPlayerData.PlayerMaxHealth += maxHealthIncreaseAmount;
-        m_LocalPlayerData.PlayerOneHealth = m_LocalPlayerData.PlayerMaxHealth;
-        m_LocalPlayerData.PlayerTwoHealth = m_LocalPlayerData.PlayerMaxHealth;
+        m_LocalPlayerData.playerMaxHealth += maxHealthIncreaseAmount;
+        m_LocalPlayerData.playerOneHealth = m_LocalPlayerData.playerMaxHealth;
+        m_LocalPlayerData.playerTwoHealth = m_LocalPlayerData.playerMaxHealth;
 
         SavePlayers();
     }
 
     public void SetAcceleration(float newAcceleration)
     {
-        m_LocalPlayerData.PlayerOneAcceleration = newAcceleration;
-        m_LocalPlayerData.PlayerTwoAcceleration = newAcceleration;
+        m_LocalPlayerData.playerOneAcceleration = newAcceleration;
+        m_LocalPlayerData.playerTwoAcceleration = newAcceleration;
 
         SavePlayers();
     }
 
+    
+    
     public void SetDisco(bool isDisco)
     {
-        m_LocalPlayerData.PlayerOneDisco = isDisco;
-        m_LocalPlayerData.PlayerTwoDisco = isDisco;
+        m_LocalPlayerData.playerOneDisco = isDisco;
+        m_LocalPlayerData.playerTwoDisco = isDisco;
 
         SavePlayers();
     }

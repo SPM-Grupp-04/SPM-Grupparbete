@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_LaserShaderMat
+  m_Name: m_LaserShaderMatSource
   m_Shader: {fileID: -6465566751694194690, guid: ae70a9dfe21b2be4da7fa9ac9c09d7a7, type: 3}
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
@@ -24,11 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8e00dca23feeca345ac01e4d72e3d93d, type: 3}
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: db96cd911d629884bbac674a30cb0c22, type: 3}
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -49,11 +49,11 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
-    - _DissolveAmout: 0.17
+    - _DissolveAmout: 0.9
     - _DstBlend: 10
-    - _NoiceAmount: 0.057
-    - _NoicePower: 100
-    - _NoiceScale: 100
+    - _NoiceAmount: 0.1
+    - _NoicePower: 2
+    - _NoiceScale: 20
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -62,9 +62,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 50, g: 44, b: 82, a: 1}
-    - _LaserSpeed: {r: -1, g: 0, b: 0, a: 0}
-    - _NoiceSpeed: {r: -12.3, g: 0, b: 0, a: 0}
+    - _Color: {r: 4.9453974, g: 42.862587, b: 72.65929, a: 1}
+    - _LaserSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiceSpeed: {r: -1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6946109237211786193
 MonoBehaviour:

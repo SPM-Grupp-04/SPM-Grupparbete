@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
             ShootOrDrill();
         }
 
-        SaveAndLoadGame();
+        
         RestrictMovement();
     }
 
@@ -108,18 +108,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SaveAndLoadGame()
-    {
-        if (saveAction.WasPressedThisFrame())
-        {
-            saveAndLoad.saveGamePress();
-        }
-
-        if (LoadAction.WasPressedThisFrame())
-        {
-            saveAndLoad.LoadGamePress();
-        }
-    }
+    
 
     private void PlayerMovement()
     {
