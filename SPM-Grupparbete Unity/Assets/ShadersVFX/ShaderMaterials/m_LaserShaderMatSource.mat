@@ -15,7 +15,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: eb7d43badcf3c7a4f9eabe4bc1209b75, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -49,11 +49,11 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
-    - _DissolveAmout: 0.9
+    - _DissolveAmout: 0.719
     - _DstBlend: 10
     - _NoiceAmount: 0.1
     - _NoicePower: 2
-    - _NoiceScale: 20
+    - _NoiceScale: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -64,7 +64,7 @@ Material:
     m_Colors:
     - _Color: {r: 4.9453974, g: 42.862587, b: 72.65929, a: 1}
     - _LaserSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _NoiceSpeed: {r: -1, g: 0, b: 0, a: 0}
+    - _NoiceSpeed: {r: -0.5, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6946109237211786193
 MonoBehaviour:
