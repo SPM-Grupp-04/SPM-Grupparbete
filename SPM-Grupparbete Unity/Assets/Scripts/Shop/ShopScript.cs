@@ -128,7 +128,7 @@ public class ShopScript : MonoBehaviour
 
     public void Accelerate(float addedAcceleration)
     {
-        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.PlayerOneAcceleration + addedAcceleration);
+        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
 
         accelerateButton.gameObject.SetActive(false);
         CloseShopInterface(null);
