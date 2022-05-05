@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ComponentPickupScript : MonoBehaviour
 {
-    [SerializeField] private VictoryConditionsScript.Components componentNumber;
+    [SerializeField, Utility.Attributes.SingleEnumFlagSelect(EnumType = typeof(VictoryConditionsScript.Components))] private VictoryConditionsScript.Components componentNumber;
 
     // Start is called before the first frame update
     void Start()
