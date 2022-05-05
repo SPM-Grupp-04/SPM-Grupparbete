@@ -69,14 +69,7 @@ public class PlayerDrill : MonoBehaviour
                 timer = 0;
             }
         }
-        if (timer == 0 && isUsed == false)
-        {
-            CoolDownDrill();
-            if (overHeatAmount <= 0)
-            {
-                canShoot = true;
-            }
-        }
+       
 
         if(Time.time >= nextColour)
         {
@@ -102,6 +95,15 @@ public class PlayerDrill : MonoBehaviour
         } else if (isDrilling)
         {
             DrillObject();
+        }
+        
+        if (timer == 0 && isUsed == false)
+        {
+            CoolDownDrill();
+            if (overHeatAmount <= 0)
+            {
+                canShoot = true;
+            }
         }
     }
 
