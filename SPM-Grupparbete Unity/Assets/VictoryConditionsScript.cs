@@ -1,4 +1,4 @@
-//author: Simon Canbäck, sica4801
+//author: Simon Canbï¿½ck, sica4801
 using System;
 using System.Collections;
 using System.Collections.Generic;
