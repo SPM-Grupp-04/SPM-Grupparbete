@@ -1,4 +1,4 @@
-//author: Simon Canbäck, sica4801
+//author: Simon Canbï¿½ck, sica4801
 
 using System;
 using System.Collections;
@@ -32,6 +32,8 @@ public class ComponentPickupScript : MonoBehaviour
 
         //the mask now contains the value for the component
         PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
+        GlobalControl.Instance.playerStatistics.componentsCollectedMask =
+            PlayerStatistics.Instance.componentsCollectedMask;
 
         Destroy(gameObject);
     }

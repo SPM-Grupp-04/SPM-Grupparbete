@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 254404803258351253}
   - component: {fileID: 254404803258351252}
   m_Layer: 5
-  m_Name: AccelerateButton
+  m_Name: DrillButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 42110313}
         m_TargetAssemblyTypeName: ShopScript, Assembly-CSharp
-        m_MethodName: Accelerate
-        m_Mode: 4
+        m_MethodName: drillUpgrade
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -420,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &254404803838412444
 RectTransform:
   m_ObjectHideFlags: 0
@@ -903,7 +903,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Accelerate
+  m_text: 'DrillUpgrade
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
