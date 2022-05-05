@@ -16,9 +16,9 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button accelerateButton;
     [SerializeField] private Button discoButton;
 
-    private int drillLevelCostBlue = 5;
+    [SerializeField] private int drillLevelCostBlue = 5;
     private int drillLevelCostRed = 0;
-    
+
     private Collider[] shopColliders;
 
     //private Button[] buttons;
@@ -120,10 +120,14 @@ public class ShopScript : MonoBehaviour
 
     public void drillUpgrade(int level)
     {
-        drillLevelCostBlue = 5;
-        drillLevelCostRed = 0;
-        m_PlayerState.m_LocalPlayerData.drillLevel = level;
-        GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+      
+ 
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals > drillLevelCostBlue)
+        {
+            m_PlayerState.m_LocalPlayerData.drillLevel = level;
+
+            GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+        }
     }
 
     public void Accelerate(float addedAcceleration)
