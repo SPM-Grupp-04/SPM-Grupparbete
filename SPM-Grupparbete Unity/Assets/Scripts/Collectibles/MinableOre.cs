@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class MinableOre : DestroyableObjectBase
 {
-    [SerializeField] int materialAmount;
-    [SerializeField] int materialHP = 10;
-    [SerializeField] int requierdWeaponLevel = 1;
+    [SerializeField] int oreMaterialHP = 10;
+    [SerializeField] int oreRequierdWeaponLevel = 1;
     [SerializeField] GameObject ore;
     [SerializeField] GameObject uiHP;
 
     private void Start()
     {
+        requiredWeaponLevel = oreRequierdWeaponLevel;
+        materialHP = oreMaterialHP;
+
     }
 
     public override void ReduceMaterialHP(int amount)
@@ -29,7 +31,7 @@ public class MinableOre : DestroyableObjectBase
 
     public override int GetRequiredWeaponLevel()
     {
-        return requierdWeaponLevel;
+        return requiredWeaponLevel;
     }
 
 
@@ -42,5 +44,10 @@ public class MinableOre : DestroyableObjectBase
             Instantiate(ore, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), Quaternion.identity);
         }
         Destroy(this.gameObject);
+    }
+
+    public int GetOreMaterialHP()
+    {
+        return oreMaterialHP;
     }
 }

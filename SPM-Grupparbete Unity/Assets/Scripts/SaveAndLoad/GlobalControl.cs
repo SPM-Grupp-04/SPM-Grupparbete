@@ -12,8 +12,8 @@ public class GlobalControl : MonoBehaviour
     public bool IsSceneBeingLoaded = false;
     // Variabler som ska sparas över scener.
 
-    public PlayerStatistics SavedData = PlayerStatistics.Instance;
-    
+    public PlayerStatistics playerStatistics;
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,7 +21,7 @@ public class GlobalControl : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Instance = this;
         }
-        else if(Instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
@@ -34,13 +34,11 @@ public class GlobalControl : MonoBehaviour
         {
             Directory.CreateDirectory("Saves");
         }
-
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Create("Saves/save.binary");
 
-        SavedData = Instance.SavedData;
-        
-        formatter.Serialize(saveFile, SavedData);
+
+        formatter.Serialize(saveFile, Instance.playerStatistics);
         saveFile.Close();
     }
 
@@ -49,8 +47,7 @@ public class GlobalControl : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Open("Saves/save.binary", FileMode.Open);
 
-        SavedData = (PlayerStatistics) formatter.Deserialize(saveFile);
+        playerStatistics = formatter.Deserialize(saveFile) as PlayerStatistics;
         saveFile.Close();
     }
-    
 }

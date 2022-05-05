@@ -1,5 +1,6 @@
 //Main author: Axel Ingelsson Fredler
 //Additional programming: Simon Canbäck, sica4801
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,8 +15,12 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
     [SerializeField] private Button discoButton;
-    private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
+
+    private int drillLevelCostBlue = 5;
+    private int drillLevelCostRed = 0;
+    
     private Collider[] shopColliders;
+
     //private Button[] buttons;
     private bool shopInterfaceOpened;
     private PlayerState m_PlayerState;
@@ -98,25 +103,43 @@ public class ShopScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
     }
 
+    //void OnClick(GameObject go)
+    //{
+    //}
+
     public void Heal(int healAmount)
     {
-        if (playerStatistics.Crystals > 2)
+        if (m_PlayerState.m_LocalPlayerData.BlueCrystals > 2)
         {
-            Debug.Log(playerStatistics.Crystals);
-            m_PlayerState.IncreaseMaxHealth(healAmount);
-            playerStatistics.Crystals -= 2;
-            Debug.Log(playerStatistics.Crystals);
+            m_PlayerState.Heal(healAmount);
         }
+
+        //  healButton.gameObject.SetActive(false);
+        //  CloseShopInterface(null);
+    }
+
+    public void drillUpgrade()
+    {
+        drillLevelCostBlue = 5;
+        drillLevelCostRed = 0;
+        m_PlayerState.m_LocalPlayerData.drillLevel++;
+        GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
     }
 
     public void Accelerate(float addedAcceleration)
     {
-        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.PlayerOneAcceleration + addedAcceleration);
+        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
+
+        accelerateButton.gameObject.SetActive(false);
+        CloseShopInterface(null);
     }
 
     public void Disco(bool isDisco)
     {
         Debug.Log("DISCO!");
         m_PlayerState.SetDisco(isDisco);
+
+        discoButton.gameObject.SetActive(false);
+        CloseShopInterface(null);
     }
 }
