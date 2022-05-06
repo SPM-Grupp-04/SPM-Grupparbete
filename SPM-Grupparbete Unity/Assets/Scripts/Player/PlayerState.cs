@@ -8,16 +8,19 @@ using UnityEngine.Serialization;
 
 public class PlayerState : MonoBehaviour, IDamagable
 {
-    public PlayerStatistics m_LocalPlayerData = PlayerStatistics.Instance;
+    public PlayerStatistics m_LocalPlayerData;
 
     [SerializeField] private String playerName;
 
-   
-    
+    private void Awake()
+    {
+        m_LocalPlayerData = PlayerStatistics.Instance;
+    }
+
     private void Start()
     {
         
-        m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
+      //  m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
         m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
         m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
       
