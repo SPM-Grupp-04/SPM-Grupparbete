@@ -8,21 +8,24 @@ public class DroneBT : Tree
 {
     //Grund klassen för en drönare. Hör byggs trädet upp och variablar som alla drönare behöver läggstill.
     public static float fov = 6f;
-    public static float fovAttackRange = 1.5f;
+    public static float fovAttackRange = 5f;
     public static float droneSpeed = 4;
 
+    [SerializeField] private LineRenderer lr;
+    [SerializeField] private LayerMask ignorLayers;
     [SerializeField] private Transform playerTransform;
 
+    
     protected override TreeNode SetUpTree()
     {
-
+    
      TreeNode root = new Selector(new List<TreeNode> // Sätter roten till den sequens som är korrekt eller till att man följer spelaren.
         {
             new Sequence(new List<TreeNode> 
             {
                 
                 new CheckEnemyInAttackRange(transform),
-                new AttackEnemy(transform), 
+                new AttackEnemy(transform, ignorLayers, lr), 
                 
             }),
             
