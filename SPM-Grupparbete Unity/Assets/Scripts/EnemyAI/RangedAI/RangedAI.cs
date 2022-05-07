@@ -113,7 +113,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         this.playerPos = playerPos;
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
         currentHealth -= damage;
     }

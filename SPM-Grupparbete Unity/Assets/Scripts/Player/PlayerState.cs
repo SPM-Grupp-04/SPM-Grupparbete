@@ -85,7 +85,7 @@ public class PlayerState : MonoBehaviour, IDamagable
         
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
         if (playerName == "PlayerOne")
         {

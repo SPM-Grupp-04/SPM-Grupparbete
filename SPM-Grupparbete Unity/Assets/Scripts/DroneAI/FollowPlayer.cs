@@ -17,11 +17,12 @@ public class FollowPlayer :TreeNode
 
     public override NodeState Evaluate()
     {
-
+        //ClearData("Target");
         // Follow Player Logic
-        if (Vector3.Distance(droneTransform.position, playerTransform.position) > 2f)
+        if (Vector3.Distance(droneTransform.position, playerTransform.position) > 3f)
         {
-            droneTransform.position = Vector3.MoveTowards(droneTransform.position, playerTransform.position, 
+            droneTransform.position = Vector3.MoveTowards(droneTransform.position, 
+                new Vector3(playerTransform.position.x, 2, playerTransform.transform.position.z), 
                 DroneBT.droneSpeed * Time.deltaTime );
             
             droneTransform.LookAt(playerTransform.position);

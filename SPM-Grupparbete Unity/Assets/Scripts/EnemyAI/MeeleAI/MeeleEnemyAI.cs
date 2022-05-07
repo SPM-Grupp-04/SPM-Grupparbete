@@ -131,7 +131,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
         this.playerPos = playerPos;
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
         CurrentHealth -= damage;
     }
