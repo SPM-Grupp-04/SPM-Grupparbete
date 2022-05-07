@@ -31,7 +31,7 @@ public class VictoryConditionsScript : MonoBehaviour
     }
 
     [Flags]
-    private enum Components
+    public enum Components
     {
         UNASSIGNED = 0b_0000_0000,
         COMPONENT_1 = 0b_0000_0001,
