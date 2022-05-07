@@ -1,4 +1,5 @@
-﻿//no author, this was nicked from the Internet
+﻿//this was nicked from the Internet
+//original author: Joost van Schaik, https://localjoost.github.io/Making-only-one-entry-of-a-Flag-Enum-selectable-in-the-Unity-Editor/
 
 using System;
 using UnityEngine;
