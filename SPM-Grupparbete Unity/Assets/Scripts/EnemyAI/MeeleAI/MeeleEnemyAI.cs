@@ -37,6 +37,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     public Vector3 playerPos = new Vector3(100, 0, 100);
     void Start()
     {
+        base.Start();
         _animator = GetComponent<Animator>();
         playerTransform.Add(GameObject.Find("Player1").transform);
         playerTransform.Add(GameObject.Find("Player2").transform);

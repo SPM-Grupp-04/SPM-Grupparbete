@@ -24,7 +24,7 @@ namespace Utility.DroneAI
             
             object t = GetData("target");
 
-            Debug.Log(t);
+      
             
             if (t == null)
             {
