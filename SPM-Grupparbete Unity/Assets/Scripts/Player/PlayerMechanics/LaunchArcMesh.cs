@@ -9,7 +9,7 @@ public class LaunchArcMesh : MonoBehaviour
 {
     [SerializeField] private float meshWidth;
     
-    [SerializeField] private float velocity;
+    [SerializeField] [Range(1.0f, 100.0f)] private float velocity = 1.0f;
     [SerializeField] private float angle;
     [SerializeField] private float trajectoryArcIncreaseSpeed = 2.0f;
     [SerializeField] private float trajectoryArcAngleIncreaseSpeed = 1.0f;
