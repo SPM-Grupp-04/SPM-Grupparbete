@@ -12,9 +12,9 @@ public class PlayerStatistics
 {
     private static PlayerStatistics instance = null;
 
-    public int playerMaxHealth = 5;
-    public int playerOneHealth = 5;
-    public int playerTwoHealth = 5;
+    public float playerMaxHealth = 5;
+    public float playerOneHealth = 5;
+    public float playerTwoHealth = 5;
     public float playerOneAcceleration = 5.0f;
     public float playerTwoAcceleration = 5.0f;
     public bool playerOneDisco = false;
