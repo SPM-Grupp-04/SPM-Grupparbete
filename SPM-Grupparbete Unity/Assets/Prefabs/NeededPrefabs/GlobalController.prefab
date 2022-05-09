@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.1907945, y: -4.684968, z: 10.15815}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,4 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdf31265fa21304290ceba6894ae758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  IsSceneBeingLoaded: 0
+  playerStatistics:
+    playerMaxHealth: 30
+    playerOneHealth: 30
+    playerTwoHealth: 30
+    playerOneAcceleration: 5
+    playerTwoAcceleration: 5
+    playerOneDisco: 0
+    playerTwoDisco: 0
+    PosX: 0
+    PosY: 0
+    PosZ: 0
+    Crystals: 0
+    BlueCrystals: 0
+    RedCrystals: 0
+    drillLevel: 0
+    componentsCollectedMask: 0

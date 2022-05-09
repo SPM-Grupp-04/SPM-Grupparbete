@@ -119,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 4323223495364660604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 2.5}
-  m_LocalScale: {x: 1, y: 3, z: 6.5692673}
+  m_LocalScale: {x: 1.3978, y: 4.1934, z: 9.182522}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8756655488501742107}
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b1eb3d1b82d1e428f180cbbfe80a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallHP: 5
-  wallRequiredWeaponLevel: 1
+  wallHP: 100
+  wallRequiredWeaponLevel: 2
   wall: {fileID: 4323223495364660604}
   uiHP: {fileID: 5728160637988641899}
 --- !u!1 &5728160637988641899

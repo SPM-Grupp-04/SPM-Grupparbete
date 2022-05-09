@@ -15099,11 +15099,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6733500310833560130, guid: ff2899a5259c5a9478d8612514c837be, type: 3}
   m_PrefabInstance: {fileID: 522986773}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &531234975 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8388054274308269335, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
-  m_PrefabInstance: {fileID: 1155517420}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &532757253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33189,6 +33184,10 @@ PrefabInstance:
       propertyPath: wallHP
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 4323223495364660599, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
+      propertyPath: wallRequiredWeaponLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4323223495364660604, guid: 416e2e912e4221f47a3faabf6ce659b3, type: 3}
       propertyPath: m_Name
       value: WallTest (2)
@@ -33350,10 +33349,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goal
       objectReference: {fileID: 0}
-    - target: {fileID: 8388054274308269337, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 53aa3d5465b9aeb41b608e306a80b670, type: 2}
     - target: {fileID: 8388054274308269339, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -33406,28 +33401,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6425197954357338050, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
 --- !u!4 &1155517421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8388054274308269339, guid: 3a565fea9416d214fb7fafb84b9f7dba, type: 3}
   m_PrefabInstance: {fileID: 1155517420}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1155517431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531234975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 109df77911ef4d95a370dbac74b745e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToSwitchTo: 2
-  goalCondition: 1
 --- !u!1 &1157687237 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 38c852cdfab93754d89ee43b59081503, type: 3}
