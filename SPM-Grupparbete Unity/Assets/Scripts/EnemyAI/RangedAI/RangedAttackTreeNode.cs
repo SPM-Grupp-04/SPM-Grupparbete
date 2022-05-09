@@ -12,6 +12,7 @@ namespace Utility.EnemyAI
     {
         private NavMeshAgent agent;
         private Vector3 target;
+        private Transform firePoint;
 
         private GameObject throwableObject;
         private Vector3 currentVelocity;
@@ -23,9 +24,10 @@ namespace Utility.EnemyAI
         private RangedAI _rangedAI;
 
 
-        public RangedAttackTreeNode(Vector3 target, NavMeshAgent agent,
+        public RangedAttackTreeNode(Transform firePoint,Vector3 target, NavMeshAgent agent,
             GameObject throwabelObject, float throwUpForce, float throwForce, RangedAI rangedAI)
         {
+            this.firePoint = firePoint;
             this.agent = agent;
             this.target = target;
             this.throwableObject = throwabelObject;
@@ -40,15 +42,17 @@ namespace Utility.EnemyAI
             agent.isStopped = true;
             Transform agentT = agent.transform;
 
-            Vector3 direction = target - agentT.position;
+            /*Vector3 direction = target - agentT.position;
             Vector3 currentDirection =
                 Vector3.SmoothDamp(agentT.forward, direction, ref currentVelocity, smoothDamp);
             Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
-            agentT.rotation = rotation;
+            agentT.rotation = rotation;*/
+            
+            agentT.LookAt(target);
 
             if (_rangedAI.timer < 0)
             {
-                var shootEventInfo = new ShootEventInfo(agent.gameObject,
+                var shootEventInfo = new ShootEventInfo(firePoint,
                     this.throwableObject, throwUpForce, throwForce);
                 EventSystem.current.FireEvent(shootEventInfo);
                 _rangedAI.timer = throwCD;

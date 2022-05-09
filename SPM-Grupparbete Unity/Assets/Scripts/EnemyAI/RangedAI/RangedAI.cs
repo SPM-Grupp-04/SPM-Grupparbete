@@ -32,6 +32,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float throwCooldown;
     [SerializeField] private float throwUpForce;
     [SerializeField] private float throwForce = 30;
+    [SerializeField] private Transform firePoint;
 
     public Vector3 target = new Vector3(100, 0, 100);
     public float distanceToTargetPlayer = 100;
@@ -82,7 +83,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
             new RangeTreeNodeRange(target, distanceToTargetPlayer, rangedAttackRange, _animator);
 
         RangedAttackTreeNode rangedAttackTreeNode =
-            new RangedAttackTreeNode(playerPos, agent,
+            new RangedAttackTreeNode(firePoint,playerPos, agent,
                 throwabelObject, throwUpForce, throwForce, this);
 
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});

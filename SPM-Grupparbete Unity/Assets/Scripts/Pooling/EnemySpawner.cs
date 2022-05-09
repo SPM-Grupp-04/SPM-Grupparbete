@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         timer = totalAllowedSpawnTime;
-        pool = new ObjectPool<BaseClassEnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+        pool = new ObjectPool<BaseClassEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
         enemyAIHandler = GetComponent<EnemyAIHandler>();
         /*for (int i = 0; i < gameObjects.Length; i++)
@@ -66,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
             enemy = genericListOfBaseClassEnemyAI[i];
             for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
-                creatEnamy();
+                CreateEnemy();
             }
         }
     }
@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    BaseClassEnemyAI creatEnamy()
+    private BaseClassEnemyAI CreateEnemy()
     {
         // så att man kan sätta hur många % av en typ man vill ska finnas.
 
@@ -103,7 +103,7 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-    void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
+   private void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.transform.position = SpawnPos;
         meeleEnemyAI.gameObject.SetActive(true);

@@ -6,7 +6,7 @@ namespace EgilScripts.DieEvents
     public class ShootEventInfo : Event
     {
        // public GameObject target;
-        public GameObject ogPos;
+        public Transform ogPos;
         public GameObject throwableObject;
        
         public float throwUpwardForce;
@@ -14,7 +14,7 @@ namespace EgilScripts.DieEvents
         
         
 
-        public ShootEventInfo(GameObject ogPos, GameObject throwableObject,  float throwUpwardForce, float throwForce)
+        public ShootEventInfo(Transform ogPos, GameObject throwableObject,  float throwUpwardForce, float throwForce)
         {
            // this.target = target;
             this.ogPos = ogPos;
