@@ -150,7 +150,11 @@ public class PlayerController : MonoBehaviour
     
     public void UseInput(InputAction.CallbackContext useValue)
     {
-        useButtonPressed = useValue.performed;
+        //useButtonPressed = useValue.performed;
+        if (useValue.performed)
+        {
+            useButtonPressed = !useButtonPressed;
+        } 
     }
 
     public void SetMovementStatus(bool movementStatus)

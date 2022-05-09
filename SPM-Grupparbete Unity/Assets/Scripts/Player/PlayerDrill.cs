@@ -22,10 +22,14 @@ public class PlayerDrill : MonoBehaviour
      private int drillLevel;
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
-
+    
+    
     [SerializeField] Material lrMaterial;
     private LineRenderer lr;
 
+
+    [SerializeField] private float drillDistance = 3;
+    [SerializeField] private float laserDistance = 10;
     private float timer = 0;
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -49,6 +53,8 @@ public class PlayerDrill : MonoBehaviour
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
+        drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
+        laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
         drillLevel = playerStatistics.drillLevel;
         lr = GetComponent<LineRenderer>();
         DrillDamage(drillLevel);
@@ -246,6 +252,11 @@ public class PlayerDrill : MonoBehaviour
                 drillDamageOres = 3;
                 drillDamageMonsters = 3;
                 break;
+            default:
+                drillDamageOres = 3;
+                drillDamageMonsters = 3;
+                break;
+                
 
         }
 
