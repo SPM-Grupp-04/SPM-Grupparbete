@@ -61,23 +61,13 @@ public class EnemyAIHandler : MonoBehaviour
                 if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
                 {
                     enemyAI.PlayerPos(playerOnePosition);
-                    closestTarget = new Vector3(playerOnePosition.x + raidusAroundTarget *
-                        Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count),
-                        playerOnePosition.y,
-                        playerOnePosition.z + raidusAroundTarget *
-                        Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count));
-                    /*closestTarget = playerOnePosition;*/
+                    closestTarget = CalulatePosInCirkel(playerOnePosition, countEnemy);
                     closestDistance = distancePlayerOne;
                 }
                 else if (playerTwoIsActive)
                 {
                     enemyAI.PlayerPos(playerTowPosition);
-                    closestTarget = new Vector3(playerTowPosition.x + raidusAroundTarget *
-                        Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count),
-                        playerTowPosition.y,
-                        playerTowPosition.z + raidusAroundTarget *
-                        Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count));
-                    /*closestTarget = playerTowPosition;*/
+                    closestTarget = CalulatePosInCirkel(playerTowPosition, countEnemy);
                     closestDistance = distancePlayerTwo;
                 }
 
@@ -90,5 +80,15 @@ public class EnemyAIHandler : MonoBehaviour
                 countEnemy++;
             }
         }
+    }
+
+
+    private Vector3 CalulatePosInCirkel(Vector3 playerPos, int countEnemy)
+    {
+        return new Vector3(playerPos.x + raidusAroundTarget *
+            Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count),
+            playerPos.y,
+            playerPos.z + raidusAroundTarget *
+            Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count));
     }
 }
