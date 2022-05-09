@@ -48,8 +48,19 @@ public class EnemyAIHandler : MonoBehaviour
                 Vector3 closestTarget = new Vector3();
                 float closestDistance = 100;
 
+                if (!playerOneIsActive)
+                {
+                    distancePlayerOne = int.MaxValue;
+                }
+
+                if (!playerTwoIsActive)
+                {
+                    distancePlayerTwo = int.MaxValue;
+                }
+                
                 if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
                 {
+                    enemyAI.PlayerPos(playerOnePosition);
                     closestTarget = new Vector3(playerOnePosition.x + raidusAroundTarget *
                         Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count),
                         playerOnePosition.y,
@@ -60,6 +71,7 @@ public class EnemyAIHandler : MonoBehaviour
                 }
                 else if (playerTwoIsActive)
                 {
+                    enemyAI.PlayerPos(playerTowPosition);
                     closestTarget = new Vector3(playerTowPosition.x + raidusAroundTarget *
                         Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count),
                         playerTowPosition.y,
@@ -69,8 +81,9 @@ public class EnemyAIHandler : MonoBehaviour
                     closestDistance = distancePlayerTwo;
                 }
 
-                enemyAI.TargetPlayerPos(closestTarget);
+                enemyAI.PositionAroundTarget(closestTarget);
                 enemyAI.DistanceToPlayerPos(closestDistance);
+              
 
 
                 enemyAI.m_TopTreeNode.Evaluate();

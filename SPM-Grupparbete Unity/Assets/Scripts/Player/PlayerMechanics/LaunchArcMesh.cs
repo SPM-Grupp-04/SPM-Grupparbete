@@ -9,13 +9,13 @@ public class LaunchArcMesh : MonoBehaviour
 {
     [SerializeField] private float meshWidth;
     
-    [SerializeField] [Range(1.0f, 100.0f)] private float velocity = 1.0f;
-    [SerializeField] private float angle;
-    [SerializeField] private float trajectoryArcIncreaseSpeed = 2.0f;
+    [SerializeField] [Range(1.0f, 10.0f)] private float velocity = 1.0f;
+    [SerializeField] private float angle = 45.0f;
+    [SerializeField] [Range(1.0f, 5.0f)] private float trajectoryArcIncreaseSpeed = 2.0f;
     [SerializeField] private float trajectoryArcAngleIncreaseSpeed = 1.0f;
     [SerializeField] private int lineSegments = 10;
 
-    [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private LayerMask collisionLayerMask;
     
     private Mesh trajectoryMesh;
 
@@ -39,14 +39,6 @@ public class LaunchArcMesh : MonoBehaviour
         Vector3 localDirection = rotation * transform.forward + transform.up;
         return localDirection.normalized;
     }
-
-    // private void OnValidate()
-    // {
-    //     if (trajectoryMesh != null && Application.isPlaying)
-    //     {
-    //         RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
-    //     }
-    // }
 
     private void Awake()
     {
@@ -92,8 +84,6 @@ public class LaunchArcMesh : MonoBehaviour
     {
         velocity += (trajectoryArcIncreaseSpeed + trajectoryArcIncreaseSpeed) * Time.deltaTime;
         velocity = Mathf.Clamp(velocity, 0.0f, 10.0f);
-        angle += trajectoryArcAngleIncreaseSpeed * Time.deltaTime;
-        angle = Mathf.Clamp(angle, 45.0f, 90.0f);
     }
 
     private void TrajectoryArcDecrease()
@@ -148,7 +138,7 @@ public class LaunchArcMesh : MonoBehaviour
             float t = (float) i / (float) lineSegments;
             newTrajectoryPoint = CalculateTrajectoryPoint(t, maxDistance);
 
-            if (Physics.OverlapSphere(transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f, groundLayerMask).Length > 0)
+            if (Physics.OverlapSphere(transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f, collisionLayerMask).Length > 0)
             {
                 break;
             }

@@ -7,19 +7,25 @@ using UnityEngine.SceneManagement;
     {
         private BoxCollider goal;
         [SerializeField] private int sceneToSwitchTo;
+        [SerializeField] private int goalCondition;
         private void Awake()
         {
             goal = GetComponent<BoxCollider>();
         }
 
         PlayerStatistics playerStatistics = PlayerStatistics.Instance;
-        
-        private void OnTriggerEnter(Collider other)
+
+        private void OnCollisionEnter(Collision collision)
         {
             SaveData();
-            SceneManager.LoadScene(sceneToSwitchTo);
+            
+            if (PlayerStatistics.Instance.componentsCollectedMask == goalCondition)
+            {
+                SceneManager.LoadScene(sceneToSwitchTo);
+            }
         }
 
+       
         
         public void SaveData()
         {

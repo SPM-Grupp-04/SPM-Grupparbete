@@ -24,7 +24,7 @@ public class UI_PlayerHealth : MonoBehaviour
 
     }
 
-    private void ChangeHealthPlayerOne(int amount)
+    private void ChangeHealthPlayerOne(float amount)
     {
         sliderPlayerOne.value = amount;
         if (m_LocalPlayerDataTest.playerOneHealth >= 4)
@@ -41,7 +41,7 @@ public class UI_PlayerHealth : MonoBehaviour
         }
    
     }
-    private void ChangeHealthPlayerTwo(int amount)
+    private void ChangeHealthPlayerTwo(float amount)
     {
         sliderPlayerTwo.value = amount;
         if (m_LocalPlayerDataTest.playerTwoHealth >= 4)

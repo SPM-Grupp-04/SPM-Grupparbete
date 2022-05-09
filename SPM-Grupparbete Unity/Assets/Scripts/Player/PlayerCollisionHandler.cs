@@ -10,10 +10,6 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag.Equals("Goal"))
-        {
-            SceneManager.LoadScene(1);
-        }
         if (collision.transform.tag.Equals("Currency"))
         {
             collision.gameObject.GetComponent<OreCollection>().CollectOre();
@@ -34,6 +30,8 @@ public class PlayerCollisionHandler : MonoBehaviour
 
             }
         }
+
+        GlobalControl.Instance.playerStatistics = m_LocalPlayerDataTest;
     }
 
     

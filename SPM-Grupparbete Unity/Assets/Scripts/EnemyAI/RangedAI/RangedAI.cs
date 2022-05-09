@@ -35,11 +35,12 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     public Vector3 target = new Vector3(100, 0, 100);
     public float distanceToTargetPlayer = 100;
-
+    public Vector3 playerPos = new Vector3(100, 0, 100);
     public float timer;
 
     void Start()
     {
+        base.Start();
         timer = throwCooldown;
         _animator = GetComponent<Animator>();
         currentHealth = startHealth;
@@ -81,7 +82,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
             new RangeTreeNodeRange(target, distanceToTargetPlayer, rangedAttackRange, _animator);
 
         RangedAttackTreeNode rangedAttackTreeNode =
-            new RangedAttackTreeNode(target, agent,
+            new RangedAttackTreeNode(playerPos, agent,
                 throwabelObject, throwUpForce, throwForce, this);
 
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
@@ -98,7 +99,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         this.pool = pool;
     }
 
-    public override void TargetPlayerPos(Vector3 TargetPos)
+    public override void PositionAroundTarget(Vector3 TargetPos)
     {
         target = TargetPos;
     }
@@ -108,7 +109,12 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         distanceToTargetPlayer = distance;
     }
 
-    public void DealDamage(int damage)
+    public override void PlayerPos(Vector3 playerPos)
+    {
+        this.playerPos = playerPos;
+    }
+
+    public void DealDamage(float damage)
     {
         currentHealth -= damage;
     }
