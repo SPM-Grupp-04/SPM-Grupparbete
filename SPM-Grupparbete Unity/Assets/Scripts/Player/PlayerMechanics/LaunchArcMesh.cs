@@ -83,18 +83,18 @@ public class LaunchArcMesh : MonoBehaviour
     private void TrajectoryArcIncrease()
     {
         velocity += (trajectoryArcIncreaseSpeed + trajectoryArcIncreaseSpeed) * Time.deltaTime;
-        velocity = Mathf.Clamp(velocity, 0.0f, 10.0f);
+        velocity = Mathf.Clamp(velocity, 1.0f, 10.0f);
     }
 
     private void TrajectoryArcDecrease()
     {
         velocity -= trajectoryArcIncreaseSpeed * Time.deltaTime;
-        velocity = Mathf.Clamp(velocity, 0.0f, 10.0f);
+        velocity = Mathf.Clamp(velocity, 1.0f, 10.0f);
     }
 
     private void DisableTrajectoryArc()
     {
-        velocity = 0.0f;
+        velocity = 1.0f;
         trajectoryMesh.Clear();
     }
 

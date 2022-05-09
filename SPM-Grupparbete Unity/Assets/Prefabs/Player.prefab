@@ -491,10 +491,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2139519183}
-  - component: {fileID: 2139519182}
-  - component: {fileID: 2139519181}
-  - component: {fileID: 2139519180}
   - component: {fileID: 1968085593151929628}
+  - component: {fileID: 5745473002439537521}
+  - component: {fileID: 1141075925159147736}
+  - component: {fileID: 3739641424811235321}
   m_Layer: 0
   m_Name: Launch Mesh
   m_TagString: Untagged
@@ -517,7 +517,23 @@ Transform:
   m_Father: {fileID: 2965090648212625148}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &2139519182
+--- !u!114 &1968085593151929628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139519179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamitePrefab: {fileID: 7467092179448219033, guid: f19dfc90978220346b75ab4ab42b5699, type: 3}
+  launchArcMesh: {fileID: 3739641424811235321}
+  coolDownTime: 5
+  uiCooldowns: {fileID: 0}
+--- !u!23 &5745473002439537521
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,7 +575,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2139519181
+--- !u!33 &1141075925159147736
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -567,7 +583,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139519179}
   m_Mesh: {fileID: 0}
---- !u!114 &2139519180
+--- !u!114 &3739641424811235321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -584,26 +600,10 @@ MonoBehaviour:
   angle: 45
   trajectoryArcIncreaseSpeed: 2
   trajectoryArcAngleIncreaseSpeed: 1
-  lineSegments: 20
+  lineSegments: 10
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 2048
---- !u!114 &1968085593151929628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2139519179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dynamitePrefab: {fileID: 7467092179448219033, guid: f19dfc90978220346b75ab4ab42b5699, type: 3}
-  launchArcMesh: {fileID: 2139519180}
-  coolDownTime: 5
-  uiCooldowns: {fileID: 0}
 --- !u!1 &2965090648212624896
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +869,7 @@ MonoBehaviour:
     m_ActionName: Player/Use[/XInputControllerWindows/start]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2139519180}
+      - m_Target: {fileID: 3739641424811235321}
         m_TargetAssemblyTypeName: LaunchArcMesh, Assembly-CSharp
         m_MethodName: TrajectoryInput
         m_Mode: 0
