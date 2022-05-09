@@ -45,10 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7401241d732f9449ee676b3b3a547d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnThreshold: 0.5
+  spawnThreshold: 1
   rockStartingForce: {x: 0, y: 0, z: 0}
   rockSpawnDuration: 0.3
+  cameraShakeMagnitude: 20
+  cameraShakeDuration: 0.45
   rockPrefab: {fileID: 3438175990380011294, guid: de868e13614e7734c80c81f57e18534b, type: 3}
+  spawnArea: {fileID: 8511597042379925228}
 --- !u!65 &8511597042379925228
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -60,5 +63,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 1, z: 5}
+  m_Center: {x: 1, y: 10, z: 1}

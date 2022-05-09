@@ -3711,20 +3711,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2877231981913864814, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: spawnArea
-      value: 
-      objectReference: {fileID: 2123499230}
-    - target: {fileID: 2877231981913864814, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
       propertyPath: spawnThreshold
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2877231981913864814, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: cameraShakeDuration
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 2877231981913864814, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: cameraShakeMagnitude
-      value: 20
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8298439244533602663, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
       propertyPath: m_RootOrder
@@ -3770,33 +3758,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8511597042379925228, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8511597042379925228, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: m_Size.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8511597042379925228, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: m_Center.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8511597042379925228, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-      propertyPath: m_Center.y
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8641847214819372022, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
       propertyPath: m_Name
       value: Falling Rocks Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
---- !u!65 &2123499230 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 8511597042379925228, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
-  m_PrefabInstance: {fileID: 2123499229}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7368729970608807084
 PrefabInstance:
   m_ObjectHideFlags: 0

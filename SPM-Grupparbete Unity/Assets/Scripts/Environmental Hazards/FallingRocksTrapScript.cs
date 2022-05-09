@@ -104,7 +104,7 @@ public class FallingRocksTrapScript : MonoBehaviour
 
     private void SpawnRock()
     {
-        if (Random.value < SpawnThreshold)
+        if (Random.value * 1.1f < SpawnThreshold)
             return;
 
         float x = transform.position.x;
