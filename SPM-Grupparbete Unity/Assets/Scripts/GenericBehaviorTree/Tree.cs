@@ -10,19 +10,17 @@ namespace BehaviorTree
     {
         private TreeNode root = null;
 
-        protected void Start()
+        public void Start()
         {
             root = SetUpTree();
         }
 
         private void Update()
         {
-            if (root != null)
-            {
-                root.Evaluate();
-            }
+            root?.Evaluate(); // kollar om det är null
         }
 
+      
         protected abstract TreeNode SetUpTree();
     }
 }

@@ -40,6 +40,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     void Start()
     {
+        base.Start();
         timer = throwCooldown;
         _animator = GetComponent<Animator>();
         currentHealth = startHealth;
@@ -113,7 +114,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         this.playerPos = playerPos;
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
         currentHealth -= damage;
     }
