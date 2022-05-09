@@ -48,7 +48,7 @@ public class PlayerState : MonoBehaviour, IDamagable
                 
                 die(gameObject);
             }
-        }
+        } 
 
         if (playerName == "PlayerTwo")
         {

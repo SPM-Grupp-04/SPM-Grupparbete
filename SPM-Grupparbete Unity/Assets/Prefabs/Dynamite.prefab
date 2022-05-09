@@ -132,7 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionDelay: 3
   explosionRadius: 5
-  explosionForce: 500
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 136
@@ -140,7 +139,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   explosionParticleSystem: {fileID: 5762038673383498229}
+  capsuleCollider: {fileID: -2474082930302201402}
+  capsuleRigidBody: {fileID: 6742602341496923280}
   meshRenderer: {fileID: 586008625529941990}
+  fallingRockSpawner: {fileID: 8641847214819372022, guid: 7727b030bcd89c14bba674b7419039da, type: 3}
 --- !u!199 &3050696135776959882
 ParticleSystemRenderer:
   serializedVersion: 6

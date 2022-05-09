@@ -11,7 +11,6 @@ public class Dynamite : MonoBehaviour
     [Header("Explosion Properties")]
     [SerializeField] [Range(1.0f, 10.0f)] private float explosionDelay = 3.0f;
     [SerializeField] [Range(1.0f, 20.0f)] private float explosionRadius = 5.0f;
-    [SerializeField] [Range(100.0f, 1000.0f)] private float explosionForce = 500.0f;
     [Header("Explosion Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
@@ -21,18 +20,19 @@ public class Dynamite : MonoBehaviour
     private float explosionCountdown;
     private bool hasExploded;
 
-    private CapsuleCollider capsuleCollider;
-    private Rigidbody capsuleRigidBody;
+    [SerializeField] private CapsuleCollider capsuleCollider;
+    [SerializeField] private Rigidbody capsuleRigidBody;
 
     [SerializeField] private MeshRenderer meshRenderer;
-    
+
+    private FallingRocksTrapScript fallingRocksScript;
+
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
-    
+
     private void Awake()
     {
-        capsuleCollider = GetComponent<CapsuleCollider>();
-        capsuleRigidBody = GetComponent<Rigidbody>();
+        fallingRocksScript = FallingRocksTrapScript.Instance;
     }
 
     private void Start()
@@ -76,7 +76,7 @@ public class Dynamite : MonoBehaviour
             particleSystemCountdown -= Time.deltaTime;
             yield return null;
         } while (particleSystemCountdown > 0.0f);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     private void Explode()
@@ -88,7 +88,8 @@ public class Dynamite : MonoBehaviour
             var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 2);
             EventSystem.current.FireEvent(damageEvent);
         }
-
-        meshRenderer.enabled = false; 
+        fallingRocksScript.SetFallingRockAreaPosition(transform.position);
+        fallingRocksScript.SpawnRocks(true);
+        meshRenderer.enabled = false;
     }
 }
