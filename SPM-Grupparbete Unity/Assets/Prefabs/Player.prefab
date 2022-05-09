@@ -582,12 +582,12 @@ MonoBehaviour:
   meshWidth: 0.5
   velocity: 1
   angle: 45
-  trajectoryArcIncreaseSpeed: 0.01
+  trajectoryArcIncreaseSpeed: 2
   trajectoryArcAngleIncreaseSpeed: 1
   lineSegments: 20
-  groundLayerMask:
+  collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 2048
 --- !u!114 &1968085593151929628
 MonoBehaviour:
   m_ObjectHideFlags: 0
