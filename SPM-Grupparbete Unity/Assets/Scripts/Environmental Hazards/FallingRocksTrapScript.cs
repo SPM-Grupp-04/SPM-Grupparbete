@@ -56,6 +56,7 @@ public class FallingRocksTrapScript : MonoBehaviour
     }
     private void Awake()
     {
+        cameraShake = CameraShake.Instance;
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -85,7 +86,7 @@ public class FallingRocksTrapScript : MonoBehaviour
         if (spawnRocks)
         {
             StartCoroutine(SpawnRocksForDuration());
-            CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
+            cameraShake.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
             spawnRocks = false;
         }
     }
