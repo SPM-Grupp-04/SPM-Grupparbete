@@ -23,6 +23,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
 
+    [SerializeField] Material lrMaterial;
     private LineRenderer lr;
 
     private float timer = 0;
@@ -34,6 +35,15 @@ public class PlayerDrill : MonoBehaviour
     private bool canShoot = true;
     private bool isShooting;
     private bool isDrilling;
+
+    private bool isDisco = false;
+    Color c1 = Color.white;
+    Color c2;
+    int randomColour1;
+    int randomColour2;
+    int randomColour3;
+    float nextColour;
+    [SerializeField] private float delayTimer = 1;
 
     private void Awake()
     {
@@ -60,14 +70,22 @@ public class PlayerDrill : MonoBehaviour
                 timer = 0;
             }
         }
-        if (timer == 0 && isUsed == false)
+       
+
+        if(Time.time >= nextColour && isDisco == true)
         {
-            CoolDownDrill();
-            if (overHeatAmount <= 0)
-            {
-                canShoot = true;
-            }
+
+            randomColour1 = Random.Range(0, 255);
+            randomColour2 = Random.Range(0, 255);
+            randomColour3 = Random.Range(0, 255);
+            lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
+          
+            nextColour = Time.time + delayTimer;
         }
+        
+
+       
+       
     }
 
     private void FixedUpdate()
@@ -79,6 +97,15 @@ public class PlayerDrill : MonoBehaviour
         {
             DrillObject();
         }
+        
+        if (timer == 0 && isUsed == false)
+        {
+            CoolDownDrill();
+            if (overHeatAmount <= 0)
+            {
+                canShoot = true;
+            }
+        }
     }
 
     public void Shoot(bool state)
@@ -87,7 +114,7 @@ public class PlayerDrill : MonoBehaviour
     }
     public void Drill(bool state)
     {
-        isDrilling = true;
+        isDrilling = state;
     }
 
     private void DrillObject()
@@ -138,6 +165,7 @@ public class PlayerDrill : MonoBehaviour
                 LaserBetweenPoints(transform.position, shootHit.point);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
+                    Debug.Log("Enemy getting hit");
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);
@@ -157,6 +185,7 @@ public class PlayerDrill : MonoBehaviour
             Destroy(beamGO);
             if (timer <= 0)
             {
+                lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
             }

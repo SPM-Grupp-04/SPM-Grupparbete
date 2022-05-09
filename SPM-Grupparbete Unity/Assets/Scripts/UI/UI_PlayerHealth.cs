@@ -19,19 +19,19 @@ public class UI_PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        ChangeHealthPlayerOne(m_LocalPlayerDataTest.PlayerOneHealth);
-        ChangeHealthPlayerTwo(m_LocalPlayerDataTest.PlayerTwoHealth);
+        ChangeHealthPlayerOne(m_LocalPlayerDataTest.playerOneHealth);
+        ChangeHealthPlayerTwo(m_LocalPlayerDataTest.playerTwoHealth);
 
     }
 
-    private void ChangeHealthPlayerOne(int amount)
+    private void ChangeHealthPlayerOne(float amount)
     {
         sliderPlayerOne.value = amount;
-        if (m_LocalPlayerDataTest.PlayerOneHealth >= 4)
+        if (m_LocalPlayerDataTest.playerOneHealth >= 4)
         {
             barColourPlayerOne.color = green;
         }
-        else if (m_LocalPlayerDataTest.PlayerOneHealth > 1 && m_LocalPlayerDataTest.PlayerOneHealth <= 3)
+        else if (m_LocalPlayerDataTest.playerOneHealth > 1 && m_LocalPlayerDataTest.playerOneHealth <= 3)
         {
             barColourPlayerOne.color = yellow;
         }
@@ -41,14 +41,14 @@ public class UI_PlayerHealth : MonoBehaviour
         }
    
     }
-    private void ChangeHealthPlayerTwo(int amount)
+    private void ChangeHealthPlayerTwo(float amount)
     {
         sliderPlayerTwo.value = amount;
-        if (m_LocalPlayerDataTest.PlayerTwoHealth >= 4)
+        if (m_LocalPlayerDataTest.playerTwoHealth >= 4)
         {
             barColourPlayerTwo.color = green;
         }
-        else if (m_LocalPlayerDataTest.PlayerTwoHealth > 1 && m_LocalPlayerDataTest.PlayerTwoHealth <= 3)
+        else if (m_LocalPlayerDataTest.playerTwoHealth > 1 && m_LocalPlayerDataTest.playerTwoHealth <= 3)
         {
             barColourPlayerTwo.color = yellow;
         }

@@ -41,7 +41,7 @@ namespace BehaviorTree
         }
 
         public virtual NodeState Evaluate() => NodeState.FAILURE;
-
+     
         public void SetData(string key, object value)
         {
             dataContext[key] = value;

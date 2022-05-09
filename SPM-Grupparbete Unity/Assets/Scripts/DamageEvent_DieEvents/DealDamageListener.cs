@@ -13,7 +13,7 @@ public class DealDamageListener : MonoBehaviour
     {
         if (dieEvenInfo.gameObject.GetComponent<IDamagable>() != null)
         {
-            dieEvenInfo.gameObject.GetComponent<IDamagable>().DealDamage(dieEvenInfo.amountOfDamage);
+            dieEvenInfo.gameObject.GetComponent<IDamagable>().DealDamage(dieEvenInfo.amountOfDamage );
         }
     }
 }
