@@ -16,7 +16,7 @@ public class ShieldAbility : MonoBehaviour
     private GameObject shieldGO;
     private float timer = 0;
     
-    private float nextShieldTime = 5f;
+    private float nextShieldTime = 10f;
 
     private static bool canUseShield;
 
