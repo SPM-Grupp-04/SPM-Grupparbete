@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class MainMenuScript : MonoBehaviour
+public class UI_MainMenuScript : MonoBehaviour
 {
     private PlayerStatistics playerStats = PlayerStatistics.Instance;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
-public class PausMenu : MonoBehaviour
+public class UI_PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     [SerializeField] private GameObject pauseMenuUI;
