@@ -43,11 +43,13 @@ public class AttackTarget : TreeNode
 
         if (target.gameObject.layer == 7)
         {
+           
             Laser();
         }
 
         if (target.gameObject.layer == 12)
         {
+           
             Drill();
         }
 

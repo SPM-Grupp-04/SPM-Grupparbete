@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float chasingRange;
     [SerializeField] private float hitRange;
     [SerializeField] private float movementSpeed;
-
+  
     [SerializeField] private MeleeWepon _meleeWepon;
 
     private List<Transform> playerTransform = new List<Transform>();
@@ -35,25 +36,28 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     public Vector3 target = new Vector3(100, 0, 100);
     public float distanceToTargetPlayer = 100;
     public Vector3 playerPos = new Vector3(100, 0, 100);
+    private float timeUntillAnimationPlay;
     void Start()
     {
         base.Start();
         _animator = GetComponent<Animator>();
-        playerTransform.Add(GameObject.Find("Player1").transform);
-        playerTransform.Add(GameObject.Find("Player2").transform);
+       // playerTransform.Add(GameObject.Find("Player1").transform);
+       // playerTransform.Add(GameObject.Find("Player2").transform);
 
         agent.speed = movementSpeed;
         base.Start();
         currentHealth = startingHealth;
+     
+
         // SetUpTree();
-       // SetUpTree();
+        // SetUpTree();
     }
 
 
     private void Update()
     {
         SetUpTree();
-       
+
         if (currentHealth < startingHealth)
         {
             currentHealth += Time.deltaTime * healthRestoreRate;
@@ -78,6 +82,8 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
         // m_TopTreeNode.Evaluate();
     }
 
+   
+
 
     private void Awake()
     {
@@ -89,15 +95,15 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     {
         // Istället för att skcika med spelarens transform hela tiden så skicka bara med platsen.
 
-        
+
         ChaseTreeNodeMelee chaseTreeNodeMelee =
             new ChaseTreeNodeMelee(target, distanceToTargetPlayer, agent, _animator); // Animator.
 
         RangeTreeNodeMelee inChaseRange =
-            new RangeTreeNodeMelee(chasingRange,  distanceToTargetPlayer, _animator);
+            new RangeTreeNodeMelee(chasingRange, distanceToTargetPlayer, _animator);
 
         RangeTreeNodeMelee inMeleeRange =
-            new RangeTreeNodeMelee(hitRange,  distanceToTargetPlayer, _animator);
+            new RangeTreeNodeMelee(hitRange, distanceToTargetPlayer, _animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
             new MeeleAttackTreeNode(playerPos, agent, _animator, _meleeWepon);
