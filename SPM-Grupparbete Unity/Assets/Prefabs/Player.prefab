@@ -746,8 +746,12 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   movementAcceleration: 5
   rotationSmoothing: 25
+  boxCollider: {fileID: 2965090648212625151}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1172,8 @@ MonoBehaviour:
   drillDamageOres: 1
   drillDamageMonsters: 1
   lrMaterial: {fileID: 2100000, guid: 17e41abbc04d83440bb40763f1b4236e, type: 2}
+  drillDistance: 3
+  laserDistance: 10
   delayTimer: 1
 --- !u!120 &515942599
 LineRenderer:
