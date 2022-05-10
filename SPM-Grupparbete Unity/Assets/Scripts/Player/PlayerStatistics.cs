@@ -25,6 +25,7 @@ public class PlayerStatistics
     public int BlueCrystals;
     public int RedCrystals;
     public int drillLevel = 0;
+    public int weaponLevel;
     public int componentsCollectedMask = 0;
 
     private PlayerStatistics()

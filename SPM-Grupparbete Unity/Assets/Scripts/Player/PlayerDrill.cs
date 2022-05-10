@@ -5,6 +5,7 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerDrill : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
 
-     private int drillLevel;
+    private int weaponLevel;
+    private int drillLevel;
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
     
@@ -53,11 +55,12 @@ public class PlayerDrill : MonoBehaviour
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
-        drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
-        laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
         drillLevel = playerStatistics.drillLevel;
         lr = GetComponent<LineRenderer>();
+        WeaponRange(weaponLevel);
         DrillDamage(drillLevel);
+        drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
+        laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
     }
 
     // Update is called once per frame
@@ -80,7 +83,7 @@ public class PlayerDrill : MonoBehaviour
 
         if(Time.time >= nextColour && isDisco == true)
         {
-
+            
             randomColour1 = Random.Range(0, 255);
             randomColour2 = Random.Range(0, 255);
             randomColour3 = Random.Range(0, 255);
@@ -121,6 +124,7 @@ public class PlayerDrill : MonoBehaviour
     public void Drill(bool state)
     {
         isDrilling = state;
+        
     }
 
     private void DrillObject()
@@ -145,6 +149,7 @@ public class PlayerDrill : MonoBehaviour
 
     void LaserBetweenPoints(Vector3 start, Vector3 end)
     {
+        
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
@@ -165,6 +170,7 @@ public class PlayerDrill : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount < 100 && canShoot)
         {
+            
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
@@ -260,5 +266,26 @@ public class PlayerDrill : MonoBehaviour
 
         }
 
+    }
+
+    private void WeaponRange(int level)
+    {
+        switch (level)
+        {
+            case 0:
+                laserDistance = 10f;
+                break;
+            case 1:
+                laserDistance = 15f;
+                break;
+            case 2:
+                laserDistance = 20f;
+                break;
+            default:
+                break;
+                
+                
+
+        }
     }
 }

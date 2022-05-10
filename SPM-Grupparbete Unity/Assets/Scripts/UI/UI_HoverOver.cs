@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,18 +8,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class UI_HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UI_HoverOver : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    [SerializeField] private Text text;
+    private GameObject displayWindow;
 
-    [SerializeField]
-    private string header;
+    private void Awake()
+    {
+        displayWindow = GameObject.Find("TextWindow");
+    }
 
-    [SerializeField] private string cost;
-
-    [SerializeField] private string body;
-    
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,18 +29,14 @@ public class UI_HoverOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+
+    public void OnSelect(BaseEventData eventData)
     {
-        text.fontSize = 40;
-        text.text += header + "\n";
-        text.fontSize = 30;
-        text.text += cost + "\n";
-        text.fontSize = 25;
-        text.text += body;
+        displayWindow.GetComponent<UI_ShopDisplayText>().DisplayText(this.gameObject);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnDeselect(BaseEventData eventData)
     {
-        text.text = "";
+        displayWindow.GetComponent<UI_ShopDisplayText>().RemoveDisplayText();
     }
 }

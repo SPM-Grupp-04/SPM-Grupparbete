@@ -16,6 +16,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button accelerateButton;
     [SerializeField] private Button discoButton;
     [SerializeField] private Button drillButton;
+    [SerializeField] private Button weaponButton;
 
     [SerializeField] private int drillLevelCostBlue = 5;
     private int drillLevelCostRed = 0;
@@ -30,6 +31,7 @@ public class ShopScript : MonoBehaviour
 
     void Awake()
     {
+        drillButton.Select();
         shopInterfaceBackground.SetActive(false);
         shopInterfaceOpened = false;
 
@@ -71,6 +73,7 @@ public class ShopScript : MonoBehaviour
     private void OpenShopInterface(Collider playerCollider)
     {
         shopInterfaceOpened = true;
+        
         //playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(false);
         shopInterfaceBackground.SetActive(true);
         Debug.Log(shopInterfaceBackground.activeSelf);
@@ -93,11 +96,12 @@ public class ShopScript : MonoBehaviour
     //{
     //}
 
-    public void Heal(int healAmount)
+    public void Heal()
     {
         if (m_PlayerState.m_LocalPlayerData.BlueCrystals > 2)
         {
-            m_PlayerState.Heal(healAmount);
+            m_PlayerState.Heal();
+            healButton.Select();
         }
     }
 
@@ -109,6 +113,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.drillLevel = level;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
             GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+            drillButton.Select();
         }
     }
 
@@ -116,11 +121,21 @@ public class ShopScript : MonoBehaviour
     {
         accelerateButton.interactable = false;
         m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
+        accelerateButton.Select();
     }
 
     public void Disco(bool isDisco)
     {
         m_PlayerState.SetDisco(isDisco);
         discoButton.interactable = false;
+        discoButton.Select();
+    }
+
+    public void WeaponUpgrade(int level)
+    {
+        
+        m_PlayerState.m_LocalPlayerData.weaponLevel = level;
+        weaponButton.interactable = false;
+        weaponButton.Select();
     }
 }
