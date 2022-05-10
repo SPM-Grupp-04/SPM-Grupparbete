@@ -5,7 +5,6 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerDrill : MonoBehaviour
 {
@@ -20,14 +19,14 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
 
-    private int weaponLevel;
-    private int drillLevel;
+     private int drillLevel;
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
     
     
-    [SerializeField] Material lrMaterial;
+    //[SerializeField] Material lrMaterial;
     private LineRenderer lr;
+    [SerializeField] private Material[] beamMaterials;
 
 
     [SerializeField] private float drillDistance = 3;
@@ -55,12 +54,11 @@ public class PlayerDrill : MonoBehaviour
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
-        drillLevel = playerStatistics.drillLevel;
-        lr = GetComponent<LineRenderer>();
-        WeaponRange(weaponLevel);
-        DrillDamage(drillLevel);
         drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
         laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
+        drillLevel = playerStatistics.drillLevel;
+        lr = GetComponent<LineRenderer>();
+        DrillDamage(drillLevel);
     }
 
     // Update is called once per frame
@@ -83,11 +81,11 @@ public class PlayerDrill : MonoBehaviour
 
         if(Time.time >= nextColour && isDisco == true)
         {
-            
+
             randomColour1 = Random.Range(0, 255);
             randomColour2 = Random.Range(0, 255);
             randomColour3 = Random.Range(0, 255);
-            lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
+            //lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
           
             nextColour = Time.time + delayTimer;
         }
@@ -124,7 +122,6 @@ public class PlayerDrill : MonoBehaviour
     public void Drill(bool state)
     {
         isDrilling = state;
-        
     }
 
     private void DrillObject()
@@ -134,22 +131,31 @@ public class PlayerDrill : MonoBehaviour
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
-            LaserBetweenPoints(transform.position, hit.point);
+            LaserBetweenPoints(transform.position, hit.point, 1);
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
         else
         {
-            LaserBetweenPoints(transform.position, drillPoint.transform.position);
+            LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
             return;
         }
 
     }
 
 
-    void LaserBetweenPoints(Vector3 start, Vector3 end)
+    void LaserBetweenPoints(Vector3 start, Vector3 end, int material)
     {
-        
+        if (material == 1)
+        {
+            lr.material = beamMaterials[0];
+        }
+
+        else if(material == 2)
+        {
+            lr.material = beamMaterials[1];
+        }
+
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
@@ -170,11 +176,10 @@ public class PlayerDrill : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount < 100 && canShoot)
         {
-            
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
-                LaserBetweenPoints(transform.position, shootHit.point);
+                LaserBetweenPoints(transform.position, shootHit.point, 2);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Debug.Log("Enemy getting hit");
@@ -187,7 +192,7 @@ public class PlayerDrill : MonoBehaviour
             }
             else
             {
-                LaserBetweenPoints(transform.position, laserPoint.transform.position);
+                LaserBetweenPoints(transform.position, laserPoint.transform.position, 2);
                 overHeatAmount += overHeatIncreaseAmount;
                 return;
             }
@@ -266,26 +271,5 @@ public class PlayerDrill : MonoBehaviour
 
         }
 
-    }
-
-    private void WeaponRange(int level)
-    {
-        switch (level)
-        {
-            case 0:
-                laserDistance = 10f;
-                break;
-            case 1:
-                laserDistance = 15f;
-                break;
-            case 2:
-                laserDistance = 20f;
-                break;
-            default:
-                break;
-                
-                
-
-        }
     }
 }
