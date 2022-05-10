@@ -19,6 +19,10 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button weaponButton;
 
     [SerializeField] private int drillLevelCostBlue = 5;
+    [SerializeField] private int healCostBlue = 2;
+    [SerializeField] private int weaponCostBlue = 5;
+    [SerializeField] private int speedCostBlue = 5;
+    [SerializeField] private int discoCostBlue = 5;
     private int drillLevelCostRed = 0;
 
     private Collider[] shopColliders;
@@ -31,7 +35,6 @@ public class ShopScript : MonoBehaviour
 
     void Awake()
     {
-        drillButton.Select();
         shopInterfaceBackground.SetActive(false);
         shopInterfaceOpened = false;
 
@@ -40,14 +43,23 @@ public class ShopScript : MonoBehaviour
         //buttons = GetComponentsInChildren<Button>();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
+            return;
+        drillButton.Select();
+        CanPlayersHeal();
+
+        
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
-        
         if (other.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
         {
+
             foreach (Button b in GetComponentsInChildren<Button>(includeInactive: true))
             {
                 
@@ -98,11 +110,14 @@ public class ShopScript : MonoBehaviour
 
     public void Heal()
     {
-        if (m_PlayerState.m_LocalPlayerData.BlueCrystals > 2)
-        {
-            m_PlayerState.Heal();
-            healButton.Select();
-        }
+        
+            if (m_PlayerState.m_LocalPlayerData.BlueCrystals > healCostBlue)
+            {
+                m_PlayerState.Heal();
+                m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCostBlue;
+                healButton.Select();
+                healButton.interactable = false;
+            }
     }
 
     public void DrillUpgrade(int level)
@@ -119,23 +134,48 @@ public class ShopScript : MonoBehaviour
 
     public void Accelerate(float addedAcceleration)
     {
-        accelerateButton.interactable = false;
-        m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
-        accelerateButton.Select();
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= speedCostBlue)
+        {
+            accelerateButton.interactable = false;
+            m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
+
+            accelerateButton.Select();
+        }
     }
 
     public void Disco(bool isDisco)
     {
-        m_PlayerState.SetDisco(isDisco);
-        discoButton.interactable = false;
-        discoButton.Select();
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= discoCostBlue)
+        {
+            m_PlayerState.SetDisco(isDisco);
+            discoButton.interactable = false;
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
+
+            discoButton.Select();
+        }
     }
 
     public void WeaponUpgrade(int level)
     {
-        
-        m_PlayerState.m_LocalPlayerData.weaponLevel = level;
-        weaponButton.interactable = false;
-        weaponButton.Select();
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= weaponCostBlue)
+        {
+            m_PlayerState.m_LocalPlayerData.weaponLevel = level;
+            weaponButton.interactable = false;
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
+            weaponButton.Select();
+        }
+    }
+
+    private void CanPlayersHeal()
+    {
+        if (m_PlayerState.m_LocalPlayerData.playerOneHealth.Equals(m_PlayerState.m_LocalPlayerData.playerMaxHealth)
+            && m_PlayerState.m_LocalPlayerData.playerTwoHealth.Equals(m_PlayerState.m_LocalPlayerData.playerMaxHealth))
+        {
+            healButton.interactable = false;
+            return;   
+        }
+
+        healButton.interactable = true;
     }
 }
