@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Dynamite : MonoBehaviour
@@ -15,7 +16,7 @@ public class Dynamite : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
     [Header("Particle System")]
-    [SerializeField] private ParticleSystem explosionParticleSystem;
+    [SerializeField] private float particleSystemPlayDuration = 5.0f;
     private float particleSystemCountdown;
     private float explosionCountdown;
     private bool hasExploded;
@@ -25,20 +26,22 @@ public class Dynamite : MonoBehaviour
 
     [SerializeField] private MeshRenderer meshRenderer;
 
-    private FallingRocksTrapScript fallingRocksScript;
+    [SerializeField] private GameObject dynamiteExplosionPrefab;
+
+    private FallingRocksSpawner fallingRocksSpawner;
 
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
 
     private void Awake()
     {
-        fallingRocksScript = FallingRocksTrapScript.Instance;
+        fallingRocksSpawner = FallingRocksSpawner.Instance;
     }
 
     private void Start()
     {
         explosionCountdown = explosionDelay;
-        particleSystemCountdown = 2.0f;
+        particleSystemCountdown = particleSystemPlayDuration;
     }
 
     void Update()
@@ -69,13 +72,18 @@ public class Dynamite : MonoBehaviour
             explosionCountdown -= Time.deltaTime;
             yield return null;
         } while (explosionCountdown > 0.0f);
-        explosionParticleSystem.Play();
+        GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
+        //Gamepad.current.SetMotorSpeeds(1,0);
+        capsuleCollider.enabled = false;
         Explode();
         do
         {
             particleSystemCountdown -= Time.deltaTime;
             yield return null;
         } while (particleSystemCountdown > 0.0f);
+        
+        //Gamepad.current.SetMotorSpeeds(0,0);
+        Destroy(dynamiteExplosion);
         Destroy(gameObject);
     }
 
@@ -84,12 +92,11 @@ public class Dynamite : MonoBehaviour
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
         foreach (Collider enemyObject in enemyColliders)
         {
-            Debug.Log(enemyObject.gameObject.name);
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 2);
+            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
             EventSystem.current.FireEvent(damageEvent);
         }
-        fallingRocksScript.SetFallingRockAreaPosition(transform.position);
-        fallingRocksScript.SpawnRocks(true);
+        fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
+        fallingRocksSpawner.SpawnRocks(true);
         meshRenderer.enabled = false;
     }
 }

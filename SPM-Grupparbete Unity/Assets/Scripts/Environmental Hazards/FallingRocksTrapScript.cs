@@ -24,8 +24,6 @@ public class FallingRocksTrapScript : MonoBehaviour
 
     [SerializeField] private Collider spawnArea;
 
-    private CameraShake cameraShake;
-
     private Vector3 cameraFollowPoint;
 
     private static FallingRocksTrapScript instance;
@@ -56,7 +54,6 @@ public class FallingRocksTrapScript : MonoBehaviour
     }
     private void Awake()
     {
-        cameraShake = CameraShake.Instance;
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -86,7 +83,7 @@ public class FallingRocksTrapScript : MonoBehaviour
         if (spawnRocks)
         {
             StartCoroutine(SpawnRocksForDuration());
-            cameraShake.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
+            CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
             spawnRocks = false;
         }
     }
@@ -104,7 +101,7 @@ public class FallingRocksTrapScript : MonoBehaviour
 
     private void SpawnRock()
     {
-        if (Random.value * 1.1f < SpawnThreshold)
+        if (Random.value * 2.0f < SpawnThreshold)
             return;
 
         float x = transform.position.x;
