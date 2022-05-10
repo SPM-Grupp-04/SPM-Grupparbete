@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject drill;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
-    [SerializeField] [Range(1.0f, 10f)] private float rotationSmoothing = 5.0f;
+    [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
