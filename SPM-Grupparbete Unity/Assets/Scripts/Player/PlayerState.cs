@@ -20,6 +20,7 @@ public class PlayerState : MonoBehaviour, IDamagable
     private void Start()
     {
         
+        
       //  m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
         m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
         m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
@@ -36,6 +37,15 @@ public class PlayerState : MonoBehaviour, IDamagable
             m_LocalPlayerData.playerTwoHealth = GlobalControl.Instance.playerStatistics.playerTwoHealth;
             m_LocalPlayerData.playerTwoAcceleration = GlobalControl.Instance.playerStatistics.playerTwoAcceleration;
             m_LocalPlayerData.playerTwoDisco = GlobalControl.Instance.playerStatistics.playerTwoDisco;
+        }
+
+        if (m_LocalPlayerData.playerOneHealth <= 0)
+        {
+            m_LocalPlayerData.playerOneHealth = 1;
+        }
+        if (m_LocalPlayerData.playerTwoHealth <= 0)
+        {
+            m_LocalPlayerData.playerTwoHealth = 1;
         }
     }
 
@@ -74,9 +84,9 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     }
 
-    public void Heal(int amount)
+    public void Heal()
     {
-        m_LocalPlayerData.playerMaxHealth ++;
+       
 
         m_LocalPlayerData.playerOneHealth = m_LocalPlayerData.playerMaxHealth;
         m_LocalPlayerData.playerTwoHealth = m_LocalPlayerData.playerMaxHealth;
