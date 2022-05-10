@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (PausMenu.GameIsPause == false)
+        if (UI_PausMenu.GameIsPause == false)
         {
             PlayerMovement();
             ShootOrDrill();
