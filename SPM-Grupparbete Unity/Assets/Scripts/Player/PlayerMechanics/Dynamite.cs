@@ -121,8 +121,8 @@ public class Dynamite : MonoBehaviour
         }
         
         isExploding = true;
-        fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
-        fallingRocksSpawner.SpawnRocks(true);
+        //fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
+        //fallingRocksSpawner.SpawnRocks(true);
         meshRenderer.enabled = false;
     }
 }
