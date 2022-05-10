@@ -48,6 +48,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
         //SetUpTree();
+        base.randomNumber = Random.Range(1, 10);
     }
 
     void Update()

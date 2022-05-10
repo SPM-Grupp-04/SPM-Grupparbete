@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 using Tree = BehaviorTree.Tree;
 
 
@@ -17,6 +18,8 @@ public class EnemyAIHandler : MonoBehaviour
     public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
     private Transform playerOne;
     private Transform playerTwo;
+    private static Vector3 dynamite;
+    private float distanceToDynamite;
 
     [SerializeField] [Range(0.1f, 5f)] private float raidusAroundTarget = 0.5f;
 
@@ -24,6 +27,11 @@ public class EnemyAIHandler : MonoBehaviour
     {
         playerOne = GameObject.Find("Player1").transform;
         playerTwo = GameObject.Find("Player2").transform;
+    }
+
+    public static void SetDynamite(Vector3 dyn)
+    {
+        dynamite = dyn;
     }
 
     private void Update()
@@ -42,8 +50,15 @@ public class EnemyAIHandler : MonoBehaviour
                 // EnemyAI.SetDistance till spelaren
                 // EnemyAI.SetDinPlats i cirkel
                 Vector3 aiPos = enemyAI.gameObject.transform.position;
+
+
                 float distancePlayerOne = Vector3.Distance(playerOnePosition, aiPos);
                 float distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPos);
+                if (dynamite != Vector3.zero)
+                {
+                    distanceToDynamite = Vector3.Distance(dynamite, aiPos);
+                }
+
 
                 Vector3 closestTarget = new Vector3();
                 float closestDistance = 100;
@@ -57,8 +72,15 @@ public class EnemyAIHandler : MonoBehaviour
                 {
                     distancePlayerTwo = int.MaxValue;
                 }
-                
-                if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
+
+               
+                if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)
+                {
+                    
+                    closestTarget = CalulatePosInCirkel(dynamite, countEnemy);
+                    closestDistance = distanceToDynamite;
+                }
+                else if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
                 {
                     enemyAI.PlayerPos(playerOnePosition);
                     closestTarget = CalulatePosInCirkel(playerOnePosition, countEnemy);
@@ -73,7 +95,6 @@ public class EnemyAIHandler : MonoBehaviour
 
                 enemyAI.PositionAroundTarget(closestTarget);
                 enemyAI.DistanceToPlayerPos(closestDistance);
-              
 
 
                 enemyAI.m_TopTreeNode.Evaluate();

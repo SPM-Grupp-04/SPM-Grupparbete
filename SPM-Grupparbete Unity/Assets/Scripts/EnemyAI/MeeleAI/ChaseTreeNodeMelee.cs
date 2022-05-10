@@ -13,16 +13,16 @@ public class ChaseTreeNodeMelee : TreeNode
     private NavMeshAgent agent;
     private Animator _animator;
     private Vector3 target;
-    private float distanceToPlayer;
+    private float distanceToTarget;
 
 
-    public ChaseTreeNodeMelee(Vector3 playerPos,float distanceToPlayer ,NavMeshAgent agent, Animator animator)
+    public ChaseTreeNodeMelee(Vector3 target,float distanceToTarget ,NavMeshAgent agent, Animator animator)
     {
         _animator = animator;
        // this.targets = targets;
         this.agent = agent;
-        target = playerPos;
-        this.distanceToPlayer = distanceToPlayer;
+        this.target = target;
+        this.distanceToTarget = distanceToTarget;
 
     }
 
@@ -42,7 +42,7 @@ public class ChaseTreeNodeMelee : TreeNode
             }
         }*/
 
-        if (distanceToPlayer > 0.2f)
+        if (distanceToTarget > 0.2f)
         {
             agent.isStopped = false;
             agent.SetDestination(target);
