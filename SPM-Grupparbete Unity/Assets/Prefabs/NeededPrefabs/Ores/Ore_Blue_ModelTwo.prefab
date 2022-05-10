@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 6979470723937351644}
   - component: {fileID: 6979470723937351645}
   - component: {fileID: 6979470723937351643}
-  - component: {fileID: 6585371861808445604}
+  - component: {fileID: -1699073997196217922}
   m_Layer: 12
   m_Name: Ore_Blue_ModelTwo
   m_TagString: Rocks
@@ -133,7 +133,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6979470723937351640}
-  m_Mesh: {fileID: -2714021702331702330, guid: 5f067d86444db9343a61453fa9694acf, type: 3}
+  m_Mesh: {fileID: 5074915313714801821, guid: 5f067d86444db9343a61453fa9694acf, type: 3}
 --- !u!23 &6979470723937351645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -193,8 +193,8 @@ MonoBehaviour:
   ore: {fileID: 4120802665321256897, guid: 9152fa5b54e0fe04dbddb4337dafb9a2, type: 3}
   uiHP: {fileID: 6979470724584502975}
   collecitbleCrystals: 3
---- !u!64 &6585371861808445604
-MeshCollider:
+--- !u!65 &-1699073997196217922
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -203,10 +203,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2714021702331702330, guid: 5f067d86444db9343a61453fa9694acf, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.2293967, y: 2.1819284, z: 1.9534394}
+  m_Center: {x: 0.023263514, y: 0.55258214, z: -0.069934666}
 --- !u!1 &6979470724009866864
 GameObject:
   m_ObjectHideFlags: 0

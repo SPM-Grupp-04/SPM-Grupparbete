@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 2429452918239139690}
   - component: {fileID: 2429452918239139691}
   - component: {fileID: 2429452918239139693}
-  - component: {fileID: 7555599614777372234}
+  - component: {fileID: 7545732017536400754}
   m_Layer: 0
   m_Name: Ore_Red_ModelOne
   m_TagString: Rocks
@@ -401,7 +401,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2429452918239139694}
-  m_Mesh: {fileID: -5110330671985609037, guid: 0e257448ccedffc4d86272f63241c4a5, type: 3}
+  m_Mesh: {fileID: 5769515877552298121, guid: 0e257448ccedffc4d86272f63241c4a5, type: 3}
 --- !u!23 &2429452918239139691
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -461,8 +461,8 @@ MonoBehaviour:
   ore: {fileID: 4120802665321256897, guid: 09f64d0cf366e90458daa64269d19e8d, type: 3}
   uiHP: {fileID: 2429452917492733449}
   collecitbleCrystals: 1
---- !u!64 &7555599614777372234
-MeshCollider:
+--- !u!65 &7545732017536400754
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -471,10 +471,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5110330671985609037, guid: 0e257448ccedffc4d86272f63241c4a5, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.9515779, y: 2.9911351, z: 2.647049}
+  m_Center: {x: 0.103518456, y: 0.7733074, z: -0.06873953}
 --- !u!1 &2429452918447854045
 GameObject:
   m_ObjectHideFlags: 0
