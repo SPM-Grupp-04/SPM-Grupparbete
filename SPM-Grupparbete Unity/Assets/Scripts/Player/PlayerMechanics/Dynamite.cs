@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Dynamite : MonoBehaviour
@@ -72,12 +73,16 @@ public class Dynamite : MonoBehaviour
             yield return null;
         } while (explosionCountdown > 0.0f);
         GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
+        //Gamepad.current.SetMotorSpeeds(1,0);
+        capsuleCollider.enabled = false;
         Explode();
         do
         {
             particleSystemCountdown -= Time.deltaTime;
             yield return null;
         } while (particleSystemCountdown > 0.0f);
+        
+        //Gamepad.current.SetMotorSpeeds(0,0);
         Destroy(dynamiteExplosion);
         Destroy(gameObject);
     }
@@ -87,8 +92,7 @@ public class Dynamite : MonoBehaviour
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
         foreach (Collider enemyObject in enemyColliders)
         {
-            Debug.Log(enemyObject.gameObject.name);
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 2);
+            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
             EventSystem.current.FireEvent(damageEvent);
         }
         fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
