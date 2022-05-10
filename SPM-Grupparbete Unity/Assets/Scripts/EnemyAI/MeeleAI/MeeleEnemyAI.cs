@@ -41,8 +41,8 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     {
         base.Start();
         _animator = GetComponent<Animator>();
-        playerTransform.Add(GameObject.Find("Player1").transform);
-        playerTransform.Add(GameObject.Find("Player2").transform);
+       // playerTransform.Add(GameObject.Find("Player1").transform);
+       // playerTransform.Add(GameObject.Find("Player2").transform);
 
         agent.speed = movementSpeed;
         base.Start();
