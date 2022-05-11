@@ -27,10 +27,19 @@ public class PlayerDrill : MonoBehaviour
     //[SerializeField] Material lrMaterial;
     private LineRenderer lr;
     [SerializeField] private Material[] beamMaterials;
+    
+    //particlesytems
+    [SerializeField] private ParticleSystem laserParticles;
+    [SerializeField] private ParticleSystem drillParticles;
 
 
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
+
+    
+    
+    
+    
     private float timer = 0;
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -49,9 +58,11 @@ public class PlayerDrill : MonoBehaviour
     int randomColour3;
     float nextColour;
     [SerializeField] private float delayTimer = 1;
+    
 
     private void Awake()
     {
+       
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
         drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
@@ -64,6 +75,7 @@ public class PlayerDrill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (isUsed == false)
         {
             lr.enabled = false;
@@ -132,6 +144,13 @@ public class PlayerDrill : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
             LaserBetweenPoints(transform.position, hit.point, 1);
+           /*
+            if (drillParticles.isPlaying == false)
+            {
+                drillParticles.Play();
+            }
+            
+            */
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
@@ -149,13 +168,14 @@ public class PlayerDrill : MonoBehaviour
         if (material == 1)
         {
             lr.material = beamMaterials[0];
+            
         }
 
         else if(material == 2)
         {
             lr.material = beamMaterials[1];
+            
         }
-
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
@@ -180,6 +200,10 @@ public class PlayerDrill : MonoBehaviour
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
+                if (laserParticles.isPlaying == false)
+                {
+                    laserParticles.Play();
+                }
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Debug.Log("Enemy getting hit");
@@ -216,6 +240,8 @@ public class PlayerDrill : MonoBehaviour
         {
             isDrilling = false;
             isShooting = false;
+            drillParticles.Stop();
+            laserParticles.Stop();
         }
 
     }

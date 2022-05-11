@@ -271,7 +271,7 @@ MonoBehaviour:
       - m_Target: {fileID: 42110313}
         m_TargetAssemblyTypeName: ShopScript, Assembly-CSharp
         m_MethodName: Heal
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -497,6 +497,10 @@ MonoBehaviour:
   drillButton: {fileID: 254404803258351252}
   weaponButton: {fileID: 5895394464882621039}
   drillLevelCostBlue: 5
+  healCostBlue: 5
+  weaponCostBlue: 10
+  speedCostBlue: 10
+  discoCostBlue: 50
   buttonsArray: []
 --- !u!1 &254404804154225486
 GameObject:
