@@ -6166,7 +6166,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2022273591, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_AmplitudeGain
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887617, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Name
@@ -30317,6 +30317,10 @@ PrefabInstance:
     - target: {fileID: 2965090648212624896, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad
       objectReference: {fileID: 0}
     - target: {fileID: 2965090648212625148, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_RootOrder

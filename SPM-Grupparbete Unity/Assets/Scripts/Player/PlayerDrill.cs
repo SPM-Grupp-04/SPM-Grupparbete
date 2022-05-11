@@ -35,6 +35,11 @@ public class PlayerDrill : MonoBehaviour
 
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
+
+    
+    
+    
+    
     private float timer = 0;
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -57,6 +62,7 @@ public class PlayerDrill : MonoBehaviour
 
     private void Awake()
     {
+       
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
         drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
@@ -138,11 +144,13 @@ public class PlayerDrill : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
             LaserBetweenPoints(transform.position, hit.point, 1);
+           /*
             if (drillParticles.isPlaying == false)
             {
                 drillParticles.Play();
             }
             
+            */
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
@@ -168,7 +176,6 @@ public class PlayerDrill : MonoBehaviour
             lr.material = beamMaterials[1];
             
         }
-
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
