@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -13,11 +14,6 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private GameObject shopInterfaceBackground;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] [Range(1.0f, 10.0f)] private float shopAreaRadius = 5.0f;
-    [SerializeField] private Button healButton;
-    [SerializeField] private Button accelerateButton;
-    [SerializeField] private Button discoButton;
-    [SerializeField] private Button drillButton;
-    [SerializeField] private Button weaponButton;
 
     [SerializeField] private int drillLevelCostBlue = 5;
     [SerializeField] private int healCostBlue = 2;
@@ -27,12 +23,20 @@ public class ShopScript : MonoBehaviour
     
     private int drillLevelCostRed = 0;
     private Collider[] shopColliders;
-    private Dictionary<Button, bool> buttonDictionary = new Dictionary<Button, bool>();
-    private PlayerState m_PlayerState;
-    
-    
-    
     private SphereCollider shopCollider;
+    private PlayerState m_PlayerState;
+    bool pauseButtonPressed;
+    private bool GameIsPause;
+    
+    private Dictionary<Button, bool> buttonDictionary = new Dictionary<Button, bool>();
+    [Header("Buttons for shop")]
+    [SerializeField] private Button healButton;
+    [SerializeField] private Button accelerateButton;
+    [SerializeField] private Button discoButton;
+    [SerializeField] private Button drillButton;
+    [SerializeField] private Button weaponButton;
+    
+    
     
     
     // Update is called once per frame
@@ -77,32 +81,35 @@ public class ShopScript : MonoBehaviour
             return;
         if (other.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
         {
-            OpenShopInterface(other);
-           
+            OpenShopInterface();
+            Debug.Log("WOW");
         }
         else
         {
-            CloseShopInterface(other);
+            CloseShopInterface();
         }
+        
     }
+
 
     private void OnTriggerExit(Collider other)
     {
-        CloseShopInterface(other);
+        CloseShopInterface();
         
     }
 
-    private void OpenShopInterface(Collider playerCollider)
+    private void OpenShopInterface()
     {
         
-        //playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(false);
         shopInterfaceBackground.SetActive(true);
         Debug.Log(shopInterfaceBackground.activeSelf);
     }
-
-    private void CloseShopInterface(Collider playerCollider)
+    public void CancelButtonInput(InputAction.CallbackContext cancelButtonValue)
     {
-        //playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(true);
+       
+    }
+    private void CloseShopInterface()
+    {
         shopInterfaceBackground.SetActive(false);
     }
 
@@ -212,5 +219,10 @@ public class ShopScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CloseShop()
+    {
+        CloseShopInterface();
     }
 }
