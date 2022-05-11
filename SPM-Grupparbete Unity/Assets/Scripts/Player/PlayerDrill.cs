@@ -24,8 +24,9 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private int drillDamageMonsters = 1;
     
     
-    [SerializeField] Material lrMaterial;
+    //[SerializeField] Material lrMaterial;
     private LineRenderer lr;
+    [SerializeField] private Material[] beamMaterials;
 
 
     [SerializeField] private float drillDistance = 3;
@@ -84,7 +85,7 @@ public class PlayerDrill : MonoBehaviour
             randomColour1 = Random.Range(0, 255);
             randomColour2 = Random.Range(0, 255);
             randomColour3 = Random.Range(0, 255);
-            lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
+            //lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
           
             nextColour = Time.time + delayTimer;
         }
@@ -130,21 +131,31 @@ public class PlayerDrill : MonoBehaviour
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
-            LaserBetweenPoints(transform.position, hit.point);
+            LaserBetweenPoints(transform.position, hit.point, 1);
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
         else
         {
-            LaserBetweenPoints(transform.position, drillPoint.transform.position);
+            LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
             return;
         }
 
     }
 
 
-    void LaserBetweenPoints(Vector3 start, Vector3 end)
+    void LaserBetweenPoints(Vector3 start, Vector3 end, int material)
     {
+        if (material == 1)
+        {
+            lr.material = beamMaterials[0];
+        }
+
+        else if(material == 2)
+        {
+            lr.material = beamMaterials[1];
+        }
+
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
@@ -168,7 +179,7 @@ public class PlayerDrill : MonoBehaviour
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
-                LaserBetweenPoints(transform.position, shootHit.point);
+                LaserBetweenPoints(transform.position, shootHit.point, 2);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Debug.Log("Enemy getting hit");
@@ -181,7 +192,7 @@ public class PlayerDrill : MonoBehaviour
             }
             else
             {
-                LaserBetweenPoints(transform.position, laserPoint.transform.position);
+                LaserBetweenPoints(transform.position, laserPoint.transform.position, 2);
                 overHeatAmount += overHeatIncreaseAmount;
                 return;
             }
