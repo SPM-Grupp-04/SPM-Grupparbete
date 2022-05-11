@@ -96,7 +96,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7467092179448219033}
   serializedVersion: 2
-  m_Mass: 3.7
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -114,10 +114,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.67235595
+  m_Height: 2.5866706
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.08550097, y: -0.07651617, z: 0.086854696}
 --- !u!114 &8521678323379612420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,17 +130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44ff71c288ac7d4c83f5bc8c16d2bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDelay: 3
+  explosionDelay: 1.35
   explosionRadius: 5
-  explosionForce: 500
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1096
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  explosionParticleSystem: {fileID: 5762038673383498229}
+  particleSystemPlayDuration: 5
+  capsuleCollider: {fileID: -2474082930302201402}
+  capsuleRigidBody: {fileID: 6742602341496923280}
   meshRenderer: {fileID: 586008625529941990}
+  dynamiteExplosionPrefab: {fileID: 2647021994092932670, guid: ee3c43e195f3a0f4dbd42a7e5d72abae, type: 3}
 --- !u!199 &3050696135776959882
 ParticleSystemRenderer:
   serializedVersion: 6
