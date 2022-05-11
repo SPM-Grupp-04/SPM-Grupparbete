@@ -10,12 +10,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject drill;
     [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] private LayerMask wallLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
-    [SerializeField] [Range(0.0f, 1.0f)] private float colliderMargin = 0.01f;
-    [SerializeField] private BoxCollider boxCollider;
-    private Collider[] penetrationColliders = new Collider[2];
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
@@ -43,7 +39,6 @@ public class PlayerController : MonoBehaviour
         {
             PlayerMovement();
             ShootOrDrill();
-            FixOverlapPenetration();
         }
         RestrictMovement();
     }
@@ -207,27 +202,5 @@ public class PlayerController : MonoBehaviour
         Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
-    }
-    
-    private void FixOverlapPenetration()
-    {
-        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-            boxCollider.transform.rotation, wallLayerMask);
-
-        while (colliderCount > 0)
-        {
-            for (int i = 0; i < colliderCount; i++)
-            {
-                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
-                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
-                        out var direction, out var distance))
-                {
-                    Vector3 separationVector = direction * distance;
-                    transform.position += separationVector + separationVector.normalized * colliderMargin;
-                }
-            }
-            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-                boxCollider.transform.rotation, wallLayerMask);
-        }
     }
 }
