@@ -16,20 +16,7 @@ public class UI_HoverOver : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         displayWindow = GameObject.Find("TextWindow");
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
+    
     public void OnSelect(BaseEventData eventData)
     {
         displayWindow.GetComponent<UI_ShopDisplayText>().DisplayText(this.gameObject);

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ShopScript : MonoBehaviour
@@ -23,34 +24,51 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private int weaponCostBlue = 5;
     [SerializeField] private int speedCostBlue = 5;
     [SerializeField] private int discoCostBlue = 5;
-    private int drillLevelCostRed = 0;
-
-    private Collider[] shopColliders;
     
-    [SerializeField] private Button[] buttonsArray;
-    private bool shopInterfaceOpened;
+    private int drillLevelCostRed = 0;
+    private Collider[] shopColliders;
+    private Dictionary<Button, bool> buttonDictionary = new Dictionary<Button, bool>();
     private PlayerState m_PlayerState;
-
+    
+    
+    
+    private SphereCollider shopCollider;
+    
+    
     // Update is called once per frame
-
-    void Awake()
+    private void Start()
     {
+        
+        for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
+        {
+            Transform temp = shopInterfaceBackground.transform.GetChild(i);
+            if (temp.gameObject.CompareTag("ShopButton"))
+            {
+                buttonDictionary.Add(shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>(), false);
+            }
+        }
+
+        foreach (KeyValuePair<Button, bool> test in buttonDictionary)
+        {
+            Debug.Log("hei");
+            Debug.Log(test.Key.ToString() + test.Value.ToString());
+        }
+        
         shopInterfaceBackground.SetActive(false);
-        shopInterfaceOpened = false;
-
+        shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
-
-        //buttons = GetComponentsInChildren<Button>();
+        shopCollider.radius = shopAreaRadius;
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
         drillButton.Select();
         CanPlayersHeal();
-
-        
+        UpdateShop();
     }
 
     private void OnTriggerStay(Collider other)
@@ -59,16 +77,8 @@ public class ShopScript : MonoBehaviour
             return;
         if (other.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
         {
-
-            foreach (Button b in GetComponentsInChildren<Button>(includeInactive: true))
-            {
-                
-                if (b.gameObject.activeSelf)
-                {
-                    OpenShopInterface(other);
-                    break;
-                }
-            }
+            OpenShopInterface(other);
+           
         }
         else
         {
@@ -84,7 +94,6 @@ public class ShopScript : MonoBehaviour
 
     private void OpenShopInterface(Collider playerCollider)
     {
-        shopInterfaceOpened = true;
         
         //playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(false);
         shopInterfaceBackground.SetActive(true);
@@ -93,7 +102,6 @@ public class ShopScript : MonoBehaviour
 
     private void CloseShopInterface(Collider playerCollider)
     {
-        shopInterfaceOpened = false;
         //playerCollider.gameObject.GetComponent<PlayerController>().SetMovementStatus(true);
         shopInterfaceBackground.SetActive(false);
     }
@@ -103,11 +111,7 @@ public class ShopScript : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
     }
-
-    //void OnClick(GameObject go)
-    //{
-    //}
-
+    
     public void Heal()
     {
         
@@ -129,6 +133,8 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
             GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
             drillButton.Select();
+            buttonDictionary[drillButton] = true;
+            UpdateShop();
         }
     }
 
@@ -139,7 +145,7 @@ public class ShopScript : MonoBehaviour
             accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
-
+            buttonDictionary[accelerateButton] = true;
             accelerateButton.Select();
         }
     }
@@ -151,7 +157,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.SetDisco(isDisco);
             discoButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
-
+            buttonDictionary[discoButton] = true;
             discoButton.Select();
         }
     }
@@ -163,6 +169,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.weaponLevel = level;
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
+            buttonDictionary[weaponButton] = true;
             weaponButton.Select();
         }
     }
@@ -177,5 +184,33 @@ public class ShopScript : MonoBehaviour
         }
 
         healButton.interactable = true;
+    }
+
+    private void UpdateShop()
+    {
+        if (buttonDictionary[drillButton] == false)
+        {
+            foreach (var button in buttonDictionary.Keys)
+            {
+                if (!button.Equals(drillButton))
+                {
+                    button.interactable = false;
+                }
+            }
+        }
+        else
+        {
+            foreach (var button in buttonDictionary.Keys)
+            {
+                if (buttonDictionary[button] == false)
+                {
+                    button.interactable = true;
+                }
+                else
+                {
+                    button.interactable = false;
+                }
+            }
+        }
     }
 }
