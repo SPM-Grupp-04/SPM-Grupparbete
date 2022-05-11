@@ -29,8 +29,8 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private Material[] beamMaterials;
     
     //particlesytems
-    [SerializeField] private ParticleSystem laserParticles;
-    [SerializeField] private ParticleSystem drillParticles;
+    [SerializeField] private ParticleSystem laserRing;
+    [SerializeField] private ParticleSystem laserEmission;
 
 
     [SerializeField] private float drillDistance = 3;
@@ -102,7 +102,8 @@ public class PlayerDrill : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+    {   
+        Debug.Log(laserRing.isPlaying);
         if (isShooting)
         {
             ShootObject();
@@ -138,10 +139,10 @@ public class PlayerDrill : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
             LaserBetweenPoints(transform.position, hit.point, 1);
-            if (drillParticles.isPlaying == false)
+            /*if (drillParticles.isPlaying == false)
             {
                 drillParticles.Play();
-            }
+            }*/
             
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
@@ -193,9 +194,10 @@ public class PlayerDrill : MonoBehaviour
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
-                if (laserParticles.isPlaying == false)
+                if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
                 {
-                    laserParticles.Play();
+                    laserRing.Play();
+                    laserEmission.Play();
                 }
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
@@ -233,8 +235,10 @@ public class PlayerDrill : MonoBehaviour
         {
             isDrilling = false;
             isShooting = false;
-            drillParticles.Stop();
-            laserParticles.Stop();
+            laserEmission.Stop();
+            laserEmission.Clear();
+            laserRing.Stop();
+            laserRing.Clear();
         }
 
     }
