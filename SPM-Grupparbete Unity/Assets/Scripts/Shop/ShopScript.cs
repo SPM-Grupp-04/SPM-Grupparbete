@@ -4,10 +4,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class ShopScript : MonoBehaviour
 {
@@ -28,7 +30,7 @@ public class ShopScript : MonoBehaviour
     bool pauseButtonPressed;
     private bool GameIsPause;
     
-    private Dictionary<Button, bool> buttonDictionary = new Dictionary<Button, bool>();
+    private Dictionary<string, bool> buttonDictionary = new Dictionary<string, bool>();
     [Header("Buttons for shop")]
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
@@ -48,14 +50,16 @@ public class ShopScript : MonoBehaviour
             Transform temp = shopInterfaceBackground.transform.GetChild(i);
             if (temp.gameObject.CompareTag("ShopButton"))
             {
-                buttonDictionary.Add(shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>(), false);
+                string addedButton = shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>().GetHashCode().ToString();
+                buttonDictionary.Add(addedButton, false);
+                temp.name = addedButton.ToString();
             }
         }
 
-        foreach (KeyValuePair<Button, bool> test in buttonDictionary)
+        foreach (KeyValuePair<string, bool> test in buttonDictionary)
         {
-            Debug.Log("hei");
-            Debug.Log(test.Key.ToString() + test.Value.ToString());
+            
+            Debug.Log(test.Key + test.Value.ToString());
         }
         
         shopInterfaceBackground.SetActive(false);
@@ -103,10 +107,7 @@ public class ShopScript : MonoBehaviour
         shopInterfaceBackground.SetActive(true);
         Debug.Log(shopInterfaceBackground.activeSelf);
     }
-    public void CancelButtonInput(InputAction.CallbackContext cancelButtonValue)
-    {
-       
-    }
+    
     private void CloseShopInterface()
     {
         shopInterfaceBackground.SetActive(false);
@@ -139,7 +140,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
             GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
             drillButton.Select();
-            buttonDictionary[drillButton] = true;
+            buttonDictionary[drillButton.GetHashCode().ToString()] = true;
             UpdateShop();
         }
     }
@@ -151,7 +152,7 @@ public class ShopScript : MonoBehaviour
             accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
-            buttonDictionary[accelerateButton] = true;
+            buttonDictionary[accelerateButton.GetHashCode().ToString()] = true;
             accelerateButton.Select();
         }
     }
@@ -163,7 +164,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.SetDisco(isDisco);
             discoButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
-            buttonDictionary[discoButton] = true;
+            buttonDictionary[discoButton.GetHashCode().ToString()] = true;
             discoButton.Select();
         }
     }
@@ -175,7 +176,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.weaponLevel = level;
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
-            buttonDictionary[weaponButton] = true;
+            buttonDictionary[weaponButton.GetHashCode().ToString()] = true;
             weaponButton.Select();
         }
     }
@@ -194,30 +195,47 @@ public class ShopScript : MonoBehaviour
 
     private void UpdateShop()
     {
-        if (buttonDictionary[drillButton] == false)
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
+        if (buttonDictionary[drillButton.GetHashCode().ToString()] == false)
         {
-            foreach (var button in buttonDictionary.Keys)
+            foreach (string hashCode in buttonDictionary.Keys)
             {
-                if (!button.Equals(drillButton))
+                if (!hashCode.Equals(drillButton.GetHashCode().ToString()))
                 {
-                    button.interactable = false;
+                    FindButton(hashCode).interactable = false;
+                    
                 }
             }
+
+            
         }
         else
         {
-            foreach (var button in buttonDictionary.Keys)
+            foreach (string hashCode in buttonDictionary.Keys)
             {
-                if (buttonDictionary[button] == false)
+                if (buttonDictionary[hashCode] == false)
                 {
-                    button.interactable = true;
+                    FindButton(hashCode).interactable = true;
                 }
                 else
                 {
-                    button.interactable = false;
+                    
+                    FindButton(hashCode).interactable = false;
                 }
             }
         }
+        stopWatch.Stop();
+        TimeSpan ts = stopWatch.Elapsed;
+       
+        Debug.Log("Run time: " + ts);
+    }
+
+    private Button FindButton(string hashCode)
+    {
+        GameObject temp = GameObject.Find("UI_Shop/ShopCanvas/ShopInterfaceBackground/" + hashCode);
+        Button tempButton = temp.GetComponent<Button>();
+        return tempButton;
     }
 
     public void CloseShop()

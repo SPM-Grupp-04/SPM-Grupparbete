@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject drill;
+    private PlayerDrill drillScript;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-
+        drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
 
@@ -139,9 +140,9 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-            Debug.Log("SHOOT");
-            drill.gameObject.SendMessage("Shoot", true);
-            drill.gameObject.SendMessage("DrillInUse", true);
+            drillScript.Shoot(true);
+            drillScript.DrillInUse(true);
+            drillScript.Drill(false);
             if (!source.isPlaying)
             {
                 PlayLaserWeaponSound();
@@ -152,8 +153,9 @@ public class PlayerController : MonoBehaviour
         {
             if (isDrilling)
             {
-                drill.gameObject.SendMessage("DrillObject");
-                drill.gameObject.SendMessage("DrillInUse", true);
+                drillScript.Shoot(false);
+                drillScript.Drill(true);
+                drillScript.DrillInUse(true);
                 if (!source.isPlaying)
                 {
                     PlayDrillSound();
@@ -161,7 +163,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                drill.gameObject.SendMessage("DrillInUse", false);
+                drillScript.DrillInUse(false);
                 StopSound();
             }
         }
