@@ -11,7 +11,7 @@ public abstract class BaseClassEnemyAI : Tree
     public TreeNode m_TopTreeNode;
 
     public int randomNumber;
-    
+
     public abstract void SetPool(IObjectPool<BaseClassEnemyAI> pool);
     public abstract void PositionAroundTarget(Vector3 TargetPos);
     public abstract void DistanceToPlayerPos(float distance);
