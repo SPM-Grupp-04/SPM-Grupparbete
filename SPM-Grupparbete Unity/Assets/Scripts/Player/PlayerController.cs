@@ -175,8 +175,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayDrillSound()
     {
-       Debug.Log("Här");
-       source.clip = drillSound;
+        source.clip = drillSound;
        source.Play();
     }
 
