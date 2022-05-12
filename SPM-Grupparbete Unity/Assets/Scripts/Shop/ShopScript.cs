@@ -199,7 +199,7 @@ public class ShopScript : MonoBehaviour
 
     private void UpdateShop()
     {
-        if (m_PlayerState.m_LocalPlayerData.drillLevel > 1)
+        if (m_PlayerState.m_LocalPlayerData.drillLevel < 1)
         {
             drillButton.interactable = true;
             healButton.interactable = false;
