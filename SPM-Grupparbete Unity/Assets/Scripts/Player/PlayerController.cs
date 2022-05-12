@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
     
     [SerializeField] private AudioClip drillSound, laserSound;
+
+    
+    private Animator animator;
     
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -116,10 +120,13 @@ public class PlayerController : MonoBehaviour
     {
         if (movementEnabled)
         {
+            
             UpdatePlayer();
         }
         else
         {
+            
+            animator.SetBool("Idel",true);
             velocity = Vector3.zero;
         }
     }
