@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class CheckEnemyInAttackRange : TreeNode
+public class CheckPlayerInAttackRange : TreeNode
 {
     private Transform objectItsAttachedToTransform;
-    private LayerMask layerMask = LayerMask.GetMask("Enemy");
-
-    public CheckEnemyInAttackRange(Transform objectItsAttachedToTransform)
+    private LayerMask layerMask = LayerMask.GetMask("Player");
+    private float fov;
+    public CheckPlayerInAttackRange(Transform objectItsAttachedToTransform, float fov)
     {
         this.objectItsAttachedToTransform = objectItsAttachedToTransform;
-       
+        this.fov = fov;
+
     }
 
     public override NodeState Evaluate()
@@ -25,7 +26,7 @@ public class CheckEnemyInAttackRange : TreeNode
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(
-                objectItsAttachedToTransform.position, DroneBT.fovAttackRange, layerMask);
+                objectItsAttachedToTransform.position, fov, layerMask);
 
             // OM vi träffade någonting så ska vi sätta det på collider plats 0. med dess trannsform som value.
             if (colliders.Length > 0)
@@ -37,6 +38,7 @@ public class CheckEnemyInAttackRange : TreeNode
             }
 
             // Det fanns ingen inärheten och vi får fail i sate.
+            ;
             state = NodeState.FAILURE;
             return state;
         }
