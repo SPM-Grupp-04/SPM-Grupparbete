@@ -40,7 +40,7 @@ public class AttackEnemy : TreeNode
         // Kör ett event när cooldownen tillåter.
         if (timeRemaining < 0.0f)
         {
-            var damageEvent = new DealDamageEventInfo(target.gameObject, 1);
+            var damageEvent = new DamageDealt(target.gameObject, 1);
             EventSystem.current.FireEvent(damageEvent);
         }
 

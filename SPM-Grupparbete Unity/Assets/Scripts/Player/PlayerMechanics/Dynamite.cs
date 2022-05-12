@@ -85,7 +85,7 @@ public class Dynamite : MonoBehaviour
         foreach (Collider enemyObject in enemyColliders)
         {
             Debug.Log(enemyObject.gameObject.name);
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 2);
+            var damageEvent = new DamageDealt(enemyObject.gameObject, 2);
             EventSystem.current.FireEvent(damageEvent);
         }
 

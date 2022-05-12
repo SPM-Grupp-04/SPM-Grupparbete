@@ -22,7 +22,7 @@ public class MeleeWepon : MonoBehaviour
         if (timeRemaining < 0.0f)
         {
            
-            var damageEvent = new DealDamageEventInfo(other.gameObject, 1);
+            var damageEvent = new DamageDealt(other.gameObject, 1);
             EventSystem.current.FireEvent(damageEvent);
         }
 
