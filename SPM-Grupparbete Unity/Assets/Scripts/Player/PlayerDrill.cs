@@ -31,6 +31,8 @@ public class PlayerDrill : MonoBehaviour
     //particlesytems
     [SerializeField] private ParticleSystem laserRing;
     [SerializeField] private ParticleSystem laserEmission;
+    [SerializeField] private ParticleSystem drillRing;
+    [SerializeField] private ParticleSystem drillEmission;
 
 
     [SerializeField] private float drillDistance = 3;
@@ -135,15 +137,18 @@ public class PlayerDrill : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        
+        if (drillRing.isPlaying == false && drillEmission.isPlaying == false)
+        {
+            drillRing.Play();
+            drillEmission.Play();
+        }
+        
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
             LaserBetweenPoints(transform.position, hit.point, 1);
-            /*if (drillParticles.isPlaying == false)
-            {
-                drillParticles.Play();
-            }*/
-            
+
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
@@ -152,6 +157,7 @@ public class PlayerDrill : MonoBehaviour
             LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
             return;
         }
+        
 
     }
 
@@ -161,13 +167,11 @@ public class PlayerDrill : MonoBehaviour
         if (material == 1)
         {
             lr.material = beamMaterials[0];
-            
         }
 
         else if(material == 2)
         {
             lr.material = beamMaterials[1];
-            
         }
 
         lr.enabled = true;
@@ -241,6 +245,10 @@ public class PlayerDrill : MonoBehaviour
             laserEmission.Clear();
             laserRing.Stop();
             laserRing.Clear();
+            drillEmission.Stop();
+            drillEmission.Clear();
+            drillRing.Stop();
+            drillRing.Clear();
         }
 
     }
