@@ -613,10 +613,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamitePrefab: {fileID: 7467092179448219033, guid: f19dfc90978220346b75ab4ab42b5699, type: 3}
+  dynamitePrefab: {fileID: 7467092179448219033, guid: 0caf637a81e9bb44da30891d66a64945, type: 3}
   launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
-  uiCooldowns: {fileID: 0}
+  uiCooldowns: {fileID: 8897414557443401525, guid: e54d38a53f629534195f56c9fc833376, type: 3}
 --- !u!23 &5745473002439537521
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -970,7 +970,7 @@ MonoBehaviour:
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
         m_TargetAssemblyTypeName: UI_PausMenu, Assembly-CSharp
         m_MethodName: PauseButtonInput
         m_Mode: 0
