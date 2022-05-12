@@ -79,10 +79,9 @@ public class ShopScript : MonoBehaviour
     {
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
-        if (other.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
+        if (other.gameObject.GetComponent<PlayerController>().IsMapSwitched())
         {
             OpenShopInterface();
-            Debug.Log("WOW");
         }
         else
         {

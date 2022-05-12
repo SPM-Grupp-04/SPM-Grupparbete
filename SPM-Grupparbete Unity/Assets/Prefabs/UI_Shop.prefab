@@ -479,16 +479,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shopAreaRadius: 5
-  healButton: {fileID: 254404803675625744}
-  accelerateButton: {fileID: 624931317074647717}
-  discoButton: {fileID: 3034946119786229408}
-  drillButton: {fileID: 254404803258351252}
-  weaponButton: {fileID: 5895394464882621039}
   drillLevelCostBlue: 5
   healCostBlue: 5
   weaponCostBlue: 10
   speedCostBlue: 10
   discoCostBlue: 50
+  healButton: {fileID: 254404803675625744}
+  accelerateButton: {fileID: 624931317074647717}
+  discoButton: {fileID: 3034946119786229408}
+  drillButton: {fileID: 254404803258351252}
+  weaponButton: {fileID: 5895394464882621039}
 --- !u!135 &1696193632
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -841,7 +841,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.4292453, g: 1, b: 0.9558303, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
