@@ -27,6 +27,10 @@ public class PlayerDrill : MonoBehaviour
     //[SerializeField] Material lrMaterial;
     private LineRenderer lr;
     [SerializeField] private Material[] beamMaterials;
+    
+    //particlesytems
+    [SerializeField] private ParticleSystem laserRing;
+    [SerializeField] private ParticleSystem laserEmission;
 
 
     [SerializeField] private float drillDistance = 3;
@@ -49,6 +53,7 @@ public class PlayerDrill : MonoBehaviour
     int randomColour3;
     float nextColour;
     [SerializeField] private float delayTimer = 1;
+    
 
     private void Awake()
     {
@@ -64,6 +69,7 @@ public class PlayerDrill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (isUsed == false)
         {
             lr.enabled = false;
@@ -96,7 +102,8 @@ public class PlayerDrill : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+    {   
+        Debug.Log(laserRing.isPlaying);
         if (isShooting)
         {
             ShootObject();
@@ -132,6 +139,11 @@ public class PlayerDrill : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
             LaserBetweenPoints(transform.position, hit.point, 1);
+            /*if (drillParticles.isPlaying == false)
+            {
+                drillParticles.Play();
+            }*/
+            
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
@@ -149,11 +161,13 @@ public class PlayerDrill : MonoBehaviour
         if (material == 1)
         {
             lr.material = beamMaterials[0];
+            
         }
 
         else if(material == 2)
         {
             lr.material = beamMaterials[1];
+            
         }
 
         lr.enabled = true;
@@ -176,10 +190,17 @@ public class PlayerDrill : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount < 100 && canShoot)
         {
+            if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
+            {
+                laserRing.Play();
+                laserEmission.Play();
+            }
+            
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
+               
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Debug.Log("Enemy getting hit");
@@ -216,6 +237,10 @@ public class PlayerDrill : MonoBehaviour
         {
             isDrilling = false;
             isShooting = false;
+            laserEmission.Stop();
+            laserEmission.Clear();
+            laserRing.Stop();
+            laserRing.Clear();
         }
 
     }

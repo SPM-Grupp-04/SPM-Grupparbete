@@ -19,7 +19,7 @@ using UnityEngine.SceneManagement;
         {
             SaveData();
             
-            if (PlayerStatistics.Instance.componentsCollectedMask == goalCondition)
+            if (PlayerStatistics.Instance.componentsCollectedMask >= goalCondition)
             {
                 SceneManager.LoadScene(sceneToSwitchTo);
             }
