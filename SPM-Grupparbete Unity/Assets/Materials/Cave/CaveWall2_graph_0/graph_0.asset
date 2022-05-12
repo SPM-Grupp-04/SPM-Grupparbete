@@ -19,31 +19,31 @@ MonoBehaviour:
     Index: 0
     Owner: {fileID: 11400000}
     Input:
-    - rid: 4944379671458873344
-    - rid: 4944379671458873345
-    - rid: 4944379671458873346
-    - rid: 4944379671458873347
-    - rid: 4944379671458873348
-    - rid: 4944379671458873349
-    - rid: 4944379671458873350
-    - rid: 4944379671458873351
-    - rid: 4944379671458873352
-    - rid: 4944379671458873353
-    - rid: 4944379671458873354
-    - rid: 4944379671458873355
-    - rid: 4944379671458873356
-    - rid: 4944379671458873357
-    - rid: 4944379671458873358
-    - rid: 4944379671458873359
-    - rid: 4944379671458873360
-    - rid: 4944379671458873361
-    - rid: 4944379671458873362
-    - rid: 4944379671458873363
-    - rid: 4944379671458873364
-    - rid: 4944379671458873365
-    - rid: 4944379671458873366
-    - rid: 4944379671458873367
-    - rid: 4944379671458873368
+    - rid: 3758168410438500360
+    - rid: 3758168410438500361
+    - rid: 3758168410438500362
+    - rid: 3758168410438500363
+    - rid: 3758168410438500364
+    - rid: 3758168410438500365
+    - rid: 3758168410438500366
+    - rid: 3758168410438500367
+    - rid: 3758168410438500368
+    - rid: 3758168410438500369
+    - rid: 3758168410438500370
+    - rid: 3758168410438500371
+    - rid: 3758168410438500372
+    - rid: 3758168410438500373
+    - rid: 3758168410438500374
+    - rid: 3758168410438500375
+    - rid: 3758168410438500376
+    - rid: 3758168410438500377
+    - rid: 3758168410438500378
+    - rid: 3758168410438500379
+    - rid: 3758168410438500380
+    - rid: 3758168410438500381
+    - rid: 3758168410438500382
+    - rid: 3758168410438500383
+    - rid: 3758168410438500384
     Output:
     - Index: 0
       VirtualOutputIndex: 9
@@ -219,18 +219,16 @@ MonoBehaviour:
       identifier=\"$outputsize\" uid=\"164732644\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
     CurrentStatePreset: " <sbspreset pkgurl=\"pkg://CaveWall\" label=\"\" >\n  <presetinput
       identifier=\"$outputsize\" uid=\"164732644\" type=\"8\" value=\"10,10\" />\n 
-      <presetinput identifier=\"hue\" uid=\"1695813501\" type=\"0\" value=\"0.471\"
+      <presetinput identifier=\"hue\" uid=\"1695813501\" type=\"0\" value=\"0.49\"
       />\n  <presetinput identifier=\"saturation\" uid=\"1695813503\" type=\"0\"
-      value=\"0.45\" />\n  <presetinput identifier=\"luminosity\" uid=\"1695813497\"
-      type=\"0\" value=\"0.442\" />\n  <presetinput identifier=\"opacitymult_3\"
-      uid=\"1695746027\" type=\"0\" value=\"0\" />\n  <presetinput identifier=\"scale\"
-      uid=\"1695780129\" type=\"0\" value=\"0.28\" />\n  <presetinput identifier=\"scale_random\"
-      uid=\"1695780292\" type=\"0\" value=\"0.479\" />\n  <presetinput identifier=\"position_random\"
-      uid=\"1695779949\" type=\"0\" value=\"6.64\" />\n  <presetinput identifier=\"rotation_random\"
+      value=\"0.402\" />\n  <presetinput identifier=\"luminosity\" uid=\"1695813497\"
+      type=\"0\" value=\"0.462\" />\n  <presetinput identifier=\"scale\" uid=\"1695780129\"
+      type=\"0\" value=\"0.28\" />\n  <presetinput identifier=\"scale_random\" uid=\"1695780292\"
+      type=\"0\" value=\"0.48\" />\n  <presetinput identifier=\"position_random\"
+      uid=\"1695779949\" type=\"0\" value=\"6.65\" />\n  <presetinput identifier=\"rotation_random\"
       uid=\"1695038039\" type=\"0\" value=\"0.049\" />\n  <presetinput identifier=\"x_amount\"
       uid=\"1695094500\" type=\"4\" value=\"9\" />\n  <presetinput identifier=\"y_amount\"
-      uid=\"1695096166\" type=\"4\" value=\"9\" />\n  <presetinput identifier=\"size\"
-      uid=\"1695095848\" type=\"1\" value=\"0.95,0.92\" />\n </sbspreset>\n"
+      uid=\"1695096166\" type=\"4\" value=\"9\" />\n </sbspreset>\n"
     IsRuntimeOnly: 0
   RefreshMaterial: 1
   Name: graph_0
@@ -240,7 +238,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4944379671458873344
+    - rid: 3758168410438500360
       type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -264,7 +262,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 4944379671458873345
+    - rid: 3758168410438500361
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -291,11 +289,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 4944379671458873346
+    - rid: 3758168410438500362
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 2
-        _Data: 0.471
+        _Data: 0.49
         _isVisible: 1
         _Description:
           Identifier: hue
@@ -316,11 +314,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873347
+    - rid: 3758168410438500363
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 3
-        _Data: 0.45
+        _Data: 0.402
         _isVisible: 1
         _Description:
           Identifier: saturation
@@ -341,11 +339,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873348
+    - rid: 3758168410438500364
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 4
-        _Data: 0.442
+        _Data: 0.462
         _isVisible: 1
         _Description:
           Identifier: luminosity
@@ -366,7 +364,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873349
+    - rid: 3758168410438500365
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 5
@@ -392,7 +390,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873350
+    - rid: 3758168410438500366
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 6
@@ -418,7 +416,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873351
+    - rid: 3758168410438500367
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 7
@@ -444,7 +442,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873352
+    - rid: 3758168410438500368
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 8
@@ -469,7 +467,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873353
+    - rid: 3758168410438500369
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 9
@@ -494,11 +492,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873354
+    - rid: 3758168410438500370
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 10
-        _Data: 0
+        _Data: 1
         _isVisible: 1
         _Description:
           Identifier: opacitymult_3
@@ -520,7 +518,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873355
+    - rid: 3758168410438500371
       type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 11
@@ -546,7 +544,7 @@ MonoBehaviour:
           _SliderClamp: 0
           _EnumValueCount: 0
           _EnumValues: []
-    - rid: 4944379671458873356
+    - rid: 3758168410438500372
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 12
@@ -572,7 +570,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873357
+    - rid: 3758168410438500373
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 13
@@ -598,7 +596,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873358
+    - rid: 3758168410438500374
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 14
@@ -623,7 +621,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873359
+    - rid: 3758168410438500375
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -650,7 +648,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 4944379671458873360
+    - rid: 3758168410438500376
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 16
@@ -679,7 +677,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873361
+    - rid: 3758168410438500377
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 17
@@ -704,11 +702,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873362
+    - rid: 3758168410438500378
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 18
-        _Data: 0.479
+        _Data: 0.48
         _isVisible: 1
         _Description:
           Identifier: scale_random
@@ -729,11 +727,11 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873363
+    - rid: 3758168410438500379
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 19
-        _Data: 6.64
+        _Data: 6.65
         _isVisible: 1
         _Description:
           Identifier: position_random
@@ -754,7 +752,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873364
+    - rid: 3758168410438500380
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 20
@@ -779,7 +777,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873365
+    - rid: 3758168410438500381
       type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 21
@@ -804,7 +802,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _GraphID: 0
-    - rid: 4944379671458873366
+    - rid: 3758168410438500382
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -831,7 +829,7 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 4944379671458873367
+    - rid: 3758168410438500383
       type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Description:
@@ -858,12 +856,12 @@ MonoBehaviour:
           _EnumValueCount: 0
           _EnumValues: []
         _HasChanged: 0
-    - rid: 4944379671458873368
+    - rid: 3758168410438500384
       type: {class: SubstanceInputFloat2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
       data:
         _Index: 24
         _GraphID: 0
-        _Data: {x: 0.95, y: 0.92}
+        _Data: {x: 0.95, y: 1.31}
         _isVisible: 1
         _Description:
           Identifier: size
