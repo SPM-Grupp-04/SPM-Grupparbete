@@ -29,7 +29,6 @@ using UnityEngine.SceneManagement;
         
         public void SaveData()
         {
-            GlobalControl.Instance.playerStatistics.Crystals = playerStatistics.Crystals;
             GlobalControl.Instance.SaveData();
         }
         
