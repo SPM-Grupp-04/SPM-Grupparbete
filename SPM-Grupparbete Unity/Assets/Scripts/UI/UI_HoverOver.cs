@@ -10,33 +10,25 @@ using UnityEngine.UI;
 
 public class UI_HoverOver : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+    
     private GameObject displayWindow;
-
+    private GameObject image;
     private void Awake()
     {
         displayWindow = GameObject.Find("TextWindow");
+        image = GameObject.Find("Highlight");
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
+    
     public void OnSelect(BaseEventData eventData)
     {
         displayWindow.GetComponent<UI_ShopDisplayText>().DisplayText(this.gameObject);
+        image.transform.position = transform.position;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
         displayWindow.GetComponent<UI_ShopDisplayText>().RemoveDisplayText();
+        
+        
     }
 }
