@@ -28253,6 +28253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7987286952311094062, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
 --- !u!1001 &978352056
@@ -30317,6 +30321,10 @@ PrefabInstance:
     - target: {fileID: 2965090648212624896, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965090648212624896, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_DefaultControlScheme
@@ -38100,6 +38108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7987286952311094062, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
 --- !u!1 &1271912477 stripped
@@ -40117,7 +40129,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aef16b963aa296048b1fcf4877c7e88f, type: 3}
   - {fileID: 8300000, guid: 36022b5cb61e9764383afb669fd90832, type: 3}
   - {fileID: 8300000, guid: 50e54d2492815c14b8bfec77ee1f4f99, type: 3}
-  audioMixer: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: a009776a98b2bac43870ee56512a5ad6, type: 2}
   sourceOne: {fileID: 1319967573}
   sourceTwo: {fileID: 1319967572}
 --- !u!82 &1319967572
