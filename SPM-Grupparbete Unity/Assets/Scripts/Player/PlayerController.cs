@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
+    
+    [SerializeField] private AudioClip drillSound, laserSound;
+
+    
+    private Animator animator;
+    
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
@@ -26,17 +32,27 @@ public class PlayerController : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
+
     private bool uiEnabled;
 
     private InputActionMap UI;
     private InputActionMap defaultMap;
 
+    private AudioSource source;
+
+
     private void Awake()
     {
+        source = GetComponent<AudioSource>();
+        source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
+
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
+
+        animator = GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -47,6 +63,8 @@ public class PlayerController : MonoBehaviour
             ShootOrDrill();
         }
         RestrictMovement();
+        
+        
     }
 
     private void OnEnable()
@@ -124,6 +142,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("SHOOT");
             drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
+            if (!source.isPlaying)
+            {
+                PlayLaserWeaponSound();
+            }
+
         }
         else
         {
@@ -131,10 +154,15 @@ public class PlayerController : MonoBehaviour
             {
                 drill.gameObject.SendMessage("DrillObject");
                 drill.gameObject.SendMessage("DrillInUse", true);
+                if (!source.isPlaying)
+                {
+                    PlayDrillSound();
+                }
             }
             else
             {
                 drill.gameObject.SendMessage("DrillInUse", false);
+                StopSound();
             }
         }
     }
@@ -143,10 +171,13 @@ public class PlayerController : MonoBehaviour
     {
         if (movementEnabled)
         {
+            
             UpdatePlayer();
         }
         else
         {
+            
+            animator.SetBool("Idel",true);
             velocity = Vector3.zero;
         }
     }
@@ -196,6 +227,25 @@ public class PlayerController : MonoBehaviour
         {
             isDrilling = false;
         }
+    }
+
+    private void PlayLaserWeaponSound()
+    {
+        source.clip = laserSound;
+        source.Play();
+        
+    }
+
+    private void PlayDrillSound()
+    {
+        source.clip = drillSound;
+       source.Play();
+    }
+
+    private void StopSound()
+    {
+        source.Stop();
+        source.clip = null;
     }
     
     public void UseInput(InputAction.CallbackContext useValue)

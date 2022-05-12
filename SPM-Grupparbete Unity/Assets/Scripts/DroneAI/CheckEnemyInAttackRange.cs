@@ -7,11 +7,12 @@ using UnityEngine.InputSystem;
 public class CheckEnemyInAttackRange : TreeNode
 {
     private Transform objectItsAttachedToTransform;
-    public static int enemyLayerMask = 1 << 7;
+    private LayerMask layerMask = LayerMask.GetMask("Enemy");
 
     public CheckEnemyInAttackRange(Transform objectItsAttachedToTransform)
     {
         this.objectItsAttachedToTransform = objectItsAttachedToTransform;
+       
     }
 
     public override NodeState Evaluate()
@@ -24,7 +25,7 @@ public class CheckEnemyInAttackRange : TreeNode
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(
-                objectItsAttachedToTransform.position, DroneBT.fovAttackRange, enemyLayerMask);
+                objectItsAttachedToTransform.position, DroneBT.fovAttackRange, layerMask);
 
             // OM vi träffade någonting så ska vi sätta det på collider plats 0. med dess trannsform som value.
             if (colliders.Length > 0)

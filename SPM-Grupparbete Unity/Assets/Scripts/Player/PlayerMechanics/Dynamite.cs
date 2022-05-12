@@ -36,6 +36,8 @@ public class Dynamite : MonoBehaviour
 
     private FallingRocksSpawner fallingRocksSpawner;
 
+    private AudioSource audioSource;
+
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
 
@@ -43,7 +45,8 @@ public class Dynamite : MonoBehaviour
 
     private void Awake()
     {
-       
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
         fallingRocksSpawner = FallingRocksSpawner.Instance;
     }
 
@@ -121,8 +124,9 @@ public class Dynamite : MonoBehaviour
         }
         
         isExploding = true;
-        //fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
-        //fallingRocksSpawner.SpawnRocks(true);
+        audioSource.Play();
+        fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
+        fallingRocksSpawner.SpawnRocks(true);
         meshRenderer.enabled = false;
     }
 }
