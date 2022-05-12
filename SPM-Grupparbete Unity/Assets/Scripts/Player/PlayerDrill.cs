@@ -190,15 +190,17 @@ public class PlayerDrill : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount < 100 && canShoot)
         {
+            if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
+            {
+                laserRing.Play();
+                laserEmission.Play();
+            }
+            
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
-                if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
-                {
-                    laserRing.Play();
-                    laserEmission.Play();
-                }
+               
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Debug.Log("Enemy getting hit");
