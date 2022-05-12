@@ -3,6 +3,7 @@ using BehaviorTree;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
 using Unity.Mathematics;
+using UnityEditorInternal;
 using UnityEngine.InputSystem;
 
 
@@ -10,17 +11,22 @@ public class BossAttackWithLaser : TreeNode
 {
     private Transform _transform;
     private Transform firePoint;
-    private Transform partToRotate;
+    private Transform firePointTwo;
+    private Animator _animator;
     private LineRenderer _lineRenderer;
+    private LineRenderer _lineTwo;
     private float attackRange;
 
-    public BossAttackWithLaser(Transform transform, Transform partToRotate, LineRenderer lineRenderer,
-        Transform firePoint, float fov)
+    public BossAttackWithLaser(Transform transform, LineRenderer lineRenderer,LineRenderer lineTwo,
+        Transform firePoint,Transform firePointTwo ,float fov, Animator animator)
     {
+        this._lineTwo = lineTwo;
         _transform = transform;
+        this.firePointTwo = firePointTwo;
         this.firePoint = firePoint;
-        this.partToRotate = partToRotate;
+        this._animator = animator;
         this._lineRenderer = lineRenderer;
+        
 
         attackRange = fov;
     }
@@ -29,6 +35,7 @@ public class BossAttackWithLaser : TreeNode
 
     public override NodeState Evaluate()
     {
+        
         target = (Transform) GetData("target");
 
 
@@ -36,15 +43,16 @@ public class BossAttackWithLaser : TreeNode
             Vector3.Distance(_transform.position, target.position) > attackRange)
         {
             _lineRenderer.enabled = false;
+            _lineTwo.enabled = false;
             ClearData("target");
             state = NodeState.FAILURE;
             return state;
         }
-
+        _animator.SetBool("Run", false);
         LockOnTarget();
 
 
-       if (target.gameObject.layer == 6 && canShoot )
+       if (target.gameObject.layer == 6  )
         {
             Laser();
         }
@@ -65,24 +73,38 @@ public class BossAttackWithLaser : TreeNode
         if (!_lineRenderer.enabled)
         {
             _lineRenderer.enabled = true;
+            _lineTwo.enabled = true;
         }
 
+        Vector3 lineHitPoint=    new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
         _lineRenderer.SetPosition(0, firePoint.position);
-        _lineRenderer.SetPosition(1, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z));
+        _lineRenderer.SetPosition(1, lineHitPoint);
+       
+        _lineTwo.SetPosition(0, firePointTwo.position);
+        _lineTwo.SetPosition(1, lineHitPoint);
     }
 
     private bool canShoot;
     void LockOnTarget()
     {
+        
+        _transform.LookAt(target);
+        /*
         Vector3 dir = target.position - _transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         
-        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * 3 /*TurnSpeed*/)
+        Vector3 rotation = Quaternion.Lerp(partToRotate.localRotation, lookRotation, Time.deltaTime * 3 /*TurnSpeed#1#)
             .eulerAngles;
 
-        Debug.Log(rotation);
-        if (rotation.y < 160 || rotation.y > 350)
+        var hit = Physics.Linecast(partToRotate.position,new Vector3(target.position.x,
+                target.position.y + 0.5f, target.position.z)
+            , 7);
+        
+        
+
+        if (hit)
         {
+            Debug.Log("hit");
             canShoot = false;
             _lineRenderer.enabled = false;
         }
@@ -92,6 +114,7 @@ public class BossAttackWithLaser : TreeNode
         }
         
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        */
         
         
         

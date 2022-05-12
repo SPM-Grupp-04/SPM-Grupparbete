@@ -38,6 +38,7 @@ public class CheckPlayerInAttackRange : TreeNode
             }
 
             // Det fanns ingen inärheten och vi får fail i sate.
+            ;
             state = NodeState.FAILURE;
             return state;
         }
