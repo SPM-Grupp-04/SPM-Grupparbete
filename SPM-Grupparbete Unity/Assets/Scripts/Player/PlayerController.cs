@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip drillSound, laserSound;
 
     
-    private Animator animator;
+   // [SerializeField]private Animator animator;
     
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -40,11 +40,13 @@ public class PlayerController : MonoBehaviour
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        animator = GetComponent<Animator>();
+       
     }
 
     private void Update()
     {
+       // animator.SetBool("Idle",true);
+        
         if (UI_PausMenu.GameIsPause == false)
         {
             PlayerMovement();
@@ -126,7 +128,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             
-            animator.SetBool("Idel",true);
+            
             velocity = Vector3.zero;
         }
     }
