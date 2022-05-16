@@ -8,7 +8,7 @@ public class DieEventListner : MonoBehaviour
 {
     private void Start()
     {
-        EventSystem.current.RegisterListner<DieEvenInfo>(OnUnitDied);
+        EventSystem.current.RegisterListener<DieEvenInfo>(OnUnitDied);
     }
 
     void OnUnitDied(DieEvenInfo dieEvenInfo)

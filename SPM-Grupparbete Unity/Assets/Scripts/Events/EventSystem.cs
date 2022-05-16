@@ -8,24 +8,24 @@ namespace EgilEventSystem
     {
         // Anyone who does anything send things in this.
 
-        private static EventSystem currentVarible;
+        private static EventSystem currentVariable;
 
 
         private void OnEnable()
         {
-            currentVarible = this;
+            currentVariable = this;
         }
 
         public static EventSystem current
         {
             get
             {
-                if (currentVarible == null)
+                if (currentVariable == null)
                 {
-                    currentVarible = GameObject.FindObjectOfType<EventSystem>();
+                    currentVariable = GameObject.FindObjectOfType<EventSystem>();
                 }
 
-                return currentVarible;
+                return currentVariable;
             }
         }
 
@@ -35,7 +35,7 @@ namespace EgilEventSystem
         // Should be set
         private Dictionary<System.Type, List<EventListener>> eventListeners;
 
-        public void RegisterListner<T>(System.Action<T> listener) where T : Event
+        public void RegisterListener<T>(System.Action<T> listener) where T : Event
         {
             System.Type eventType = typeof(T);
 
@@ -49,7 +49,7 @@ namespace EgilEventSystem
                 eventListeners[eventType] = new List<EventListener>();
             }
 
-            // Wrapp a type converstion around the even listner.
+            // Wrap a type conversion around the event listener.
             void Wrapper(Event e)
             {
                 listener((T) e);

@@ -209,7 +209,7 @@ public class PlayerDrill : MonoBehaviour
                 {
                     Debug.Log("Enemy getting hit");
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
-                    var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
+                    var takeDamge = new DamageDealt(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);
                 }
                 overHeatAmount += overHeatIncreaseAmount;

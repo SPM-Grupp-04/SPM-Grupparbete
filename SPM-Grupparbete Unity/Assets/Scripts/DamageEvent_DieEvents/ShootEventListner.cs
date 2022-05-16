@@ -10,7 +10,7 @@ namespace EgilScripts.DieEvents
      
         private void Start()
         {
-            EventSystem.current.RegisterListner<ShootEventInfo>(OnShot);
+            EventSystem.current.RegisterListener<ShootEventInfo>(OnShot);
         }
 
         void OnShot(ShootEventInfo shootEventInfo)

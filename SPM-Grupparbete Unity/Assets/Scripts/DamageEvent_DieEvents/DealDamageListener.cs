@@ -6,10 +6,10 @@ public class DealDamageListener : MonoBehaviour
 {
     private void Start()
     {
-        EventSystem.current.RegisterListner<DealDamageEventInfo>(OnDealDamageToUnit);
+        EventSystem.current.RegisterListener<DamageDealt>(OnDealDamageToUnit);
     }
 
-    void OnDealDamageToUnit(DealDamageEventInfo dieEvenInfo)
+    void OnDealDamageToUnit(DamageDealt dieEvenInfo)
     {
         if (dieEvenInfo.gameObject.GetComponent<IDamagable>() != null)
         {
