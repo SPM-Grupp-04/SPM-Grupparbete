@@ -28,7 +28,7 @@ public class ShopScript : MonoBehaviour
     bool pauseButtonPressed;
     private bool GameIsPause;
     
-    private Dictionary<Button, bool> buttonDictionary = new Dictionary<Button, bool>();
+    private Dictionary<Button, bool> buttonDictionary;
     [Header("Buttons for shop")]
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
@@ -42,21 +42,27 @@ public class ShopScript : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
-        
-        for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
-        {
-            Transform temp = shopInterfaceBackground.transform.GetChild(i);
-            if (temp.gameObject.CompareTag("ShopButton"))
-            {
-                buttonDictionary.Add(shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>(), false);
-            }
-        }
-
-        foreach (KeyValuePair<Button, bool> test in buttonDictionary)
-        {
-            Debug.Log("hei");
-            Debug.Log(test.Key.ToString() + test.Value.ToString());
-        }
+        // if (PlayerStatistics.Instance.buttonDictionary == null)
+        // {
+        //     Debug.Log("I am empty");
+        //     buttonDictionary = new Dictionary<Button, bool>();
+        //     
+        //     for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
+        //     {
+        //         Transform temp = shopInterfaceBackground.transform.GetChild(i);
+        //         if (temp.gameObject.CompareTag("ShopButton"))
+        //         {
+        //             buttonDictionary.Add(shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>(), false);
+        //         }
+        //     }
+        // }
+        //
+        //
+        // foreach (KeyValuePair<Button, bool> test in buttonDictionary)
+        // {
+        //     Debug.Log("hei");
+        //     Debug.Log(test.Key.ToString() + test.Value.ToString());
+        // }
         
         shopInterfaceBackground.SetActive(false);
         shopCollider = GetComponent<SphereCollider>();
@@ -86,6 +92,7 @@ public class ShopScript : MonoBehaviour
         else
         {
             CloseShopInterface();
+            
         }
         
     }
@@ -103,12 +110,10 @@ public class ShopScript : MonoBehaviour
         shopInterfaceBackground.SetActive(true);
         Debug.Log(shopInterfaceBackground.activeSelf);
     }
-    public void CancelButtonInput(InputAction.CallbackContext cancelButtonValue)
-    {
-       
-    }
+   
     private void CloseShopInterface()
     {
+        //PlayerStatistics.Instance.buttonDictionary = buttonDictionary;
         shopInterfaceBackground.SetActive(false);
     }
 
@@ -139,7 +144,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
             GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
             drillButton.Select();
-            buttonDictionary[drillButton] = true;
+            //buttonDictionary[drillButton] = true;
             UpdateShop();
         }
     }
@@ -151,7 +156,7 @@ public class ShopScript : MonoBehaviour
             accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
-            buttonDictionary[accelerateButton] = true;
+            //buttonDictionary[accelerateButton] = true;
             accelerateButton.Select();
         }
     }
@@ -163,7 +168,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.SetDisco(isDisco);
             discoButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
-            buttonDictionary[discoButton] = true;
+            //buttonDictionary[discoButton] = true;
             discoButton.Select();
         }
     }
@@ -175,7 +180,7 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.weaponLevel = level;
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
-            buttonDictionary[weaponButton] = true;
+            //buttonDictionary[weaponButton] = true;
             weaponButton.Select();
         }
     }
@@ -194,34 +199,46 @@ public class ShopScript : MonoBehaviour
 
     private void UpdateShop()
     {
-        if (buttonDictionary[drillButton] == false)
+        if (m_PlayerState.m_LocalPlayerData.drillLevel < 1)
         {
-            foreach (var button in buttonDictionary.Keys)
-            {
-                if (!button.Equals(drillButton))
-                {
-                    button.interactable = false;
-                }
-            }
+            drillButton.interactable = true;
+            healButton.interactable = false;
+            discoButton.interactable = false;
+            accelerateButton.interactable = false;
+            weaponButton.interactable = false;
         }
         else
         {
-            foreach (var button in buttonDictionary.Keys)
-            {
-                if (buttonDictionary[button] == false)
-                {
-                    button.interactable = true;
-                }
-                else
-                {
-                    button.interactable = false;
-                }
-            }
+            drillButton.interactable = false;
+            healButton.interactable = true;
+            discoButton.interactable = true;
+            accelerateButton.interactable = true;
+            weaponButton.interactable = true;
         }
+        // if (buttonDictionary[drillButton] == false)
+        // {
+        //     foreach (var button in buttonDictionary.Keys)
+        //     {
+        //         if (!button.Equals(drillButton))
+        //         {
+        //             button.interactable = false;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     foreach (var button in buttonDictionary.Keys)
+        //     {
+        //         if (buttonDictionary[button] == false)
+        //         {
+        //             button.interactable = true;
+        //         }
+        //         else
+        //         {
+        //             button.interactable = false;
+        //         }
+        //     }
+        // }
     }
-
-    public void CloseShop()
-    {
-        CloseShopInterface();
-    }
+    
 }

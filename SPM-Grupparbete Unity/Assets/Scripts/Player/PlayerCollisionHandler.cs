@@ -31,7 +31,8 @@ public class PlayerCollisionHandler : MonoBehaviour
             }
         }
 
-        GlobalControl.Instance.playerStatistics = m_LocalPlayerDataTest;
+        GlobalControl.Instance.playerStatistics.BlueCrystals = m_LocalPlayerDataTest.BlueCrystals;
+        GlobalControl.Instance.playerStatistics.RedCrystals = m_LocalPlayerDataTest.RedCrystals;
     }
 
     

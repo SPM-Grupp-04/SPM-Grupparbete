@@ -24,12 +24,15 @@ public class PlayerState : MonoBehaviour, IDamagable
       //  m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
         m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
         m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
+        m_LocalPlayerData.drillLevel = GlobalControl.Instance.playerStatistics.drillLevel;
+        m_LocalPlayerData.componentsCollectedMask = GlobalControl.Instance.playerStatistics.componentsCollectedMask;
       
         if (playerName == "PlayerOne")
         {
             m_LocalPlayerData.playerOneHealth = GlobalControl.Instance.playerStatistics.playerOneHealth;
             m_LocalPlayerData.playerOneAcceleration = GlobalControl.Instance.playerStatistics.playerOneAcceleration;
             m_LocalPlayerData.playerOneDisco = GlobalControl.Instance.playerStatistics.playerOneDisco;
+            
         }
         
         if (playerName == "PlayerTwo")
@@ -135,18 +138,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
         SavePlayers();
     }
-
-    public void GainCrystal()
-    {
-        if (playerName == "PlayerOne")
-        {
-            m_LocalPlayerData.Crystals++;
-        }
-        else
-        {
-            m_LocalPlayerData.Crystals++;
-        }
-    }
+    
 
     public void SavePlayers()
     {

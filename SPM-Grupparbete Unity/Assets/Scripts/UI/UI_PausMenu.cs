@@ -21,28 +21,12 @@ public class UI_PausMenu : MonoBehaviour
 
     
     private void Start()
-    {
-      // playerInput = GetComponent<PlayerInput>();
-      // pause = playerInput.actions["Pause"];
-      // pausePlayerTwo = PlayerInputTwo.actions["Pause"];
+    { 
+        playerInput = GetComponent<PlayerInput>();
+       pause = playerInput.actions["Pause"];
+       pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // if (pauseButtonPressed)
-        // {
-        //     if (GameIsPause)
-        //     {
-        //         Resume();
-        //     }
-        //     else
-        //     {
-        //         
-        //         Pause();
-        //     }
-        // }
-    }
+    
 
     public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
     {
