@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
-    
+
     [SerializeField] private AudioClip drillSound, laserSound;
 
-    
-    
+
+
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
@@ -60,9 +60,8 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             ShootOrDrill();
         }
+
         RestrictMovement();
-        
-        
     }
 
     private void OnEnable()
@@ -80,13 +79,13 @@ public class PlayerController : MonoBehaviour
         if (SwitchMap.performed)
         {
             uiEnabled = !uiEnabled;
-            
+
             if (uiEnabled)
             {
-                
+
                 UI.Enable();
                 playerInput.SwitchCurrentActionMap("UI");
-                
+
                 defaultMap.Disable();
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
 
@@ -140,11 +139,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("SHOOT");
             drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
+
             if (!source.isPlaying)
             {
                 PlayLaserWeaponSound();
             }
-
         }
         else
         {
@@ -152,6 +151,7 @@ public class PlayerController : MonoBehaviour
             {
                 drill.gameObject.SendMessage("DrillObject");
                 drill.gameObject.SendMessage("DrillInUse", true);
+
                 if (!source.isPlaying)
                 {
                     PlayDrillSound();
@@ -169,12 +169,10 @@ public class PlayerController : MonoBehaviour
     {
         if (movementEnabled)
         {
-            
             UpdatePlayer();
         }
         else
         {
-            
             velocity = Vector3.zero;
         }
     }
@@ -190,6 +188,7 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerRotationGamePad();
         }
+
         transform.position += velocity * movementAcceleration * Time.deltaTime;
     }
 
@@ -202,13 +201,14 @@ public class PlayerController : MonoBehaviour
     {
         return uiEnabled;
     }
-    
+
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
         if (shootValue.performed)
         {
             isShooting = true;
-        } else if (shootValue.canceled)
+        }
+        else if (shootValue.canceled)
         {
             isShooting = false;
         }
@@ -230,13 +230,12 @@ public class PlayerController : MonoBehaviour
     {
         source.clip = laserSound;
         source.Play();
-        
     }
 
     private void PlayDrillSound()
     {
         source.clip = drillSound;
-       source.Play();
+        source.Play();
     }
 
     private void StopSound()
@@ -244,21 +243,21 @@ public class PlayerController : MonoBehaviour
         source.Stop();
         source.clip = null;
     }
-    
+
     public void UseInput(InputAction.CallbackContext useValue)
     {
         //useButtonPressed = useValue.performed;
         if (useValue.performed)
         {
             useButtonPressed = !useButtonPressed;
-        } 
+        }
     }
 
     public void SetMovementStatus(bool movementStatus)
     {
         movementEnabled = movementStatus;
     }
-    
+
     public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
@@ -269,7 +268,7 @@ public class PlayerController : MonoBehaviour
     {
         gamePadLookRotation = rotationValue.ReadValue<Vector2>();
     }
-    
+
     public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
     {
         mousePosition = mouseValue.ReadValue<Vector2>();

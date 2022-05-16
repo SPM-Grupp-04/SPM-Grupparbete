@@ -19,15 +19,15 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
 
-     private int drillLevel;
+    private int drillLevel;
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
-    
-    
+
+
     //[SerializeField] Material lrMaterial;
     private LineRenderer lr;
     [SerializeField] private Material[] beamMaterials;
-    
+
     //particlesytems
     [SerializeField] private ParticleSystem laserRing;
     [SerializeField] private ParticleSystem laserEmission;
@@ -40,7 +40,7 @@ public class PlayerDrill : MonoBehaviour
     private float timer = 0;
     private GameObject laserPoint;
     private GameObject drillPoint;
-    private GameObject beamGO; 
+    private GameObject beamGO;
 
     private bool isUsed;
     private bool canShoot = true;
@@ -55,14 +55,14 @@ public class PlayerDrill : MonoBehaviour
     int randomColour3;
     float nextColour;
     [SerializeField] private float delayTimer = 1;
-    
+
 
     private void Awake()
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
-        drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
-        laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
+        drillPoint.transform.localPosition = new Vector3(0, 0.75f, drillDistance);
+        laserPoint.transform.localPosition = new Vector3(0, 0.75f, laserDistance);
         drillLevel = playerStatistics.drillLevel;
         lr = GetComponent<LineRenderer>();
         DrillDamage(drillLevel);
@@ -71,7 +71,6 @@ public class PlayerDrill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (isUsed == false)
         {
             lr.enabled = false;
@@ -80,43 +79,42 @@ public class PlayerDrill : MonoBehaviour
         if (timer > 0)
         {
             timer -= Time.deltaTime;
+
             if (timer < 0)
             {
                 timer = 0;
             }
         }
-       
 
-        if(Time.time >= nextColour && isDisco == true)
+
+        if (Time.time >= nextColour && isDisco == true)
         {
-
             randomColour1 = Random.Range(0, 255);
             randomColour2 = Random.Range(0, 255);
             randomColour3 = Random.Range(0, 255);
             //lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
-          
+
             nextColour = Time.time + delayTimer;
         }
-        
-
-       
-       
     }
 
     private void FixedUpdate()
-    {   
+    {
         Debug.Log(laserRing.isPlaying);
+
         if (isShooting)
         {
             ShootObject();
-        } else if (isDrilling)
+        }
+        else if (isDrilling)
         {
             DrillObject();
         }
-        
+
         if (timer == 0 && isUsed == false)
         {
             CoolDownDrill();
+
             if (overHeatAmount <= 0)
             {
                 canShoot = true;
@@ -137,13 +135,13 @@ public class PlayerDrill : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        
+
         if (drillRing.isPlaying == false && drillEmission.isPlaying == false)
         {
             drillRing.Play();
             drillEmission.Play();
         }
-        
+
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.green);
@@ -157,10 +155,7 @@ public class PlayerDrill : MonoBehaviour
             LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
             return;
         }
-        
-
     }
-
 
     void LaserBetweenPoints(Vector3 start, Vector3 end, int material)
     {
@@ -169,7 +164,7 @@ public class PlayerDrill : MonoBehaviour
             lr.material = beamMaterials[0];
         }
 
-        else if(material == 2)
+        else if (material == 2)
         {
             lr.material = beamMaterials[1];
         }
@@ -185,13 +180,13 @@ public class PlayerDrill : MonoBehaviour
         //beamGO = Instantiate(beamMaterial, position, transform.rotation);
         //beamGO.transform.up = offset;
         //beamGO.transform.localScale = scale;
-
     }
 
     private void ShootObject()
     {
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
         if (overHeatAmount < 100 && canShoot)
         {
             if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
@@ -199,19 +194,20 @@ public class PlayerDrill : MonoBehaviour
                 laserRing.Play();
                 laserEmission.Play();
             }
-            
+
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
                 Debug.DrawLine(transform.position, shootHit.point, Color.green);
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
-               
+
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Debug.Log("Enemy getting hit");
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
-                    var takeDamge = new DamageDealt(shootHit.collider.gameObject,1);
+                    var takeDamge = new DamageDealt(shootHit.collider.gameObject, 1);
                     EventSystem.current.FireEvent(takeDamge);
                 }
+
                 overHeatAmount += overHeatIncreaseAmount;
                 return;
             }
@@ -219,12 +215,14 @@ public class PlayerDrill : MonoBehaviour
             {
                 LaserBetweenPoints(transform.position, laserPoint.transform.position, 2);
                 overHeatAmount += overHeatIncreaseAmount;
+
                 return;
             }
         }
         else if (overHeatAmount >= 100)
         {
             Destroy(beamGO);
+
             if (timer <= 0)
             {
                 lr.enabled = false;
@@ -237,7 +235,8 @@ public class PlayerDrill : MonoBehaviour
     public void DrillInUse(bool state)
     {
         isUsed = state;
-        if(isUsed == false)
+
+        if (isUsed == false)
         {
             isDrilling = false;
             isShooting = false;
@@ -300,8 +299,6 @@ public class PlayerDrill : MonoBehaviour
                 drillDamageOres = 3;
                 drillDamageMonsters = 3;
                 break;
-                
-
         }
 
     }

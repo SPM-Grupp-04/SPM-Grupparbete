@@ -68,7 +68,7 @@ public class BossAttackWithLaser : TreeNode
 
     void Laser()
     {
-        DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, 4 * Time.deltaTime);
+        DamageDealt dealDamageEventInfo = new DamageDealt(target.gameObject, 4 * Time.deltaTime);
         EventSystem.current.FireEvent(dealDamageEventInfo);
         if (!_lineRenderer.enabled)
         {

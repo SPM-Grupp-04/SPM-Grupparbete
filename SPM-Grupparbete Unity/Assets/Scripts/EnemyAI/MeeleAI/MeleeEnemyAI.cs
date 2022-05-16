@@ -116,7 +116,7 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
         this.pool = pool;
     }
 
-    public override void TargetPlayerPos(Vector3 targeDistance)
+    public void TargetPlayerPos(Vector3 targeDistance)
     {
         target = targeDistance;
     }
@@ -129,5 +129,20 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
     public void DealDamage(int damage)
     {
         CurrentHealth -= damage;
+    }
+
+    public override void PositionAroundTarget(Vector3 TargetPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void PlayerPos(Vector3 playerPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DealDamage(float damage)
+    {
+        throw new System.NotImplementedException();
     }
 }
