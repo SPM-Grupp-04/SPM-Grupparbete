@@ -29,8 +29,8 @@ public class ShopScript : MonoBehaviour
     private PlayerState m_PlayerState;
     bool pauseButtonPressed;
     private bool GameIsPause;
-    
-    private Dictionary<string, bool> buttonDictionary = new Dictionary<string, bool>();
+
+    private Dictionary<string, bool> buttonDictionary;
     [Header("Buttons for shop")]
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
@@ -41,19 +41,28 @@ public class ShopScript : MonoBehaviour
     
     
     
-    // Update is called once per frame
     private void Start()
     {
         
-        for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
+        if (PlayerStatistics.Instance.buttonDictionary == null)
         {
-            Transform temp = shopInterfaceBackground.transform.GetChild(i);
-            if (temp.gameObject.CompareTag("ShopButton"))
+            Debug.Log("I am empty");
+            buttonDictionary = new Dictionary<string, bool>();
+            for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
             {
-                string addedButton = shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>().GetHashCode().ToString();
-                buttonDictionary.Add(addedButton, false);
-                temp.name = addedButton.ToString();
+                Transform temp = shopInterfaceBackground.transform.GetChild(i);
+                if (temp.gameObject.CompareTag("ShopButton"))
+                {
+                    string addedButton = shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>().GetHashCode().ToString();
+                    buttonDictionary.Add(addedButton, false);
+                    temp.name = addedButton;
+                }
             }
+            Debug.Log("I am now full");
+        }
+        else
+        {
+            buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
         }
 
         foreach (KeyValuePair<string, bool> test in buttonDictionary)
