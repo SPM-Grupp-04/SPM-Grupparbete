@@ -211,14 +211,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f5e10b97c20194eb71abfbe75c99c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomNumber: 0
   startHealth: 2
   rangedAttackRange: 10
   movementSpeed: 4
   chasingRange: 30
-  throwabelObject: {fileID: 7467092179448219033, guid: c5963268bcb0e1f4ab6794facc11586b, type: 3}
-  throwCooldown: 2
-  throwUpForce: 12
-  throwForce: 30
+  throwabelObject: {fileID: 7467092179448219033, guid: fb4c100fbf9b34c4e8dbc210f82c1dd5, type: 3}
+  throwCooldown: 5
+  throwUpForce: 1
+  throwForce: 2
   firePoint: {fileID: 7692960205702161346}
   target: {x: 100, y: 0, z: 100}
   distanceToTargetPlayer: 100

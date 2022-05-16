@@ -7,39 +7,43 @@ using UnityEngine.Serialization;
 public class ShieldAbility : MonoBehaviour
 {
 
-    [SerializeField] private float timerToDestroyShield = 2f;
-    [SerializeField] private GameObject shieldPrefab;
     [SerializeField] GameObject player;
-    [SerializeField] private float cooldownToNextUse = 5f;
+    [SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private float upTimeShield = 5f;
+    [SerializeField] private float coolDown = 15f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
-
-    private GameObject shieldGO;
-    private float timer = 0;
     
-    private float nextShieldTime = 10f;
-
+    private static float cooldownToNextUse;
+    private GameObject shieldGO;
+    private float destroyShieldTimer;
     private static bool canUseShield;
+
+    
+
 
     private bool shieldButtonPressed;
 
     private void Awake()
     {
+        coolDown += upTimeShield;
         canUseShield = true;
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (timer > 0)
+        if (destroyShieldTimer > 0)
         {
-            timer -= Time.deltaTime;
-            if (timer < 0)
+            destroyShieldTimer -= Time.deltaTime;
+            if (destroyShieldTimer < 0)
             {
-                timer = 0;
+                destroyShieldTimer = 0;
             }
         }
-        if(timer == 0 && shieldGO != null)
+        
+        if(destroyShieldTimer == 0 && shieldGO != null)
         {
             DestroyShield();
         }
@@ -49,19 +53,17 @@ public class ShieldAbility : MonoBehaviour
             ActivateShield();
         }
 
-        nextShieldTime += Time.deltaTime;
 
-        if (nextShieldTime <= cooldownToNextUse) {}
 
+        if (cooldownToNextUse >= Time.time)
         {
-            uiCooldowns.GetShieldText().text = ((int) cooldownToNextUse - (int) nextShieldTime).ToString();
+            uiCooldowns.GetShieldText().text = ((int)cooldownToNextUse - (int)Time.time).ToString();
         }
-        
-        if (nextShieldTime >= cooldownToNextUse)
-        {
+        else
+        { 
             uiCooldowns.GetShieldText().text = "Sköld";
+            canUseShield = true;
         }
-        
     }
 
     public void ShieldButtonInput(InputAction.CallbackContext shieldButtonValue)
@@ -71,18 +73,20 @@ public class ShieldAbility : MonoBehaviour
 
     public void ActivateShield()
     {
-        if (canUseShield && nextShieldTime >= cooldownToNextUse)
+        if (canUseShield &&  Time.time >= cooldownToNextUse)
         {
-            timer = timerToDestroyShield;
+            Debug.Log("SMIL");
+            destroyShieldTimer = upTimeShield;
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
-            nextShieldTime = 0;
+            cooldownToNextUse = Time.time + coolDown;
         }
     }
 
     private void DestroyShield()
-    {
+    {   
+         
          Destroy(shieldGO);
-         canUseShield = true;
+         
     }
 }

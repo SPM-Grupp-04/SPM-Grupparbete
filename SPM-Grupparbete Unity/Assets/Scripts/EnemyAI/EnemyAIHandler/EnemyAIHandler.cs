@@ -16,8 +16,8 @@ public class EnemyAIHandler : MonoBehaviour
     //[SerializeField] private GameObject targetTwo;
 
     public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
-    private Transform playerOne;
-    private Transform playerTwo;
+    private GameObject playerOne;
+    private GameObject playerTwo;
     private static Vector3 dynamite;
     private float distanceToDynamite;
 
@@ -25,8 +25,22 @@ public class EnemyAIHandler : MonoBehaviour
 
     private void Start()
     {
-        playerOne = GameObject.Find("Player1").transform;
-        playerTwo = GameObject.Find("Player2").transform;
+       
+            playerOne = GameObject.Find("Player1");
+            Debug.Log(playerOne);
+            playerTwo = GameObject.Find("Player2");
+           Debug.Log(playerTwo);
+            
+            if (playerOne == null)
+            {
+                playerOne = playerTwo;
+            }
+
+            if (playerTwo == null)
+            {
+                playerTwo = playerOne;
+            }
+         
     }
 
     public static void SetDynamite(Vector3 dyn)
@@ -36,8 +50,10 @@ public class EnemyAIHandler : MonoBehaviour
 
     private void Update()
     {
-        Vector3 playerOnePosition = playerOne.position;
-        Vector3 playerTowPosition = playerTwo.position;
+        
+        
+        Vector3 playerOnePosition = playerOne.transform.position;
+        Vector3 playerTowPosition = playerTwo.transform.position;
         bool playerOneIsActive = playerOne.gameObject.activeInHierarchy;
         bool playerTwoIsActive = playerTwo.gameObject.activeInHierarchy;
         int countEnemy = 0;
@@ -73,10 +89,9 @@ public class EnemyAIHandler : MonoBehaviour
                     distancePlayerTwo = int.MaxValue;
                 }
 
-               
+
                 if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)
                 {
-                    
                     closestTarget = CalulatePosInCirkel(dynamite, countEnemy);
                     closestDistance = distanceToDynamite;
                 }

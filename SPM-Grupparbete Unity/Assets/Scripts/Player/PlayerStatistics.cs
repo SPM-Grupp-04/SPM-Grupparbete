@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PlayerStatistics
 {
     private static PlayerStatistics instance = null;
 
-    public float playerMaxHealth = 5;
-    public float playerOneHealth = 5;
-    public float playerTwoHealth = 5;
+    public float playerMaxHealth = 30;
+    public float playerOneHealth = 30;
+    public float playerTwoHealth = 30;
     public float playerOneAcceleration = 5.0f;
     public float playerTwoAcceleration = 5.0f;
     public bool playerOneDisco = false;
@@ -27,6 +28,8 @@ public class PlayerStatistics
     public int drillLevel = 0;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
+    //public Dictionary<Button, bool> buttonDictionary;
+
 
     private PlayerStatistics()
     {

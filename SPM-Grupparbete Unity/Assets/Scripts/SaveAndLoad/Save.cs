@@ -17,19 +17,23 @@ using UnityEngine.SceneManagement;
 
         private void OnCollisionEnter(Collision collision)
         {
-            SaveData();
-            
-            if (PlayerStatistics.Instance.componentsCollectedMask == goalCondition)
+
+            if (collision.gameObject.CompareTag("Player")) 
             {
-                SceneManager.LoadScene(sceneToSwitchTo);
+                SaveData();
+            
+                if (PlayerStatistics.Instance.componentsCollectedMask >= goalCondition)
+                {
+                    SceneManager.LoadScene(sceneToSwitchTo);
+                }
             }
+           
         }
 
        
         
         public void SaveData()
         {
-            GlobalControl.Instance.playerStatistics.Crystals = playerStatistics.Crystals;
             GlobalControl.Instance.SaveData();
         }
         
