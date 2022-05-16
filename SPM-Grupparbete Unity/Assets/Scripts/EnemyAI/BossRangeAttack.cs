@@ -3,6 +3,7 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace Utility.EnemyAI
@@ -10,26 +11,28 @@ namespace Utility.EnemyAI
     public class BossRangeAttack : TreeNode
     {
         private GameObject rockThrow;
-        private Transform thisTransform;
+        NavMeshAgent  thisTransform;
         private Transform firePoint;
         private float throwUpForce;
         private float throwForce;
 
+        private Animator animator;
         private float timer = 0;
 
-        private float cooldown = 3;
+        private float cooldown = 5;
 
         // Hämtas
         private Transform target = null;
 
-        public BossRangeAttack(GameObject rockThrow, Transform thisTransform, float throwUpForce, float throwForce,
-            Transform firePoint)
+        public BossRangeAttack(GameObject rockThrow, NavMeshAgent thisTransform, float throwUpForce, float throwForce,
+            Transform firePoint, Animator  animator)
         {
             this.rockThrow = rockThrow;
             this.thisTransform = thisTransform;
             this.throwUpForce = throwUpForce;
             this.throwForce = throwForce;
             this.firePoint = firePoint;
+            this.animator = animator;
         }
 
         public override NodeState Evaluate()
@@ -39,15 +42,15 @@ namespace Utility.EnemyAI
             target = (Transform) GetData("target");
 
             Debug.Log(target);
+            timer -= Time.deltaTime;
 
-
-            if (target == null)
+            if (target == null || timer > 0)
             {
                 return NodeState.FAILURE;
             }
 
-
-            thisTransform.LookAt(target);
+            animator.SetBool("Run", false);
+            thisTransform.transform.LookAt(target);
 
             if (timer <= 0)
             {
@@ -56,7 +59,7 @@ namespace Utility.EnemyAI
                 timer = cooldown;
             }
 
-            timer -= Time.deltaTime;
+           
 
             return NodeState.RUNNING;
         }

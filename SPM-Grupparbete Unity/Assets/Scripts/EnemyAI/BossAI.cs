@@ -54,7 +54,7 @@ public class BossAI : Tree
             new Sequence(new List<TreeNode>
             {
                 new CheckPlayerInAttackRange(transform, 20),
-                new BossRangeAttack(rockToThorw, transform, throwUpForce, throwForce, rockThrowPos)
+                new BossRangeAttack(rockToThorw,agent,throwUpForce,throwForce,rockThrowPos, _animator)
             }),
             // Springer efters seplaren
             new Sequence(new List<TreeNode>
