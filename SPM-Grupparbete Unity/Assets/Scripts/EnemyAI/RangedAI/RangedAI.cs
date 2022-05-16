@@ -42,7 +42,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     void Start()
     {
         base.Start();
-        timer = throwCooldown;
+        timer = 0;
         _animator = GetComponent<Animator>();
         currentHealth = startHealth;
         agent = GetComponent<NavMeshAgent>();

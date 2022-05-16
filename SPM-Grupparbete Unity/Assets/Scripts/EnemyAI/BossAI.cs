@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using BehaviorTree;
 using UnityEngine.AI;
+using Utility.EnemyAI;
 using Tree = BehaviorTree.Tree;
 
 public class BossAI : Tree
@@ -16,7 +17,15 @@ public class BossAI : Tree
     [SerializeField] private Transform firePointTwo;
     [SerializeField] private float fovAttackRange;
     [SerializeField] private Animator _animator;
-    private float checkForPlayerFOV = 16;
+
+    [SerializeField] private GameObject rockToThorw;
+    [SerializeField] private Transform rockThrowPos;
+    [SerializeField] private float throwForce = 30;
+    [SerializeField] private float throwUpForce = 2;
+
+
+    private float checkForPlayerFOV = 15;
+
 
     protected override TreeNode SetUpTree()
     {
@@ -41,18 +50,21 @@ public class BossAI : Tree
                     fovAttackRange, _animator),
             }),
 
-            // Springer efters seplaren
+            // Slänger stenar mot spelaren.
             new Sequence(new List<TreeNode>
             {
                 new CheckPlayerInAttackRange(transform, 20),
-                new BossMoveToPlayers(transform,_animator),
-            })
-            
+                new BossRangeAttack(rockToThorw, transform, throwUpForce, throwForce, rockThrowPos)
+            }),
+            // Springer efters seplaren
+            new Sequence(new List<TreeNode>
+            {
+                new CheckPlayerInAttackRange(transform, 30),
+                new BossMoveToPlayers(transform, _animator),
+            }),
+
+
             // Om spelarna springer för långt ifrån spring tillbaka till din spawn position och börja
-            // slöppa stenar från taket.
-
-
-
         });
 
 
