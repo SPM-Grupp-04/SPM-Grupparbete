@@ -34,7 +34,7 @@ using UnityEngine.SceneManagement;
         
         public void SaveData()
         {
-            GlobalControl.Instance.SaveData();
+            GlobalControl.SaveData();
         }
         
     }
