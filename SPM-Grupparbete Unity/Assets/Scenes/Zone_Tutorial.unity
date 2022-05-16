@@ -43203,7 +43203,7 @@ MonoBehaviour:
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
   m_PointAction: {fileID: 210458966}
-  m_MoveAction: {fileID: -8770741591401497550, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+  m_MoveAction: {fileID: 4968653899827907030, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
   m_SubmitAction: {fileID: 1939228039}
   m_CancelAction: {fileID: 1299348849}
   m_LeftClickAction: {fileID: 1574840152}
@@ -49274,6 +49274,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: shopAreaRadius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 254404803984606747, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_RootOrder
       value: 1

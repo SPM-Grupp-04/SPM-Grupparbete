@@ -27,7 +27,7 @@ public class PlayerStatistics
     public int drillLevel = 0;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
-    public Dictionary<string, bool> buttonDictionary = new Dictionary<string, bool>();
+    public Dictionary<string, bool> buttonDictionary;
 
 
     private PlayerStatistics()
