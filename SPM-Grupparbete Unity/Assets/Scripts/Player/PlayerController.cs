@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
     
     [SerializeField] private AudioClip drillSound, laserSound;
+
+    
     
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -29,7 +31,14 @@ public class PlayerController : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
+
+    private bool uiEnabled;
+
+    private InputActionMap UI;
+    private InputActionMap defaultMap;
+
     private AudioSource source;
+
 
     private void Awake()
     {
@@ -37,6 +46,11 @@ public class PlayerController : MonoBehaviour
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
+
+        UI = playerInput.actions.FindActionMap("UI");
+        defaultMap = playerInput.actions.FindActionMap("Player");
+
+
     }
 
     private void Update()
@@ -49,6 +63,45 @@ public class PlayerController : MonoBehaviour
         RestrictMovement();
         
         
+    }
+
+    private void OnEnable()
+    {
+        playerInput.actions["SwitchMap"].performed += SwitchActionMap;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions["SwitchMap"].performed -= SwitchActionMap;
+    }
+
+    public void SwitchActionMap(InputAction.CallbackContext SwitchMap)
+    {
+        if (SwitchMap.performed)
+        {
+            uiEnabled = !uiEnabled;
+            
+            if (uiEnabled)
+            {
+                
+                UI.Enable();
+                playerInput.SwitchCurrentActionMap("UI");
+                
+                defaultMap.Disable();
+                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+
+            }
+            else
+            {
+                Debug.Log(uiEnabled);
+
+                defaultMap.Enable();
+                playerInput.SwitchCurrentActionMap("Player");
+                UI.Disable();
+                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+
+            }
+        }
     }
 
     private void RestrictMovement()
@@ -116,10 +169,12 @@ public class PlayerController : MonoBehaviour
     {
         if (movementEnabled)
         {
+            
             UpdatePlayer();
         }
         else
         {
+            
             velocity = Vector3.zero;
         }
     }
@@ -141,6 +196,11 @@ public class PlayerController : MonoBehaviour
     public bool IsUseButtonPressed()
     {
         return useButtonPressed;
+    }
+
+    public bool IsMapSwitched()
+    {
+        return uiEnabled;
     }
     
     public void ShootInput(InputAction.CallbackContext shootValue)
@@ -175,8 +235,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayDrillSound()
     {
-       Debug.Log("Här");
-       source.clip = drillSound;
+        source.clip = drillSound;
        source.Play();
     }
 
