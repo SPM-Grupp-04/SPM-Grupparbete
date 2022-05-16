@@ -217,11 +217,18 @@ public class ShopScript : MonoBehaviour
                 if (buttonDictionary[hashCode] == false)
                 {
                     FindButton(hashCode).interactable = true;
+                    
+                    if (hashCode.Equals(healButton.GetHashCode().ToString()))
+                    {
+                        CanPlayersHeal();
+                        
+                    }
                 }
                 else
                 {
                     
                     FindButton(hashCode).interactable = false;
+                    
                 }
             }
         }
