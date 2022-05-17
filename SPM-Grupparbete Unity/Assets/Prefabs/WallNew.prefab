@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 4471920123488140565}
   - component: {fileID: 4471920123488140563}
   - component: {fileID: 3485803009817605808}
+  - component: {fileID: 5622856426434640759}
   m_Layer: 12
   m_Name: WallNew
   m_TagString: Rocks
@@ -422,6 +423,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2334642, y: 6.0721364, z: 8.186142}
   m_Center: {x: 0.32693547, y: 2.2046063, z: 0.054767847}
+--- !u!208 &5622856426434640759
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4471920123488140560}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.6170001, y: 3.0360003, z: 4.0930004}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.32700002, y: 2.2050002, z: 0.055000003}
+  m_TimeToStationary: 0.5
 --- !u!1 &4471920123596952052
 GameObject:
   m_ObjectHideFlags: 0

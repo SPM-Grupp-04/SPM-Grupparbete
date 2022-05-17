@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PlayerStatistics
@@ -28,6 +29,7 @@ public class PlayerStatistics
     public int weaponLevel;
     public int componentsCollectedMask = 0;
     public Dictionary<string, bool> buttonDictionary;
+
 
 
     private PlayerStatistics()

@@ -29,8 +29,8 @@ public class ShopScript : MonoBehaviour
     private PlayerState m_PlayerState;
     bool pauseButtonPressed;
     private bool GameIsPause;
-
     private Dictionary<string, bool> buttonDictionary;
+
     [Header("Buttons for shop")]
     [SerializeField] private Button healButton;
     [SerializeField] private Button accelerateButton;
@@ -43,6 +43,7 @@ public class ShopScript : MonoBehaviour
     
     private void Start()
     {
+
         Debug.Log(buttonDictionary);
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
         
@@ -74,6 +75,7 @@ public class ShopScript : MonoBehaviour
             
             Debug.Log(test.Key + " " + test.Value.ToString());
         }
+
         
         shopInterfaceBackground.SetActive(false);
         shopCollider = GetComponent<SphereCollider>();
@@ -103,6 +105,7 @@ public class ShopScript : MonoBehaviour
         else
         {
             CloseShopInterface();
+            
         }
         
     }
@@ -117,6 +120,7 @@ public class ShopScript : MonoBehaviour
     private void OpenShopInterface()
     {
         shopInterfaceBackground.SetActive(true);
+
     }
     
     private void CloseShopInterface()
@@ -136,8 +140,13 @@ public class ShopScript : MonoBehaviour
             
             Debug.Log(test.Key + " " + test.Value.ToString());
         }
-        shopInterfaceBackground.SetActive(false);
+
+        Debug.Log(shopInterfaceBackground.activeSelf);
+		shopInterfaceBackground.SetActive(false);
+
     }
+   
+
 
     void OnDrawGizmos()
     {
@@ -174,6 +183,7 @@ public class ShopScript : MonoBehaviour
                 }
                 break;
                 
+
         }
         
     }
@@ -185,7 +195,9 @@ public class ShopScript : MonoBehaviour
             accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
+
             buttonDictionary[accelerateButton.name] = true;
+
             accelerateButton.Select();
         }
     }
@@ -197,7 +209,9 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.SetDisco(isDisco);
             discoButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
+
             buttonDictionary[discoButton.name] = true;
+
             discoButton.Select();
         }
     }
@@ -210,6 +224,7 @@ public class ShopScript : MonoBehaviour
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
             buttonDictionary[weaponButton.name] = true;
+
             weaponButton.Select();
         }
     }
@@ -228,6 +243,7 @@ public class ShopScript : MonoBehaviour
 
     private void UpdateShop()
     {
+
         
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
@@ -279,5 +295,6 @@ public class ShopScript : MonoBehaviour
         Button tempButton = temp.GetComponent<Button>();
         return tempButton;
     }
+
     
 }

@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip drillSound, laserSound;
 
     
-    private Animator animator;
     
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -52,7 +51,6 @@ public class PlayerController : MonoBehaviour
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
 
-        animator = GetComponent<Animator>();
 
     }
 
@@ -179,7 +177,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             
-            animator.SetBool("Idel",true);
             velocity = Vector3.zero;
         }
     }

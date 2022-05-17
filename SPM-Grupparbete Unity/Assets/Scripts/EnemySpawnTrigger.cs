@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawnTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject enemySpawner;
-    [SerializeField] private AudioManager audioManager;
+    //[SerializeField] private AudioManager audioManager;
     
 
     private void Start()
@@ -19,11 +19,12 @@ public class EnemySpawnTrigger : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             enemySpawner.SetActive(true);
+            /*
             if (audioManager.InCombat() == false) 
             {
                 audioManager.CombatMusic();
             }
-            
+            */
         }
     }
 }
