@@ -90,9 +90,9 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, rangedAttackTreeNode});
 
-        m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
-        return m_TopTreeNode;
+        return MTopTreeNode;
     }
 
 

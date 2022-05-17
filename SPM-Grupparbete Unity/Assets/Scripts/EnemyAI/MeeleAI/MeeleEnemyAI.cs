@@ -109,16 +109,16 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
             new RangeTreeNodeMelee(hitRange, distanceToTarget, _animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
-            new MeeleAttackTreeNode(playerPos, agent, _animator, _meleeWepon);
+            new MeeleAttackTreeNode( playerPos,agent, _animator, _meleeWepon);
         
         
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
-        m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
 
-        return m_TopTreeNode;
+        return MTopTreeNode;
     }
 
     public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)

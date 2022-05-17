@@ -1,17 +1,20 @@
 ﻿using BehaviorTree;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossMoveToPlayers : TreeNode
 {
-    private Transform bossTransfrom;
+    
+    private NavMeshAgent agent;
     private Transform target;
     private Animator animator;
-    private int moveSpeed = 3;
+    private int moveSpeed = 5;
 
-    public BossMoveToPlayers(Transform bossTransfrom, Animator animator)
+    public BossMoveToPlayers(NavMeshAgent agent, Animator animator)
     {
-        this.bossTransfrom = bossTransfrom;
+        this.agent = agent;
         this.animator = animator;
+        
     }
 
     public override NodeState Evaluate()
@@ -21,12 +24,17 @@ public class BossMoveToPlayers : TreeNode
         
         if (t != null)
         {
+            agent.speed = moveSpeed;
+            agent.isStopped = false;
+            
             animator.SetBool("Run", true);
             target = (Transform) GetData("target");
             
-            bossTransfrom.position = Vector3.MoveTowards(bossTransfrom.position, target.transform.position, 3 * Time.deltaTime);
-            bossTransfrom.transform.LookAt(target);
-            return NodeState.RUNNING;
+            agent.SetDestination(new Vector3(target.position.x, agent.transform.position.y, target.position.z));
+            Debug.Log( agent.SetDestination(new Vector3(target.position.x, agent.transform.position.y, target.position.z)) + " Agents Destination");
+          //  agent.transform.LookAt(target);
+           
+            return NodeState.SUCCESS;
         }
         
         animator.SetBool("Run", false);
