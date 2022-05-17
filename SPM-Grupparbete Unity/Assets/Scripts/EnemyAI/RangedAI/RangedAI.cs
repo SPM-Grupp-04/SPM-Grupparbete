@@ -42,7 +42,7 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     void Start()
     {
         base.Start();
-        timer = throwCooldown;
+        timer = 0;
         _animator = GetComponent<Animator>();
         currentHealth = startHealth;
         agent = GetComponent<NavMeshAgent>();
@@ -90,9 +90,9 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, rangedAttackTreeNode});
 
-        m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
-        return m_TopTreeNode;
+        return MTopTreeNode;
     }
 
 

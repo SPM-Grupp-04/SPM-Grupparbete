@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
     
     [SerializeField] private AudioClip drillSound, laserSound;
+    [SerializeField] private Animator animator;
 
     
     
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        animator.enabled = true;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
@@ -138,12 +141,24 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
+
             drillScript.Shoot(true);
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
+
+            Debug.Log(animator.isActiveAndEnabled);
+            
+            
+            Debug.Log("SHOOT");
+            drill.gameObject.SendMessage("Shoot", true);
+            drill.gameObject.SendMessage("DrillInUse", true);
+            animator.SetBool("IsShooting", true);
+            animator.SetBool("Idle", false);
+
             if (!source.isPlaying)
             {
                 PlayLaserWeaponSound();
+                
             }
 
         }
@@ -154,6 +169,13 @@ public class PlayerController : MonoBehaviour
                 drillScript.Shoot(false);
                 drillScript.Drill(true);
                 drillScript.DrillInUse(true);
+
+                drill.gameObject.SendMessage("DrillObject");
+                drill.gameObject.SendMessage("DrillInUse", true);
+                
+                animator.SetBool("IsShooting", true);
+                animator.SetBool("Idle", false);
+
                 if (!source.isPlaying)
                 {
                     PlayDrillSound();
@@ -163,9 +185,13 @@ public class PlayerController : MonoBehaviour
             {
                 drillScript.DrillInUse(false);
                 StopSound();
+                animator.SetBool("IsShooting", false);
+                animator.SetBool("Idle", true);
+                
             }
         }
     }
+    
 
     private void PlayerMovement()
     {
@@ -265,6 +291,10 @@ public class PlayerController : MonoBehaviour
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
+        if (velocity != Vector3.zero)
+        {
+            animator.SetBool("MoveForward", true);
+        }
     }
 
     public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)

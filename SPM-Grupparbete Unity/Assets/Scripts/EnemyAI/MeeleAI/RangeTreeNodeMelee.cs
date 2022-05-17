@@ -26,20 +26,7 @@ public class RangeTreeNodeMelee : TreeNode
 
     public override NodeState Evaluate()
     {
-        /*float distance = largeDistanceNumber;
-        foreach (Transform target in targets)
-        {
-            float tempdistance = Vector3.Distance(target.position, orgin.position);
-            Debug.Log(target + "RangeNode");
-            if (tempdistance < distance && target.gameObject.activeInHierarchy)
-            {
-                distance = tempdistance;
-               
-                this.target = target;
-            }
-
-                
-        }*/
+       
 
         state = distanceToPlayer <= range ? NodeState.SUCCESS : NodeState.FAILURE;
         if (state == NodeState.FAILURE)

@@ -1,61 +1,93 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BehaviorTree;
 using UnityEditor;
 using UnityEngine;
 using BehaviorTree;
+using EnemyAI;
 using UnityEngine.AI;
+using Utility.EnemyAI;
 using Tree = BehaviorTree.Tree;
 
 public class BossAI : Tree
 {
     [SerializeField] private NavMeshAgent agent;
 
+    [SerializeField] private GameObject rockToThrow;
+
+    [SerializeField] private Animator animator;
+
     [SerializeField] private LineRenderer lineRenderer;
-    [SerializeField] private LineRenderer _lineRendererTwo;
-    [SerializeField] private Transform firepoint;
+    [SerializeField] private LineRenderer lineRendererTwo;
+
+    [SerializeField] private Transform rockThrowPosition;
+    [SerializeField] private Transform firePoint;
     [SerializeField] private Transform firePointTwo;
+
+    private const float CheckForMeeleAttackFOV = 3f;
+    private const float CheckForLaserFOV = 15;
+    private const float CheckForRangeAttackFOV = 20;
+    private const float CheckIfIShouldMoveToPlayerFOV = 30;
+
     [SerializeField] private float fovAttackRange;
-    [SerializeField] private Animator _animator;
-    private float checkForPlayerFOV = 16;
+    [SerializeField] private float throwForce = 30;
+    [SerializeField] private float throwUpForce = 2;
+
+    [SerializeField] private List<Transform> waypoints;
+
+    [SerializeField] private MeleeWepon meleeWepon;
 
     protected override TreeNode SetUpTree()
     {
-        /*
-         * :Needed nodes:
-         * Hitta spelarna.
-         * Röra sig mot spelarna
-         * Slå mot spelarna
-         * Spawna Adds
-         * Stampa i marken för att få ner stenar som faller
-         * Skjuta laser från ögonen
-         * 
-         */
-
+        var agentTransform = agent.transform;
         TreeNode root = new Selector(new List<TreeNode>
         {
+            // Kolla om spelaren är i range
+            new Sequence(new List<TreeNode>
+            {
+                new CheckPlayerInAttackRange(agentTransform, CheckForMeeleAttackFOV),
+                new BossMeeleAttack(agent, animator, meleeWepon)
+            }),
+          
             // Skjuter spelaren.
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(agent.transform, checkForPlayerFOV),
-                new BossAttackWithLaser(agent.transform, lineRenderer, _lineRendererTwo, firepoint, firePointTwo,
-                    fovAttackRange, _animator),
+                new CheckPlayerInAttackRange(agentTransform, CheckForLaserFOV),
+                new BossAttackWithLaser(agent, lineRenderer, lineRendererTwo, firePoint, 
+                    firePointTwo,fovAttackRange,animator),
             }),
-
+            
+            // Slänger stenar mot spelaren.
+            new Sequence(new List<TreeNode>
+            {
+                new CheckPlayerInAttackRange(transform, CheckForRangeAttackFOV),
+                new BossRangeAttack(rockToThrow, agent, throwUpForce, throwForce, rockThrowPosition, animator)
+            }),
+            
             // Springer efters seplaren
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(transform, 20),
-                new BossMoveToPlayers(transform,_animator),
-            })
+                new CheckPlayerInAttackRange(agentTransform, CheckIfIShouldMoveToPlayerFOV),
+                new BossMoveToPlayers(agent, animator),
+            }),
+           
+            // Reset state.
+            new BossIdle(agent, animator, waypoints)
             
-            // Om spelarna springer för långt ifrån spring tillbaka till din spawn position och börja
-            // slöppa stenar från taket.
-
-
-
         });
-
-
+        
         return root;
     }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(agent.transform.position,CheckIfIShouldMoveToPlayerFOV);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(agent.transform.position, CheckForLaserFOV);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(agent.transform.position, CheckForRangeAttackFOV);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(agent.transform.position, CheckForMeeleAttackFOV);
+    }
+    
 }
