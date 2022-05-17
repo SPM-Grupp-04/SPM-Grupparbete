@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamitePrefab: {fileID: 7467092179448219033, guid: 0caf637a81e9bb44da30891d66a64945, type: 3}
+  dynamitePrefab: {fileID: 7467092179448219033, guid: f19dfc90978220346b75ab4ab42b5699, type: 3}
   launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
   uiCooldowns: {fileID: 0}
@@ -733,6 +733,7 @@ Transform:
   - {fileID: 485164650}
   - {fileID: 1923348165}
   - {fileID: 2139519183}
+  - {fileID: 8103748577460179343}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -969,19 +970,7 @@ MonoBehaviour:
     m_ActionId: 0a6c6e6f-4221-430c-816c-77e0f2210986
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI_PausMenu, Assembly-CSharp
-        m_MethodName: PauseButtonInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 87d8f1e3-1346-44b2-9a5b-991b9747d3fd
     m_ActionName: Player/Pause[/Keyboard/k,/XInputControllerWindows/start]
   - m_PersistentCalls:
@@ -1027,19 +1016,19 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 6dbc1526-d730-4a0e-9227-7b7f83ed8534
-    m_ActionName: Player/SwitchMap[/DualShock4GamepadHID/buttonWest]
+    m_ActionName: Player/SwitchMap
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: dbd4abb2-0b9f-4a0f-95c1-29f6f39c18d4
-    m_ActionName: UI/Navigate[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID/rightStick/right,/DualShock4GamepadHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 2edb01cd-4daa-4bdc-ac5c-fedf885011b4
-    m_ActionName: UI/Submit[/Keyboard/enter,/DualShock4GamepadHID/buttonSouth]
+    m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 79b79ad0-e9a7-4cf7-87a5-3974902e1805
-    m_ActionName: UI/Cancel[/Keyboard/escape,/DualShock4GamepadHID/buttonEast]
+    m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 1ed11c73-62bf-4f66-9232-2ed44a4c0ea5
@@ -1071,23 +1060,11 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b2842feb-3785-44fb-9e20-34aaee8fd721
-    m_ActionName: UI/Pause[/DualShock4GamepadHID/start]
+    m_ActionName: UI/Pause
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7708049037048568331}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: SwitchActionMap
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 3d509d47-d0eb-4df7-b2eb-15eb9c76921a
-    m_ActionName: UI/SwitchActionMap[/DualShock4GamepadHID/buttonWest]
+    m_ActionName: UI/SwitchActionMap
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -1163,10 +1140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9a82d836642ce458be2a83a1888eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerToDestroyShield: 2
-  shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
   player: {fileID: 2965090648212624896}
-  cooldownToNextUse: 5
+  shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
+  upTimeShield: 5
+  coolDown: 15
   uiCooldowns: {fileID: 0}
 --- !u!54 &8649910836036510376
 Rigidbody:
@@ -1725,6 +1702,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6093184859343044073, guid: 04bb2260c25184f4aae98d7ecab88bce, type: 3}
   m_PrefabInstance: {fileID: 586882722}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &830465525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2965090648212625148}
+    m_Modifications:
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.27500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4415768
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4415768
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5522771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5522771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103748578287596667, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: m_Name
+      value: JetStream
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+--- !u!4 &8103748577460179343 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+  m_PrefabInstance: {fileID: 830465525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1075454381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1974,7 +2013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1982,7 +2021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1994,7 +2033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2018,6 +2057,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
+--- !u!1 &59422593403783252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
+  m_PrefabInstance: {fileID: 869886704481875205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &664575013723280116
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59422593403783252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02423ad2797c54c46b5bec8f48d7fd54, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &835642186703262446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
