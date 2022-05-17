@@ -15,7 +15,7 @@ public class ShopScript : MonoBehaviour
 {
     [SerializeField] private GameObject shopInterfaceBackground;
     [SerializeField] private LayerMask playerLayerMask;
-    [SerializeField] [Range(1.0f, 10.0f)] private float shopAreaRadius = 5.0f;
+    [SerializeField] [Range(1.0f, 30.0f)] private float shopAreaRadius = 5.0f;
 
     [SerializeField] private int drillLevelCostBlue = 5;
     [SerializeField] private int healCostBlue = 2;
