@@ -22,6 +22,8 @@ public class CameraHandler : MonoBehaviour
 
     private static CameraHandler instance;
     
+    private Camera mainCamera;
+    
     public static CameraHandler Instance
     {
         get { return instance; }
@@ -34,6 +36,11 @@ public class CameraHandler : MonoBehaviour
     private const int FOVMAX = 100;
 
     private Vector3 LenghtBetweenPlayers;
+    
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
 
 
     private void Start()
@@ -87,6 +94,36 @@ public class CameraHandler : MonoBehaviour
         {
             virtualCameraPlayerOne.gameObject.SetActive(true);
         }
+    }
+    
+    private void RestrictMovement()
+    {
+        Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
+        cameraView.x = Mathf.Clamp01(cameraView.x);
+        cameraView.y = Mathf.Clamp01(cameraView.y);
+
+        bool isOutSide = false;
+
+        if (cameraView.x == 0f || cameraView.x == 1)
+        {
+            isOutSide = true;
+            //  Debug.Log("Outside X ");
+        }
+
+        if (cameraView.y == 0f || cameraView.y == 1)
+        {
+            isOutSide = true;
+            //  Debug.Log("Outside Y");
+        }
+
+        Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
+        if (isOutSide)
+        {
+            //    Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
+            Debug.Log("IS OUTSIDE");
+        }
+
+        transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
     }
 
     private void CalculateMidPointBetweenPlayers()

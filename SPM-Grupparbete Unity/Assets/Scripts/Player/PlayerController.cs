@@ -8,23 +8,36 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject drill;
+    [Header("Collision Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask wallLayerMask;
+    
+    [Header("Movement")]
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
     [SerializeField] [Range(0.0f, 1.0f)] private float colliderMargin = 0.01f;
+    
+    [Header("Components")]
+    [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
+
+    [SerializeField] private Transform otherPlayerTransform;
+    
     private Collider[] penetrationColliders = new Collider[2];
+    
     private PlayerInput playerInput;
+    
     private Camera mainCamera;
+    
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector3 gamePadLookRotation;
     private Vector2 lookRotation;
     private Vector2 mousePosition;
+    
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
+    
     private bool movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
@@ -50,31 +63,42 @@ public class PlayerController : MonoBehaviour
 
     private void RestrictMovement()
     {
-        Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
-        cameraView.x = Mathf.Clamp01(cameraView.x);
-        cameraView.y = Mathf.Clamp01(cameraView.y);
+        Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
+        currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
+        currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
+        
 
         bool isOutSide = false;
 
-        if (cameraView.x == 0f || cameraView.x == 1)
+        if (currentPlayerCameraView.x == 0f || currentPlayerCameraView.x == 1)
         {
             isOutSide = true;
             //  Debug.Log("Outside X ");
         }
 
-        if (cameraView.y == 0f || cameraView.y == 1)
+        if (currentPlayerCameraView.y == 0f || currentPlayerCameraView.y == 1)
         {
             isOutSide = true;
             //  Debug.Log("Outside Y");
         }
 
-        Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
+        Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
+        
         if (isOutSide)
         {
+            Vector3 otherPlayerCameraView = mainCamera.WorldToViewportPoint(otherPlayerTransform.position);
+            otherPlayerCameraView.x = Mathf.Clamp01(otherPlayerCameraView.x);
+            otherPlayerCameraView.y = Mathf.Clamp01(otherPlayerCameraView.y);
+            
+            Vector3 otherPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(otherPlayerCameraView);
+            
+            otherPlayerTransform.position = new Vector3(otherPlayerCameraView.x - otherPlayerPosInWorldPoint.x, otherPlayerTransform.position.y,
+                otherPlayerCameraView.y - otherPlayerPosInWorldPoint.z);
             //    Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
+            Debug.Log("IS OUTSIDE");
         }
-
-        transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
+        
+        transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
     }
 
     private void ShootOrDrill()
