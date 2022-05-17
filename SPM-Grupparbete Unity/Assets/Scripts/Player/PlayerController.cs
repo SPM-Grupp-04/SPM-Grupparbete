@@ -99,8 +99,8 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log(uiEnabled);
 
                 //defaultMap.Enable();
-                //playerInput.SwitchCurrentActionMap("Player");
-                //UI.Disable();
+                playerInput.SwitchCurrentActionMap("Player");
+                UI.Disable();
                 //Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
 
             }
