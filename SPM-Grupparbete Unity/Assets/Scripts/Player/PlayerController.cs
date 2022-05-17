@@ -90,18 +90,18 @@ public class PlayerController : MonoBehaviour
                 UI.Enable();
                 playerInput.SwitchCurrentActionMap("UI");
                 
-                defaultMap.Disable();
+                //defaultMap.Disable();
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
 
             }
             else
             {
-                Debug.Log(uiEnabled);
+                //Debug.Log(uiEnabled);
 
-                defaultMap.Enable();
-                playerInput.SwitchCurrentActionMap("Player");
-                UI.Disable();
-                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+                //defaultMap.Enable();
+                //playerInput.SwitchCurrentActionMap("Player");
+                //UI.Disable();
+                //Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
 
             }
         }

@@ -159,16 +159,23 @@ public class ShopScript : MonoBehaviour
 
     public void DrillUpgrade(int level)
     {
-        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
+        switch (level)
         {
-            drillButton.interactable = false;
-            m_PlayerState.m_LocalPlayerData.drillLevel = level;
-            m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
-            GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-            drillButton.Select();
-            buttonDictionary[drillButton.name] = true;
-            UpdateShop();
+            case 1:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
+                {
+                    drillButton.interactable = false;
+                    m_PlayerState.m_LocalPlayerData.drillLevel = level;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    drillButton.Select();
+                    buttonDictionary[drillButton.name] = true;
+                    UpdateShop();
+                }
+                break;
+                
         }
+        
     }
 
     public void Accelerate(float addedAcceleration)
