@@ -820,6 +820,7 @@ MonoBehaviour:
   rotationSmoothing: 25
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
+  animator: {fileID: 3432154670100536797}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,10 +1141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9a82d836642ce458be2a83a1888eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerToDestroyShield: 2
-  shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
   player: {fileID: 2965090648212624896}
-  cooldownToNextUse: 5
+  shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
+  upTimeShield: 5
+  coolDown: 15
   uiCooldowns: {fileID: 0}
 --- !u!54 &3438931142091801704
 Rigidbody:
@@ -1963,7 +1964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1971,7 +1972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1983,7 +1984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1999,6 +2000,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
+--- !u!1 &59422593403783252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
+  m_PrefabInstance: {fileID: 869886704481875205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3432154670100536797
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59422593403783252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc1de8b5f52425e43978184c49dce8bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &835642186703262446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}

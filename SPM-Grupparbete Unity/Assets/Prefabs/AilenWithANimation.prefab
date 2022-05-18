@@ -610,15 +610,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d6d6a9fed7c7f4f9c7830032f5439b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomNumber: 0
   startingHealth: 5
   healthRestoreRate: 0
   chasingRange: 30
   hitRange: 1.25
   movementSpeed: 8
-  deathClip: {fileID: 7400000, guid: 4e75f654f3c20aa43bde6ff1697be77f, type: 2}
   _meleeWepon: {fileID: 2684010117394386391}
   target: {x: 100, y: 0, z: 100}
-  distanceToTargetPlayer: 100
+  distanceToTarget: 100
   playerPos: {x: 100, y: 0, z: 100}
 --- !u!82 &5417767976317561673
 AudioSource:
@@ -988,7 +988,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4c7461abf052da47a037be97d30e04a, type: 2}
+  - {fileID: 2100000, guid: fc37c282736e1d644a7b1533d9c3d3d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
