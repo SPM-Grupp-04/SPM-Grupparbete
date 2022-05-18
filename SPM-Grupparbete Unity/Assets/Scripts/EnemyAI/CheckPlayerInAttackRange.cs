@@ -9,15 +9,18 @@ public class CheckPlayerInAttackRange : TreeNode
     private readonly Transform agentsTransform;
     private readonly LayerMask layerMask = LayerMask.GetMask("Player");
     private readonly float fov;
-
-    public CheckPlayerInAttackRange(Transform agentsTransform, float fov)
+    private BossAI boss;
+    public CheckPlayerInAttackRange(BossAI boss,Transform agentsTransform, float fov)
     {
         this.agentsTransform = agentsTransform;
         this.fov = fov;
+        this.boss = boss;
     }
 
     public override NodeState Evaluate()
     {
+
+       
         object t = GetData("target");
         
         if (t == null)
