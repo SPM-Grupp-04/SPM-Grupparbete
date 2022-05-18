@@ -10,14 +10,14 @@ using UnityEngine.InputSystem;
 
 public class BossAttackWithLaser : TreeNode
 {
-    private NavMeshAgent agent;
-    private Transform firePoint;
-    private Transform firePointTwo;
-    private Animator _animator;
-    private LineRenderer lineRenderer;
-    private LineRenderer lineTwo;
-    private float attackRange;
-    private float overHeatTime = 5;
+    private readonly NavMeshAgent agent;
+    private readonly Transform firePoint;
+    private readonly Transform firePointTwo;
+    private readonly Animator animator;
+    private readonly LineRenderer lineRenderer;
+    private readonly LineRenderer lineTwo;
+    private readonly float attackRange;
+    private const float OverHeatTime = 5;
 
     public BossAttackWithLaser(NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
         Transform firePoint, Transform firePointTwo, float fov, Animator animator)
@@ -26,10 +26,8 @@ public class BossAttackWithLaser : TreeNode
         this.agent = agent;
         this.firePointTwo = firePointTwo;
         this.firePoint = firePoint;
-        this._animator = animator;
+        this.animator = animator;
         this.lineRenderer = lineRenderer;
-
-
         attackRange = fov;
     }
 
@@ -39,7 +37,7 @@ public class BossAttackWithLaser : TreeNode
 
     public override NodeState Evaluate()
     {
-        if (timer > overHeatTime)
+        if (timer > OverHeatTime)
         {
             isOverHeated = true;
         }
@@ -75,7 +73,7 @@ public class BossAttackWithLaser : TreeNode
             return state;
         }
 
-        _animator.SetBool("Run", false);
+        animator.SetBool("Run", false);
         LockOnTarget();
         
         if (target.gameObject.layer == 6)

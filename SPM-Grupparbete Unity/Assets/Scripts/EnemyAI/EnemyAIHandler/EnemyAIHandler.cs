@@ -71,10 +71,11 @@ public class EnemyAIHandler : MonoBehaviour
 
         foreach (BaseClassEnemyAI enemyAI in units)
         {
-            if (enemyAI.gameObject.activeInHierarchy)
+            if (enemyAI.gameObject.activeInHierarchy )
             {
                 Vector3 aiPos = enemyAI.gameObject.transform.position;
 
+                
                 // Checking distance from Ai-unit to Player.
                 distancePlayerOne = Vector3.Distance(playerOnePosition, aiPos);
                 distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPos);
@@ -105,6 +106,7 @@ public class EnemyAIHandler : MonoBehaviour
                 
                 countEnemy++;
             }
+           
         }
     }
 
