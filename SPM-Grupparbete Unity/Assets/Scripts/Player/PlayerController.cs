@@ -264,10 +264,14 @@ public class PlayerController : MonoBehaviour
     public void UseInput(InputAction.CallbackContext useValue)
     {
         //useButtonPressed = useValue.performed;
+        
         if (useValue.performed)
         {
-            useButtonPressed = !useButtonPressed;
-        } 
+            useButtonPressed = true;
+        } else if (useValue.canceled)
+        {
+            useButtonPressed = false;
+        }
     }
 
     public void SetMovementStatus(bool movementStatus)
