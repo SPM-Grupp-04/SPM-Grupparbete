@@ -25,16 +25,18 @@ public class ComponentPickupScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
-        if (!collision.collider.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player") )
             return;
-
-        //the mask now contains the value for the component
-        PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
-        GlobalControl.Instance.playerStatistics.componentsCollectedMask =
+        
+        if (collision.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
+        {
+            //the mask now contains the value for the component
+            PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
+            GlobalControl.Instance.playerStatistics.componentsCollectedMask =
             PlayerStatistics.Instance.componentsCollectedMask;
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

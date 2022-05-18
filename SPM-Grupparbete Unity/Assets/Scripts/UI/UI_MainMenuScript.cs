@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +10,10 @@ public class UI_MainMenuScript : MonoBehaviour
 
     [SerializeField] private GameObject startButton;
     [SerializeField] private int sceneToLoad = 0;
+
+    [SerializeField] private GameObject mainMenu;
+
+    [SerializeField] private GameObject settingsMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +39,13 @@ public class UI_MainMenuScript : MonoBehaviour
             Debug.Log("Quitting game");
             Application.Quit();
         }
+
+        public void ShowSettingsMenu()
+        {
+            mainMenu.SetActive(false);
+            settingsMenu.SetActive(true);
+        }
+        
+    
     
 }

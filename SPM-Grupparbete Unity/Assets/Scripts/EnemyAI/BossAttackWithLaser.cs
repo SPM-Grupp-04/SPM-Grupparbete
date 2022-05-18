@@ -4,119 +4,121 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using Unity.Mathematics;
 using UnityEditorInternal;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 
 public class BossAttackWithLaser : TreeNode
 {
-    private Transform _transform;
-    private Transform firePoint;
-    private Transform firePointTwo;
-    private Animator _animator;
-    private LineRenderer _lineRenderer;
-    private LineRenderer _lineTwo;
-    private float attackRange;
+    private readonly NavMeshAgent agent;
+    private readonly Transform firePoint;
+    private readonly Transform firePointTwo;
+    private readonly Animator animator;
+    private readonly LineRenderer lineRenderer;
+    private readonly LineRenderer lineTwo;
+    private readonly float attackRange;
+    private const float OverHeatTime = 5;
+    private BossAI bossAI;
 
-    public BossAttackWithLaser(Transform transform, LineRenderer lineRenderer,LineRenderer lineTwo,
-        Transform firePoint,Transform firePointTwo ,float fov, Animator animator)
+    public BossAttackWithLaser(BossAI bossAI, NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
+        Transform firePoint, Transform firePointTwo, float fov, Animator animator)
     {
-        this._lineTwo = lineTwo;
-        _transform = transform;
+        this.lineTwo = lineTwo;
+        this.agent = agent;
         this.firePointTwo = firePointTwo;
         this.firePoint = firePoint;
-        this._animator = animator;
-        this._lineRenderer = lineRenderer;
-        
-
+        this.animator = animator;
+        this.lineRenderer = lineRenderer;
+        this.bossAI = bossAI;
         attackRange = fov;
     }
 
+    private bool isOverHeated = false;
     private Transform target;
+    private float timer = 0;
 
     public override NodeState Evaluate()
     {
-        
+        if (bossAI.getCurrentHealth() < 1)
+        {
+            disableLineRenderer();
+            return NodeState.FAILURE;
+        }
+
+        if (timer > OverHeatTime)
+        {
+            isOverHeated = true;
+        }
+
+        if (timer <= 0)
+        {
+            isOverHeated = false;
+        }
+
+        if (isOverHeated)
+        {
+            timer -= Time.deltaTime;
+            disableLineRenderer();
+            ClearData("target");
+            return NodeState.FAILURE;
+        }
+
+        if (!isOverHeated)
+        {
+            timer += Time.deltaTime;
+        }
+
         target = (Transform) GetData("target");
 
-
         if (target == null || !target.gameObject.activeInHierarchy ||
-            Vector3.Distance(_transform.position, target.position) > attackRange)
+            Vector3.Distance(agent.transform.position, target.position) > attackRange)
         {
-            _lineRenderer.enabled = false;
-            _lineTwo.enabled = false;
+            disableLineRenderer();
             ClearData("target");
             state = NodeState.FAILURE;
             return state;
         }
-        _animator.SetBool("Run", false);
+
+        animator.SetBool("Run", false);
         LockOnTarget();
 
-
-       if (target.gameObject.layer == 6  )
+        if (target.gameObject.layer == 6)
         {
             Laser();
         }
 
-
-        state = NodeState.RUNNING;
-        cooldown += Time.deltaTime;
-        return state;
+        return NodeState.RUNNING;
     }
 
-    private float cooldown = 0.5f;
-
+    private void disableLineRenderer()
+    {
+        lineRenderer.enabled = false;
+        lineTwo.enabled = false;
+    }
 
     void Laser()
     {
         DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, 4 * Time.deltaTime);
         EventSystem.current.FireEvent(dealDamageEventInfo);
-        if (!_lineRenderer.enabled)
+        if (!lineRenderer.enabled)
         {
-            _lineRenderer.enabled = true;
-            _lineTwo.enabled = true;
+            lineRenderer.enabled = true;
+            lineTwo.enabled = true;
         }
 
-        Vector3 lineHitPoint=    new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
-        _lineRenderer.SetPosition(0, firePoint.position);
-        _lineRenderer.SetPosition(1, lineHitPoint);
-       
-        _lineTwo.SetPosition(0, firePointTwo.position);
-        _lineTwo.SetPosition(1, lineHitPoint);
+        Vector3 lineHitPoint = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, lineHitPoint);
+
+        lineTwo.SetPosition(0, firePointTwo.position);
+        lineTwo.SetPosition(1, lineHitPoint);
     }
 
     private bool canShoot;
+
     void LockOnTarget()
     {
-        
-        _transform.LookAt(target);
-        /*
-        Vector3 dir = target.position - _transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
-        
-        Vector3 rotation = Quaternion.Lerp(partToRotate.localRotation, lookRotation, Time.deltaTime * 3 /*TurnSpeed#1#)
-            .eulerAngles;
-
-        var hit = Physics.Linecast(partToRotate.position,new Vector3(target.position.x,
-                target.position.y + 0.5f, target.position.z)
-            , 7);
-        
-        
-
-        if (hit)
-        {
-            Debug.Log("hit");
-            canShoot = false;
-            _lineRenderer.enabled = false;
-        }
-        else
-        {
-            canShoot = true;
-        }
-        
-        partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-        */
-        
-        
-        
+        agent.transform.LookAt(target);
+        agent.isStopped = true;
     }
 }
