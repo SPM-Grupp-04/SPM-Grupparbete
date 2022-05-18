@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
 using UnityEditor;
@@ -6,10 +7,11 @@ using UnityEngine;
 using BehaviorTree;
 using EnemyAI;
 using UnityEngine.AI;
+using UnityEngine.PlayerLoop;
 using Utility.EnemyAI;
 using Tree = BehaviorTree.Tree;
 
-public class BossAI : Tree
+public class BossAI : Tree, IDamagable
 {
     [SerializeField] private NavMeshAgent agent;
 
@@ -37,37 +39,41 @@ public class BossAI : Tree
 
     [SerializeField] private MeleeWepon meleeWepon;
 
+    private float currentHealth = 50;
+    
     protected override TreeNode SetUpTree()
     {
+        
         var agentTransform = agent.transform;
         TreeNode root = new Selector(new List<TreeNode>
         {
             // Kolla om spelaren är i range
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(agentTransform, CheckForMeeleAttackFOV),
-                new BossMeeleAttack(agent, animator, meleeWepon)
+                new CheckPlayerInAttackRange(this
+                    ,agentTransform, CheckForMeeleAttackFOV),
+                new BossMeeleAttack(this,agent, animator, meleeWepon)
             }),
           
             // Skjuter spelaren.
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(agentTransform, CheckForLaserFOV),
-                new BossAttackWithLaser(agent, lineRenderer, lineRendererTwo, firePoint, 
+                new CheckPlayerInAttackRange(this,agentTransform, CheckForLaserFOV),
+                new BossAttackWithLaser(this,agent, lineRenderer, lineRendererTwo, firePoint, 
                     firePointTwo,fovAttackRange,animator),
             }),
             
             // Slänger stenar mot spelaren.
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(transform, CheckForRangeAttackFOV),
-                new BossRangeAttack(rockToThrow, agent, throwUpForce, throwForce, rockThrowPosition, animator)
+                new CheckPlayerInAttackRange(this,transform, CheckForRangeAttackFOV),
+                new BossRangeAttack(this,rockToThrow, agent, throwUpForce, throwForce, rockThrowPosition, animator)
             }),
             
             // Springer efters seplaren
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(agentTransform, CheckIfIShouldMoveToPlayerFOV),
+                new CheckPlayerInAttackRange(this,agentTransform, CheckIfIShouldMoveToPlayerFOV),
                 new BossMoveToPlayers(agent, animator),
             }),
            
@@ -89,5 +95,27 @@ public class BossAI : Tree
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(agent.transform.position, CheckForMeeleAttackFOV);
     }
-    
+
+    public void DealDamage(float damage)
+    {
+        currentHealth -= damage;
+        
+        if (currentHealth < 1)
+        {
+            agent.speed = 0;
+            StartCoroutine(waitbeforeDieWithoutPool());
+        }
+    }
+
+    public float getCurrentHealth()
+    {
+        return currentHealth;
+    }
+    private IEnumerator waitbeforeDieWithoutPool()
+    {
+        animator.SetTrigger("Die");
+        yield return new WaitForSeconds(2);
+        
+        gameObject.SetActive(false);
+    }
 }

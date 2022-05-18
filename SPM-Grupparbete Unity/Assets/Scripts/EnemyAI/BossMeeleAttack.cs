@@ -20,16 +20,23 @@ namespace EnemyAI
         private Vector3 currentVelocity;
         private Animator animator;
         private MeleeWepon meleeWepon;
+        private BossAI bossAI;
         
-        public BossMeeleAttack(NavMeshAgent agent, Animator animator, MeleeWepon meleeWepon)
+        public BossMeeleAttack(BossAI bossAI,NavMeshAgent agent, Animator animator, MeleeWepon meleeWepon)
         {
             this.agent = agent;
             this.animator = animator;
             this.meleeWepon = meleeWepon;
+            this.bossAI = bossAI;
         }
 
         public override NodeState Evaluate()
         {
+            if (bossAI.getCurrentHealth() < 1)
+            {
+                return NodeState.FAILURE;
+            }
+            
             agent.isStopped = true;
             var agentT = agent.transform;
             var target = (Transform) GetData("target");
