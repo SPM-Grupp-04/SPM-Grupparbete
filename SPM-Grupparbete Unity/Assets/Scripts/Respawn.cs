@@ -9,17 +9,25 @@ public class Respawn : MonoBehaviour
 {
     [SerializeField] private GameObject playerOne;
     [SerializeField] private GameObject playerTwo;
-    [Header("Zonen man vill spawna i Default är 2 som är hub")]
-    [SerializeField] private int zoneToSpawnIn = 2;
 
+    [SerializeField] private GameObject canvasToSetActive;
+    
+    /*
+    [Header("Zonen man vill spawna i Default är 2 som är hub")]
+    [SerializeField] private int zoneToSpawnIn = 2;*/
+
+    
     [Header("If testing set to false")]
     public bool useRespawn;
+    
     private void Update()
     {
         if (useRespawn && playerOne.activeInHierarchy == false && playerTwo.activeInHierarchy == false)
         {
+            
             // Tar dig till Hubben.
-            SceneManager.LoadScene(zoneToSpawnIn);
+            canvasToSetActive.SetActive(true);
+            //SceneManager.LoadScene(zoneToSpawnIn);
         }
     }
 }
