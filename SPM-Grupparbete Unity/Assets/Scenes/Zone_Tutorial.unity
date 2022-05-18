@@ -13341,11 +13341,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press START to open the shop, the same button is used if you want to exit.
+  m_text: 'Press START to open and close the shop!
 
 
-    This
-    is the shop, buy the drill upgrade and look at the other things you can buy.
 
 
 '
@@ -26412,7 +26410,7 @@ MonoBehaviour:
     drill.
 
 
-    Get one from the shop. If you alreday have it, mine away!'
+    Get one from the shop'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -40288,17 +40286,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6962444589580304263, guid: aa9f42aaa1c7e68448c688ee10b4d0dc, type: 3}
   m_PrefabInstance: {fileID: 1316666105}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1319967571 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4361447376998521467, guid: f06716529f13da14c87e593c836e0696, type: 3}
-  m_PrefabInstance: {fileID: 4361447377897472296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a38c0c0e914f542993d2e50e3b99ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1327045745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47100,7 +47087,7 @@ MonoBehaviour:
 
 
     Walk over them to pick
-    them up! And maybe visit the shop'
+    them up!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -52791,7 +52778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawner: {fileID: 1271912477}
-  audioManager: {fileID: 1319967571}
 --- !u!65 &1710738479
 BoxCollider:
   m_ObjectHideFlags: 0

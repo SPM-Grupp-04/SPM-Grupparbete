@@ -105,7 +105,6 @@ public class PlayerDrill : MonoBehaviour
 
     private void FixedUpdate()
     {   
-        Debug.Log(laserRing.isPlaying);
         if (isShooting)
         {
             ShootObject();
