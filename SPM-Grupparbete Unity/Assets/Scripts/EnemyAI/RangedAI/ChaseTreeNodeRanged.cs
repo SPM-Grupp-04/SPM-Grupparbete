@@ -10,12 +10,12 @@ public class ChaseTreeNodeRanged : TreeNode
     private Vector3 target;
     private float distanceToTarget;
     private NavMeshAgent agent;
-    private Animator _animator;
+    private Animator animator;
 
 
     public ChaseTreeNodeRanged(Vector3 target,float distanceToTarget, NavMeshAgent agent, Animator animator)
     {
-        _animator = animator;
+        this.animator = animator;
         this.target = target;
         this.distanceToTarget = distanceToTarget;
         this.agent = agent;
@@ -24,19 +24,6 @@ public class ChaseTreeNodeRanged : TreeNode
 
     public override NodeState Evaluate()
     {
-        
-        /*float distance = 100;
-        foreach (Transform target in targets)
-        {
-            float tempdistance = Vector3.Distance(target.position, agent.transform.position);
-
-            if (tempdistance < distance && target.gameObject.activeInHierarchy)
-            {
-                distance = tempdistance;
-                this.target = target;
-            }
-        }*/
-
         if (distanceToTarget > 0.2f)
         {
             agent.isStopped = false;

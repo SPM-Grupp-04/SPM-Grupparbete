@@ -17,15 +17,9 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float rangedAttackRange;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
-    private Animator _animator;
+    private Animator animator;
     private IObjectPool<BaseClassEnemyAI> pool;
-
-    /*
-     * Settings for a good granade: Rb mass = 3.7 for grande.
-     * throwCd = 2;
-     * throwUpForce = 12;
-     * throwForce = 30;
-     */
+    
     [Header("Throw Weapon settings")] [SerializeField]
     private GameObject throwabelObject;
 
@@ -43,11 +37,10 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     {
         base.Start();
         timer = 0;
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         currentHealth = startHealth;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
-        //SetUpTree();
         base.randomNumber = Random.Range(1, 10);
     }
 
@@ -64,29 +57,26 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
             {
                 gameObject.SetActive(false);
             }
-
             return;
         }
-
         timer -= Time.deltaTime;
-        // ToptreeNodeEvaluate();
     }
 
     protected override TreeNode SetUpTree()
     {
         ChaseTreeNodeRanged chaseTreeNodeMelee =
-            new ChaseTreeNodeRanged(target, distanceToTargetPlayer, agent, _animator);
+            new ChaseTreeNodeRanged(target, distanceToTargetPlayer, agent, animator);
 
         RangeTreeNodeRange chasingRangeTreeNodeMelee =
-            new RangeTreeNodeRange(target, distanceToTargetPlayer, chasingRange, _animator);
+            new RangeTreeNodeRange(target, distanceToTargetPlayer, chasingRange, animator);
 
         RangeTreeNodeRange shootingRangeTreeNodeMelee =
-            new RangeTreeNodeRange(target, distanceToTargetPlayer, rangedAttackRange, _animator);
+            new RangeTreeNodeRange(target, distanceToTargetPlayer, rangedAttackRange, animator);
 
         RangedAttackTreeNode rangedAttackTreeNode =
             new RangedAttackTreeNode(firePoint,playerPos, agent,
                 throwabelObject, throwUpForce, throwForce, this);
-
+        
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, rangedAttackTreeNode});
 
@@ -114,6 +104,11 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
     public override void PlayerPos(Vector3 playerPos)
     {
         this.playerPos = playerPos;
+    }
+
+    public override float GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
     public void DealDamage(float damage)

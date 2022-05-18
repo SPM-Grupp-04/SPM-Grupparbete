@@ -26,7 +26,7 @@ namespace EnemyAI
         {
             int randomPoint = UnityEngine.Random.Range(0, wayPoints.Count);
 
-            if (timer > 3)
+            if (timer >= 5)
             {
                 agent.SetDestination(wayPoints[randomPoint].position);
                 timer = 0;
