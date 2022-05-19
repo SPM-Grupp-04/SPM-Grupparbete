@@ -721,6 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryLayerMask: 1
+  gameObject: {fileID: 0}
 --- !u!224 &489454023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -904,7 +905,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ce02b78098a9f56449078ed26a1f5fa6, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce02b78098a9f56449078ed26a1f5fa6, type: 3}
       propertyPath: m_LocalScale.x
@@ -1226,7 +1227,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ce02b78098a9f56449078ed26a1f5fa6, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce02b78098a9f56449078ed26a1f5fa6, type: 3}
       propertyPath: m_LocalScale.x
@@ -2293,6 +2294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 904460277, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 254404803190041202, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2701,7 +2706,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ce02b78098a9f56449078ed26a1f5fa6, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce02b78098a9f56449078ed26a1f5fa6, type: 3}
       propertyPath: m_LocalScale.x
