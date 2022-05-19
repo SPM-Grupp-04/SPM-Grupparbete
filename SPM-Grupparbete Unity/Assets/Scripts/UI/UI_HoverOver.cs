@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class UI_HoverOver : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private GameObject displayWindow;
+    private GameObject target;
     private void Awake()
     {
         displayWindow = GameObject.Find("TextWindow");

@@ -27,7 +27,7 @@ public class ShopScript : MonoBehaviour
 
     private int drillLevelScale;
     
-    private int drillLevelCostRed = 0;
+    private int drillLevelCostRed = 10;
     private Collider[] shopColliders;
     private SphereCollider shopCollider;
     private PlayerState m_PlayerState;
@@ -36,12 +36,13 @@ public class ShopScript : MonoBehaviour
     private Dictionary<string, bool> buttonDictionary;
 
     [Header("Buttons for shop")]
+    [SerializeField] private Button drill1Button;
     [SerializeField] private Button healButton;
-    [SerializeField] private Button accelerateButton;
-    [SerializeField] private Button discoButton;
-    [SerializeField] private Button drillButton;
     [SerializeField] private Button weaponButton;
-    
+    [SerializeField] private Button accelerateButton;
+    [SerializeField] private Button healthOneButton;
+    [SerializeField] private Button healthTwoButton;
+    [SerializeField] private Button drill2Button;
     
     
     
@@ -87,7 +88,7 @@ public class ShopScript : MonoBehaviour
         
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
-        drillButton.Select();
+        drill1Button.Select();
         UpdateShop();
         
     }
@@ -172,16 +173,28 @@ public class ShopScript : MonoBehaviour
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
                 {
                     Debug.Log("I am called");
-                    drillButton.interactable = false;
+                    drill1Button.interactable = false;
                     m_PlayerState.m_LocalPlayerData.drillLevel = level;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
                     GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-                    drillButton.Select();
-                    buttonDictionary[drillButton.name] = true;
+                    drill1Button.Select();
+                    buttonDictionary[drill1Button.name] = true;
                     UpdateShop();
                 }
                 break;
             case 2:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostRed)
+                {
+                    Debug.Log("I am called");
+                    drill2Button.interactable = false;
+                    m_PlayerState.m_LocalPlayerData.drillLevel = level;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
+                    m_PlayerState.m_LocalPlayerData.RedCrystals -= drillLevelCostRed;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    drill2Button.Select();
+                    buttonDictionary[drill2Button.name] = true;
+                    UpdateShop();
+                }
                 break;
                 
 
@@ -203,19 +216,19 @@ public class ShopScript : MonoBehaviour
         }
     }
 
-    public void Disco(bool isDisco)
-    {
-        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= discoCostBlue)
-        {
-            m_PlayerState.SetDisco(isDisco);
-            discoButton.interactable = false;
-            m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
-
-            buttonDictionary[discoButton.name] = true;
-
-            discoButton.Select();
-        }
-    }
+    // public void Disco(bool isDisco)
+    // {
+    //     if (GlobalControl.Instance.playerStatistics.BlueCrystals >= discoCostBlue)
+    //     {
+    //         m_PlayerState.SetDisco(isDisco);
+    //         discoButton.interactable = false;
+    //         m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
+    //
+    //         buttonDictionary[discoButton.name] = true;
+    //
+    //         discoButton.Select();
+    //     }
+    // }
 
     public void WeaponUpgrade(int level)
     {
@@ -248,11 +261,11 @@ public class ShopScript : MonoBehaviour
         
         Stopwatch stopWatch = new Stopwatch();
         stopWatch.Start();
-        if (buttonDictionary[drillButton.name] == false)
+        if (buttonDictionary[drill1Button.name] == false)
         {
             foreach (string buttonName in buttonDictionary.Keys)
             {
-                if (!buttonName.Equals(drillButton.name))
+                if (!buttonName.Equals(drill1Button.name))
                 {
                     FindButton(buttonName).interactable = false;
                     
