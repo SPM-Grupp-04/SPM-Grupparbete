@@ -200,6 +200,7 @@ public class PlayerDrill : MonoBehaviour
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
+
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);
                 }

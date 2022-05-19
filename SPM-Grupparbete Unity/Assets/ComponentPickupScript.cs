@@ -3,15 +3,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ComponentPickupScript : MonoBehaviour
 {
     [SerializeField] private VictoryConditionsScript.Components componentNumber;
+    [SerializeField] private GameObject canvas;
+    [SerializeField] private TextMeshProUGUI text;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        text.enabled = false;
         //checks if the mask contains the value for the component
         if ((PlayerStatistics.Instance.componentsCollectedMask & (int)componentNumber) > 0)
             Destroy(gameObject);
@@ -25,16 +30,19 @@ public class ComponentPickupScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
-        if (!collision.collider.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player") )
             return;
-
-        //the mask now contains the value for the component
-        PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
-        GlobalControl.Instance.playerStatistics.componentsCollectedMask =
+        text.enabled = true;
+        canvas.transform.rotation = Camera.main.transform.rotation;
+        if (collision.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
+        {
+            //the mask now contains the value for the component
+            PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
+            GlobalControl.Instance.playerStatistics.componentsCollectedMask =
             PlayerStatistics.Instance.componentsCollectedMask;
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

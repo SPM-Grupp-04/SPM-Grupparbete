@@ -20,8 +20,9 @@ public class BossRangeAttack : TreeNode
 
     // Hämtas
     private Transform target = null;
+    private BossAI bossAI;
 
-    public BossRangeAttack(GameObject rockThrow, NavMeshAgent thisTransform, float throwUpForce, float throwForce,
+    public BossRangeAttack(BossAI bossAI,GameObject rockThrow, NavMeshAgent thisTransform, float throwUpForce, float throwForce,
         Transform firePoint, Animator animator)
     {
         this.rockThrow = rockThrow;
@@ -30,6 +31,7 @@ public class BossRangeAttack : TreeNode
         this.throwForce = throwForce;
         this.firePoint = firePoint;
         this.animator = animator;
+        this.bossAI = bossAI;
     }
 
     public override NodeState Evaluate()

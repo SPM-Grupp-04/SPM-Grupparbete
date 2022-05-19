@@ -16,4 +16,5 @@ public abstract class BaseClassEnemyAI : Tree
     public abstract void PositionAroundTarget(Vector3 targetPos);
     public abstract void DistanceToPlayerPos(float distance);
     public abstract void PlayerPos(Vector3 playerPos);
+    public abstract float GetCurrentHealth();
 }

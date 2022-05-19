@@ -170,6 +170,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpawnTeleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6a2e239-1d70-4946-8416-cb0545b7d1d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -308,7 +317,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1a1a3d56-da45-421e-8973-164598f675bd"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -461,12 +470,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bf25c913-23ad-41e7-a8e0-2737bc14b1e5"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""id"": ""76364945-c0b8-45b8-a26c-7b5202672276"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchMap"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SpawnTeleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -478,7 +487,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""dbd4abb2-0b9f-4a0f-95c1-29f6f39c18d4"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -583,15 +592,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""45540e25-a770-47b3-9614-b2f108cc207d"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1034,72 +1034,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchActionMap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""088b9617-a9b2-4a5a-b918-5989eac9e6d5"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""2f6fdd5c-f8cc-437f-b553-9137a8635a50"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""fbfae44b-6e6a-4203-a5e8-bb1c93f401bc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""adcbc826-55e7-4d0a-b78d-e1c95669c236"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""eaac2f11-f067-47c9-9fe6-56ea999ce5d7"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""6a5209cc-12f3-4cf1-a460-40a0f7a67cc4"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1185,6 +1119,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_ThrowDynamite = m_Player.FindAction("ThrowDynamite", throwIfNotFound: true);
         m_Player_SwitchMap = m_Player.FindAction("SwitchMap", throwIfNotFound: true);
+        m_Player_SpawnTeleport = m_Player.FindAction("SpawnTeleport", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1199,7 +1134,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_SwitchActionMap = m_UI.FindAction("SwitchActionMap", throwIfNotFound: true);
-        m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1275,6 +1209,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_ThrowDynamite;
     private readonly InputAction m_Player_SwitchMap;
+    private readonly InputAction m_Player_SpawnTeleport;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1295,6 +1230,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @ThrowDynamite => m_Wrapper.m_Player_ThrowDynamite;
         public InputAction @SwitchMap => m_Wrapper.m_Player_SwitchMap;
+        public InputAction @SpawnTeleport => m_Wrapper.m_Player_SpawnTeleport;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1352,6 +1288,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
                 @SwitchMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
                 @SwitchMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
+                @SpawnTeleport.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnTeleport;
+                @SpawnTeleport.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnTeleport;
+                @SpawnTeleport.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnTeleport;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1404,6 +1343,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchMap.started += instance.OnSwitchMap;
                 @SwitchMap.performed += instance.OnSwitchMap;
                 @SwitchMap.canceled += instance.OnSwitchMap;
+                @SpawnTeleport.started += instance.OnSpawnTeleport;
+                @SpawnTeleport.performed += instance.OnSpawnTeleport;
+                @SpawnTeleport.canceled += instance.OnSpawnTeleport;
             }
         }
     }
@@ -1424,7 +1366,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_SwitchActionMap;
-    private readonly InputAction m_UI_Move;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1441,7 +1382,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @SwitchActionMap => m_Wrapper.m_UI_SwitchActionMap;
-        public InputAction @Move => m_Wrapper.m_UI_Move;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1487,9 +1427,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchActionMap.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSwitchActionMap;
                 @SwitchActionMap.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSwitchActionMap;
                 @SwitchActionMap.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSwitchActionMap;
-                @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1530,9 +1467,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchActionMap.started += instance.OnSwitchActionMap;
                 @SwitchActionMap.performed += instance.OnSwitchActionMap;
                 @SwitchActionMap.canceled += instance.OnSwitchActionMap;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
             }
         }
     }
@@ -1600,6 +1534,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnShield(InputAction.CallbackContext context);
         void OnThrowDynamite(InputAction.CallbackContext context);
         void OnSwitchMap(InputAction.CallbackContext context);
+        void OnSpawnTeleport(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1615,6 +1550,5 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnSwitchActionMap(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
     }
 }

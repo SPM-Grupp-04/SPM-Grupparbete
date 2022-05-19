@@ -10,26 +10,26 @@ using UnityEngine.InputSystem;
 
 public class BossAttackWithLaser : TreeNode
 {
-    private NavMeshAgent agent;
-    private Transform firePoint;
-    private Transform firePointTwo;
-    private Animator _animator;
-    private LineRenderer lineRenderer;
-    private LineRenderer lineTwo;
-    private float attackRange;
-    private float overHeatTime = 5;
+    private readonly NavMeshAgent agent;
+    private readonly Transform firePoint;
+    private readonly Transform firePointTwo;
+    private readonly Animator animator;
+    private readonly LineRenderer lineRenderer;
+    private readonly LineRenderer lineTwo;
+    private readonly float attackRange;
+    private const float OverHeatTime = 5;
+    private BossAI bossAI;
 
-    public BossAttackWithLaser(NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
+    public BossAttackWithLaser(BossAI bossAI, NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
         Transform firePoint, Transform firePointTwo, float fov, Animator animator)
     {
         this.lineTwo = lineTwo;
         this.agent = agent;
         this.firePointTwo = firePointTwo;
         this.firePoint = firePoint;
-        this._animator = animator;
+        this.animator = animator;
         this.lineRenderer = lineRenderer;
-
-
+        this.bossAI = bossAI;
         attackRange = fov;
     }
 
@@ -39,7 +39,13 @@ public class BossAttackWithLaser : TreeNode
 
     public override NodeState Evaluate()
     {
-        if (timer > overHeatTime)
+        if (bossAI.getCurrentHealth() < 1)
+        {
+            disableLineRenderer();
+            return NodeState.FAILURE;
+        }
+
+        if (timer > OverHeatTime)
         {
             isOverHeated = true;
         }
@@ -52,8 +58,7 @@ public class BossAttackWithLaser : TreeNode
         if (isOverHeated)
         {
             timer -= Time.deltaTime;
-            lineRenderer.enabled = false;
-            lineTwo.enabled = false;
+            disableLineRenderer();
             ClearData("target");
             return NodeState.FAILURE;
         }
@@ -68,16 +73,15 @@ public class BossAttackWithLaser : TreeNode
         if (target == null || !target.gameObject.activeInHierarchy ||
             Vector3.Distance(agent.transform.position, target.position) > attackRange)
         {
-            lineRenderer.enabled = false;
-            lineTwo.enabled = false;
+            disableLineRenderer();
             ClearData("target");
             state = NodeState.FAILURE;
             return state;
         }
 
-        _animator.SetBool("Run", false);
+        animator.SetBool("Run", false);
         LockOnTarget();
-        
+
         if (target.gameObject.layer == 6)
         {
             Laser();
@@ -86,6 +90,11 @@ public class BossAttackWithLaser : TreeNode
         return NodeState.RUNNING;
     }
 
+    private void disableLineRenderer()
+    {
+        lineRenderer.enabled = false;
+        lineTwo.enabled = false;
+    }
 
     void Laser()
     {
@@ -111,6 +120,5 @@ public class BossAttackWithLaser : TreeNode
     {
         agent.transform.LookAt(target);
         agent.isStopped = true;
-      
     }
 }
