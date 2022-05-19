@@ -49,6 +49,7 @@ public class MeeleAttackTreeNode : TreeNode
         // TODO: Ändra senare.!!!!!!!
         if (_meleeWepon.timeRemaining <= 0.1f)
         {
+           
             _animator.SetTrigger("Attack");
         }
 

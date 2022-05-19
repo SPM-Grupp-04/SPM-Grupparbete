@@ -170,6 +170,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpawnTeleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6a2e239-1d70-4946-8416-cb0545b7d1d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -456,6 +465,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76364945-c0b8-45b8-a26c-7b5202672276"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SpawnTeleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1099,6 +1119,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_ThrowDynamite = m_Player.FindAction("ThrowDynamite", throwIfNotFound: true);
         m_Player_SwitchMap = m_Player.FindAction("SwitchMap", throwIfNotFound: true);
+        m_Player_SpawnTeleport = m_Player.FindAction("SpawnTeleport", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1188,6 +1209,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_ThrowDynamite;
     private readonly InputAction m_Player_SwitchMap;
+    private readonly InputAction m_Player_SpawnTeleport;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1208,6 +1230,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @ThrowDynamite => m_Wrapper.m_Player_ThrowDynamite;
         public InputAction @SwitchMap => m_Wrapper.m_Player_SwitchMap;
+        public InputAction @SpawnTeleport => m_Wrapper.m_Player_SpawnTeleport;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1265,6 +1288,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
                 @SwitchMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
                 @SwitchMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
+                @SpawnTeleport.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnTeleport;
+                @SpawnTeleport.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnTeleport;
+                @SpawnTeleport.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpawnTeleport;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1317,6 +1343,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SwitchMap.started += instance.OnSwitchMap;
                 @SwitchMap.performed += instance.OnSwitchMap;
                 @SwitchMap.canceled += instance.OnSwitchMap;
+                @SpawnTeleport.started += instance.OnSpawnTeleport;
+                @SpawnTeleport.performed += instance.OnSpawnTeleport;
+                @SpawnTeleport.canceled += instance.OnSpawnTeleport;
             }
         }
     }
@@ -1505,6 +1534,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnShield(InputAction.CallbackContext context);
         void OnThrowDynamite(InputAction.CallbackContext context);
         void OnSwitchMap(InputAction.CallbackContext context);
+        void OnSpawnTeleport(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
