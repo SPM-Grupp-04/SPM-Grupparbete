@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
 
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
-
-        
     }
 
     private void Update()
@@ -105,33 +103,66 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [SerializeField] private PlayerController otherPlayer;
+
     private void RestrictMovement()
     {
         Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
         cameraView.x = Mathf.Clamp01(cameraView.x);
         cameraView.y = Mathf.Clamp01(cameraView.y);
 
-        bool isOutSide = false;
+        //bool isOutSide = false;
 
-        if (cameraView.x == 0f || cameraView.x == 1)
+        if (cameraView.x <= 0.1)
+        {
+           
+                velocity.x *= -1;
+            
+        }
+        else if (cameraView.x >= 0.9)
+        {
+          
+                velocity.x *= -1;
+            
+        }
+
+        if (cameraView.y <= 0.1f)
+        {
+            if (velocity == Vector3.zero)
+            {
+                otherPlayer.velocity.z *= -1;
+            }
+            else
+            {
+                velocity.z *= -1;
+            }
+                
+            
+        }
+        else if (cameraView.y >= 0.9)
+        {
+            
+                velocity.z *= -1;
+            
+        }
+
+        /*if (cameraView.x == 0f || cameraView.x == 1)
         {
             isOutSide = true;
             //  Debug.Log("Outside X ");
         }
 
-        if (cameraView.y == 0f || cameraView.y == 1)
+        if (cameraView.y <= 0.2f || cameraView.y == 1)
         {
             isOutSide = true;
-            //  Debug.Log("Outside Y");
-        }
+            Debug.Log("Outside Y");
+        }*/
+
 
         Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
-        if (isOutSide)
-        {
-            //    Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
-        }
 
-        transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
+
+        //  transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
     }
 
     private void ShootOrDrill()
@@ -269,12 +300,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    [SerializeField]private GameObject teleport;
+    [SerializeField] private GameObject teleport;
 
     public void Teleport(InputAction.CallbackContext teleportValue)
     {
         if (teleport.activeInHierarchy != false) return;
-        
+
         teleport.transform.position = transform.position + new Vector3(1, 1, 1);
         teleport.SetActive(true);
     }
