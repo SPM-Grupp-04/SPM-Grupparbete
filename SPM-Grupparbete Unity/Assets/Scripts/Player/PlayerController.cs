@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
 
-        teleport = GameObject.Find("TownPortal");
+        
     }
 
     private void Update()
@@ -269,7 +269,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private GameObject teleport;
+    [SerializeField]private GameObject teleport;
 
     public void Teleport(InputAction.CallbackContext teleportValue)
     {

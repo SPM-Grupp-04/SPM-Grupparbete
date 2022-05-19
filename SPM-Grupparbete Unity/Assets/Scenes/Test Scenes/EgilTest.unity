@@ -209,6 +209,11 @@ Transform:
   m_Father: {fileID: 1697629320}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &75678974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2971810965652457063, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
+  m_PrefabInstance: {fileID: 2971810964587788123}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &152520906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1274,6 +1279,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3739641424811235321, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: trajectoryArcIncreaseSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: teleport
+      value: 
+      objectReference: {fileID: 75678974}
     - target: {fileID: 8649910836036510376, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_IsKinematic
       value: 1
@@ -2079,7 +2092,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e63fa44e842153249ae835ebc62d07db, type: 2}
+  - {fileID: 2100000, guid: 1450b3914be28ac47a04df0ed1f2df73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3119,7 +3132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971810965652457063, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
       propertyPath: m_Name
-      value: TowPortal
+      value: TownPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971810965652457063, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}

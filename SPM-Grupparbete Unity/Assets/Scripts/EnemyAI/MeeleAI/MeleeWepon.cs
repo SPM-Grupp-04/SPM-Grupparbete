@@ -18,7 +18,7 @@ public class MeleeWepon : MonoBehaviour
    
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("SHould trigger");
+     
         if (timeRemaining < 0.0f)
         {
            
