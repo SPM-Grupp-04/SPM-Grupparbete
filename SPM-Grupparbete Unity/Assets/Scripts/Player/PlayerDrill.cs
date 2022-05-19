@@ -9,8 +9,6 @@ using UnityEngine.InputSystem;
 public class PlayerDrill : MonoBehaviour
 {
     private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
-    [SerializeField] private GameObject beamPrefab;
-    [SerializeField] private GameObject laserPrefab;
 
     [SerializeField] private LayerMask igenoreMask;
 
@@ -40,7 +38,6 @@ public class PlayerDrill : MonoBehaviour
     private float timer = 0;
     private GameObject laserPoint;
     private GameObject drillPoint;
-    private GameObject beamGO; 
 
     private bool isUsed;
     private bool canShoot = true;
@@ -113,7 +110,7 @@ public class PlayerDrill : MonoBehaviour
             DrillObject();
         }
         
-        if (timer == 0 && isUsed == false)
+        if (timer == 0 && isShooting == false)
         {
             CoolDownDrill();
             if (overHeatAmount <= 0)
@@ -123,14 +120,7 @@ public class PlayerDrill : MonoBehaviour
         }
     }
 
-    public void Shoot(bool state)
-    {
-        isShooting = state;
-    }
-    public void Drill(bool state)
-    {
-        isDrilling = state;
-    }
+
 
     private void DrillObject()
     {
@@ -176,61 +166,54 @@ public class PlayerDrill : MonoBehaviour
         lr.enabled = true;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-
-        //var offset = end - start;
-        //var scale = new Vector3(width, offset.magnitude / 2.0f, width);
-        //var position = start + (offset / 4.0f) ;
-        //Destroy(beamGO);
-        //beamGO = Instantiate(beamMaterial, position, transform.rotation);
-        //beamGO.transform.up = offset;
-        //beamGO.transform.localScale = scale;
-
     }
 
     private void ShootObject()
     {
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (overHeatAmount < 100 && canShoot)
+        if (overHeatAmount < 100 && canShoot && isShooting)
         {
+            if (overHeatAmount >= 100)
+            {
+                if (timer <= 0)
+                {
+                    lr.enabled = false;
+                    canShoot = false;
+                    timer = coolDownTimerStart;
+                    isShooting = false;
+                    laserEmission.Stop();
+                    laserEmission.Clear();
+                    laserRing.Stop();
+                    laserRing.Clear();
+                    return;
+                }
+            }
+            
             if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
             {
                 laserRing.Play();
                 laserEmission.Play();
             }
-            
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
-                Debug.DrawLine(transform.position, shootHit.point, Color.green);
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
-               
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    
-                    //shootHit.collider.gameObject.SendMessage("TakeDamage");
+
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);
                 }
                 overHeatAmount += overHeatIncreaseAmount;
-                return;
+                
             }
             else
             {
                 LaserBetweenPoints(transform.position, laserPoint.transform.position, 2);
                 overHeatAmount += overHeatIncreaseAmount;
-                return;
             }
         }
-        else if (overHeatAmount >= 100)
-        {
-            Destroy(beamGO);
-            if (timer <= 0)
-            {
-                lr.enabled = false;
-                canShoot = false;
-                timer = coolDownTimerStart;
-            }
-        }
+       
     }
 
     public void DrillInUse(bool state)
@@ -240,16 +223,31 @@ public class PlayerDrill : MonoBehaviour
         {
             isDrilling = false;
             isShooting = false;
+        }
+
+    }
+    
+    public void Shoot(bool state)
+    {
+        isShooting = state;
+        if (!isShooting)
+        {
             laserEmission.Stop();
             laserEmission.Clear();
             laserRing.Stop();
             laserRing.Clear();
+        }
+    }
+    public void Drill(bool state)
+    {
+        isDrilling = state;
+        if (!isDrilling)
+        {
             drillEmission.Stop();
             drillEmission.Clear();
             drillRing.Stop();
             drillRing.Clear();
         }
-
     }
 
     private void CoolDownDrill()

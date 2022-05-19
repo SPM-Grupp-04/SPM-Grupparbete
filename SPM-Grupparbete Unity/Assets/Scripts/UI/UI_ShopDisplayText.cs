@@ -36,29 +36,40 @@ public class UI_ShopDisplayText : MonoBehaviour
         {
             case 0:
                 header = "Drill Upgrade";
-                cost = "5";
+                cost = "Cost: 5 blue";
                 body = "This makes drill go brrrr";
                 break;
             case 1:
                 header = "Heal";
-                cost = "5";
+                cost = "Cost: 5 blue";
                 body = "This heals the player, many HP";
                 break;
             case 2:
                 header = "Weapon Upgrade";
-                cost = "10";
+                cost = "Cost: 10 blue";
                 body = "This makes laser go far";
                 break;
             case 3:
                 header = "Speed Upgrade";
-                cost = "10";
+                cost = "Cost: 10 blue";
                 body = "This makes players gor wroom";
                 break;
             case 4:
-                header = "Disco Upgrade";
-                cost = "50";
-                body = "Boots and cats, Boots and cats, Boots and cats, Boots and cats";
+                header = "Health 1";
+                cost = "Cost: 20 blue";
+                body = "Player gets 10 extra HP";
                 break;
+            case 5:
+                header = "Health 2";
+                cost = "Cost: 40 blue";
+                body = "Player gets 20 extra HP";
+                break;
+            case 6:
+                header = "Drill 2";
+                cost = "Cost: 20 blue & 20 red";
+                body = "This makes drill go even more BBBRRRRRRRR";
+                break;
+            
             
         }
         

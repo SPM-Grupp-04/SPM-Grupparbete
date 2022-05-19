@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5252746951170712258
+--- !u!114 &-6402746738596425898
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,11 +20,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HealButton
-  m_Shader: {fileID: -6465566751694194690, guid: 7f320ae04e5fc9c479c9c64a6747a67c, type: 3}
+  m_Name: uitest
+  m_Shader: {fileID: -6465566751694194690, guid: e1f788c684eaf4f4a86745df4dcbff03, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -33,8 +33,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3ff8c36f1051a22489f2406be3c075ba, type: 3}
+    - _Pattern:
+        m_Texture: {fileID: 2800000, guid: c7952207a96f4524f8d8f46c72676266, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -51,10 +51,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Float: 0
+    - _Fill: 0.01
+    - _Offset: 0.6
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ScrollSpeed: 0.05
+    - _Visability: 5
     m_Colors:
-    - _Color: {r: 0, g: 3.686275, b: 3.937255, a: 1}
-    - _Emission: {r: 0, g: 11.88428, b: 14.69436, a: 1}
+    - _Emission: {r: 4.392157, g: 0, b: 5.992157, a: 0}
   m_BuildTextureStacks: []

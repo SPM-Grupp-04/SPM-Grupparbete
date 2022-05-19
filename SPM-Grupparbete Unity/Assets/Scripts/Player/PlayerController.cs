@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject drill;
+    private PlayerDrill drillScript;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
@@ -43,12 +44,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        animator.enabled = true;
+       // animator.enabled = true;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-
+        drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
 
@@ -90,17 +91,22 @@ public class PlayerController : MonoBehaviour
                 UI.Enable();
                 playerInput.SwitchCurrentActionMap("UI");
 
+
+
                 defaultMap.Disable();
+
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
             }
             else
             {
-                Debug.Log(uiEnabled);
+                //Debug.Log(uiEnabled);
 
-                defaultMap.Enable();
+                //defaultMap.Enable();
                 playerInput.SwitchCurrentActionMap("Player");
                 UI.Disable();
+
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+
             }
         }
     }
@@ -138,14 +144,19 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
+
+
+            drillScript.Shoot(true);
+            drillScript.DrillInUse(true);
+            drillScript.Drill(false);
             Debug.Log(animator.isActiveAndEnabled);
 
 
             Debug.Log("SHOOT");
             drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
-            animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
+
+
             if (!source.isPlaying)
             {
                 PlayLaserWeaponSound();
@@ -155,11 +166,16 @@ public class PlayerController : MonoBehaviour
         {
             if (isDrilling)
             {
+                drillScript.Shoot(false);
+                drillScript.Drill(true);
+                drillScript.DrillInUse(true);
+
                 drill.gameObject.SendMessage("DrillObject");
                 drill.gameObject.SendMessage("DrillInUse", true);
 
                 animator.SetBool("IsShooting", true);
                 animator.SetBool("Idle", false);
+
                 if (!source.isPlaying)
                 {
                     PlayDrillSound();
@@ -167,10 +183,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                drill.gameObject.SendMessage("DrillInUse", false);
+                drillScript.DrillInUse(false);
                 StopSound();
+
                 animator.SetBool("IsShooting", false);
                 animator.SetBool("Idle", true);
+
             }
         }
     }
@@ -290,7 +308,7 @@ public class PlayerController : MonoBehaviour
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
         if (velocity != Vector3.zero)
         {
-            animator.SetBool("MoveForward", true);
+            //animator.SetBool("MoveForward", true);
         }
     }
 

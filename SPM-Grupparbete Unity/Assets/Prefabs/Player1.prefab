@@ -1063,9 +1063,25 @@ MonoBehaviour:
     m_ActionId: b2842feb-3785-44fb-9e20-34aaee8fd721
     m_ActionName: UI/Pause
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SwitchActionMap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3d509d47-d0eb-4df7-b2eb-15eb9c76921a
     m_ActionName: UI/SwitchActionMap
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45540e25-a770-47b3-9614-b2f108cc207d
+    m_ActionName: UI/Move[/XInputControllerWindows1/leftStick,/XInputControllerWindows/leftStick,/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -1406,8 +1422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b860060e4cfe1488da4013ec0db427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beamPrefab: {fileID: 2906850320086881520, guid: b23138dbb3c78fb4ba93f20d188e5ae0, type: 3}
-  laserPrefab: {fileID: 2906850320086881520, guid: 3d264b8a4b6591a4f8f35552ab3fd0d2, type: 3}
   igenoreMask:
     serializedVersion: 2
     m_Bits: 255
