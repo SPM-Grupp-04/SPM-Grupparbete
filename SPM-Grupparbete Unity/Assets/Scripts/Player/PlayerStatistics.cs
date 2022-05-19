@@ -28,6 +28,7 @@ public class PlayerStatistics
     public int drillLevel = 0;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
+    public float shieldCooldownModifer = 1f;
     public Dictionary<string, bool> buttonDictionary;
 
 

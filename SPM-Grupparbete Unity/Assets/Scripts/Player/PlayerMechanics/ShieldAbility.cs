@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,29 +7,33 @@ using UnityEngine.Serialization;
 
 public class ShieldAbility : MonoBehaviour
 {
+    private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
 
     [SerializeField] GameObject player;
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float upTimeShield = 5f;
-    [SerializeField] private float coolDown = 15f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
     
+    private float coolDown = 15f;
     private static float cooldownToNextUse;
     private GameObject shieldGO;
     private float destroyShieldTimer;
     private static bool canUseShield;
+    private float shieldCooldownModifer;
 
     
 
 
     private bool shieldButtonPressed;
 
-    private void Awake()
+    private void Start()
     {
+        shieldCooldownModifer = playerStatistics.shieldCooldownModifer;
         coolDown += upTimeShield;
         canUseShield = true;
-
     }
+
+    
 
 
     // Update is called once per frame
@@ -73,13 +78,14 @@ public class ShieldAbility : MonoBehaviour
 
     public void ActivateShield()
     {
+
         if (canUseShield &&  Time.time >= cooldownToNextUse)
         {
-            Debug.Log("SMIL");
             destroyShieldTimer = upTimeShield;
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
-            cooldownToNextUse = Time.time + coolDown;
+            cooldownToNextUse = Time.time + (coolDown * shieldCooldownModifer);
+            Debug.Log(cooldownToNextUse);
         }
     }
 

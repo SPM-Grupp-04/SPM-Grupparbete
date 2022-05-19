@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        animator.enabled = true;
+       // animator.enabled = true;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
@@ -146,14 +146,14 @@ public class PlayerController : MonoBehaviour
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
 
-            Debug.Log(animator.isActiveAndEnabled);
+            //Debug.Log(animator.isActiveAndEnabled);
             
             
             Debug.Log("SHOOT");
             drill.gameObject.SendMessage("Shoot", true);
             drill.gameObject.SendMessage("DrillInUse", true);
-            animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
+            //animator.SetBool("IsShooting", true);
+            //animator.SetBool("Idle", false);
 
             if (!source.isPlaying)
             {
@@ -173,8 +173,8 @@ public class PlayerController : MonoBehaviour
                 drill.gameObject.SendMessage("DrillObject");
                 drill.gameObject.SendMessage("DrillInUse", true);
                 
-                animator.SetBool("IsShooting", true);
-                animator.SetBool("Idle", false);
+                //animator.SetBool("IsShooting", true);
+                //animator.SetBool("Idle", false);
 
                 if (!source.isPlaying)
                 {
@@ -185,8 +185,8 @@ public class PlayerController : MonoBehaviour
             {
                 drillScript.DrillInUse(false);
                 StopSound();
-                animator.SetBool("IsShooting", false);
-                animator.SetBool("Idle", true);
+                //animator.SetBool("IsShooting", false);
+                //animator.SetBool("Idle", true);
                 
             }
         }
@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
         if (velocity != Vector3.zero)
         {
-            animator.SetBool("MoveForward", true);
+            //animator.SetBool("MoveForward", true);
         }
     }
 

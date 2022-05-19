@@ -14,14 +14,18 @@ using Debug = UnityEngine.Debug;
 public class ShopScript : MonoBehaviour
 {
     [SerializeField] private GameObject shopInterfaceBackground;
+    [SerializeField] private GameObject contentGO;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] [Range(1.0f, 30.0f)] private float shopAreaRadius = 5.0f;
-
+    [SerializeField] private RectTransform rectTransform;
+    
     [SerializeField] private int drillLevelCostBlue = 5;
     [SerializeField] private int healCostBlue = 2;
     [SerializeField] private int weaponCostBlue = 5;
     [SerializeField] private int speedCostBlue = 5;
     [SerializeField] private int discoCostBlue = 5;
+
+    private int drillLevelScale;
     
     private int drillLevelCostRed = 0;
     private Collider[] shopColliders;
@@ -43,31 +47,25 @@ public class ShopScript : MonoBehaviour
     
     private void Start()
     {
-
-        Debug.Log(buttonDictionary);
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
+        Debug.Log(contentGO.name);
         
         if (buttonDictionary == null)
         {
             
-            Debug.Log("I am empty");
             buttonDictionary = new Dictionary<string, bool>();
-            for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
+            for (int i = 0; i < contentGO.transform.childCount; i++)
             {
-                Transform temp = shopInterfaceBackground.transform.GetChild(i);
+                Transform temp = contentGO.transform.GetChild(i);
+                
                 if (temp.gameObject.CompareTag("ShopButton"))
                 {
-                    string addedButton = shopInterfaceBackground.transform.GetChild(i).gameObject.name;
+                    string addedButton = contentGO.transform.GetChild(i).gameObject.name;
+                    Debug.Log(addedButton);
                     buttonDictionary.Add(addedButton, false);
                     temp.name = addedButton;
                 }
             }
-            Debug.Log("I am now full");
-        }
-        else
-        {
-            Debug.Log("Loaded BD form PS");
-            
         }
 
         foreach (KeyValuePair<string, bool> test in buttonDictionary)
@@ -77,10 +75,10 @@ public class ShopScript : MonoBehaviour
         }
 
         
-        shopInterfaceBackground.SetActive(false);
         shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
         shopCollider.radius = shopAreaRadius;
+        shopInterfaceBackground.SetActive(false);
     }
     
 
@@ -90,8 +88,8 @@ public class ShopScript : MonoBehaviour
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
         drillButton.Select();
-        CanPlayersHeal();
         UpdateShop();
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -127,21 +125,21 @@ public class ShopScript : MonoBehaviour
     {
         PlayerStatistics.Instance.buttonDictionary = buttonDictionary;
         
-        Debug.Log("Current BD ");
-        foreach (KeyValuePair<string, bool> test in buttonDictionary)
-        {
-            
-            Debug.Log(test.Key + " " + test.Value.ToString());
-        }
-        Debug.Log("------------------------------------------------");
-        Debug.Log("Saved BD");
-        foreach (KeyValuePair<string, bool> test in PlayerStatistics.Instance.buttonDictionary)
-        {
-            
-            Debug.Log(test.Key + " " + test.Value.ToString());
-        }
-
-        Debug.Log(shopInterfaceBackground.activeSelf);
+        // Debug.Log("Current BD ");
+        // foreach (KeyValuePair<string, bool> test in buttonDictionary)
+        // {
+        //     
+        //     Debug.Log(test.Key + " " + test.Value.ToString());
+        // }
+        // Debug.Log("------------------------------------------------");
+        // Debug.Log("Saved BD");
+        // foreach (KeyValuePair<string, bool> test in PlayerStatistics.Instance.buttonDictionary)
+        // {
+        //     
+        //     Debug.Log(test.Key + " " + test.Value.ToString());
+        // }
+        //
+        // Debug.Log(shopInterfaceBackground.activeSelf);
 		shopInterfaceBackground.SetActive(false);
 
     }
@@ -173,6 +171,7 @@ public class ShopScript : MonoBehaviour
             case 1:
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
                 {
+                    Debug.Log("I am called");
                     drillButton.interactable = false;
                     m_PlayerState.m_LocalPlayerData.drillLevel = level;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
@@ -181,6 +180,8 @@ public class ShopScript : MonoBehaviour
                     buttonDictionary[drillButton.name] = true;
                     UpdateShop();
                 }
+                break;
+            case 2:
                 break;
                 
 
@@ -291,8 +292,11 @@ public class ShopScript : MonoBehaviour
     private Button FindButton(string buttonName)
     {
         Debug.Log(buttonName);
-        GameObject temp = GameObject.Find("UI_Shop/ShopCanvas/ShopInterfaceBackground/" + buttonName);
+        GameObject temp = GameObject.Find("UI_Shop/ShopCanvas/ShopInterfaceBackground/ScrollView/Viewport/Content/" + buttonName);
+        Debug.Log(temp);
         Button tempButton = temp.GetComponent<Button>();
+        
+
         return tempButton;
     }
 
