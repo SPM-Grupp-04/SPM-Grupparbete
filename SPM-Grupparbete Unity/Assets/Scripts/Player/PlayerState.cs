@@ -77,7 +77,7 @@ public class PlayerState : MonoBehaviour, IDamagable
     IEnumerator WaitForAnimation(GameObject g)
     {
         animator.SetBool("IsDead",true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.1f);
         die(g);
     }
     
