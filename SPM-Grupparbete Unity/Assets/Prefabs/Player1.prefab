@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamitePrefab: {fileID: 7467092179448219033, guid: f19dfc90978220346b75ab4ab42b5699, type: 3}
+  dynamitePrefab: {fileID: 7467092179448219033, guid: 0caf637a81e9bb44da30891d66a64945, type: 3}
   launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
   uiCooldowns: {fileID: 0}
@@ -821,6 +821,7 @@ MonoBehaviour:
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
   animator: {fileID: 222274269}
+  teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,9 +1080,21 @@ MonoBehaviour:
     m_ActionId: 3d509d47-d0eb-4df7-b2eb-15eb9c76921a
     m_ActionName: UI/SwitchActionMap
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 45540e25-a770-47b3-9614-b2f108cc207d
-    m_ActionName: UI/Move[/XInputControllerWindows1/leftStick,/XInputControllerWindows/leftStick,/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s]
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Teleport
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6a2e239-1d70-4946-8416-cb0545b7d1d8
+    m_ActionName: Player/SpawnTeleport[/XInputControllerWindows/dpad/up]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -1116,6 +1129,7 @@ MonoBehaviour:
     drillLevel: 0
     weaponLevel: 0
     componentsCollectedMask: 0
+    shieldCooldownModifer: 1
   playerName: PlayerOne
 --- !u!114 &5868905720494507359
 MonoBehaviour:
@@ -1160,7 +1174,6 @@ MonoBehaviour:
   player: {fileID: 2965090648212624896}
   shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
   upTimeShield: 5
-  coolDown: 15
   uiCooldowns: {fileID: 0}
 --- !u!54 &8649910836036510376
 Rigidbody:
@@ -1174,7 +1187,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
