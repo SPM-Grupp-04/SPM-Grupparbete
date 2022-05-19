@@ -180,13 +180,10 @@ public class PlayerController : MonoBehaviour
             drillScript.Shoot(true);
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
+            animator.SetBool("IsShooting", true);
+            animator.SetBool("Idle", false);
             Debug.Log(animator.isActiveAndEnabled);
-
-
-            Debug.Log("SHOOT");
-            drill.gameObject.SendMessage("Shoot", true);
-            drill.gameObject.SendMessage("DrillInUse", true);
-
+            
 
             if (!source.isPlaying)
             {
@@ -201,9 +198,6 @@ public class PlayerController : MonoBehaviour
                 drillScript.Drill(true);
                 drillScript.DrillInUse(true);
 
-                drill.gameObject.SendMessage("DrillObject");
-                drill.gameObject.SendMessage("DrillInUse", true);
-
                 animator.SetBool("IsShooting", true);
                 animator.SetBool("Idle", false);
 
@@ -215,6 +209,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 drillScript.DrillInUse(false);
+                drillScript.Shoot(false);
+                drillScript.Drill(false);
                 StopSound();
 
                 animator.SetBool("IsShooting", false);

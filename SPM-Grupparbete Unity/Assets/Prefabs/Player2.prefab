@@ -821,6 +821,7 @@ MonoBehaviour:
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
   animator: {fileID: 3432154670100536797}
+  otherPlayer: {fileID: 0}
   teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
@@ -1064,7 +1065,19 @@ MonoBehaviour:
     m_ActionId: b2842feb-3785-44fb-9e20-34aaee8fd721
     m_ActionName: UI/Pause
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7708049037048568331}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SwitchActionMap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3d509d47-d0eb-4df7-b2eb-15eb9c76921a
     m_ActionName: UI/SwitchActionMap
   - m_PersistentCalls:
@@ -1119,6 +1132,7 @@ MonoBehaviour:
     componentsCollectedMask: 0
     shieldCooldownModifer: 1
   playerName: PlayerTwo
+  animator: {fileID: 3432154670100536797}
 --- !u!114 &5868905720494507359
 MonoBehaviour:
   m_ObjectHideFlags: 0

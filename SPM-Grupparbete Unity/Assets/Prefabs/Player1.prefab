@@ -821,6 +821,7 @@ MonoBehaviour:
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
   animator: {fileID: 222274269}
+  otherPlayer: {fileID: 0}
   teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
@@ -1131,6 +1132,7 @@ MonoBehaviour:
     componentsCollectedMask: 0
     shieldCooldownModifer: 1
   playerName: PlayerOne
+  animator: {fileID: 222274269}
 --- !u!114 &5868905720494507359
 MonoBehaviour:
   m_ObjectHideFlags: 0

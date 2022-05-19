@@ -11,7 +11,7 @@ public class PlayerState : MonoBehaviour, IDamagable
     public PlayerStatistics m_LocalPlayerData;
 
     [SerializeField] private String playerName;
-
+    [SerializeField] private Animator animator;
     private void Awake()
     {
         m_LocalPlayerData = PlayerStatistics.Instance;
@@ -59,8 +59,8 @@ public class PlayerState : MonoBehaviour, IDamagable
         {
             if (m_LocalPlayerData.playerOneHealth < 1)
             {
-                
-                die(gameObject);
+
+                StartCoroutine(WaitForAnimation(gameObject));
             }
         } 
 
@@ -68,12 +68,19 @@ public class PlayerState : MonoBehaviour, IDamagable
         {
             if (m_LocalPlayerData.playerTwoHealth < 1)
             {
-                
-                die(gameObject);
+
+                StartCoroutine(WaitForAnimation(gameObject));
             }
         }
     }
 
+    IEnumerator WaitForAnimation(GameObject g)
+    {
+        animator.SetBool("IsDead",true);
+        yield return new WaitForSeconds(2);
+        die(g);
+    }
+    
     void die(GameObject gameObject)
     {
      
