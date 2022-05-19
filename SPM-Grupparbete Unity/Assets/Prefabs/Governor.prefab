@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 6270097400504094490}
   - component: {fileID: 6270097400504094495}
   - component: {fileID: 6270097400504094480}
+  - component: {fileID: 3632645281234480782}
   m_Layer: 0
   m_Name: Governor
   m_TagString: Untagged
@@ -476,3 +477,24 @@ MonoBehaviour:
   canvas: {fileID: 3010024189669586553}
   text: {fileID: 6366484398640504937}
   vfx: {fileID: 3021664043916480916}
+  animator: {fileID: 3632645281234480782}
+--- !u!95 &3632645281234480782
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6612046817647964738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 547de91b9a497de4985fb2cec3baf252, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

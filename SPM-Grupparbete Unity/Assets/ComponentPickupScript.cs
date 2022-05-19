@@ -13,6 +13,8 @@ public class ComponentPickupScript : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private VisualEffect vfx;
+    [SerializeField] private Animator animator;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,11 @@ public class ComponentPickupScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void OnTriggerStay(Collider collision)
     {
         if (!collision.gameObject.CompareTag("Player") )
@@ -45,14 +52,17 @@ public class ComponentPickupScript : MonoBehaviour
             GlobalControl.Instance.playerStatistics.componentsCollectedMask =
             PlayerStatistics.Instance.componentsCollectedMask;
             vfx.Play();
+            
             StartCoroutine(Delay());
-            Destroy(gameObject);
+            
         }
     }
 
     IEnumerator Delay()
     {
+        animator.SetBool("Alpha", true);
         yield return new WaitForSeconds(2);
+        Destroy(gameObject);
 
     }
 }
