@@ -821,6 +821,7 @@ MonoBehaviour:
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
   animator: {fileID: 3432154670100536797}
+  teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,6 +1067,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3d509d47-d0eb-4df7-b2eb-15eb9c76921a
     m_ActionName: UI/SwitchActionMap
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6a2e239-1d70-4946-8416-cb0545b7d1d8
+    m_ActionName: Player/SpawnTeleport[/XInputControllerWindows/dpad/up]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1317,8 +1322,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5711041550793873810}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.72, z: 0.5}
+  m_LocalRotation: {x: -0.00000002107342, y: 0.00000005960463, z: 0.00000002107342, w: 1}
+  m_LocalPosition: {x: 0.50000066, y: 0.71999997, z: 0.5000006}
   m_LocalScale: {x: 0.278787, y: 0.278787, z: 0.92929}
   m_ConstrainProportionsScale: 0
   m_Children:
