@@ -5,17 +5,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ComponentPickupScript : MonoBehaviour
 {
     [SerializeField] private VictoryConditionsScript.Components componentNumber;
     [SerializeField] private GameObject canvas;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private VisualEffect vfx;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
         text.enabled = false;
         //checks if the mask contains the value for the component
         if ((PlayerStatistics.Instance.componentsCollectedMask & (int)componentNumber) > 0)
@@ -42,7 +44,15 @@ public class ComponentPickupScript : MonoBehaviour
             PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
             GlobalControl.Instance.playerStatistics.componentsCollectedMask =
             PlayerStatistics.Instance.componentsCollectedMask;
+            vfx.Play();
+            StartCoroutine(Delay());
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(2);
+
     }
 }
