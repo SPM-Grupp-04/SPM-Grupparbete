@@ -2,29 +2,52 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class UnloadLevel : MonoBehaviour
 {
-    public GameObject playerOne;
-    public GameObject playerTwo;
+    private GameObject playerOne;
+    private GameObject playerTwo;
+    private GameObject drone;
     private GameObject teleportBackPos;
+
     private void Start()
     {
         playerOne = GameObject.Find("Player1");
         playerTwo = GameObject.Find("Player2");
-        teleportBackPos = GameObject.Find("TowPortal");
+        drone = GameObject.Find("Drone");
+        teleportBackPos = GameObject.Find("TownPortal");
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        playerOne.transform.position = new Vector3(teleportBackPos.transform.position.x -300,
-            0.58f, teleportBackPos.transform.position.z - 500 );
-       
-        playerTwo.transform.position =  new Vector3(teleportBackPos.transform.position.x -300,
-            0.58f, teleportBackPos.transform.position.z - 500 );
-        SceneManager.UnloadSceneAsync(5);
+        var teleportPosition = teleportBackPos.transform.position;
 
+        TownPortal.isTeleporting = true;
+
+        if (playerOne != null)
+        {
+            playerOne.transform.position = new Vector3(teleportPosition.x + 1
+                , 0.58f, teleportPosition.z + 1);
+        }
+
+        if (playerTwo != null)
+        {
+            playerTwo.transform.position = new Vector3(teleportPosition.x 
+                , 0.58f, teleportPosition.z );;
+        }
+
+        if (drone != null)
+        {
+            drone.transform.position = new Vector3(teleportPosition.x,
+                drone.transform.position.y, teleportPosition.z);
+        }
+        teleportBackPos.SetActive(false);
+
+        StartCoroutine(TownPortal.waitUntillActivate());
+
+        SceneManager.UnloadSceneAsync(5);
     }
 }

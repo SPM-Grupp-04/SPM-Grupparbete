@@ -11,6 +11,7 @@ public class TownPortal : MonoBehaviour
     private GameObject drone;
     [SerializeField]   private GameObject camera;
     private bool isLoading;
+    public static bool isTeleporting;
 
     private void Start()
     {
@@ -21,20 +22,32 @@ public class TownPortal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
         if (!isLoading)
         {
+            isTeleporting = true;
             isLoading = true;
-            GlobalControl.Instance.playerStatistics.PosX = playerOne.transform.position.x;
-            GlobalControl.Instance.playerStatistics.PosY = playerOne.transform.position.y;
-            GlobalControl.Instance.playerStatistics.PosZ = playerOne.transform.position.z;
             GlobalControl.SaveData();
             SceneManager.LoadScene(5, LoadSceneMode.Additive);
          
             camera.transform.position = new Vector3(1000, camera.transform.position.y, 1000);
             playerOne.transform.position = new Vector3(1000, 3, 1000); // Hamnar på 800/0/550
             playerTwo.transform.position = new Vector3(1001, 3, 1001);
-            drone.transform.position = playerOne.transform.position;
+            drone.transform.position =new Vector3(playerOne.transform.position.x,
+                drone.transform.position.y, playerOne.transform.position.z);
+            StartCoroutine(waitUntillActivate());
+            isLoading = false;
             
         }
+    }
+
+   public static IEnumerator waitUntillActivate()
+    {
+        yield return new  WaitForSeconds(1);
+        isTeleporting = false;
+
     }
 }
