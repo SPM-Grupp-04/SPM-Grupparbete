@@ -61,7 +61,7 @@ public class UI_ShopDisplayText : MonoBehaviour
                 break;
             case 5:
                 header = "Health 2";
-                cost = "Cost: 40 blue";
+                cost = "Cost: 40 blue & 20 red";
                 body = "Player gets 20 extra HP";
                 break;
             case 6:
