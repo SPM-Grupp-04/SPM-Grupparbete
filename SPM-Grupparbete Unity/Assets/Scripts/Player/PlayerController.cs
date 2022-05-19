@@ -28,8 +28,16 @@ public class PlayerController : MonoBehaviour
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
     private bool enteredShopArea;
-    private bool isShooting;
-    private bool isDrilling;
+    public bool IsShooting
+    {
+        get;
+        private set;
+    }
+    public bool IsDrilling
+    {
+        get;
+        private set;
+    }
     private bool useButtonPressed;
 
     private bool uiEnabled;
@@ -49,8 +57,6 @@ public class PlayerController : MonoBehaviour
 
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
-
-
     }
 
     private void Update()
@@ -58,7 +64,6 @@ public class PlayerController : MonoBehaviour
         if (UI_PausMenu.GameIsPause == false)
         {
             PlayerMovement();
-            ShootOrDrill();
         }
 
         RestrictMovement();
@@ -82,13 +87,11 @@ public class PlayerController : MonoBehaviour
 
             if (uiEnabled)
             {
-
                 UI.Enable();
                 playerInput.SwitchCurrentActionMap("UI");
 
                 defaultMap.Disable();
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
             }
             else
             {
@@ -98,7 +101,6 @@ public class PlayerController : MonoBehaviour
                 playerInput.SwitchCurrentActionMap("Player");
                 UI.Disable();
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
             }
         }
     }
@@ -130,39 +132,6 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
-    }
-
-    private void ShootOrDrill()
-    {
-        if (isShooting)
-        {
-            Debug.Log("SHOOT");
-            drill.gameObject.SendMessage("Shoot", true);
-            drill.gameObject.SendMessage("DrillInUse", true);
-
-            if (!source.isPlaying)
-            {
-                PlayLaserWeaponSound();
-            }
-        }
-        else
-        {
-            if (isDrilling)
-            {
-                drill.gameObject.SendMessage("DrillObject");
-                drill.gameObject.SendMessage("DrillInUse", true);
-
-                if (!source.isPlaying)
-                {
-                    PlayDrillSound();
-                }
-            }
-            else
-            {
-                drill.gameObject.SendMessage("DrillInUse", false);
-                StopSound();
-            }
-        }
     }
 
     private void PlayerMovement()
@@ -206,11 +175,11 @@ public class PlayerController : MonoBehaviour
     {
         if (shootValue.performed)
         {
-            isShooting = true;
+            IsShooting = true;
         }
         else if (shootValue.canceled)
         {
-            isShooting = false;
+            IsShooting = false;
         }
     }
 
@@ -218,11 +187,11 @@ public class PlayerController : MonoBehaviour
     {
         if (drillValue.performed)
         {
-            isDrilling = true;
+            IsDrilling = true;
         }
         else if (drillValue.canceled)
         {
-            isDrilling = false;
+            IsDrilling = false;
         }
     }
 

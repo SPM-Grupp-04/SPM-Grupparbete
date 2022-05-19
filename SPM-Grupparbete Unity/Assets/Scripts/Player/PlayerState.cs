@@ -24,7 +24,7 @@ public class PlayerState : MonoBehaviour, IDamagable
       //  m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
         m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
         m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
-        m_LocalPlayerData.drillLevel = GlobalControl.Instance.playerStatistics.drillLevel;
+        m_LocalPlayerData.armamentLevel = GlobalControl.Instance.playerStatistics.armamentLevel;
         m_LocalPlayerData.componentsCollectedMask = GlobalControl.Instance.playerStatistics.componentsCollectedMask;
       
         if (playerName == "PlayerOne")
@@ -74,28 +74,18 @@ public class PlayerState : MonoBehaviour, IDamagable
     }
 
     void die(GameObject gameObject)
-    {
-     
-        
-        
+    {        
         var dieEvent = new DieEvenInfo(gameObject);
 
         EventSystem.current.FireEvent(dieEvent);
-
-        
-       
-
     }
 
     public void Heal()
     {
-       
-
         m_LocalPlayerData.playerOneHealth = m_LocalPlayerData.playerMaxHealth;
         m_LocalPlayerData.playerTwoHealth = m_LocalPlayerData.playerMaxHealth;
         
         GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-        
     }
 
     public void DealDamage(float damage)

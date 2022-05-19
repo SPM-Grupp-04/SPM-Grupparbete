@@ -135,12 +135,12 @@ public class ShopScript : MonoBehaviour
             }
     }
 
-    public void DrillUpgrade(int level)
+    public void DrillUpgrade(PlayerBeamArmamentBase.ArmamentLevel level)
     {
         if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
         {
             drillButton.interactable = false;
-            m_PlayerState.m_LocalPlayerData.drillLevel = level;
+            m_PlayerState.m_LocalPlayerData.armamentLevel = level;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
             GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
             drillButton.Select();
@@ -199,7 +199,7 @@ public class ShopScript : MonoBehaviour
 
     private void UpdateShop()
     {
-        if (m_PlayerState.m_LocalPlayerData.drillLevel < 1)
+        if ((int)m_PlayerState.m_LocalPlayerData.armamentLevel < 1)
         {
             drillButton.interactable = true;
             healButton.interactable = false;

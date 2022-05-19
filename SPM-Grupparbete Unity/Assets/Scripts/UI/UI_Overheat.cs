@@ -7,9 +7,9 @@ public class UI_Overheat : MonoBehaviour
 {
 
     [SerializeField]private Slider slider;
-    [SerializeField] private GameObject drill;
+    [SerializeField] private GameObject weapon;
     [SerializeField]Image barColour;
-    [SerializeField] PlayerDrill playerDrillScript;
+    [SerializeField] PlayerWeapon playerWeaponScript;
 
     Color green = new Color(0, 255, 0);
     Color yellow = new Color(255, 255, 0);
@@ -18,24 +18,25 @@ public class UI_Overheat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerDrillScript = drill.GetComponent<PlayerDrill>();
-
+        playerWeaponScript = weapon.GetComponent<PlayerWeapon>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        IncreaseOverheatSlider(playerDrillScript.GetOverheatAmount());
+        UpdateOverheatSlider(playerWeaponScript.WeaponCurrentHeat);
     }
 
-    private void IncreaseOverheatSlider(float amount)
+    private void UpdateOverheatSlider(float amount)
     {
         slider.value = amount * 0.01f;
-        if (amount <= 50)
+
+        if (amount <= playerWeaponScript.OverheatThreshold * 0.5f)
         {
             barColour.color = green;
         }
-        else if (amount > 50 && amount <= 80) 
+        else if (amount > playerWeaponScript.OverheatThreshold * 0.5f 
+            && amount <= playerWeaponScript.OverheatThreshold * 0.8f) 
         {
             barColour.color = yellow;
         } 
