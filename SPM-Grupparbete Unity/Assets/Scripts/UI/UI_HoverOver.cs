@@ -10,19 +10,17 @@ using UnityEngine.UI;
 
 public class UI_HoverOver : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    
     private GameObject displayWindow;
-    private GameObject image;
+    private GameObject target;
     private void Awake()
     {
         displayWindow = GameObject.Find("TextWindow");
-        image = GameObject.Find("Highlight");
     }
     
     public void OnSelect(BaseEventData eventData)
     {
         displayWindow.GetComponent<UI_ShopDisplayText>().DisplayText(this.gameObject);
-        image.transform.position = transform.position;
+        
     }
 
     public void OnDeselect(BaseEventData eventData)

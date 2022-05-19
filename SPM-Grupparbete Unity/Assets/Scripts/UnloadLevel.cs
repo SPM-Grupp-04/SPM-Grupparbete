@@ -30,13 +30,13 @@ public class UnloadLevel : MonoBehaviour
         if (playerOne != null)
         {
             playerOne.transform.position = new Vector3(teleportPosition.x + 1
-                , 0.58f, teleportPosition.z + 1);
+                , 0.8f, teleportPosition.z + 1);
         }
 
         if (playerTwo != null)
         {
             playerTwo.transform.position = new Vector3(teleportPosition.x 
-                , 0.58f, teleportPosition.z );;
+                , 0.8f, teleportPosition.z );;
         }
 
         if (drone != null)

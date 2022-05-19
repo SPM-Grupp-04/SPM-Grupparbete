@@ -30,7 +30,7 @@ public class VictoryConditionsScript : MonoBehaviour
             return;
         }
 
-        if (PlayerStatistics.Instance.componentsCollectedMask == (int) victoryLayerMask)
+        if (PlayerStatistics.Instance.componentsCollectedMask >= (int) victoryLayerMask)
         {
           //  Destroy(gameObject);
           gameObject.SetActive(true);

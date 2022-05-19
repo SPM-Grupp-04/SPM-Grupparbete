@@ -4,70 +4,82 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class ShopScript : MonoBehaviour
 {
     [SerializeField] private GameObject shopInterfaceBackground;
+    [SerializeField] private GameObject contentGO;
     [SerializeField] private LayerMask playerLayerMask;
-    [SerializeField] [Range(1.0f, 10.0f)] private float shopAreaRadius = 5.0f;
-
+    [SerializeField] [Range(1.0f, 30.0f)] private float shopAreaRadius = 5.0f;
+    [SerializeField] private RectTransform rectTransform;
+    
     [SerializeField] private int drillLevelCostBlue = 5;
     [SerializeField] private int healCostBlue = 2;
     [SerializeField] private int weaponCostBlue = 5;
     [SerializeField] private int speedCostBlue = 5;
     [SerializeField] private int discoCostBlue = 5;
+
+    private int drillLevelScale;
     
-    private int drillLevelCostRed = 0;
+    private int drillLevelCostRed = 10;
     private Collider[] shopColliders;
     private SphereCollider shopCollider;
     private PlayerState m_PlayerState;
     bool pauseButtonPressed;
     private bool GameIsPause;
-    
-    private Dictionary<Button, bool> buttonDictionary;
+    private Dictionary<string, bool> buttonDictionary;
+
     [Header("Buttons for shop")]
+    [SerializeField] private Button drill1Button;
     [SerializeField] private Button healButton;
-    [SerializeField] private Button accelerateButton;
-    [SerializeField] private Button discoButton;
-    [SerializeField] private Button drillButton;
     [SerializeField] private Button weaponButton;
+    [SerializeField] private Button accelerateButton;
+    [SerializeField] private Button healthOneButton;
+    [SerializeField] private Button healthTwoButton;
+    [SerializeField] private Button drill2Button;
     
     
     
-    
-    // Update is called once per frame
     private void Start()
     {
-        // if (PlayerStatistics.Instance.buttonDictionary == null)
-        // {
-        //     Debug.Log("I am empty");
-        //     buttonDictionary = new Dictionary<Button, bool>();
-        //     
-        //     for (int i = 0; i < shopInterfaceBackground.transform.childCount; i++)
-        //     {
-        //         Transform temp = shopInterfaceBackground.transform.GetChild(i);
-        //         if (temp.gameObject.CompareTag("ShopButton"))
-        //         {
-        //             buttonDictionary.Add(shopInterfaceBackground.transform.GetChild(i).gameObject.GetComponent<Button>(), false);
-        //         }
-        //     }
-        // }
-        //
-        //
-        // foreach (KeyValuePair<Button, bool> test in buttonDictionary)
-        // {
-        //     Debug.Log("hei");
-        //     Debug.Log(test.Key.ToString() + test.Value.ToString());
-        // }
+        buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
+        Debug.Log(contentGO.name);
         
-        shopInterfaceBackground.SetActive(false);
+        if (buttonDictionary == null)
+        {
+            
+            buttonDictionary = new Dictionary<string, bool>();
+            for (int i = 0; i < contentGO.transform.childCount; i++)
+            {
+                Transform temp = contentGO.transform.GetChild(i);
+                
+                if (temp.gameObject.CompareTag("ShopButton"))
+                {
+                    string addedButton = contentGO.transform.GetChild(i).gameObject.name;
+                    Debug.Log(addedButton);
+                    buttonDictionary.Add(addedButton, false);
+                    temp.name = addedButton;
+                }
+            }
+        }
+
+        foreach (KeyValuePair<string, bool> test in buttonDictionary)
+        {
+            
+            Debug.Log(test.Key + " " + test.Value.ToString());
+        }
+
+        
         shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
         shopCollider.radius = shopAreaRadius;
+        shopInterfaceBackground.SetActive(false);
     }
     
 
@@ -76,9 +88,9 @@ public class ShopScript : MonoBehaviour
         
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
-        drillButton.Select();
-        CanPlayersHeal();
+        drill1Button.Select();
         UpdateShop();
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -106,16 +118,34 @@ public class ShopScript : MonoBehaviour
 
     private void OpenShopInterface()
     {
-        
         shopInterfaceBackground.SetActive(true);
-        Debug.Log(shopInterfaceBackground.activeSelf);
+
     }
-   
+    
     private void CloseShopInterface()
     {
-        //PlayerStatistics.Instance.buttonDictionary = buttonDictionary;
-        shopInterfaceBackground.SetActive(false);
+        PlayerStatistics.Instance.buttonDictionary = buttonDictionary;
+        
+        // Debug.Log("Current BD ");
+        // foreach (KeyValuePair<string, bool> test in buttonDictionary)
+        // {
+        //     
+        //     Debug.Log(test.Key + " " + test.Value.ToString());
+        // }
+        // Debug.Log("------------------------------------------------");
+        // Debug.Log("Saved BD");
+        // foreach (KeyValuePair<string, bool> test in PlayerStatistics.Instance.buttonDictionary)
+        // {
+        //     
+        //     Debug.Log(test.Key + " " + test.Value.ToString());
+        // }
+        //
+        // Debug.Log(shopInterfaceBackground.activeSelf);
+		shopInterfaceBackground.SetActive(false);
+
     }
+   
+
 
     void OnDrawGizmos()
     {
@@ -137,16 +167,39 @@ public class ShopScript : MonoBehaviour
 
     public void DrillUpgrade(int level)
     {
-        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
+        switch (level)
         {
-            drillButton.interactable = false;
-            m_PlayerState.m_LocalPlayerData.drillLevel = level;
-            m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
-            GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-            drillButton.Select();
-            //buttonDictionary[drillButton] = true;
-            UpdateShop();
+            case 1:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
+                {
+                    Debug.Log("I am called");
+                    drill1Button.interactable = false;
+                    m_PlayerState.m_LocalPlayerData.drillLevel = level;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    drill1Button.Select();
+                    buttonDictionary[drill1Button.name] = true;
+                    UpdateShop();
+                }
+                break;
+            case 2:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostRed)
+                {
+                    Debug.Log("I am called");
+                    drill2Button.interactable = false;
+                    m_PlayerState.m_LocalPlayerData.drillLevel = level;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
+                    m_PlayerState.m_LocalPlayerData.RedCrystals -= drillLevelCostRed;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    drill2Button.Select();
+                    buttonDictionary[drill2Button.name] = true;
+                    UpdateShop();
+                }
+                break;
+                
+
         }
+        
     }
 
     public void Accelerate(float addedAcceleration)
@@ -156,22 +209,26 @@ public class ShopScript : MonoBehaviour
             accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
-            //buttonDictionary[accelerateButton] = true;
+
+            buttonDictionary[accelerateButton.name] = true;
+
             accelerateButton.Select();
         }
     }
 
-    public void Disco(bool isDisco)
-    {
-        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= discoCostBlue)
-        {
-            m_PlayerState.SetDisco(isDisco);
-            discoButton.interactable = false;
-            m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
-            //buttonDictionary[discoButton] = true;
-            discoButton.Select();
-        }
-    }
+    // public void Disco(bool isDisco)
+    // {
+    //     if (GlobalControl.Instance.playerStatistics.BlueCrystals >= discoCostBlue)
+    //     {
+    //         m_PlayerState.SetDisco(isDisco);
+    //         discoButton.interactable = false;
+    //         m_PlayerState.m_LocalPlayerData.BlueCrystals -= discoCostBlue;
+    //
+    //         buttonDictionary[discoButton.name] = true;
+    //
+    //         discoButton.Select();
+    //     }
+    // }
 
     public void WeaponUpgrade(int level)
     {
@@ -180,7 +237,8 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.weaponLevel = level;
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
-            //buttonDictionary[weaponButton] = true;
+            buttonDictionary[weaponButton.name] = true;
+
             weaponButton.Select();
         }
     }
@@ -199,46 +257,61 @@ public class ShopScript : MonoBehaviour
 
     private void UpdateShop()
     {
-        if (m_PlayerState.m_LocalPlayerData.drillLevel < 1)
+
+        
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
+        if (buttonDictionary[drill1Button.name] == false)
         {
-            drillButton.interactable = true;
-            healButton.interactable = false;
-            discoButton.interactable = false;
-            accelerateButton.interactable = false;
-            weaponButton.interactable = false;
+            foreach (string buttonName in buttonDictionary.Keys)
+            {
+                if (!buttonName.Equals(drill1Button.name))
+                {
+                    FindButton(buttonName).interactable = false;
+                    
+                }
+            }
+
+            
         }
         else
         {
-            drillButton.interactable = false;
-            healButton.interactable = true;
-            discoButton.interactable = true;
-            accelerateButton.interactable = true;
-            weaponButton.interactable = true;
+            foreach (string buttonName in buttonDictionary.Keys)
+            {
+                if (buttonDictionary[buttonName] == false)
+                {
+                    FindButton(buttonName).interactable = true;
+                    
+                    if (buttonName.Equals(healButton.name))
+                    {
+                        CanPlayersHeal();
+                        
+                    }
+                }
+                else
+                {
+                    
+                    FindButton(buttonName).interactable = false;
+                    
+                }
+            }
         }
-        // if (buttonDictionary[drillButton] == false)
-        // {
-        //     foreach (var button in buttonDictionary.Keys)
-        //     {
-        //         if (!button.Equals(drillButton))
-        //         {
-        //             button.interactable = false;
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     foreach (var button in buttonDictionary.Keys)
-        //     {
-        //         if (buttonDictionary[button] == false)
-        //         {
-        //             button.interactable = true;
-        //         }
-        //         else
-        //         {
-        //             button.interactable = false;
-        //         }
-        //     }
-        // }
+        stopWatch.Stop();
+        TimeSpan ts = stopWatch.Elapsed;
+       
+        Debug.Log("Run time: " + ts);
     }
+
+    private Button FindButton(string buttonName)
+    {
+        Debug.Log(buttonName);
+        GameObject temp = GameObject.Find("UI_Shop/ShopCanvas/ShopInterfaceBackground/ScrollView/Viewport/Content/" + buttonName);
+        Debug.Log(temp);
+        Button tempButton = temp.GetComponent<Button>();
+        
+
+        return tempButton;
+    }
+
     
 }
