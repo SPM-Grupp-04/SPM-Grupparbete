@@ -148,6 +148,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SpawnTeleport",
+                    "type": "Button",
+                    "id": "a6a2e239-1d70-4946-8416-cb0545b7d1d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -286,7 +295,7 @@
                 {
                     "name": "",
                     "id": "1a1a3d56-da45-421e-8973-164598f675bd",
-                    "path": "<Gamepad>/start",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -434,6 +443,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76364945-c0b8-45b8-a26c-7b5202672276",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpawnTeleport",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

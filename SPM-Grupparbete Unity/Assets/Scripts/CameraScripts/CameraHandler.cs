@@ -61,7 +61,8 @@ public class CameraHandler : MonoBehaviour
 
         SetCameraLensFOV();
 
-        transform.position += midpointAtoB;
+        transform.position += new Vector3(midpointAtoB.x, 0, midpointAtoB.z);
+
     }
 
     private void CheckWhatCameraShouldHavePriority()

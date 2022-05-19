@@ -105,7 +105,6 @@ public class PlayerDrill : MonoBehaviour
 
     private void FixedUpdate()
     {   
-        Debug.Log(laserRing.isPlaying);
         if (isShooting)
         {
             ShootObject();
@@ -207,7 +206,7 @@ public class PlayerDrill : MonoBehaviour
                
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    Debug.Log("Enemy getting hit");
+                    
                     //shootHit.collider.gameObject.SendMessage("TakeDamage");
                     var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);

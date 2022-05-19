@@ -1,46 +1,47 @@
-using System;
+
 using System.Collections.Generic;
-using BehaviorTree;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Pool;
-using Random = UnityEngine.Random;
-using Tree = BehaviorTree.Tree;
+
 
 
 public class EnemyAIHandler : MonoBehaviour
 {
-    // Ref till spelarna:
-    //[SerializeField] private GameObject targetOne;
-    //[SerializeField] private GameObject targetTwo;
-
     public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
+    
     private GameObject playerOne;
     private GameObject playerTwo;
+    
     private static Vector3 dynamite;
-    private float distanceToDynamite;
+    private Vector3 playerOnePosition;
+    private Vector3 playerTowPosition;
+    private Vector3 closestTarget;
 
-    [SerializeField] [Range(0.1f, 5f)] private float raidusAroundTarget = 0.5f;
+    private bool playerOneIsActive;
+    private bool playerTwoIsActive;
+
+    private const float RadiusAroundTarget = 0.5f;
+  
+    private float distanceToDynamite;
+    private float closestDistance;
+    private float distancePlayerOne;
+    private float distancePlayerTwo;
+
 
     private void Start()
     {
-       
-            playerOne = GameObject.Find("Player1");
-            Debug.Log(playerOne);
-            playerTwo = GameObject.Find("Player2");
-           Debug.Log(playerTwo);
-            
-            if (playerOne == null)
-            {
-                playerOne = playerTwo;
-            }
+        playerOne = GameObject.Find("Player1");
+        playerTwo = GameObject.Find("Player2");
 
-            if (playerTwo == null)
-            {
-                playerTwo = playerOne;
-            }
-         
+        //If a player died treat it as the other one. 
+        if (playerOne == null)
+        {
+            playerOne = playerTwo;
+        }
+
+        if (playerTwo == null)
+        {
+            playerTwo = playerOne;
+        }
     }
 
     public static void SetDynamite(Vector3 dyn)
@@ -48,83 +49,100 @@ public class EnemyAIHandler : MonoBehaviour
         dynamite = dyn;
     }
 
+
     private void Update()
     {
-        
-        
-        Vector3 playerOnePosition = playerOne.transform.position;
-        Vector3 playerTowPosition = playerTwo.transform.position;
-        bool playerOneIsActive = playerOne.gameObject.activeInHierarchy;
-        bool playerTwoIsActive = playerTwo.gameObject.activeInHierarchy;
-        int countEnemy = 0;
+        playerOneIsActive = playerOne.gameObject.activeInHierarchy;
+        playerTwoIsActive = playerTwo.gameObject.activeInHierarchy;
+
+        // Getting the player position once.
+        if (playerOneIsActive)
+        {
+            playerOnePosition = playerOne.transform.position;
+        }
+
+        if (playerTwoIsActive)
+        {
+            playerTowPosition = playerTwo.transform.position;
+        }
+
+        // Used to know were to position in the circle around tha player.
+        var countEnemy = 0;
+
         foreach (BaseClassEnemyAI enemyAI in units)
         {
-            if (enemyAI.gameObject.activeInHierarchy)
+            if (enemyAI.gameObject.activeInHierarchy )
             {
-                // Det är är din distanc till spelaren 
-                // Här är nummret på din plats i cirkeln som ska omringa spelaren
-                // EnemyAI.SetDistance till spelaren
-                // EnemyAI.SetDinPlats i cirkel
                 Vector3 aiPos = enemyAI.gameObject.transform.position;
 
+                
+                // Checking distance from Ai-unit to Player.
+                distancePlayerOne = Vector3.Distance(playerOnePosition, aiPos);
+                distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPos);
 
-                float distancePlayerOne = Vector3.Distance(playerOnePosition, aiPos);
-                float distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPos);
-                if (dynamite != Vector3.zero)
-                {
-                    distanceToDynamite = Vector3.Distance(dynamite, aiPos);
-                }
+                // Resetting the old values.
+                closestTarget = new Vector3();
+                closestDistance = 100;
 
-
-                Vector3 closestTarget = new Vector3();
-                float closestDistance = 100;
-
+                // A check needed to make sure the AI don't find the transform for the inactivated Game object.
                 if (!playerOneIsActive)
                 {
-                    distancePlayerOne = int.MaxValue;
+                    distancePlayerOne = 1000;
                 }
 
                 if (!playerTwoIsActive)
                 {
-                    distancePlayerTwo = int.MaxValue;
+                    distancePlayerTwo = 1000;
                 }
 
 
-                if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)
-                {
-                    closestTarget = CalulatePosInCirkel(dynamite, countEnemy);
-                    closestDistance = distanceToDynamite;
-                }
-                else if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
-                {
-                    enemyAI.PlayerPos(playerOnePosition);
-                    closestTarget = CalulatePosInCirkel(playerOnePosition, countEnemy);
-                    closestDistance = distancePlayerOne;
-                }
-                else if (playerTwoIsActive)
-                {
-                    enemyAI.PlayerPos(playerTowPosition);
-                    closestTarget = CalulatePosInCirkel(playerTowPosition, countEnemy);
-                    closestDistance = distancePlayerTwo;
-                }
+                closestDistance = ClosestDistance(enemyAI, aiPos, countEnemy,
+                    closestDistance, distancePlayerOne, distancePlayerTwo);
 
                 enemyAI.PositionAroundTarget(closestTarget);
                 enemyAI.DistanceToPlayerPos(closestDistance);
-
-
-                enemyAI.m_TopTreeNode.Evaluate();
+                
+                enemyAI.MTopTreeNode.Evaluate();
+                
                 countEnemy++;
             }
+           
         }
     }
 
-
-    private Vector3 CalulatePosInCirkel(Vector3 playerPos, int countEnemy)
+    private float ClosestDistance(BaseClassEnemyAI enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
+        float distancePlayerOne, float distancePlayerTwo)
     {
-        return new Vector3(playerPos.x + raidusAroundTarget *
+        if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)
+        {
+            // Checking the distance to the dynamite for every enemy that might need to know it.
+            distanceToDynamite = Vector3.Distance(dynamite, aiPos);
+            closestTarget = CalculatePositionInCircle(dynamite, countEnemy);
+            closestDistance = distanceToDynamite;
+        }
+        else if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
+        {
+            enemyAI.PlayerPos(playerOnePosition);
+            closestTarget = CalculatePositionInCircle(playerOnePosition, countEnemy);
+            closestDistance = distancePlayerOne;
+        }
+        else if (playerTwoIsActive)
+        {
+            enemyAI.PlayerPos(playerTowPosition);
+            closestTarget = CalculatePositionInCircle(playerTowPosition, countEnemy);
+            closestDistance = distancePlayerTwo;
+        }
+
+        return closestDistance;
+    }
+
+
+    private Vector3 CalculatePositionInCircle(Vector3 playerPos, int countEnemy)
+    {
+        return new Vector3(playerPos.x + RadiusAroundTarget *
             Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count),
             playerPos.y,
-            playerPos.z + raidusAroundTarget *
+            playerPos.z + RadiusAroundTarget *
             Mathf.Cos(2 * Mathf.PI * countEnemy / units.Count));
     }
 }

@@ -7,18 +7,19 @@ using UnityEngine.InputSystem;
 
 public class AttackTarget : TreeNode
 {
-    private Transform _transform;
+    private Transform transform;
     private Transform firePoint;
     private Transform partToRotate;
-    private LineRenderer _lineRenderer;
+    private LineRenderer lineRenderer;
     private float attackRange;
+    private const float Damage = 10;
 
     public AttackTarget(Transform transform, Transform partToRotate, LineRenderer lineRenderer, Transform firePoint, float fov)
     {
-        _transform = transform;
+        this.transform = transform;
         this.firePoint = firePoint;
         this.partToRotate = partToRotate;
-        this._lineRenderer = lineRenderer;
+        this.lineRenderer = lineRenderer;
 
         attackRange = fov;
     }
@@ -31,9 +32,9 @@ public class AttackTarget : TreeNode
 
 
         if (target == null || !target.gameObject.activeInHierarchy ||
-            Vector3.Distance(_transform.position, target.position) > attackRange)
+            Vector3.Distance(transform.position, target.position) > attackRange)
         {
-            _lineRenderer.enabled = false;
+            lineRenderer.enabled = false;
             ClearData("target");
             state = NodeState.FAILURE;
             return state;
@@ -65,36 +66,36 @@ public class AttackTarget : TreeNode
     {
         if (cooldown > 0.5f)
         {
-            target.gameObject.SendMessage("ReduceMaterialHP", 1);
+            target.gameObject.SendMessage("ReduceMaterialHP", 2);
             cooldown = 0;
         }
 
-        if (!_lineRenderer.enabled)
+        if (!lineRenderer.enabled)
         {
-            _lineRenderer.enabled = true;
+            lineRenderer.enabled = true;
         }
 
-        _lineRenderer.SetPosition(0, firePoint.position);
-        _lineRenderer.SetPosition(1, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z));
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z));
     }
 
 
     void Laser()
     {
-        DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, 4 * Time.deltaTime);
+        DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, Damage * Time.deltaTime);
         EventSystem.current.FireEvent(dealDamageEventInfo);
-        if (!_lineRenderer.enabled)
+        if (!lineRenderer.enabled)
         {
-            _lineRenderer.enabled = true;
+            lineRenderer.enabled = true;
         }
 
-        _lineRenderer.SetPosition(0, firePoint.position);
-        _lineRenderer.SetPosition(1, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z));
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z));
     }
 
     void LockOnTarget()
     {
-        Vector3 dir = target.position - _transform.position;
+        Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * 3 /*TurnSpeed*/)
             .eulerAngles;

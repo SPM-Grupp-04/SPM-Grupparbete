@@ -27,8 +27,22 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
+    /*[ContextMenu("Reset save file")]
+    public void Reset()
+    {
+        if (Directory.Exists("Saves"))
+        {
+            Instance.playerStatistics = playerStatistics;
+        }
+        else
+        {
+            Debug.Log("There is no saveFile");
+        }
+    }*/
 
-    public void SaveData()
+    
+  
+    public static void SaveData()
     {
         if (!Directory.Exists("Saves"))
         {
@@ -42,6 +56,21 @@ public class GlobalControl : MonoBehaviour
         saveFile.Close();
     }
 
+
+    [ContextMenu("Save Data")]
+    public void SaveInInspector()
+    {
+        if (!Directory.Exists("Saves"))
+        {
+            Directory.CreateDirectory("Saves");
+        }
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream saveFile = File.Create("Saves/save.binary");
+
+
+        formatter.Serialize(saveFile, playerStatistics);
+        saveFile.Close();
+    }
     public void LoadData()
     {
 
