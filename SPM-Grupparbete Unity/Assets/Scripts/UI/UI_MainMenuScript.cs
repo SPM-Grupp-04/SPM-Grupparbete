@@ -8,24 +8,42 @@ public class UI_MainMenuScript : MonoBehaviour
 {
     private PlayerStatistics playerStats = PlayerStatistics.Instance;
 
-    [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject firstSelected;
     [SerializeField] private int sceneToLoad = 0;
 
-    [SerializeField] private GameObject mainMenu;
+  
 
-    [SerializeField] private GameObject settingsMenu;
+   // [SerializeField] private GameObject settingsMenu;
     // Start is called before the first frame update
     void Start()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(startButton);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
   
         // För att senare ladda scenen som vi ska in i
         //SceneManager.LoadScene(playerStats.Scene);
 
+        public void LoadGame()
+        {
+            if (GlobalControl.Instance.playerStatistics.drillLevel >= 1)
+            {
+             SceneManager.LoadScene(2);
+                
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+            
+        }
 
+        public void LoadMain()
+        {
+            SceneManager.LoadScene(0);
+        }
+        
 
        public void LoadStartScene()
         {
@@ -40,11 +58,7 @@ public class UI_MainMenuScript : MonoBehaviour
             Application.Quit();
         }
 
-        public void ShowSettingsMenu()
-        {
-            mainMenu.SetActive(false);
-            settingsMenu.SetActive(true);
-        }
+      
         
     
     
