@@ -12,6 +12,8 @@ public class DynamiteThrow : MonoBehaviour
     [SerializeField] private UI_Cooldowns uiCooldowns;
     private float nextFireTime = 5f;
 
+    [SerializeField] private PlayerDrill playerDrillScript;
+    
     private void Update()
     {
         nextFireTime += Time.deltaTime;
@@ -27,16 +29,14 @@ public class DynamiteThrow : MonoBehaviour
         }
     }
 
-    public void ThrowDynamite(InputAction.CallbackContext value)
+    public void ThrowDynamite()
     {
         if (nextFireTime >= coolDownTime)
         {
-            if (value.performed)
-            {
-                GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
-                thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
-                nextFireTime = 0;
-            }
+            GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
+            thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
+            nextFireTime = 0;
+            playerDrillScript.IncreaseOverheatAmount(25.0f);
         }
     }
 }

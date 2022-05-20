@@ -16,6 +16,8 @@ public class LaunchArcMesh : MonoBehaviour
     [SerializeField] private int lineSegments = 10;
 
     [SerializeField] private LayerMask collisionLayerMask;
+
+    private DynamiteThrow dynamiteThrowScript;
     
     private Mesh trajectoryMesh;
 
@@ -44,6 +46,7 @@ public class LaunchArcMesh : MonoBehaviour
     {
         trajectoryMesh = GetComponent<MeshFilter>().mesh;
         gravity = Mathf.Abs(Physics.gravity.y);
+        dynamiteThrowScript = GetComponent<DynamiteThrow>();
     }
     
     private void Update()
@@ -76,6 +79,7 @@ public class LaunchArcMesh : MonoBehaviour
         }
         else if (trajectoryInputValue.canceled)
         {
+            dynamiteThrowScript.ThrowDynamite();
             increaseDynamiteArc = false;
         }
     }

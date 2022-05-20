@@ -108,6 +108,11 @@ public class PlayerDrill : MonoBehaviour
         }
     }
 
+    public void IncreaseOverheatAmount(float increaseAmount)
+    {
+        overHeatAmount += increaseAmount;
+    }
+
     public void Shoot(bool state)
     {
         isShooting = state;
