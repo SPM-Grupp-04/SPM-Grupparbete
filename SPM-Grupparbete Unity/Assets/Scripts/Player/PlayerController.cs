@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
-
-    [SerializeField] private Transform otherPlayerTransform;
+    
+    [SerializeField] private PlayerController otherPlayerController;
     
     private Collider[] penetrationColliders = new Collider[2];
     
@@ -66,37 +66,18 @@ public class PlayerController : MonoBehaviour
         Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
         currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
         currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
-        
-
-        bool isOutSide = false;
 
         if (currentPlayerCameraView.x == 0f || currentPlayerCameraView.x == 1)
         {
-            isOutSide = true;
-            //  Debug.Log("Outside X ");
+            otherPlayerController.SetPlayerVelocity(new Vector3(0.0f, 0.0f, otherPlayerController.GetPlayerVelocity().z));
         }
 
         if (currentPlayerCameraView.y == 0f || currentPlayerCameraView.y == 1)
         {
-            isOutSide = true;
-            //  Debug.Log("Outside Y");
+            otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerController.GetPlayerVelocity().x, 0.0f, 0.0f));
         }
 
         Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
-        
-        if (isOutSide)
-        {
-            Vector3 otherPlayerCameraView = mainCamera.WorldToViewportPoint(otherPlayerTransform.position);
-            otherPlayerCameraView.x = Mathf.Clamp01(otherPlayerCameraView.x);
-            otherPlayerCameraView.y = Mathf.Clamp01(otherPlayerCameraView.y);
-            
-            Vector3 otherPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(otherPlayerCameraView);
-            
-            otherPlayerTransform.position = new Vector3(otherPlayerCameraView.x - otherPlayerPosInWorldPoint.x, otherPlayerTransform.position.y,
-                otherPlayerCameraView.y - otherPlayerPosInWorldPoint.z);
-            //    Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
-            Debug.Log("IS OUTSIDE");
-        }
         
         transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
     }
@@ -147,6 +128,16 @@ public class PlayerController : MonoBehaviour
             UpdatePlayerRotationGamePad();
         }
         transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+
+    public void SetPlayerVelocity(Vector3 newPlayerVelocity)
+    {
+        velocity = newPlayerVelocity;
+    }
+
+    public Vector3 GetPlayerVelocity()
+    {
+        return velocity;
     }
 
     public bool IsUseButtonPressed()
