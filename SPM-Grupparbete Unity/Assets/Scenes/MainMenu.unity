@@ -887,9 +887,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSceneBeingLoaded: 0
   playerStatistics:
-    playerMaxHealth: 30
-    playerOneHealth: 30
-    playerTwoHealth: 30
+    playerMaxHealth: 45
+    playerOneHealth: 45
+    playerTwoHealth: 45
     playerOneAcceleration: 5
     playerTwoAcceleration: 5
     playerOneDisco: 0
@@ -900,9 +900,10 @@ MonoBehaviour:
     Crystals: 0
     BlueCrystals: 0
     RedCrystals: 0
-    drillLevel: 1
+    drillLevel: 0
     weaponLevel: 0
     componentsCollectedMask: 0
+    shieldCooldownModifer: 1
 --- !u!4 &1082036218
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,10 +1330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81dd6594f8af744e9ecfbae02b744cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 1878068682}
+  firstSelected: {fileID: 0}
   sceneToLoad: 1
-  mainMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
 --- !u!1 &1878068682
 GameObject:
   m_ObjectHideFlags: 0
