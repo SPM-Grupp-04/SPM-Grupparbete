@@ -101,6 +101,9 @@
         },
         {
             "m_Id": "62a1e8306c154ddc8745c3613302c44f"
+        },
+        {
+            "m_Id": "dc7dc5c9164849db86664bcfd8691fe1"
         }
     ],
     "m_GroupDatas": [],
@@ -390,6 +393,9 @@
             },
             {
                 "m_Id": "e18ceb30bd874edb992c7596239d68d3"
+            },
+            {
+                "m_Id": "dc7dc5c9164849db86664bcfd8691fe1"
             }
         ]
     },
@@ -1690,6 +1696,36 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.ColorRGBMaterialSlot",
+    "m_ObjectId": "6c30b1b6640d48bb94953dfff79c642e",
+    "m_Id": 0,
+    "m_DisplayName": "Emission",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Emission",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 78.79325103759766,
+        "y": 78.79325103759766,
+        "z": 78.79325103759766
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_ColorMode": 1,
+    "m_DefaultColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6c31afefe21c49ab95d60a0e8ae35a1d",
     "m_Id": 0,
@@ -2534,6 +2570,39 @@
         "m_SerializableColors": []
     },
     "m_ClampType": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "dc7dc5c9164849db86664bcfd8691fe1",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Emission",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "6c30b1b6640d48bb94953dfff79c642e"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Emission"
 }
 
 {
