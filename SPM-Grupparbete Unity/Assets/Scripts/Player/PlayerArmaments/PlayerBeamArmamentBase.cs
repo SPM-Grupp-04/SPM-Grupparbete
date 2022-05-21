@@ -12,12 +12,16 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
     protected PlayerStatistics playerStatistics = PlayerStatistics.Instance;
     protected ArmamentLevel ArmLevel => playerStatistics.armamentLevel;
 
+    [Header("Audio settings")]
+    [SerializeField] protected AudioClip sound;
+    private AudioSource audioSource;
+    public AudioClip Sound => sound;
+
     [Header("VFX settings")]
-    [SerializeField] protected GameObject VFXPrefab;
-    [SerializeField] protected GameObject VFXMaxRange;
     [SerializeField] protected Material[] VFXMaterials;
     [SerializeField] protected ParticleSystem beamRing;
     [SerializeField] protected ParticleSystem beamEmission;
+    protected GameObject VFXMaxRange;
     public LineRenderer VFXLineRenderer
     {
         get; protected set;
@@ -33,9 +37,15 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
     [SerializeField] private Player.ArmamentLevelToFloatMap armamentLevelToRangeTable;
     protected Dictionary<ArmamentLevel, float> armamentLevelToDamageDictionary = new Dictionary<ArmamentLevel, float>();
     protected Dictionary<ArmamentLevel, float> armamentLevelToRangeDictionary = new Dictionary<ArmamentLevel, float>();
-    [SerializeField] protected LayerMask ignoreMask;
+    [SerializeField, Tooltip("Layers the beam is allowed to collide with visually.")] protected LayerMask allowedCollisionWhenRenderingMask;
+    [SerializeField, Tooltip("Layers the beam is allowed to interact with programmatically.")] protected LayerMask interactMask;
 
     protected abstract bool CanShoot
+    {
+        get;
+    }
+
+    public abstract bool IsActivated
     {
         get;
     }
@@ -53,8 +63,12 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
         foreach (var altfe in armamentLevelToRangeTable.ledger)
             armamentLevelToRangeDictionary[altfe.armLevel] = altfe.val;
 
-        VFXMaxRange.transform.localPosition = transform.position + new Vector3(0.0f, 0.0f, Range);
+        VFXMaxRange = new GameObject("MaxRange");
+        VFXMaxRange.transform.parent = transform;
+        VFXMaxRange.transform.localPosition = new Vector3(0.0f, 0.0f, Range);
         MaterialIndex = 0;
+
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
     protected virtual void LaserBetweenPoints(Vector3 start, Vector3 end, int material)
@@ -79,12 +93,13 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
                 beamEmission.Play();
             }
 
-            Physics.Raycast(transform.position, fwd, out shootHit, Range, ignoreMask);
+            Physics.Raycast(transform.position, fwd, out shootHit, Range, allowedCollisionWhenRenderingMask);
+
             Vector3 point2 = shootHit.collider == null ? VFXMaxRange.transform.position : shootHit.point;
-            Debug.DrawLine(transform.position, point2, Color.green);
+
             LaserBetweenPoints(transform.position, point2, MaterialIndex);
 
-            if (!Utility.LayerMaskExtensions.IsInLayerMask(shootHit.collider.gameObject, ignoreMask))
+            if (shootHit.collider != null && Utility.LayerMaskExtensions.IsInLayerMask(shootHit.collider.gameObject, interactMask))
             {
                 var takeDamage = new DamageDealt(shootHit.collider.gameObject, armamentLevelToDamageDictionary[ArmLevel]);
                 EventSystem.current.FireEvent(takeDamage);
@@ -100,6 +115,18 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
         beamEmission.Clear();
         beamRing.Stop();
         beamRing.Clear();
+    }
+
+    public void PlaySound()
+    {
+        audioSource.clip = sound;
+        audioSource.Play();
+    }
+
+    public void StopSound()
+    {
+        audioSource.Stop();
+        audioSource.clip = null;
     }
 
     public enum ArmamentLevel

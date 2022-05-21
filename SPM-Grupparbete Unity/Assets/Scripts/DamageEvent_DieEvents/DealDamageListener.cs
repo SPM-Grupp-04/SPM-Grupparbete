@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DealDamageListener : MonoBehaviour
 {
+    private EventSystem.EventListener damageListener;
+
     private void Start()
     {
-        EventSystem.current.RegisterListener<DamageDealt>(OnDealDamageToUnit);
+        damageListener = EventSystem.current.RegisterListener<DamageDealt>(OnDealDamageToUnit);
     }
 
     void OnDealDamageToUnit(DamageDealt dieEvenInfo)
@@ -15,5 +17,10 @@ public class DealDamageListener : MonoBehaviour
         {
             dieEvenInfo.gameObject.GetComponent<IDamagable>().DealDamage(dieEvenInfo.amountOfDamage );
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventSystem.current.UnregisterListener<DamageDealt>(damageListener);
     }
 }

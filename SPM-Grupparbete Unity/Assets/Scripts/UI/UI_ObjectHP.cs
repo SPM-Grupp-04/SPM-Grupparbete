@@ -8,15 +8,16 @@ public class UI_ObjectHP : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject gameObjectHP;
+    [SerializeField] private float hideSliderTimer = 2.0f;
     
 
     private void Start()
     {
-        
         MinableOre ore = gameObjectHP.gameObject.GetComponent<MinableOre>();
         DestroyableWall wall = gameObjectHP.gameObject.GetComponent<DestroyableWall>();
         
         slider.gameObject.SetActive(false);
+
         if (ore != null)
         {
             slider.maxValue = ore.GetOreMaterialHP();
@@ -33,19 +34,19 @@ public class UI_ObjectHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void ObjectTakeDamage(int amount)
     {
+        CancelInvoke("HideUI");
         slider.gameObject.SetActive(true);
 
         transform.rotation = Camera.main.transform.rotation;
 
         slider.value -= amount;
-        Invoke("HideUI", 2);
-        
+        Invoke("HideUI", hideSliderTimer);
     }
+
     private void HideUI()
     {
         slider.gameObject.SetActive(false);

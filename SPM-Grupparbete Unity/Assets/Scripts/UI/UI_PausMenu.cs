@@ -9,24 +9,23 @@ public class UI_PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     [SerializeField] private GameObject pauseMenuUI;
-    public PlayerInput playerInput;
-    public PlayerInput PlayerInputTwo;
-    private InputAction pause;
+    [SerializeField] private PlayerInput playerInputOne;
+    [SerializeField] private PlayerInput PlayerInputTwo;
+    private InputAction pausePlayerOne;
     private InputAction pausePlayerTwo;
 
     private bool pauseButtonPressed;
-    
+
     [Header("MenuButtonFirstSelection")]
     [SerializeField] private GameObject pauseFirstButton;
 
-    
+
     private void Start()
-    { 
-        playerInput = GetComponent<PlayerInput>();
-       pause = playerInput.actions["Pause"];
-       pausePlayerTwo = PlayerInputTwo.actions["Pause"];
+    {
+        pausePlayerOne = playerInputOne.actions["Pause"];
+        pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
-    
+
 
     public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
     {
@@ -43,7 +42,7 @@ public class UI_PausMenu : MonoBehaviour
             Resume();
         }
     }
-    
+
     private void Pause()
     {
         pauseMenuUI.SetActive(true);

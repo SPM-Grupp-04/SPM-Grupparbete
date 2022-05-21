@@ -13,10 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
 
-    [SerializeField] private AudioClip drillSound, laserSound;
-
-
-
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
@@ -171,7 +167,7 @@ public class PlayerController : MonoBehaviour
         return uiEnabled;
     }
 
-    public void ShootInput(InputAction.CallbackContext shootValue)
+    public void OnShootInput(InputAction.CallbackContext shootValue)
     {
         if (shootValue.performed)
         {
@@ -183,7 +179,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void DrillInput(InputAction.CallbackContext drillValue)
+    public void OnDrillInput(InputAction.CallbackContext drillValue)
     {
         if (drillValue.performed)
         {
@@ -195,22 +191,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void PlayLaserWeaponSound()
+    //this is a kind of "super method" to OnShootInput()/OnDrillInput(). probably not worth using, though
+    public void OnArmamentInput(InputAction.CallbackContext value, ref bool variable)
     {
-        source.clip = laserSound;
-        source.Play();
-    }
-
-    private void PlayDrillSound()
-    {
-        source.clip = drillSound;
-        source.Play();
-    }
-
-    private void StopSound()
-    {
-        source.Stop();
-        source.clip = null;
+        if (value.performed)
+        {
+            variable = true;
+        }
+        else if (value.canceled)
+        {
+            variable = false;
+        }
     }
 
     public void UseInput(InputAction.CallbackContext useValue)

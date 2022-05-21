@@ -6,14 +6,8 @@ using UnityEngine;
 
 public class PlayerDrill : PlayerBeamArmamentBase
 {
-    [SerializeField] private ParticleSystem drillRing;
-    [SerializeField] private ParticleSystem drillEmission;
-
-    protected override bool CanShoot => !(transform.parent.gameObject.GetComponentInChildren<StateMachine>().CurrentState is WeaponFiringState);
-
-    void FixedUpdate()
-    {
-        if (CanShoot && GetComponentInParent<PlayerController>().IsDrilling)
-            Shoot();
-    }
+    [SerializeField] private StateMachine laserStateMachine;
+    protected override bool CanShoot => !(laserStateMachine.CurrentState is LaserWeaponFiringState);
+    public override bool IsActivated => GetComponentInParent<PlayerController>().IsDrilling;
 }
+

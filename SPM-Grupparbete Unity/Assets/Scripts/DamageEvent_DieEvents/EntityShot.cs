@@ -3,7 +3,7 @@ using Event = EgilEventSystem.Event;
 
 namespace EgilScripts.DieEvents
 {
-    public class ShootEventInfo : Event
+    public class EntityShot : Event
     {
        // public GameObject target;
         public Transform ogPos;
@@ -14,7 +14,7 @@ namespace EgilScripts.DieEvents
         
         
 
-        public ShootEventInfo(Transform ogPos, GameObject throwableObject,  float throwUpwardForce, float throwForce)
+        public EntityShot(Transform ogPos, GameObject throwableObject,  float throwUpwardForce, float throwForce)
         {
            // this.target = target;
             this.ogPos = ogPos;

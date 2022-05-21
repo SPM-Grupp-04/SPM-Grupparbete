@@ -10,7 +10,7 @@ namespace Player
 
         public PlayerController Controller => GetMemberInParent(controller);
 
-        protected T GetMemberInParent<T>(T member)
+        protected T GetMemberInParent<T>(T member) where T : MonoBehaviour
         {
             member = stateMachine.gameObject.GetComponentInParent<T>();
 

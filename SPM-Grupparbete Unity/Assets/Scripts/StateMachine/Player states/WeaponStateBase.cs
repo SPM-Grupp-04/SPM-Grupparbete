@@ -5,18 +5,20 @@ using UnityEngine;
 
 public abstract class WeaponStateBase : ControllerStateBase
 {
-    private PlayerWeapon weapon;
+    protected PlayerBeamArmamentBase armament;
 
-    protected PlayerWeapon Armament => GetMemberInParent(weapon);
+    protected PlayerBeamArmamentBase Armament => GetMemberInParent(armament);
+
+    protected virtual bool IsActivated => Armament.IsActivated;
 
     public new void Initialize(StateMachine stateMachine)
     {
         this.Initialize(stateMachine, Armament);
     }
 
-    public virtual void Initialize(StateMachine stateMachine, PlayerWeapon weapon)
+    public virtual void Initialize(StateMachine stateMachine, PlayerBeamArmamentBase weapon)
     {
         base.Initialize(stateMachine);
-        this.weapon = weapon;
+        this.armament = weapon;
     }
 }

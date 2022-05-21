@@ -12,7 +12,9 @@ public class MinableOre : DestroyableObjectBase
     [SerializeField] int oreRequiredWeaponLevel = 1;
     [SerializeField] GameObject ore;
     [SerializeField] GameObject uiHP;
-    [SerializeField] [Range(1, 3)] private int collecitbleCrystals = 1;
+    [SerializeField] [Range(1, 3)] private int collectibleCrystals = 1;
+
+    private EventSystem.EventListener damageListener;
 
     UI_ObjectHP uiObjectHp;
 
@@ -22,13 +24,15 @@ public class MinableOre : DestroyableObjectBase
         materialHP = oreMaterialHP;
         uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
 
-        EventSystem.current.RegisterListener<DamageDealt>(
-            (dd) =>
-                {
-                    if (dd.gameObject == gameObject)
-                        ReduceMaterialHP((int)dd.amountOfDamage);
-                }
-            );
+        //damageListener = EventSystem.current.RegisterListener<DamageDealt>(OnDamage);
+    }
+
+    private void OnDamage(DamageDealt dd)
+    {
+        if (dd.gameObject == gameObject)
+        {
+            ReduceMaterialHP((int)dd.amountOfDamage);
+        }
     }
 
     public override void ReduceMaterialHP(int amount)
@@ -53,12 +57,27 @@ public class MinableOre : DestroyableObjectBase
 
     private void DestroyObject()
     {
-        for (int i = 0; i < collecitbleCrystals; i++)
+        for (int i = 0; i < collectibleCrystals; i++)
         {
             Instantiate(ore, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), Quaternion.identity);
         }
 
         Destroy(this.gameObject);
+    }
+
+    private void OnEnable()
+    {
+        damageListener = EventSystem.current.RegisterListener<DamageDealt>(OnDamage);
+    }
+
+    //ensures no dangling references remain
+    private void OnDisable()
+    {
+        if (damageListener != null && EventSystem.current != null)  //needed to ensure the game does not generate exceptions on application quit
+        {
+            EventSystem.current.UnregisterListener<DamageDealt>(damageListener);
+            damageListener = null;
+        }
     }
 
     public int GetOreMaterialHP()

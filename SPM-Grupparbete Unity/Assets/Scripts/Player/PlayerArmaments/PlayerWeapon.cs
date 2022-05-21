@@ -26,12 +26,15 @@ public class PlayerWeapon : PlayerBeamArmamentBase
     public float WeaponCoolingRate => weaponCoolingRate;
     public float WeaponOverheatCoolingRate => weaponOverheatCoolingRate;
     public float WeaponCooldownTimerStart => weaponCooldownTimerStart;
+    public bool IsOverheated => currentHeat >= overheatThreshold;
 
     //change this if we add stuff like stuns, weapon misfires, etc.
     protected override bool CanShoot
     {
         get => currentHeat < overheatThreshold;
     }
+
+    public override bool IsActivated => GetComponentInParent<PlayerController>().IsShooting;
 
     [Header("Disco settings")]
     [SerializeField] private float discoDelayTimer = 1.0f;

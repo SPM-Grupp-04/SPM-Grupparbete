@@ -25,7 +25,7 @@ public class PlayerStatistics
     public int Crystals;
     public int BlueCrystals;
     public int RedCrystals;
-    public PlayerBeamArmamentBase.ArmamentLevel armamentLevel = 0;
+    public PlayerBeamArmamentBase.ArmamentLevel armamentLevel = PlayerBeamArmamentBase.ArmamentLevel.LEVEL_1;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
     //public Dictionary<Button, bool> buttonDictionary;

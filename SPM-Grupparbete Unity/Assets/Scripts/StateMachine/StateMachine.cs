@@ -37,7 +37,7 @@ public class StateMachine : MonoBehaviour
 		CurrentState.Enter();
 	}
 
-    private void Update()
+	private void Update()
     {
 		CurrentState.HandleUpdate();
     }

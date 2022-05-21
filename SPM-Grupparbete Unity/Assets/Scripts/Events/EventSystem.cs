@@ -10,7 +10,6 @@ namespace EgilEventSystem
 
         private static EventSystem currentVariable;
 
-
         private void OnEnable()
         {
             currentVariable = this;
@@ -29,13 +28,12 @@ namespace EgilEventSystem
             }
         }
 
-
-        private delegate void EventListener(EgilEventSystem.Event e);
+        public delegate void EventListener(EgilEventSystem.Event e);
 
         // Should be set
         private Dictionary<System.Type, List<EventListener>> eventListeners;
 
-        public void RegisterListener<T>(System.Action<T> listener) where T : Event
+        public EventListener RegisterListener<T>(System.Action<T> listener) where T : Event
         {
             System.Type eventType = typeof(T);
 
@@ -56,10 +54,10 @@ namespace EgilEventSystem
             }
 
             eventListeners[eventType].Add(Wrapper);
+            return Wrapper;
         }
 
-
-        public void UnregisterListener<T>(System.Action<T> listener) where T : Event
+        public void UnregisterListener<T>(EventListener listener) where T : Event
         {
             System.Type eventType = typeof(T);
 
@@ -69,29 +67,32 @@ namespace EgilEventSystem
                 return;
             }
 
-
-            void Wrapper(Event e)
-            {
-                listener((T) e);
-            }
-
-            eventListeners[eventType].Remove(Wrapper);
+            eventListeners[eventType].Remove(listener);
         }
 
         // Execute Event.
         public void FireEvent(Event EventInfo)
         {
-            System.Type trueEventOInfoClass = EventInfo.GetType();
+            System.Type trueEventInfoClass = EventInfo.GetType();
 
-            if (eventListeners == null || eventListeners[trueEventOInfoClass] == null)
+            if (eventListeners == null || eventListeners[trueEventInfoClass] == null)
             {
                 // No one is listening we are done
                 return;
             }
 
-            foreach (EventListener el in eventListeners[trueEventOInfoClass])
+            foreach (EventListener el in eventListeners[trueEventInfoClass])
             {
                 el(EventInfo);
+            }
+        }
+
+        //not really needed, but the event system is throwing a lot of exceptions on application quit and this is due diligence
+        private void OnDestroy()
+        {
+            foreach (var v in eventListeners)
+            {
+                eventListeners[v.Key].Clear();
             }
         }
     }

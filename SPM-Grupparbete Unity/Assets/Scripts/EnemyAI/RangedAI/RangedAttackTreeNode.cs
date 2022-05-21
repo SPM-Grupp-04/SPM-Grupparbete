@@ -52,7 +52,7 @@ namespace Utility.EnemyAI
 
             if (_rangedAI.timer < 0)
             {
-                var shootEventInfo = new ShootEventInfo(firePoint,
+                var shootEventInfo = new EntityShot(firePoint,
                     this.throwableObject, throwUpForce, throwForce);
                 EventSystem.current.FireEvent(shootEventInfo);
                 _rangedAI.timer = throwCD;

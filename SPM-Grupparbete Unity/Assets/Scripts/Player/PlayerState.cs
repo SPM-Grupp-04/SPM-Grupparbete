@@ -75,7 +75,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     void die(GameObject gameObject)
     {        
-        var dieEvent = new DieEvenInfo(gameObject);
+        var dieEvent = new EntityDied(gameObject);
 
         EventSystem.current.FireEvent(dieEvent);
     }

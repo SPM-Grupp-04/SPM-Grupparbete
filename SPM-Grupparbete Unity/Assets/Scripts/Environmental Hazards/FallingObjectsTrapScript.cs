@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEditor;
+using EgilEventSystem;
 
 public class FallingObjectsTrapScript : MonoBehaviour
 {
@@ -17,12 +17,14 @@ public class FallingObjectsTrapScript : MonoBehaviour
     protected ObjectPool<GameObject> objectPool;
     [SerializeField] protected int poolSize = 20;
 
+    private EventSystem.EventListener collidedListener;
+
     // Start is called before the first frame update
     void Start()
     {
         bounds = GetComponent<Collider>().bounds;
 
-        EgilEventSystem.EventSystem.current.RegisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(
+        collidedListener = EventSystem.current.RegisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(
             (foce) =>
                 {
                     if (foce.CollidingObject.transform.parent == transform)
@@ -89,5 +91,10 @@ public class FallingObjectsTrapScript : MonoBehaviour
 
         go.transform.position = new Vector3(bounds.center.x + x, bounds.center.y, bounds.center.z + z);
         go.GetComponentInChildren<Rigidbody>().AddForce(objectStartingForce * Random.Range(randomStartingForceMultiplierRange.x, randomStartingForceMultiplierRange.y));
+    }
+
+    private void OnDestroy()
+    {
+        EventSystem.current.UnregisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(collidedListener);
     }
 }

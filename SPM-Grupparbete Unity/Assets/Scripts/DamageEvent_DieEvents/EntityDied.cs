@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Event = EgilEventSystem.Event;
 
-public class DieEvenInfo : Event
+public class EntityDied : Event
 {
     public GameObject gameObject;
 
-    public DieEvenInfo(GameObject gameObject)
+    public EntityDied(GameObject gameObject)
     {
         this.gameObject = gameObject;
     }

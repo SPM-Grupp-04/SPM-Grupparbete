@@ -1,12 +1,15 @@
 ﻿//Simon Canbäck, sica4801
 
-using Player;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "State Machine/Player/WeaponCoolingState")]
-public class WeaponCoolingState : WeaponStateBase
+//yes, this kind of recursive definition is a nightmare and i don't know why it works. don't touch it --Simon
+public abstract class WeaponCoolingStateBase<TIdleState, TFiringState> : WeaponStateBase 
+    where TIdleState : WeaponIdleStateBase<TIdleState, TFiringState>
+    where TFiringState : WeaponFiringStateBase<TIdleState, TFiringState>
 {
     private float cooldownDelayTimer;
+
+    protected new PlayerWeapon Armament => GetMemberInParent((PlayerWeapon)armament);
 
     public override void Enter()
     {
@@ -28,7 +31,7 @@ public class WeaponCoolingState : WeaponStateBase
         Armament.CoolWeapon();
 
         if (Armament.WeaponCurrentHeat <= 0.0f)
-            stateMachine.Transition<WeaponIdleState>();
+            stateMachine.Transition<TIdleState>();
     }
 
     public override void HandleUpdate()
