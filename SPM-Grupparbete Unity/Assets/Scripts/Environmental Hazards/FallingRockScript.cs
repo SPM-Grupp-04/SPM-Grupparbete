@@ -22,6 +22,8 @@ public class FallingRockScript : MonoBehaviour
     [SerializeField] private MeshRenderer rockMeshRenderer;
     [SerializeField] private MeshRenderer telegraphMarkerMeshRenderer;
 
+    [SerializeField] private SphereCollider rockCollider;
+
     private float particelSystemCountDown;
 
     private void Awake()
@@ -73,16 +75,18 @@ public class FallingRockScript : MonoBehaviour
             EventSystem.current.FireEvent(damageEvent);
             
             rockExplosionParticleSystem.Play();
+
+            rockCollider.enabled = false;
             
             rockMeshRenderer.enabled = false;
             telegraphMarkerMeshRenderer.enabled = false;
 
-            StartCoroutine(PlayParticleSystemAndDisableMeshRenderers());
+            StartCoroutine(CountDownToDestruction());
             
         }
     }
 
-    private IEnumerator PlayParticleSystemAndDisableMeshRenderers()
+    private IEnumerator CountDownToDestruction()
     {
         do
         {
