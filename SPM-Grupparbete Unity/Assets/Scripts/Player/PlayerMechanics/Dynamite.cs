@@ -12,13 +12,17 @@ public class Dynamite : MonoBehaviour
     [Header("Explosion Properties")]
     [SerializeField] [Range(1.0f, 10.0f)] private float explosionDelay = 3.0f;
     [SerializeField] [Range(1.0f, 20.0f)] private float explosionRadius = 7.5f;
+    
     [Header("Explosion Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
+    
     [Header("Particle System")]
     [SerializeField] private float particleSystemPlayDuration = 5.0f;
+    
     private float particleSystemCountdown;
     private float explosionCountdown;
+    
     private bool hasExploded;
 
     [SerializeField] private CapsuleCollider capsuleCollider;

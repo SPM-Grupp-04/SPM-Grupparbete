@@ -1,4 +1,6 @@
 //Author: Simon Canb�ck, sica4801
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using EgilEventSystem;
@@ -12,6 +14,20 @@ public class FallingRockScript : MonoBehaviour
     [SerializeField] private GameObject telegraphMarker;
     [SerializeField, Tooltip("Mark any layers that the rock is supposed to interact with -- most likely Player and Terrain or similar.")] private LayerMask layerMask;
     [SerializeField] private float yDespawnBoundary = -100.0f;
+
+    [SerializeField] private float particleSystemDuration = 5.0f;
+
+    [SerializeField] private ParticleSystem rockExplosionParticleSystem;
+
+    [SerializeField] private MeshRenderer rockMeshRenderer;
+    [SerializeField] private MeshRenderer telegraphMarkerMeshRenderer;
+
+    private float particelSystemCountDown;
+
+    private void Awake()
+    {
+        particelSystemCountDown = particleSystemDuration;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -55,9 +71,26 @@ public class FallingRockScript : MonoBehaviour
             }*/
             var damageEvent = new DealDamageEventInfo(collision.gameObject, 1);
             EventSystem.current.FireEvent(damageEvent);
+            
+            rockExplosionParticleSystem.Play();
+            
+            rockMeshRenderer.enabled = false;
+            telegraphMarkerMeshRenderer.enabled = false;
 
-            Destroy(telegraphMarker);
-            Destroy(gameObject);
+            StartCoroutine(PlayParticleSystemAndDisableMeshRenderers());
+            
         }
+    }
+
+    private IEnumerator PlayParticleSystemAndDisableMeshRenderers()
+    {
+        do
+        {
+            particelSystemCountDown -= Time.deltaTime;
+            yield return null;
+        } while (particelSystemCountDown > 0.0f);
+        
+        Destroy(telegraphMarker);
+        Destroy(gameObject);
     }
 }
