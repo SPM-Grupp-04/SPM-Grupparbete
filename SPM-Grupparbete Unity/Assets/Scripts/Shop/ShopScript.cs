@@ -19,22 +19,26 @@ public class ShopScript : MonoBehaviour
     [SerializeField] [Range(1.0f, 30.0f)] private float shopAreaRadius = 5.0f;
     [SerializeField] private RectTransform rectTransform;
     
-    [SerializeField] private int drillLevelCostBlue = 5;
-    [SerializeField] private int healCostBlue = 2;
-    [SerializeField] private int weaponCostBlue = 5;
-    [SerializeField] private int speedCostBlue = 5;
-    [SerializeField] private int discoCostBlue = 5;
-
-    private int drillLevelScale;
-    
-    private int drillLevelCostRed = 10;
     private Collider[] shopColliders;
     private SphereCollider shopCollider;
     private PlayerState m_PlayerState;
     bool pauseButtonPressed;
     private bool GameIsPause;
-    private Dictionary<string, bool> buttonDictionary;
-
+    private bool doOnce = false;
+    
+    [Header("Costs for shop")]
+    [SerializeField] private int drillLevelCostBlue;
+    [SerializeField] private int healCostBlue;
+    [SerializeField] private int weaponCostBlue;
+    [SerializeField] private int speedCostBlue;
+    [SerializeField] private int discoCostBlue;
+    [SerializeField] private int drillLevel2CostRed;
+    [SerializeField] private int healthLevel1CostBlue;
+    [SerializeField] private int healthLevel2CostBlue;
+    [SerializeField] private int healthLevel2CostRed;
+    
+    
+    
     [Header("Buttons for shop")]
     [SerializeField] private Button drill1Button;
     [SerializeField] private Button healButton;
@@ -44,6 +48,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healthTwoButton;
     [SerializeField] private Button drill2Button;
     
+    private Dictionary<string, bool> buttonDictionary;
     
     
     private void Start()
@@ -88,7 +93,7 @@ public class ShopScript : MonoBehaviour
         
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
-        drill1Button.Select();
+        
         UpdateShop();
         
     }
@@ -100,11 +105,16 @@ public class ShopScript : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>().IsMapSwitched())
         {
             OpenShopInterface();
+            if (!doOnce)
+            {
+                drill1Button.Select();
+                doOnce = true;
+            }
         }
         else
         {
             CloseShopInterface();
-            
+            doOnce = false;
         }
         
     }
@@ -125,23 +135,7 @@ public class ShopScript : MonoBehaviour
     private void CloseShopInterface()
     {
         PlayerStatistics.Instance.buttonDictionary = buttonDictionary;
-        
-        // Debug.Log("Current BD ");
-        // foreach (KeyValuePair<string, bool> test in buttonDictionary)
-        // {
-        //     
-        //     Debug.Log(test.Key + " " + test.Value.ToString());
-        // }
-        // Debug.Log("------------------------------------------------");
-        // Debug.Log("Saved BD");
-        // foreach (KeyValuePair<string, bool> test in PlayerStatistics.Instance.buttonDictionary)
-        // {
-        //     
-        //     Debug.Log(test.Key + " " + test.Value.ToString());
-        // }
-        //
-        // Debug.Log(shopInterfaceBackground.activeSelf);
-		shopInterfaceBackground.SetActive(false);
+        shopInterfaceBackground.SetActive(false);
 
     }
    
@@ -183,13 +177,13 @@ public class ShopScript : MonoBehaviour
                 }
                 break;
             case 2:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostRed)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= 20 && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostRed)
                 {
                     Debug.Log("I am called");
                     drill2Button.interactable = false;
                     m_PlayerState.m_LocalPlayerData.drillLevel = level;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
-                    m_PlayerState.m_LocalPlayerData.RedCrystals -= drillLevelCostRed;
+                    m_PlayerState.m_LocalPlayerData.RedCrystals -= drillLevel2CostRed;
                     GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
                     drill2Button.Select();
                     buttonDictionary[drill2Button.name] = true;
@@ -202,12 +196,53 @@ public class ShopScript : MonoBehaviour
         
     }
 
+    public void HealthUpgrade(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel1CostBlue)
+                {
+                    Debug.Log("I am called");
+                    healthOneButton.interactable = false;
+                    m_PlayerState.m_LocalPlayerData.playerMaxHealth += 10;
+                    m_PlayerState.m_LocalPlayerData.playerOneHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
+                    m_PlayerState.m_LocalPlayerData.playerTwoHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= healthLevel1CostBlue;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    healthOneButton.Select();
+                    buttonDictionary[healthOneButton.name] = true;
+                    UpdateShop();
+                }
+                break;
+            case 2:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostRed)
+                {
+                    Debug.Log("I am called");
+                    healthTwoButton.interactable = false;
+                    m_PlayerState.m_LocalPlayerData.playerMaxHealth += 20;
+                    m_PlayerState.m_LocalPlayerData.playerOneHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
+                    m_PlayerState.m_LocalPlayerData.playerTwoHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= healthLevel2CostBlue;
+                    m_PlayerState.m_LocalPlayerData.RedCrystals -= healthLevel2CostRed;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    healthTwoButton.Select();
+                    buttonDictionary[healthTwoButton.name] = true;
+                    UpdateShop();
+                }
+                break;
+                
+
+        }
+    }
+
     public void Accelerate(float addedAcceleration)
     {
         if (GlobalControl.Instance.playerStatistics.BlueCrystals >= speedCostBlue)
         {
             accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
+            m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerTwoAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
 
             buttonDictionary[accelerateButton.name] = true;
@@ -238,7 +273,8 @@ public class ShopScript : MonoBehaviour
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
             buttonDictionary[weaponButton.name] = true;
-
+            GameObject.Find("Players/Player1/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
+            GameObject.Find("Players/Player2/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
             weaponButton.Select();
         }
     }

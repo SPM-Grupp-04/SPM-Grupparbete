@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -342,7 +342,7 @@ Light:
   m_InnerSpotAngle: 30.124435
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.591
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -1747,6 +1747,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2965090648212625148}
     m_Modifications:
+    - target: {fileID: 8103748578287596664, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8103748578287596666, guid: cde5bbab58c4a554a88e9424b00f28bb, type: 3}
       propertyPath: m_RootOrder
       value: 6

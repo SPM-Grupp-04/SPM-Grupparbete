@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0.39215687}
+  m_Color: {r: 0, g: 0.9707384, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -629,6 +629,10 @@ MonoBehaviour:
   weaponCostBlue: 10
   speedCostBlue: 10
   discoCostBlue: 50
+  drillLevel2CostRed: 20
+  healthLevel1CostBlue: 20
+  healthLevel2CostBlue: 40
+  healthLevel2CostRed: 20
   drill1Button: {fileID: 254404803258351252}
   healButton: {fileID: 254404803675625744}
   weaponButton: {fileID: 5895394464882621039}
@@ -1007,11 +1011,87 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3769734912698923960}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.15659998
+  m_Size: 0.1566
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &721142956444554282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3346641557964207376}
+  - component: {fileID: 2234270924990347295}
+  - component: {fileID: 3683053145989372564}
+  m_Layer: 0
+  m_Name: Selected
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3346641557964207376
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721142956444554282}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9127701535878169643}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 150, y: 150}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &2234270924990347295
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721142956444554282}
+  m_CullTransparentMesh: 1
+--- !u!114 &3683053145989372564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721142956444554282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cbc7a80b95ddbd840a31d7646eb9f94e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1898902815773417731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,8 +1294,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 42110313}
         m_TargetAssemblyTypeName: ShopScript, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: HealthUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1271,12 +1351,13 @@ RectTransform:
   - {fileID: 2282699344898733056}
   - {fileID: 7155048137134638205}
   - {fileID: 983447759}
+  - {fileID: 3346641557964207376}
   m_Father: {fileID: 5953798873112683999}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -0.00019678367}
+  m_AnchoredPosition: {x: -0.00016355515, y: -0.000016062944}
   m_SizeDelta: {x: -1, y: 5000}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3513947962972649923
@@ -1680,7 +1761,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6845508007053417975}
   m_HandleRect: {fileID: 3593866802213349653}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2232,7 +2313,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2453,12 +2534,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 42110313}
         m_TargetAssemblyTypeName: ShopScript, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: HealthUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 1
@@ -2565,6 +2646,8 @@ GameObject:
   m_Component:
   - component: {fileID: 382472733249044259}
   - component: {fileID: 807159916}
+  - component: {fileID: 1371020100}
+  - component: {fileID: 1371020099}
   m_Layer: 5
   m_Name: TextWindow
   m_TagString: Untagged
@@ -2616,6 +2699,46 @@ MonoBehaviour:
   - {fileID: 5515921171327223363}
   - {fileID: 4605873160688556151}
   - {fileID: 2534264262561971376}
+  - {fileID: 6299669082859575457}
+  - {fileID: 983447758}
+--- !u!222 &1371020100
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041398213099388838}
+  m_CullTransparentMesh: 1
+--- !u!114 &1371020099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041398213099388838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.972549, b: 1, a: 0.039215688}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7050810461135492542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,7 +3031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0.972549, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

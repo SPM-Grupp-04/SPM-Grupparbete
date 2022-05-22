@@ -1,10 +1,12 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerDrill : MonoBehaviour
 {
@@ -17,7 +19,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
 
-     private int drillLevel;
+
     [SerializeField] private int drillDamageOres = 1;
     [SerializeField] private int drillDamageMonsters = 1;
     
@@ -58,11 +60,11 @@ public class PlayerDrill : MonoBehaviour
     {
         laserPoint = transform.Find("LaserPoint").gameObject;
         drillPoint = transform.Find("DrillPoint").gameObject;
-        drillPoint.transform.localPosition = new Vector3(0,0.75f,drillDistance);
         laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
-        drillLevel = playerStatistics.drillLevel;
         lr = GetComponent<LineRenderer>();
-        DrillDamage(drillLevel);
+        DrillDamage();
+        WeaponLevel();
+
     }
 
     // Update is called once per frame
@@ -273,8 +275,9 @@ public class PlayerDrill : MonoBehaviour
         return drillDamageMonsters;
     }
 
-    private void DrillDamage(int drillLevel)
+    private void DrillDamage()
     {
+        int drillLevel = playerStatistics.drillLevel;
         switch (drillLevel)
         {
             case 0:
@@ -301,5 +304,38 @@ public class PlayerDrill : MonoBehaviour
 
         }
 
+    }
+
+    private void WeaponLevel()
+    {
+        int level = playerStatistics.weaponLevel;
+        switch (level)
+        {
+            case 1:
+                laserDistance = 10f;
+                laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
+                break;
+            case 2:
+                laserDistance = 15f;
+                laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
+                break;
+            case 3:
+                laserDistance = 20f;
+                laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
+
+                break;
+            default:
+                laserDistance = 20f;
+                laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
+
+                break;
+                
+
+        }
+    }
+
+    public void SetWeaponLevel()
+    {
+        WeaponLevel();
     }
 }
