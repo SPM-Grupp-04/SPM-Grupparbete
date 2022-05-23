@@ -22,9 +22,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
     
-    [SerializeField] private Transform otherPlayerTransform;
-
-    private RestrictPlayerMovementOutsideCamera restrictPlayerMovementOutSideCamera;
+    [Header("Player Restrictions")] 
+    [SerializeField] [Range(0.9f, 1.0f)] private float cameraPlayerPositiveMovementThreshold = 0.9f;
+    [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
+    
+    [SerializeField] private PlayerController otherPlayerController;
     
     private Collider[] penetrationColliders = new Collider[2];
     
@@ -55,7 +57,6 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        restrictPlayerMovementOutSideCamera = RestrictPlayerMovementOutsideCamera.Instance;
     }
 
     private void Update()
@@ -75,45 +76,39 @@ public class PlayerController : MonoBehaviour
         currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
         currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
 
-        if (currentPlayerCameraView.x == 0.0f && !invisibleWallDeployed)
+        Vector3 otherPlayerVelocity = otherPlayerController.GetPlayerVelocity();
+
+        if (currentPlayerCameraView.x <= 0.05f)
         {
-            invisibleWallDeployed = true;
-            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(otherPlayerTransform.position.x + 1.0f, 10.0f, 0.0f), quaternion.Euler(0.0f, 90.0f, 0.0f));
-        } else if (currentPlayerCameraView.x > 0.1f && invisibleWallDeployed)
-        {
-            invisibleWallDeployed = false;
-            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
+            if (otherPlayerVelocity.x > 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(0.0f, otherPlayerVelocity.y, otherPlayerVelocity.z));
+            }
         }
 
-        if (currentPlayerCameraView.x == 1.0f && !invisibleWallDeployed)
+        if (currentPlayerCameraView.x >= 0.95f)
         {
-            invisibleWallDeployed = true;
-            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(otherPlayerTransform.position.x - 1.0f, 10.0f, 0.0f), quaternion.Euler(0.0f, 90.0f, 0.0f));
-        } else if (currentPlayerCameraView.x < 0.9f && invisibleWallDeployed)
-        {
-            invisibleWallDeployed = false;
-            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
-        }
+            if (otherPlayerVelocity.x < 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(0.0f, otherPlayerVelocity.y, otherPlayerVelocity.z));
+            }
+        } 
 
-        if (currentPlayerCameraView.y == 0.0f && !invisibleWallDeployed)
+        if (currentPlayerCameraView.y <= 0.05f)
         {
-            invisibleWallDeployed = true;
-            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(0.0f, 10.0f, otherPlayerTransform.position.z + 1.0f), quaternion.Euler(0.0f, 0.0f, 0.0f));
-        } else if (currentPlayerCameraView.y > 0.1f && invisibleWallDeployed)
-        {
-            invisibleWallDeployed = false;
-            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
+            if (otherPlayerVelocity.z > 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, 0.0f));
+            }
         }
-
-        if (currentPlayerCameraView.y == 1.0f && !invisibleWallDeployed)
+        
+        if (currentPlayerCameraView.y >= 0.95f)
         {
-            invisibleWallDeployed = true;
-            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(0.0f, 10.0f, otherPlayerTransform.position.z - 1.0f), quaternion.Euler(0.0f, 0.0f, 0.0f));
-        } else if (currentPlayerCameraView.y < 0.9f && invisibleWallDeployed)
-        {
-            invisibleWallDeployed = false;
-            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
-        }
+            if (otherPlayerVelocity.z < 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, 0.0f));
+            }
+        } 
 
         Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
         
