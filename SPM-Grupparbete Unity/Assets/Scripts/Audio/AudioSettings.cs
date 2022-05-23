@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class AudioSettings : MonoBehaviour
 {
 
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Toggle toggle;
 
     private bool isMuted = false;
     // Start is called before the first frame update
@@ -16,10 +18,12 @@ public class AudioSettings : MonoBehaviour
         if (PlayerPrefs.HasKey("IsMuted") == false)
         {
             audioMixer.SetFloat("VolumeControl", 1);
+            toggle.isOn = false;
             return;
         }
 
         audioMixer.SetFloat("VolumeControl", PlayerPrefs.GetFloat("IsMuted"));
+        toggle.isOn = true;
     }
 
     // Update is called once per frame
