@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private AudioClip drillSound, laserSound;
+    [SerializeField] private Animator animator;
+    private PlayerDrill drillScript;
     
     [Header("Player Restrictions")] 
     [SerializeField] [Range(0.9f, 1.0f)] private float cameraPlayerPositiveMovementThreshold = 0.9f;
@@ -52,20 +55,37 @@ public class PlayerController : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
+    
+    private bool uiEnabled;
+
+    private InputActionMap UI;
+    private InputActionMap defaultMap;
+
+    private AudioSource source;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
+        source = GetComponent<AudioSource>();
+        source.loop = true;
+        playerInput = GetComponent<PlayerInput>();
+        mainCamera = Camera.main;
+        drillScript = drill.GetComponent<PlayerDrill>();
+        UI = playerInput.actions.FindActionMap("UI");
+        defaultMap = playerInput.actions.FindActionMap("Player");
     }
 
     private void Update()
     {
-        if (PausMenu.GameIsPause == false)
+        if (UI_PausMenu.GameIsPause == false)
         {
             PlayerMovement();
             ShootOrDrill();
-            FixOverlapPenetration();
+        }
+        if (TownPortal.isTeleporting == false)
+        {
+            RestrictMovement();
         }
         RestrictMovement();
     }
@@ -167,6 +187,11 @@ public class PlayerController : MonoBehaviour
     public bool IsUseButtonPressed()
     {
         return useButtonPressed;
+    }
+    
+    public bool IsMapSwitched()
+    {
+        return uiEnabled;
     }
     
     public void ShootInput(InputAction.CallbackContext shootValue)
