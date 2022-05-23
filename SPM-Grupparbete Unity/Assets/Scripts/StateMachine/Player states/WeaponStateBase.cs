@@ -5,20 +5,19 @@ using UnityEngine;
 
 public abstract class WeaponStateBase : ControllerStateBase
 {
-    protected PlayerBeamArmamentBase armament;
+    private PlayerBeamArmamentBase armament;
+    private Animator animator;
 
     protected PlayerBeamArmamentBase Armament => GetMemberInParent(armament);
+    public Animator WeaponAnimator
+    {
+        get
+        {
+            if (animator == null)
+                animator = Controller.GetComponentInChildren<Animator>();
 
+            return animator;
+        }
+    }
     protected virtual bool IsActivated => Armament.IsActivated;
-
-    public new void Initialize(StateMachine stateMachine)
-    {
-        this.Initialize(stateMachine, Armament);
-    }
-
-    public virtual void Initialize(StateMachine stateMachine, PlayerBeamArmamentBase weapon)
-    {
-        base.Initialize(stateMachine);
-        this.armament = weapon;
-    }
 }

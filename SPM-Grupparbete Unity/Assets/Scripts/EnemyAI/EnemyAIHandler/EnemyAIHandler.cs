@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyAIHandler : MonoBehaviour
 {
-    public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
+    public List<EnemyAIBase> units = new List<EnemyAIBase>();
     
     private GameObject playerOne;
     private GameObject playerTwo;
@@ -29,8 +29,8 @@ public class EnemyAIHandler : MonoBehaviour
 
     private void Start()
     {
-        playerOne = GameObject.Find("Player1");
-        playerTwo = GameObject.Find("Player2");
+        playerOne = GameObject.Find("Player 1");
+        playerTwo = GameObject.Find("Player 2");
 
         //If a player died treat it as the other one. 
         if (playerOne == null)
@@ -69,12 +69,14 @@ public class EnemyAIHandler : MonoBehaviour
         // Used to know were to position in the circle around tha player.
         var countEnemy = 0;
 
-        foreach (BaseClassEnemyAI enemyAI in units)
+        foreach (EnemyAIBase enemyAI in units)
         {
+            if (enemyAI == null || enemyAI.gameObject == null)
+                continue;
+
             if (enemyAI.gameObject.activeInHierarchy )
             {
                 Vector3 aiPos = enemyAI.gameObject.transform.position;
-
                 
                 // Checking distance from Ai-unit to Player.
                 distancePlayerOne = Vector3.Distance(playerOnePosition, aiPos);
@@ -95,7 +97,6 @@ public class EnemyAIHandler : MonoBehaviour
                     distancePlayerTwo = 1000;
                 }
 
-
                 closestDistance = ClosestDistance(enemyAI, aiPos, countEnemy,
                     closestDistance, distancePlayerOne, distancePlayerTwo);
 
@@ -110,7 +111,7 @@ public class EnemyAIHandler : MonoBehaviour
         }
     }
 
-    private float ClosestDistance(BaseClassEnemyAI enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
+    private float ClosestDistance(EnemyAIBase enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
         float distancePlayerOne, float distancePlayerTwo)
     {
         if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)

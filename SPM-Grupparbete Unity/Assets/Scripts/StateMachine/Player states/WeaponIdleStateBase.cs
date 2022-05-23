@@ -10,10 +10,12 @@ public abstract class WeaponIdleStateBase<TIdleState, TFiringState> : WeaponStat
 {
     public override void Enter()
     {
+        WeaponAnimator.SetBool("Idle", true);
     }
 
     public override void Exit()
     {
+        WeaponAnimator.SetBool("Idle", false);
     }
 
     public override void HandleFixedUpdate()

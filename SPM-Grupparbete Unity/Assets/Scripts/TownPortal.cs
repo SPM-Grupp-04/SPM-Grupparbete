@@ -9,7 +9,7 @@ public class TownPortal : MonoBehaviour
     private GameObject playerOne;
     private GameObject playerTwo;
     private GameObject drone;
-    [SerializeField]   private GameObject camera;
+    [SerializeField] new private GameObject camera;
     private bool isLoading;
     public static bool isTeleporting;
 
@@ -48,13 +48,13 @@ public class TownPortal : MonoBehaviour
             drone.transform.position =new Vector3(playerOne.transform.position.x,
                 drone.transform.position.y, playerOne.transform.position.z);
             
-            StartCoroutine(waitUntillActivate());
+            StartCoroutine(WaitUntilActivate());
             isLoading = false;
             
         }
     }
 
-   public static IEnumerator waitUntillActivate()
+   public static IEnumerator WaitUntilActivate()
     {
         yield return new  WaitForSeconds(1);
         isTeleporting = false;

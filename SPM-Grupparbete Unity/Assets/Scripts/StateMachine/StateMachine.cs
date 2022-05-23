@@ -17,6 +17,9 @@ public class StateMachine : MonoBehaviour
 		stateDictionary = new Dictionary<Type, StateBase>();
 		StateBase state;
 
+		if (allowedStates == null)
+			throw new NullReferenceException("allowedStates is null");
+
 		foreach (StateBase v in allowedStates)
 		{
 			state = Instantiate(v);

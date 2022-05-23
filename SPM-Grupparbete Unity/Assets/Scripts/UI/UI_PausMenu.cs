@@ -22,8 +22,8 @@ public class UI_PausMenu : MonoBehaviour
 
     private void Start()
     {
-        pausePlayerOne = playerInputOne.actions["Pause"];
-        pausePlayerTwo = PlayerInputTwo.actions["Pause"];
+        //pausePlayerOne = playerInputOne.actions["Pause"];
+        //pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
 
 

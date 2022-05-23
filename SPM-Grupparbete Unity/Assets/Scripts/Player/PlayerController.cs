@@ -9,23 +9,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject drill;
-    private PlayerDrill drillScript;
     [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
-    [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
+    [SerializeField, Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
+    [SerializeField, Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
+    [SerializeField] private float movementAnimationStateTolerance = 0.05f;
 
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector3 gamePadLookRotation;
-    private Vector2 lookRotation;
     private Vector2 mousePosition;
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
-    private bool enteredShopArea;
     public bool IsShooting
     {
         get;
@@ -45,17 +42,18 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource source;
 
+    private Animator animator;
+
 
     private void Awake()
     {
-       // animator.enabled = true;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -193,6 +191,8 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerRotationGamePad();
         }
+
+        animator.SetBool("Moving", velocity.magnitude >= movementAnimationStateTolerance && animator.GetBool("IsShooting") == false);
 
         transform.position += velocity * movementAcceleration * Time.deltaTime;
     }

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "State Machine/Player/LaserWeaponIdleState")]
 public class LaserWeaponIdleState : WeaponIdleStateBase<LaserWeaponIdleState, LaserWeaponFiringState>
 {
-    protected new PlayerWeapon Armament => GetMemberInParent((PlayerWeapon)armament);
+    private PlayerWeapon armament;
+    protected new PlayerWeapon Armament => GetMemberInParent(armament);
 
     public override void HandleFixedUpdate()
     {

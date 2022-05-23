@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.Pool;
 
 
-public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
+public class MeleeEnemyAI : EnemyAIBase, IDamagable
 {
     [SerializeField] private float startingHealth;
     private float currentHealth;
@@ -19,7 +19,7 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
 
     private List<Transform> playerTransform = new List<Transform>();
 
-    private IObjectPool<BaseClassEnemyAI> pool;
+    private IObjectPool<EnemyAIBase> pool;
 
     private Animator animator;
 
@@ -110,7 +110,7 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
     }
 
 
-    public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
+    public override void SetPool(IObjectPool<EnemyAIBase> pool)
     {
         this.pool = pool;
     }

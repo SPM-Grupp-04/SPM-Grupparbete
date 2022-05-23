@@ -111,8 +111,8 @@ public class BossAttackWithLaser : TreeNode
         }
 
 
-        DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, 4 * Time.deltaTime);
-        EventSystem.current.FireEvent(dealDamageEventInfo);
+        DamageDealt damageDealt = new DamageDealt(target.gameObject, 4 * Time.deltaTime);
+        EventSystem.current.FireEvent(damageDealt);
         EnableLineRenders();
         Vector3 lineHitPoint = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
         SetLinerendersPos(lineHitPoint);
