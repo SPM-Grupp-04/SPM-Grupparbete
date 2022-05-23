@@ -11,17 +11,11 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float startingHealth;
     private float currentHealth;
 
-    public float CurrentHealth
-    {
-        get { return currentHealth; }
-        set { currentHealth = Mathf.Clamp(value, 0, startingHealth); }
-    }
-
     [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
     [SerializeField] private float hitRange;
     [SerializeField] private float movementSpeed;
-  
+
     [SerializeField] private MeleeWepon _meleeWepon;
 
     private List<Transform> playerTransform = new List<Transform>();
@@ -34,20 +28,23 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     //public TreeNode m_TopTreeNode;
 
     public Vector3 target = new Vector3(100, 0, 100);
-    public float distanceToTargetPlayer = 100;
+    public float distanceToTarget = 100;
     public Vector3 playerPos = new Vector3(100, 0, 100);
     private float timeUntillAnimationPlay;
+
     void Start()
     {
         base.Start();
+        base.randomNumber = Random.Range(1, 10);
+
         _animator = GetComponent<Animator>();
-       // playerTransform.Add(GameObject.Find("Player1").transform);
-       // playerTransform.Add(GameObject.Find("Player2").transform);
+        // playerTransform.Add(GameObject.Find("Player1").transform);
+        // playerTransform.Add(GameObject.Find("Player2").transform);
 
         agent.speed = movementSpeed;
         base.Start();
         currentHealth = startingHealth;
-     
+
 
         // SetUpTree();
         // SetUpTree();
@@ -65,24 +62,44 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
         if (currentHealth <= 1)
         {
+           
+           // StartCoroutine(WaitBeforeDie());
+
             if (this.pool != null)
             {
                 currentHealth = startingHealth;
-                pool.Release(this);
+              //  _animator.SetTrigger("Die");
+              agent.speed = 0;
+              StartCoroutine(WaitBeforeDie());
+              //  pool.Release(this);
             }
             else
             {
                 Debug.Log("Pool is null");
-                gameObject.SetActive(false);
+                agent.speed = 0;
+                StartCoroutine(waitbeforeDieWithoutPool());
+                // StartCoroutine(WaitBeforeDie());
+                // gameObject.SetActive(false);
             }
-
-            return;
         }
 
         // m_TopTreeNode.Evaluate();
     }
 
-   
+    private IEnumerator waitbeforeDieWithoutPool()
+    {
+        _animator.SetTrigger("Die");
+        yield return new WaitForSeconds(2);
+        agent.speed = movementSpeed;
+        gameObject.SetActive(false);
+    }
+    private IEnumerator WaitBeforeDie()
+    {
+        _animator.SetTrigger("Die");
+        yield return new WaitForSeconds(2);
+        agent.speed = movementSpeed;
+        pool.Release(this);
+    }
 
 
     private void Awake()
@@ -95,28 +112,27 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     {
         // Istället för att skcika med spelarens transform hela tiden så skicka bara med platsen.
 
-
         ChaseTreeNodeMelee chaseTreeNodeMelee =
-            new ChaseTreeNodeMelee(target, distanceToTargetPlayer, agent, _animator); // Animator.
+            new ChaseTreeNodeMelee(target, distanceToTarget, agent, _animator); // Animator.
 
         RangeTreeNodeMelee inChaseRange =
-            new RangeTreeNodeMelee(chasingRange, distanceToTargetPlayer, _animator);
+            new RangeTreeNodeMelee(chasingRange, distanceToTarget, _animator);
 
         RangeTreeNodeMelee inMeleeRange =
-            new RangeTreeNodeMelee(hitRange, distanceToTargetPlayer, _animator);
+            new RangeTreeNodeMelee(hitRange, distanceToTarget, _animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
             new MeeleAttackTreeNode(playerPos, agent, _animator, _meleeWepon);
 
+
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
-        m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
 
-        return m_TopTreeNode;
+        return MTopTreeNode;
     }
-
 
     public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
     {
@@ -130,7 +146,7 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
 
     public override void DistanceToPlayerPos(float distance)
     {
-        this.distanceToTargetPlayer = distance;
+        this.distanceToTarget = distance;
     }
 
     public override void PlayerPos(Vector3 playerPos)
@@ -138,8 +154,13 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
         this.playerPos = playerPos;
     }
 
+    public override float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     public void DealDamage(float damage)
     {
-        CurrentHealth -= damage;
+        currentHealth -= damage;
     }
 }

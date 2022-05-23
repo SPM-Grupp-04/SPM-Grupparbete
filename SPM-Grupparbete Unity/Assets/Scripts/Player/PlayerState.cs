@@ -11,7 +11,7 @@ public class PlayerState : MonoBehaviour, IDamagable
     public PlayerStatistics m_LocalPlayerData;
 
     [SerializeField] private String playerName;
-
+    [SerializeField] private Animator animator;
     private void Awake()
     {
         m_LocalPlayerData = PlayerStatistics.Instance;
@@ -20,15 +20,20 @@ public class PlayerState : MonoBehaviour, IDamagable
     private void Start()
     {
         
+        
       //  m_LocalPlayerData.Crystals = GlobalControl.Instance.playerStatistics.Crystals;
         m_LocalPlayerData.BlueCrystals = GlobalControl.Instance.playerStatistics.BlueCrystals;
         m_LocalPlayerData.RedCrystals = GlobalControl.Instance.playerStatistics.RedCrystals;
+        m_LocalPlayerData.drillLevel = GlobalControl.Instance.playerStatistics.drillLevel;
+        m_LocalPlayerData.componentsCollectedMask = GlobalControl.Instance.playerStatistics.componentsCollectedMask;
+        m_LocalPlayerData.playerMaxHealth = GlobalControl.Instance.playerStatistics.playerMaxHealth;
       
         if (playerName == "PlayerOne")
         {
             m_LocalPlayerData.playerOneHealth = GlobalControl.Instance.playerStatistics.playerOneHealth;
             m_LocalPlayerData.playerOneAcceleration = GlobalControl.Instance.playerStatistics.playerOneAcceleration;
             m_LocalPlayerData.playerOneDisco = GlobalControl.Instance.playerStatistics.playerOneDisco;
+            
         }
         
         if (playerName == "PlayerTwo")
@@ -36,6 +41,15 @@ public class PlayerState : MonoBehaviour, IDamagable
             m_LocalPlayerData.playerTwoHealth = GlobalControl.Instance.playerStatistics.playerTwoHealth;
             m_LocalPlayerData.playerTwoAcceleration = GlobalControl.Instance.playerStatistics.playerTwoAcceleration;
             m_LocalPlayerData.playerTwoDisco = GlobalControl.Instance.playerStatistics.playerTwoDisco;
+        }
+
+        if (m_LocalPlayerData.playerOneHealth <= 0)
+        {
+            m_LocalPlayerData.playerOneHealth = 1;
+        }
+        if (m_LocalPlayerData.playerTwoHealth <= 0)
+        {
+            m_LocalPlayerData.playerTwoHealth = 1;
         }
     }
 
@@ -45,8 +59,8 @@ public class PlayerState : MonoBehaviour, IDamagable
         {
             if (m_LocalPlayerData.playerOneHealth < 1)
             {
-                
-                die(gameObject);
+
+                StartCoroutine(WaitForAnimation(gameObject));
             }
         } 
 
@@ -54,12 +68,19 @@ public class PlayerState : MonoBehaviour, IDamagable
         {
             if (m_LocalPlayerData.playerTwoHealth < 1)
             {
-                
-                die(gameObject);
+
+                StartCoroutine(WaitForAnimation(gameObject));
             }
         }
     }
 
+    IEnumerator WaitForAnimation(GameObject g)
+    {
+        animator.SetBool("IsDead",true);
+        yield return new WaitForSeconds(1.1f);
+        die(g);
+    }
+    
     void die(GameObject gameObject)
     {
      
@@ -74,9 +95,9 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     }
 
-    public void Heal(int amount)
+    public void Heal()
     {
-        m_LocalPlayerData.playerMaxHealth ++;
+       
 
         m_LocalPlayerData.playerOneHealth = m_LocalPlayerData.playerMaxHealth;
         m_LocalPlayerData.playerTwoHealth = m_LocalPlayerData.playerMaxHealth;
@@ -125,18 +146,7 @@ public class PlayerState : MonoBehaviour, IDamagable
 
         SavePlayers();
     }
-
-    public void GainCrystal()
-    {
-        if (playerName == "PlayerOne")
-        {
-            m_LocalPlayerData.Crystals++;
-        }
-        else
-        {
-            m_LocalPlayerData.Crystals++;
-        }
-    }
+    
 
     public void SavePlayers()
     {

@@ -43,7 +43,7 @@ public class SaveAndLoadSystem : MonoBehaviour
     private void saveGamePress()
     {
         GlobalControl.Instance.playerStatistics.Crystals = playerStatistics.Crystals;
-        GlobalControl.Instance.SaveData();
+        GlobalControl.SaveData();
         SceneManager.LoadScene(sceneToLoad);
     }
 

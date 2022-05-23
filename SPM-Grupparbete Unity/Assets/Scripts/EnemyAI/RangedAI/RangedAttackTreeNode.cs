@@ -18,7 +18,7 @@ namespace Utility.EnemyAI
         private Vector3 currentVelocity;
         private float smoothDamp;
 
-        [Header("ThrowSettings")] private float throwCD = 2;
+        [Header("ThrowSettings")] private float throwCD = 5;
         private float throwUpForce;
         private float throwForce;
         private RangedAI _rangedAI;
@@ -41,12 +41,6 @@ namespace Utility.EnemyAI
         {
             agent.isStopped = true;
             Transform agentT = agent.transform;
-
-            /*Vector3 direction = target - agentT.position;
-            Vector3 currentDirection =
-                Vector3.SmoothDamp(agentT.forward, direction, ref currentVelocity, smoothDamp);
-            Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
-            agentT.rotation = rotation;*/
             
             agentT.LookAt(target);
 
@@ -57,8 +51,7 @@ namespace Utility.EnemyAI
                 EventSystem.current.FireEvent(shootEventInfo);
                 _rangedAI.timer = throwCD;
             }
-
-
+            
             state = NodeState.RUNNING;
             return state;
         }
