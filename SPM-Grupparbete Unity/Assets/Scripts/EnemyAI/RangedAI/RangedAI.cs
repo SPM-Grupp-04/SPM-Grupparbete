@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 using Utility.EnemyAI;
 using Tree = BehaviorTree.Tree;
 
-public class RangedAI : EnemyAIBase, IDamagable
+public class RangedAI : BaseClassEnemyAI, IDamagable
 {
     //  private TreeNode topTreeNode;
     private float currentHealth;
@@ -18,7 +18,7 @@ public class RangedAI : EnemyAIBase, IDamagable
     [SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
     private Animator animator;
-    private IObjectPool<EnemyAIBase> pool;
+    private IObjectPool<BaseClassEnemyAI> pool;
     
     [Header("Throw Weapon settings")] [SerializeField]
     private GameObject throwabelObject;
@@ -86,7 +86,7 @@ public class RangedAI : EnemyAIBase, IDamagable
     }
 
 
-    public override void SetPool(IObjectPool<EnemyAIBase> pool)
+    public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
     {
         this.pool = pool;
     }

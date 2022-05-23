@@ -11,8 +11,8 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<EnemyAIBase> pool;
-    private EnemyAIBase enemy;
+    private ObjectPool<BaseClassEnemyAI> pool;
+    private BaseClassEnemyAI _baseClassEnemy;
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
 
@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
     private EnemyAIHandler enemyAIHandler;
-    [SerializeField] private EnemyAIBase[] genericListOfBaseClassEnemyAI;
+    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
     [SerializeField] private float[] prioListMatchingObjektOrder;
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
     [SerializeField] private float totalAllowedSpawnTime = 5;
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         timer = totalAllowedSpawnTime;
-        pool = new ObjectPool<EnemyAIBase>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+        pool = new ObjectPool<BaseClassEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
         enemyAIHandler = GetComponent<EnemyAIHandler>();
         /*for (int i = 0; i < gameObjects.Length; i++)
@@ -63,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (var i = 0; i < genericListOfBaseClassEnemyAI.Length; i++) // 2 gånger
         {
-            enemy = genericListOfBaseClassEnemyAI[i];
+            _baseClassEnemy = genericListOfBaseClassEnemyAI[i];
             for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
                 CreateEnemy();
@@ -91,29 +91,29 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    private EnemyAIBase CreateEnemy()
+    private BaseClassEnemyAI CreateEnemy()
     {
         // så att man kan sätta hur många % av en typ man vill ska finnas.
-        if (enemy == null)
+        if (_baseClassEnemy == null)
             return null;
 
-        enemy = Instantiate(enemy, transform.position, quaternion.identity);
-        enemyAIHandler.units.Add(enemy);
+        _baseClassEnemy = Instantiate(_baseClassEnemy, transform.position, quaternion.identity);
+        enemyAIHandler.units.Add(_baseClassEnemy);
 
-        enemy.SetPool(pool);
+        _baseClassEnemy.SetPool(pool);
 
-        return enemy;
+        return _baseClassEnemy;
     }
 
-   private void OnTakeEnemyAIFromPool(EnemyAIBase meeleEnemyAI)
+   private void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleBaseClassEnemyAI)
     {
-        meeleEnemyAI.transform.position = SpawnPos;
-        meeleEnemyAI.gameObject.SetActive(true);
+        meeleBaseClassEnemyAI.transform.position = SpawnPos;
+        meeleBaseClassEnemyAI.gameObject.SetActive(true);
     }
 
 
-    public void OnReturnBallToPool(EnemyAIBase meeleEnemyAI)
+    public void OnReturnBallToPool(BaseClassEnemyAI meeleBaseClassEnemyAI)
     {
-        meeleEnemyAI.gameObject.SetActive(false);
+        meeleBaseClassEnemyAI.gameObject.SetActive(false);
     }
 }

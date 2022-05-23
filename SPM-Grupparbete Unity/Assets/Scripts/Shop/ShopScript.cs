@@ -176,6 +176,7 @@ public class ShopScript : MonoBehaviour
                     UpdateShop();
                 }
                 break;
+            
             case PlayerBeamArmamentBase.ArmamentLevel.LEVEL_2:
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= 20 && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostRed)
                 {
@@ -212,6 +213,7 @@ public class ShopScript : MonoBehaviour
                     UpdateShop();
                 }
                 break;
+            
             case 2:
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostRed)
                 {

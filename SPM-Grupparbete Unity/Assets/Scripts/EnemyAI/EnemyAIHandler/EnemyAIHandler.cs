@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyAIHandler : MonoBehaviour
 {
-    public List<EnemyAIBase> units = new List<EnemyAIBase>();
+    public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
     
     private GameObject playerOne;
     private GameObject playerTwo;
@@ -42,6 +42,8 @@ public class EnemyAIHandler : MonoBehaviour
         {
             playerTwo = playerOne;
         }
+        
+        Debug.Log(playerOne.transform.position);
     }
 
     public static void SetDynamite(Vector3 dyn)
@@ -69,7 +71,7 @@ public class EnemyAIHandler : MonoBehaviour
         // Used to know were to position in the circle around tha player.
         var countEnemy = 0;
 
-        foreach (EnemyAIBase enemyAI in units)
+        foreach (BaseClassEnemyAI enemyAI in units)
         {
             if (enemyAI == null || enemyAI.gameObject == null)
                 continue;
@@ -111,10 +113,10 @@ public class EnemyAIHandler : MonoBehaviour
         }
     }
 
-    private float ClosestDistance(EnemyAIBase enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
+    private float ClosestDistance(BaseClassEnemyAI baseClassEnemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
         float distancePlayerOne, float distancePlayerTwo)
     {
-        if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)
+        if (dynamite != Vector3.zero && baseClassEnemyAI.randomNumber >= 6)
         {
             // Checking the distance to the dynamite for every enemy that might need to know it.
             distanceToDynamite = Vector3.Distance(dynamite, aiPos);
@@ -123,13 +125,13 @@ public class EnemyAIHandler : MonoBehaviour
         }
         else if (distancePlayerOne < distancePlayerTwo && playerOneIsActive)
         {
-            enemyAI.PlayerPos(playerOnePosition);
+            baseClassEnemyAI.PlayerPos(playerOnePosition);
             closestTarget = CalculatePositionInCircle(playerOnePosition, countEnemy);
             closestDistance = distancePlayerOne;
         }
         else if (playerTwoIsActive)
         {
-            enemyAI.PlayerPos(playerTowPosition);
+            baseClassEnemyAI.PlayerPos(playerTowPosition);
             closestTarget = CalculatePositionInCircle(playerTowPosition, countEnemy);
             closestDistance = distancePlayerTwo;
         }
