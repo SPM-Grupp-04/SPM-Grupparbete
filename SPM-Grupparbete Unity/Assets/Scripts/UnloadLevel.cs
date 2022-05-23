@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UnloadLevel : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class UnloadLevel : MonoBehaviour
     private GameObject drone;
     private GameObject teleportBackPos;
 
+    
+    public GameObject loadingScreen;
+    public Slider Slider;
+    public Text progressText;
     private void Start()
     {
         playerOne = GameObject.Find("Player1");
@@ -27,6 +32,8 @@ public class UnloadLevel : MonoBehaviour
 
         TownPortal.isTeleporting = true;
 
+        StartCoroutine(LoadAsynchronusly(5));
+        
         if (playerOne != null)
         {
             playerOne.transform.position = new Vector3(teleportPosition.x + 1
@@ -48,6 +55,22 @@ public class UnloadLevel : MonoBehaviour
 
         StartCoroutine(TownPortal.waitUntillActivate());
 
-        SceneManager.UnloadSceneAsync(5);
+        //SceneManager.UnloadSceneAsync(5);
     }
+    
+    IEnumerator LoadAsynchronusly(int sceneIndex)
+    {
+        AsyncOperation op = SceneManager.UnloadSceneAsync(sceneIndex);
+      
+        loadingScreen.SetActive(true);
+        while (op.isDone == false)
+        {
+            float progress = Mathf.Clamp01(op.progress / .9f);
+            Slider.value = progress;
+            progressText.text = progress * 100f + "%";
+            yield return null;
+        }
+        loadingScreen.SetActive(false);
+    }
+    
 }

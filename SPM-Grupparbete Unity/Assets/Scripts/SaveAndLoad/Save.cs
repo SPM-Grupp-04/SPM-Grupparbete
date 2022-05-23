@@ -30,6 +30,7 @@ public class Save : MonoBehaviour
             
                 if (PlayerStatistics.Instance.componentsCollectedMask >= goalCondition)
                 {
+                   
                     //SceneManager.LoadScene(sceneToSwitchTo);
                     StartCoroutine(LoadAsynchronusly(sceneToSwitchTo));
                 }
