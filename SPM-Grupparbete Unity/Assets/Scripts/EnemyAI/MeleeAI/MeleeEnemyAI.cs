@@ -10,12 +10,6 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
     [SerializeField] private float startingHealth;
     private float currentHealth;
 
-    public float CurrentHealth
-    {
-        get { return currentHealth; }
-        set { currentHealth = Mathf.Clamp(value, 0, startingHealth); }
-    }
-
     [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
     [SerializeField] private float hitRange;
@@ -34,18 +28,20 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
 
     public Vector3 target = new Vector3(100, 0, 100);
     public float distanceToTargetPlayer = 100;
+    public Vector3 playerPos = new Vector3(100, 0, 100);
+    private float timeUntillAnimationPlay;
 
     void Start()
     {
+        base.Start();
+        base.randomNumber = Random.Range(1, 10);
         _animator = GetComponent<Animator>();
-        playerTransform.Add(GameObject.Find("Player1").transform);
-        playerTransform.Add(GameObject.Find("Player2").transform);
+        // playerTransform.Add(GameObject.Find("Player1").transform);
+        // playerTransform.Add(GameObject.Find("Player2").transform);
 
         agent.speed = movementSpeed;
         base.Start();
         currentHealth = startingHealth;
-        // SetUpTree();
-       // SetUpTree();
     }
 
 
@@ -63,15 +59,19 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
             if (this.pool != null)
             {
                 currentHealth = startingHealth;
-                pool.Release(this);
+              //  _animator.SetTrigger("Die");
+              agent.speed = 0;
+              StartCoroutine(WaitBeforeDie());
+              //  pool.Release(this);
             }
             else
             {
                 Debug.Log("Pool is null");
-                gameObject.SetActive(false);
+                agent.speed = 0;
+                StartCoroutine(waitbeforeDieWithoutPool());
+                // StartCoroutine(WaitBeforeDie());
+                // gameObject.SetActive(false);
             }
-
-            return;
         }
 
         // m_TopTreeNode.Evaluate();
@@ -104,10 +104,10 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
-        m_TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
 
-        return m_TopTreeNode;
+        return MTopTreeNode;
     }
 
 
@@ -139,6 +139,11 @@ public class MeleeEnemyAI : BaseClassEnemyAI, IDamagable
     public override void PlayerPos(Vector3 playerPos)
     {
         throw new System.NotImplementedException();
+    }
+
+    public override float GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
     public void DealDamage(float damage)

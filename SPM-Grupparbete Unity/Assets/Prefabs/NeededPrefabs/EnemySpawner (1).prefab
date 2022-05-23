@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7705741150849415780
 Transform:
@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genericListOfBaseClassEnemyAI:
-  - {fileID: 67914529985804271, guid: 8acb1d932503fa144843ff87cc66a141, type: 3}
+  - {fileID: 4736492482025062304, guid: 1bea5cfd88766b64cb14f5272013b032, type: 3}
   prioListMatchingObjektOrder:
-  - 1
-  totalAllowedEnimesAtSpawner: 5
-  totalAllowedSpawnTime: 10
+  - 100
+  totalAllowedEnimesAtSpawner: 45
+  totalAllowedSpawnTime: 5
 --- !u!65 &8472183783228933263
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78,4 +78,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units: []
-  raidusAroundTarget: 0.5

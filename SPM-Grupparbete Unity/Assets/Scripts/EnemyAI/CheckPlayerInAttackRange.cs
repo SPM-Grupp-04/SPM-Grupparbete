@@ -6,45 +6,46 @@ using UnityEngine.InputSystem;
 
 public class CheckPlayerInAttackRange : TreeNode
 {
-    private Transform objectItsAttachedToTransform;
-    private LayerMask layerMask = LayerMask.GetMask("Player");
-    private float fov;
-    public CheckPlayerInAttackRange(Transform objectItsAttachedToTransform, float fov)
+    private readonly Transform agentsTransform;
+    private readonly LayerMask layerMask = LayerMask.GetMask("Player");
+    private readonly float fov;
+    private BossAI boss;
+    public CheckPlayerInAttackRange(BossAI boss,Transform agentsTransform, float fov)
     {
-        this.objectItsAttachedToTransform = objectItsAttachedToTransform;
+        this.agentsTransform = agentsTransform;
         this.fov = fov;
-
+        this.boss = boss;
     }
 
     public override NodeState Evaluate()
     {
-        // Kollar om det finns någont target i Mappen.
-        object t = GetData("target");
 
-        // Om det inte finns så gör vi en overlapsphare cast som kollar om det finns någon fiende i närheten
-        // Vi träffar bara sådana som har en layermask Enemy(7) på sig.
+       
+        object t = GetData("target");
+        
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(
-                objectItsAttachedToTransform.position, fov, layerMask);
-
-            // OM vi träffade någonting så ska vi sätta det på collider plats 0. med dess trannsform som value.
+                agentsTransform.position, fov, layerMask);
+            
             if (colliders.Length > 0)
             {
                 parent.parent.SetData("target", colliders[0].transform);
-                state = NodeState.SUCCESS;
-
-                return state;
+                return NodeState.SUCCESS;
             }
-
-            // Det fanns ingen inärheten och vi får fail i sate.
-            ;
-            state = NodeState.FAILURE;
-            return state;
+            ClearData("target");
+            return NodeState.FAILURE;
         }
-
-        // är inte null vilket betyder att vi redan har lagt till en i mappen
-        // och inte tagit bort den än( detta innebär att den fortfarande är nära eller inte dött.
+    
+        Transform target = (Transform) GetData("target");
+        float distance = Vector3.Distance(agentsTransform.position, target.position);
+      
+        if (distance > fov)
+        {
+            ClearData("target");
+            return NodeState.FAILURE;
+        }
+        
         state = NodeState.SUCCESS;
         return state;
     }

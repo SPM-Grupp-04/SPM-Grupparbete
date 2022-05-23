@@ -44,17 +44,12 @@ public class MeleeAttackTreeNode : TreeNode
     {
         agent.isStopped = true;
         Transform agentT = agent.transform;
-        //ai.SetColor(Color.red);
-        // Vector3 direction = target - agentT.position;
-        //  Vector3 currentDirection = Vector3.SmoothDamp(agentT.forward, target, ref currentVelocity, smoothDamp);
-        //   Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
-        //  agentT.rotation = rotation;
-
         agentT.LookAt(target);
 
         // TODO: Ändra senare.!!!!!!!
         if (_meleeWepon.timeRemaining <= 0.1f)
         {
+           
             _animator.SetTrigger("Attack");
         }
 

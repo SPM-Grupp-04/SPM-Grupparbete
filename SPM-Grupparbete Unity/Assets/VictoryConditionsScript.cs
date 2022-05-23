@@ -1,4 +1,5 @@
 //author: Simon Canb�ck, sica4801
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,10 +25,16 @@ public class VictoryConditionsScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.collider.CompareTag("Player"))
+        {
             return;
+        }
 
-        if (PlayerStatistics.Instance.componentsCollectedMask == (int)victoryLayerMask)
-            Destroy(gameObject);
+        if (PlayerStatistics.Instance.componentsCollectedMask >= (int) victoryLayerMask)
+        {
+          //  Destroy(gameObject);
+          gameObject.SetActive(true);
+          
+        }
     }
 
     [Flags]

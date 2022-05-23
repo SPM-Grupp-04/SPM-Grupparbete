@@ -28,7 +28,9 @@ public class PlayerStatistics
     public PlayerBeamArmamentBase.ArmamentLevel armamentLevel = PlayerBeamArmamentBase.ArmamentLevel.LEVEL_1;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
-    //public Dictionary<Button, bool> buttonDictionary;
+    public float shieldCooldownModifer = 1f;
+    public Dictionary<string, bool> buttonDictionary;
+
 
 
     private PlayerStatistics()

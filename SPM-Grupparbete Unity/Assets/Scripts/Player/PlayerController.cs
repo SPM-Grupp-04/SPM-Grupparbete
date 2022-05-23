@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject drill;
+    private PlayerDrill drillScript;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
@@ -46,11 +48,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+       // animator.enabled = true;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-
+        drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
     }
@@ -62,7 +65,10 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
         }
 
-        RestrictMovement();
+        if (TownPortal.isTeleporting == false)
+        {
+            RestrictMovement();
+        }
     }
 
     private void OnEnable()
@@ -91,15 +97,18 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Debug.Log(uiEnabled);
+                //Debug.Log(uiEnabled);
 
-                defaultMap.Enable();
+                //defaultMap.Enable();
                 playerInput.SwitchCurrentActionMap("Player");
                 UI.Disable();
+
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
             }
         }
     }
+
+    [SerializeField] private PlayerController otherPlayer;
 
     private void RestrictMovement()
     {
@@ -107,27 +116,58 @@ public class PlayerController : MonoBehaviour
         cameraView.x = Mathf.Clamp01(cameraView.x);
         cameraView.y = Mathf.Clamp01(cameraView.y);
 
-        bool isOutSide = false;
+        //bool isOutSide = false;
 
-        if (cameraView.x == 0f || cameraView.x == 1)
+        if (cameraView.x <= 0.1)
+        {
+           
+                velocity.x *= -1;
+            
+        }
+        else if (cameraView.x >= 0.9)
+        {
+          
+                velocity.x *= -1;
+            
+        }
+
+        if (cameraView.y <= 0.1f)
+        {
+            if (velocity == Vector3.zero)
+            {
+                otherPlayer.velocity.z *= -1;
+            }
+            else
+            {
+                velocity.z *= -1;
+            }
+                
+            
+        }
+        else if (cameraView.y >= 0.9)
+        {
+            
+                velocity.z *= -1;
+            
+        }
+
+        /*if (cameraView.x == 0f || cameraView.x == 1)
         {
             isOutSide = true;
             //  Debug.Log("Outside X ");
         }
 
-        if (cameraView.y == 0f || cameraView.y == 1)
+        if (cameraView.y <= 0.2f || cameraView.y == 1)
         {
             isOutSide = true;
-            //  Debug.Log("Outside Y");
-        }
+            Debug.Log("Outside Y");
+        }*/
+
 
         Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
-        if (isOutSide)
-        {
-            //    Debug.Log("PlayerPosInWorld " + playerPosInWorldPoint);
-        }
 
-        transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
+
+        //  transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
     }
 
     private void PlayerMovement()
@@ -207,6 +247,7 @@ public class PlayerController : MonoBehaviour
     public void UseInput(InputAction.CallbackContext useValue)
     {
         //useButtonPressed = useValue.performed;
+
         if (useValue.performed)
         {
             useButtonPressed = !useButtonPressed;
@@ -222,6 +263,10 @@ public class PlayerController : MonoBehaviour
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
+        if (velocity != Vector3.zero)
+        {
+            //animator.SetBool("MoveForward", true);
+        }
     }
 
     public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)
