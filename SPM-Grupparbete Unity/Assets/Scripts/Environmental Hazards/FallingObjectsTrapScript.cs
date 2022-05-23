@@ -98,7 +98,10 @@ public class FallingObjectsTrapScript : MonoBehaviour
 
     private void OnDisable()
     {
-        EventSystem.current.UnregisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(collidedListener);
-        collidedListener = null;
+        if (collidedListener != null && EventSystem.current != null)
+        {
+            EventSystem.current.UnregisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(collidedListener);
+            collidedListener = null;
+        }
     }
 }

@@ -817,6 +817,7 @@ MonoBehaviour:
     m_Bits: 8
   movementAcceleration: 5
   rotationSmoothing: 25
+  otherPlayer: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,7 +863,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7708049037048568331}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: ShootInput
+        m_MethodName: OnShootInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -878,7 +879,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7708049037048568331}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: DrillInput
+        m_MethodName: OnDrillInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1064,6 +1065,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3d509d47-d0eb-4df7-b2eb-15eb9c76921a
     m_ActionName: UI/SwitchActionMap[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6a2e239-1d70-4946-8416-cb0545b7d1d8
+    m_ActionName: Player/SpawnTeleport[/XInputControllerWindows/dpad/up]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1098,7 +1103,9 @@ MonoBehaviour:
     armamentLevel: 1
     weaponLevel: 0
     componentsCollectedMask: 0
+    shieldCooldownModifer: 1
   playerName: PlayerTwo
+  animator: {fileID: 0}
 --- !u!114 &5868905720494507359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,7 +1149,6 @@ MonoBehaviour:
   player: {fileID: 2965090648212624896}
   shieldPrefab: {fileID: 8255799755186002452, guid: 1850422e3a673164883a0ba9f1dac9e1, type: 3}
   upTimeShield: 5
-  coolDown: 15
   uiCooldowns: {fileID: 0}
 --- !u!54 &2965090648212625147
 Rigidbody:
@@ -1609,7 +1615,7 @@ MonoBehaviour:
   allowedStates:
   - {fileID: 11400000, guid: 8fd5ef40e09f89e44a028e5aa8917e6a, type: 2}
   - {fileID: 11400000, guid: f9c455a3e31d4f644b8c9fed4621075b, type: 2}
-  - {fileID: 11400000, guid: b0235f184f68829468e6451f5c6c0d1e, type: 2}
+  - {fileID: 11400000, guid: c968c468f2b05644d818bc8ebc4f1c83, type: 2}
 --- !u!1001 &1465427902
 PrefabInstance:
   m_ObjectHideFlags: 0

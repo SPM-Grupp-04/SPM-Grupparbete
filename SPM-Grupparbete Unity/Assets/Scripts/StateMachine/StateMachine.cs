@@ -12,7 +12,7 @@ public class StateMachine : MonoBehaviour
 		get; private set;
 	}
 
-    private void Awake()
+    private void Start()
     {
 		stateDictionary = new Dictionary<Type, StateBase>();
 		StateBase state;

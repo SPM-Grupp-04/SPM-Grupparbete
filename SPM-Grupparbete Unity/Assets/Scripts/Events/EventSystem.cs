@@ -50,7 +50,7 @@ namespace EgilEventSystem
             // Wrap a type conversion around the event listener.
             void Wrapper(Event e)
             {
-                listener((T) e);
+                listener((T)e);
             }
 
             eventListeners[eventType].Add(Wrapper);
@@ -71,19 +71,20 @@ namespace EgilEventSystem
         }
 
         // Execute Event.
-        public void FireEvent(Event EventInfo)
+        public void FireEvent(Event firedEvent)
         {
-            System.Type trueEventInfoClass = EventInfo.GetType();
+            System.Type firedEventType = firedEvent.GetType();
 
-            if (eventListeners == null || eventListeners[trueEventInfoClass] == null)
+            if (eventListeners == null || eventListeners[firedEventType] == null)
             {
                 // No one is listening we are done
                 return;
             }
 
-            foreach (EventListener el in eventListeners[trueEventInfoClass])
+            //regular for-loop instead of foreach; if an event listener is unregistered mid-loop it won't throw an error
+            for (int i = 0; i < eventListeners[firedEventType].Count; i++)
             {
-                el(EventInfo);
+                eventListeners[firedEventType][i]?.Invoke(firedEvent);
             }
         }
 

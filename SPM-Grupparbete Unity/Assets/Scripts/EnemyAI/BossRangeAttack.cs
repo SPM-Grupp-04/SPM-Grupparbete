@@ -51,7 +51,7 @@ public class BossRangeAttack : TreeNode
 
         if (timer <= 0)
         {
-            var rockThrowEvent = new ShootEventInfo(firePoint, this.rockThrow, throwUpForce, throwForce);
+            var rockThrowEvent = new EntityShot(firePoint, this.rockThrow, throwUpForce, throwForce);
             EventSystem.current.FireEvent(rockThrowEvent);
             timer = cooldown;
             return NodeState.SUCCESS;

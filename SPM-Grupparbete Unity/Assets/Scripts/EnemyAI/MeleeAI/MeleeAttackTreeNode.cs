@@ -23,8 +23,8 @@ public class MeleeAttackTreeNode : TreeNode
     private List<Transform> targets;
     private Vector3 currentVelocity;
     private float smoothDamp;
-    private Animator _animator;
-    private MeleeWepon _meleeWepon;
+    private Animator animator;
+    private MeleeWepon meleeWepon;
     private Vector3 target;
 
 
@@ -36,8 +36,8 @@ public class MeleeAttackTreeNode : TreeNode
         this.target = target;
 
         smoothDamp = 1f;
-        _animator = animator;
-        _meleeWepon = meleeWepon;
+        this.animator = animator;
+        this.meleeWepon = meleeWepon;
     }
 
     public override NodeState Evaluate()
@@ -47,10 +47,10 @@ public class MeleeAttackTreeNode : TreeNode
         agentT.LookAt(target);
 
         // TODO: Ändra senare.!!!!!!!
-        if (_meleeWepon.timeRemaining <= 0.1f)
+        if (meleeWepon.timeRemaining <= 0.1f)
         {
            
-            _animator.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
         }
 
         state = NodeState.RUNNING;
