@@ -617,6 +617,7 @@ MonoBehaviour:
   launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
   uiCooldowns: {fileID: 0}
+  playerDrillScript: {fileID: 0}
 --- !u!23 &5745473002439537521
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -812,17 +813,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2f232af7217b94ebbe104266a7da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drill: {fileID: 5711041550793873810}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   movementAcceleration: 5
   rotationSmoothing: 25
+  colliderMargin: 0.01
+  drill: {fileID: 5711041550793873810}
+  boxCollider: {fileID: 0}
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
   animator: {fileID: 222274269}
-  otherPlayer: {fileID: 0}
-  teleport: {fileID: 0}
+  cameraPlayerPositiveMovementThreshold: 0.9
+  cameraPlayerNegativeMovementThreshold: 0.1
+  otherPlayerController: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,7 +980,19 @@ MonoBehaviour:
     m_ActionId: 0a6c6e6f-4221-430c-816c-77e0f2210986
     m_ActionName: Player/EnterDynamiteThrowMode[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
+        m_TargetAssemblyTypeName: UI_PausMenu, Assembly-CSharp
+        m_MethodName: PauseButtonInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 87d8f1e3-1346-44b2-9a5b-991b9747d3fd
     m_ActionName: Player/Pause[/Keyboard/k,/XInputControllerWindows/start]
   - m_PersistentCalls:
@@ -1002,9 +1021,9 @@ MonoBehaviour:
     m_ActionName: Player/Shield[/Keyboard/z]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1968085593151929628}
-        m_TargetAssemblyTypeName: DynamiteThrow, Assembly-CSharp
-        m_MethodName: ThrowDynamite
+      - m_Target: {fileID: 3739641424811235321}
+        m_TargetAssemblyTypeName: LaunchArcMesh, Assembly-CSharp
+        m_MethodName: TrajectoryInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
