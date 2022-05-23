@@ -10,14 +10,18 @@ public class UI_Crystal : MonoBehaviour
 
 
     [SerializeField]
-    private Text title;
-    
+    private Text BlueCrystals;
+    [SerializeField]
+    private Text RedCrystals;
+
 
 
 
     public void Update()
     {
 
-        title.text = m_LocalPlayerDataTest.Crystals.ToString();
+        BlueCrystals.text = m_LocalPlayerDataTest.BlueCrystals.ToString();
+        RedCrystals.text = m_LocalPlayerDataTest.RedCrystals.ToString();
+
     }
 }

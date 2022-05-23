@@ -1,15 +1,37 @@
+//primary author:
+//additional programming: Simon Canb�ck, sica4801
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-[Serializable]
+[System.Serializable]
 public class PlayerStatistics
 {
-
     private static PlayerStatistics instance = null;
+
+    public float playerMaxHealth = 30;
+    public float playerOneHealth = 30;
+    public float playerTwoHealth = 30;
+    public float playerOneAcceleration = 5.0f;
+    public float playerTwoAcceleration = 5.0f;
+    public bool playerOneDisco = false;
+    public bool playerTwoDisco = false;
+    // public string Scene;
+    public float PosX, PosY, PosZ;
+    public int Crystals;
+    public int BlueCrystals;
+    public int RedCrystals;
+    public int drillLevel = 0;
+    public int weaponLevel;
+    public int componentsCollectedMask = 0;
+    public float shieldCooldownModifer = 1f;
+    public Dictionary<string, bool> buttonDictionary;
+
+
 
     private PlayerStatistics()
     {
@@ -29,7 +51,7 @@ public class PlayerStatistics
                 //        instance.PlayerOneAcceleration = go.GetComponent<PlayerController>().MovementAcceleration;
                 //    else if (go.GetComponent<EgilHealth>().name == "PlayerTwo")
                 //        instance.PlayerTwoAcceleration = go.GetComponent<PlayerController>().MovementAcceleration;
-                        
+
                 //}
             }
 
@@ -37,17 +59,6 @@ public class PlayerStatistics
         }
     }
 
-    //TODO: Att implemntera ett sätt att göra detta för två spelare.
-    // Här kan Samtlig inofrmation om Antal kristaller ligga osv. All form av information som vill spara
 
-    public int PlayerOneHealth = 5;
-    public int PlayerTwoHealth = 5;
-    public float PlayerOneAcceleration = 5.0f;
-    public float PlayerTwoAcceleration = 5.0f;
-    public bool PlayerOneDisco = false;
-    public bool PlayerTwoDisco = false;
-    public string Scene;
-    public float PosX, PosY, PosZ;
-    public int Crystals = 0;
 
 }

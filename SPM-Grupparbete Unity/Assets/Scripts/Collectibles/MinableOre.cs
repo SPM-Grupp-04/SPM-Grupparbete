@@ -4,43 +4,55 @@ using UnityEngine;
 
 public class MinableOre : DestroyableObjectBase
 {
-    [SerializeField] int materialAmount;
-    [SerializeField] int materialHP = 10;
-    [SerializeField] int requierdWeaponLevel = 1;
+    PlayerStatistics playerStatistics = PlayerStatistics.Instance;
+    
+    [SerializeField] int oreMaterialHP = 10;
+    [SerializeField] int oreRequierdWeaponLevel = 1;
     [SerializeField] GameObject ore;
     [SerializeField] GameObject uiHP;
+    [SerializeField] [Range(1, 3)] private int collecitbleCrystals = 1;
+
+    UI_ObjectHP uiObjectHp;
 
     private void Start()
     {
+        requiredWeaponLevel = oreRequierdWeaponLevel;
+        materialHP = oreMaterialHP;
+        uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
     }
 
     public override void ReduceMaterialHP(int amount)
     {
-       
+        if (playerStatistics.drillLevel >= requiredWeaponLevel)
+        {
             materialHP -= amount;
-            uiHP.GetComponent<UI_ObjectHP>().OreTakeDamage(amount);
+            uiObjectHp.ObjectTakeDamage(amount);
             if (materialHP <= 0)
             {
                 DestoryObject();
             }
-        
-        
+        }
     }
 
     public override int GetRequiredWeaponLevel()
     {
-        return requierdWeaponLevel;
+        return requiredWeaponLevel;
     }
 
 
     private void DestoryObject()
     {
 
-        int random = Random.Range(1, 3);
-        for (int i = 0; i < random; i++)
+        
+        for (int i = 0; i < collecitbleCrystals; i++)
         {
             Instantiate(ore, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), Quaternion.identity);
         }
         Destroy(this.gameObject);
+    }
+
+    public int GetOreMaterialHP()
+    {
+        return oreMaterialHP;
     }
 }

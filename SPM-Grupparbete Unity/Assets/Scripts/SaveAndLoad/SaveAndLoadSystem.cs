@@ -13,69 +13,46 @@ public class SaveAndLoadSystem : MonoBehaviour
     private InputAction saveAction;
     private InputAction loadGame;
 */
+  [Header("When you exit a scen Save and set a scene to load")]
+  [SerializeField] private bool save;
+  [SerializeField] private int sceneToLoad;
+ 
+  [Header("When You Enter Scene")]
+  [SerializeField] private bool load;
     private void Awake()
     {
     }
 
-    // Start is called before the first frame update
-  /*
-    void Start()
+    private void Start()
     {
         
-        PI = GetComponent<PlayerInput>();
-        
-        saveAction = PI.actions["Save"];
-        loadGame = PI.actions["Loaded"];
-        
-        if (GlobalControl.Instance.IsSceneBeingLoaded)
+        if (save)
         {
-            GlobalControl.Instance.SavedData = GlobalControl.Instance.SavedData;
+            saveGamePress();
+        }
 
-            GlobalControl.Instance.IsSceneBeingLoaded = false;
+        if (load)
+        {
+            LoadGamePress();
         }
     }
-*/
 
-    public void saveGamePress()
+
+    PlayerStatistics playerStatistics = PlayerStatistics.Instance;
+  
+    private void saveGamePress()
     {
-        Debug.Log("Pressed O");
-        GlobalControl.Instance.SavedData.Scene = SceneManager.GetActiveScene().name;
-
-        GlobalControl.Instance.SaveData();
+        GlobalControl.Instance.playerStatistics.Crystals = playerStatistics.Crystals;
+        GlobalControl.SaveData();
+        SceneManager.LoadScene(sceneToLoad);
     }
 
-    public void LoadGamePress()
+    private void LoadGamePress()
     {
-        Debug.Log("Pressed P");
+       
         GlobalControl.Instance.LoadData();
         GlobalControl.Instance.IsSceneBeingLoaded = true;
-
-        String whichScene = GlobalControl.Instance.SavedData.Scene;
-        SceneManager.LoadScene(whichScene);
+       
     }
-    /*
-    void Update()
-    {
-        
-        if (saveAction.IsPressed())
-        {
-            Debug.Log("Pressed O");
-            GlobalControl.Instance.SavedData.Scene = SceneManager.GetActiveScene().name;
-
-            GlobalControl.Instance.SaveData();
-        }
-        
-
-        if (loadGame.IsPressed())
-        {
-            Debug.Log("Pressed P");
-            GlobalControl.Instance.LoadData();
-            GlobalControl.Instance.IsSceneBeingLoaded = true;
-
-            String whichScene = GlobalControl.Instance.SavedData.Scene;
-            SceneManager.LoadScene(whichScene);
-        }
-        
-    }
-    */
+    
 }

@@ -2,34 +2,33 @@ using UnityEngine;
 
 public class DestroyableWall : DestroyableObjectBase
 {
-    protected new int materialAmount = 0;
-    protected new int materialHP = 5;
-    protected new int requiredWeaponLevel = 1;
+    PlayerStatistics playerStatistics = PlayerStatistics.Instance;
+    
+    [SerializeField] int wallHP = 5;
+    [SerializeField] int wallRequiredWeaponLevel = 1;
+    [SerializeField] GameObject wall;
+    [SerializeField] GameObject uiHP;
+    UI_ObjectHP uiObjectHp;
 
-
-    public override void ReduceMaterialAmount(int amount)
+    private void Awake()
     {
-        if (materialAmount > 0)
-        {
-            if (amount > materialAmount)
-            {
-                int remaingingMaterials = materialAmount % 0;
-                MinedMaterial(remaingingMaterials);
-            }
+        materialHP = wallHP;
+        requiredWeaponLevel = wallRequiredWeaponLevel;
+        uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
 
-            materialAmount -= amount;
-            MinedMaterial(amount);
-        }
     }
 
     public override void ReduceMaterialHP(int amount)
     {
-        materialHP -= amount;
-        ReduceMaterialAmount(amount);
-        Debug.Log("Hit");
-        if (materialHP <= 0)
+        if (playerStatistics.drillLevel >= requiredWeaponLevel)
         {
-            DestroyObject();
+            materialHP -= amount;
+            uiObjectHp.ObjectTakeDamage(amount);
+            Debug.Log("Hit");
+            if (materialHP <= 0)
+            {
+                DestroyObject();
+            }
         }
     }
 
@@ -38,14 +37,14 @@ public class DestroyableWall : DestroyableObjectBase
         return requiredWeaponLevel;
     }
 
-    public override int MinedMaterial(int minedMaterial)
-    {
-        return minedMaterial;
-    }
-
     private void DestroyObject()
     {
 
         Destroy(this.gameObject);
+    }
+
+    public int GetWallHP()
+    {
+        return materialHP;
     }
 }

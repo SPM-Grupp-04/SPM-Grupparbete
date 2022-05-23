@@ -148,7 +148,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: f85ae6ce54afca74d9eeb73b985cc3ab, type: 2}
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Very High
@@ -229,8 +229,9 @@ QualitySettings:
     Nintendo Switch: 5
     PS4: 5
     PSP2: 2
+    Server: 3
     Stadia: 5
-    Standalone: 5
+    Standalone: 3
     WebGL: 3
     Windows Store Apps: 5
     XboxOne: 5

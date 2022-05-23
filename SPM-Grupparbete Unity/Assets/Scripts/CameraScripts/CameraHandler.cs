@@ -20,6 +20,12 @@ public class CameraHandler : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera virtualCameraPlayerTwo;
 
+    private static CameraHandler instance;
+    
+    public static CameraHandler Instance
+    {
+        get { return instance; }
+    }
 
     private Vector3 directionCtoA;
     private Vector3 directionCtoB;
@@ -32,6 +38,14 @@ public class CameraHandler : MonoBehaviour
 
     private void Start()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         virtualCameraPlayerOne.gameObject.SetActive(false);
         virtualCameraPlayerTwo.gameObject.SetActive(false);
     }
@@ -47,7 +61,8 @@ public class CameraHandler : MonoBehaviour
 
         SetCameraLensFOV();
 
-        transform.position += midpointAtoB;
+        transform.position += new Vector3(midpointAtoB.x, 0, midpointAtoB.z);
+
     }
 
     private void CheckWhatCameraShouldHavePriority()

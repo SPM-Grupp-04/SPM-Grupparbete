@@ -1,62 +1,117 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
+
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<EnemyAI> pool;
-    [SerializeField] private EnemyAI enemyPrefab;
+    private ObjectPool<BaseClassEnemyAI> pool;
+    private BaseClassEnemyAI enemy;
+    private Vector3 SpawnPos;
+    private BoxCollider boxCollider;
 
-   private  int totalAmountOfEnemies = 0;
+    private float totalProcent;
+    //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
-   [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
-    //private  int totalSpawnedEnemies = 0;
-    private void Awake() => pool = new ObjectPool<EnemyAI>(creatEnamy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+    private EnemyAIHandler enemyAIHandler;
+    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
+    [SerializeField] private float[] prioListMatchingObjektOrder;
+    [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
+    [SerializeField] private float totalAllowedSpawnTime = 5;
+    private float timer;
 
-
-  
-
-    private void Update()
+    private void Start()
     {
-        /*if (totalSpawnedEnemies < 10)
+    }
+
+    private void OnEnable()
+    {
+        timer = totalAllowedSpawnTime;
+    }
+
+    private void Awake()
+    {
+        timer = totalAllowedSpawnTime;
+        pool = new ObjectPool<BaseClassEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+
+        enemyAIHandler = GetComponent<EnemyAIHandler>();
+        /*for (int i = 0; i < gameObjects.Length; i++)
         {
-            creatEnamy();
-            Debug.Log(totalAmountOfEnemies + " Total amout of enimes.");
-            totalSpawnedEnemies++;
+            genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
         }*/
 
-        // Spawna finenderna från poolen!
-
-        if (totalAmountOfEnemies < totalAllowedEnimesAtSpawner)
+        // Räknar ut vad som är 100%
+        for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
         {
-            pool.Get();
+            totalProcent += prioListMatchingObjektOrder[i];
+        }
+
+        //Sätter procent av den totala summan prioNummret är.
+        for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
+        {
+            prioListMatchingObjektOrder[i] /= totalProcent;
+        }
+
+        boxCollider = GetComponent<BoxCollider>();
+        SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
+
+        for (var i = 0; i < genericListOfBaseClassEnemyAI.Length; i++) // 2 gånger
+        {
+            enemy = genericListOfBaseClassEnemyAI[i];
+            for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
+            {
+                CreateEnemy();
+            }
         }
     }
 
-    EnemyAI creatEnamy()
+
+    private void FixedUpdate()
     {
-        var enemy = Instantiate(enemyPrefab, transform.position, quaternion.identity);
+        if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
+        {
+            SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
+            for (var i = 0; i < pool.CountInactive; i++)
+            {
+                pool.Get();
+            }
+        }
+        else
+        {
+            this.enabled = false;
+        }
+
+        timer -= Time.deltaTime;
+    }
+
+
+    private BaseClassEnemyAI CreateEnemy()
+    {
+        // så att man kan sätta hur många % av en typ man vill ska finnas.
+
+        enemy = Instantiate(enemy, transform.position, quaternion.identity);
+        enemyAIHandler.units.Add(enemy);
+
         enemy.SetPool(pool);
 
         return enemy;
     }
 
-    void OnTakeEnemyAIFromPool(EnemyAI enemyAI)
+   private void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
     {
-        enemyAI.transform.position = gameObject.transform.position;
-        enemyAI._meshRenderer.enabled = true;
-        enemyAI.gameObject.SetActive(true);
-        
-        totalAmountOfEnemies++;
+        meeleEnemyAI.transform.position = SpawnPos;
+        meeleEnemyAI.gameObject.SetActive(true);
     }
 
 
-    public void OnReturnBallToPool(EnemyAI enemyAi)
+    public void OnReturnBallToPool(BaseClassEnemyAI meeleEnemyAI)
     {
-        enemyAi.gameObject.SetActive(false);
-        totalAmountOfEnemies--;
+        meeleEnemyAI.gameObject.SetActive(false);
     }
 }

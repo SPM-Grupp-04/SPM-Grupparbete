@@ -7,65 +7,94 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(MeshFilter))]
 public class LaunchArcMesh : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private InputAction enterDynamiteThrowModeInputAction;
-    private InputAction increaseTrajectoryArcInputAction;
-    private Mesh trajectoryMesh;
     [SerializeField] private float meshWidth;
     
-    [SerializeField] private float velocity = 0.0f;
-    [SerializeField] private float angle;
-    [SerializeField] private float trajectoryArcIncreaseSpeed = 0.01f;
+    [SerializeField] [Range(1.0f, 10.0f)] private float velocity = 1.0f;
+    [SerializeField] private float angle = 45.0f;
+    [SerializeField] [Range(1.0f, 5.0f)] private float trajectoryArcIncreaseSpeed = 2.0f;
+    [SerializeField] private float trajectoryArcAngleIncreaseSpeed = 1.0f;
     [SerializeField] private int lineSegments = 10;
 
+    [SerializeField] private LayerMask collisionLayerMask;
+    
+    private Mesh trajectoryMesh;
+
+    private bool isDynamiteThrowModeEntered;
+    private bool increaseDynamiteArc;
+    private bool keepDynamiteArcLength;
+    
     private float gravity;
     private float radianAngle;
 
-    private void OnValidate()
+    private Vector3 newTrajectoryPoint;
+
+    public float GetLaunchVelocity()
     {
-        if (trajectoryMesh != null && Application.isPlaying)
-        {
-            RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
-        }
+        return velocity;
+    }
+
+    public Vector3 GetLaunchAngle()
+    {
+        Quaternion rotation = Quaternion.AngleAxis(angle, transform.forward);
+        Vector3 localDirection = rotation * transform.forward + transform.up;
+        return localDirection.normalized;
     }
 
     private void Awake()
     {
-        playerInput = GetComponentInParent<PlayerInput>();
-        enterDynamiteThrowModeInputAction = playerInput.actions["EnterDynamiteThrowMode"];
-        increaseTrajectoryArcInputAction = playerInput.actions["TrajectoryIncrease"];
         trajectoryMesh = GetComponent<MeshFilter>().mesh;
         gravity = Mathf.Abs(Physics.gravity.y);
     }
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Update()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (enterDynamiteThrowModeInputAction.IsPressed())
+        if (isDynamiteThrowModeEntered)
         {
-            TrajectoryPrediction();
-        }
-        else
+            RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
+            if (increaseDynamiteArc)
+            {
+                TrajectoryArcIncrease();
+            }
+            else
+            {
+                TrajectoryArcDecrease();
+            }
+        } 
+        else if (velocity <= 1.0f)
         {
-            DisableTrajectoryPrediction();
+            isDynamiteThrowModeEntered = false;
+            DisableTrajectoryArc();
         }
     }
 
-    private void TrajectoryPrediction()
+    public void TrajectoryInput(InputAction.CallbackContext trajectoryInputValue)
     {
-        //Debug.Log(increaseTrajectoryArcInputAction.ReadValue<float>());
-        velocity += increaseTrajectoryArcInputAction.ReadValue<float>() * trajectoryArcIncreaseSpeed;
-        angle += increaseTrajectoryArcInputAction.ReadValue<float>() * 0.005f;
-        RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
+        if (trajectoryInputValue.performed)
+        {
+            isDynamiteThrowModeEntered = true;
+            increaseDynamiteArc = true;
+        }
+        else if (trajectoryInputValue.canceled)
+        {
+            increaseDynamiteArc = false;
+        }
     }
 
-    private void DisableTrajectoryPrediction()
+    private void TrajectoryArcIncrease()
     {
+        velocity += (trajectoryArcIncreaseSpeed + trajectoryArcIncreaseSpeed) * Time.deltaTime;
+        velocity = Mathf.Clamp(velocity, 1.0f, 10.0f);
+    }
+
+    private void TrajectoryArcDecrease()
+    {
+        velocity -= trajectoryArcIncreaseSpeed * Time.deltaTime;
+        velocity = Mathf.Clamp(velocity, 1.0f, 10.0f);
+    }
+
+    private void DisableTrajectoryArc()
+    {
+        velocity = 1.0f;
         trajectoryMesh.Clear();
     }
 
@@ -107,7 +136,13 @@ public class LaunchArcMesh : MonoBehaviour
         for (int i = 0; i <= lineSegments; i++)
         {
             float t = (float) i / (float) lineSegments;
-            throwTrajectoryArray[i] = CalculateTrajectoryPoint(t, maxDistance);
+            newTrajectoryPoint = CalculateTrajectoryPoint(t, maxDistance);
+
+            if (Physics.OverlapSphere(transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f, collisionLayerMask).Length > 0)
+            {
+                break;
+            }
+            throwTrajectoryArray[i] = newTrajectoryPoint;
         }
         return throwTrajectoryArray;
     }
@@ -119,5 +154,11 @@ public class LaunchArcMesh : MonoBehaviour
                           ((gravity * xDistance * xDistance) / 
                            (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
         return new Vector3(xDistance, yDistance);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(  transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f);
     }
 }
