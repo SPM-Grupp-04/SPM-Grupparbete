@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
     
-    [SerializeField] private PlayerController otherPlayerController;
+    [SerializeField] private Transform otherPlayerTransform;
+
+    private RestrictPlayerMovementOutsideCamera restrictPlayerMovementOutSideCamera;
     
     private Collider[] penetrationColliders = new Collider[2];
     
@@ -34,6 +37,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 gamePadLookRotation;
     private Vector2 lookRotation;
     private Vector2 mousePosition;
+
+
+    private bool invisibleWallDeployed;
+    private Vector3 invisibleWallPosition;
     
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
@@ -48,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
+        restrictPlayerMovementOutSideCamera = RestrictPlayerMovementOutsideCamera.Instance;
     }
 
     private void Update()
@@ -67,14 +75,44 @@ public class PlayerController : MonoBehaviour
         currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
         currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
 
-        if (currentPlayerCameraView.x == 0f || currentPlayerCameraView.x == 1)
+        if (currentPlayerCameraView.x == 0.0f && !invisibleWallDeployed)
         {
-            otherPlayerController.SetPlayerVelocity(new Vector3(0.0f, 0.0f, otherPlayerController.GetPlayerVelocity().z));
+            invisibleWallDeployed = true;
+            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(otherPlayerTransform.position.x + 1.0f, 10.0f, 0.0f), quaternion.Euler(0.0f, 90.0f, 0.0f));
+        } else if (currentPlayerCameraView.x > 0.1f && invisibleWallDeployed)
+        {
+            invisibleWallDeployed = false;
+            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
         }
 
-        if (currentPlayerCameraView.y == 0f || currentPlayerCameraView.y == 1)
+        if (currentPlayerCameraView.x == 1.0f && !invisibleWallDeployed)
         {
-            otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerController.GetPlayerVelocity().x, 0.0f, 0.0f));
+            invisibleWallDeployed = true;
+            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(otherPlayerTransform.position.x - 1.0f, 10.0f, 0.0f), quaternion.Euler(0.0f, 90.0f, 0.0f));
+        } else if (currentPlayerCameraView.x < 0.9f && invisibleWallDeployed)
+        {
+            invisibleWallDeployed = false;
+            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
+        }
+
+        if (currentPlayerCameraView.y == 0.0f && !invisibleWallDeployed)
+        {
+            invisibleWallDeployed = true;
+            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(0.0f, 10.0f, otherPlayerTransform.position.z + 1.0f), quaternion.Euler(0.0f, 0.0f, 0.0f));
+        } else if (currentPlayerCameraView.y > 0.1f && invisibleWallDeployed)
+        {
+            invisibleWallDeployed = false;
+            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
+        }
+
+        if (currentPlayerCameraView.y == 1.0f && !invisibleWallDeployed)
+        {
+            invisibleWallDeployed = true;
+            restrictPlayerMovementOutSideCamera.MoveInvisibleWallToBlockPlayer(new Vector3(0.0f, 10.0f, otherPlayerTransform.position.z - 1.0f), quaternion.Euler(0.0f, 0.0f, 0.0f));
+        } else if (currentPlayerCameraView.y < 0.9f && invisibleWallDeployed)
+        {
+            invisibleWallDeployed = false;
+            restrictPlayerMovementOutSideCamera.ResetInvisibleWall();
         }
 
         Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
