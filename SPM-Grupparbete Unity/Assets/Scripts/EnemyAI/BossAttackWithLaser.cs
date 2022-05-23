@@ -19,6 +19,7 @@ public class BossAttackWithLaser : TreeNode
     private readonly float attackRange;
     private const float OverHeatTime = 5;
     private BossAI bossAI;
+    private int sheildMask;
 
     public BossAttackWithLaser(BossAI bossAI, NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
         Transform firePoint, Transform firePointTwo, float fov, Animator animator)
@@ -31,6 +32,7 @@ public class BossAttackWithLaser : TreeNode
         this.lineRenderer = lineRenderer;
         this.bossAI = bossAI;
         attackRange = fov;
+        sheildMask = LayerMask.GetMask("Shield");
     }
 
     private bool isOverHeated = false;
@@ -98,15 +100,35 @@ public class BossAttackWithLaser : TreeNode
 
     void Laser()
     {
+        Debug.DrawRay(bossAI.transform.position, target.position - bossAI.transform.position  , Color.black);
+        RaycastHit hit;
+        if (Physics.Raycast(bossAI.transform.position, target.position - bossAI.transform.position ,out hit, 
+                attackRange, sheildMask))
+        {
+            EnableLineRenders();
+            SetLinerendersPos(hit.point);
+            return;
+        }
+
+
         DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, 4 * Time.deltaTime);
         EventSystem.current.FireEvent(dealDamageEventInfo);
+        EnableLineRenders();
+        Vector3 lineHitPoint = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
+        SetLinerendersPos(lineHitPoint);
+    }
+
+    private void EnableLineRenders()
+    {
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
             lineTwo.enabled = true;
         }
+    }
 
-        Vector3 lineHitPoint = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
+    private void SetLinerendersPos(Vector3 lineHitPoint)
+    {
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, lineHitPoint);
 

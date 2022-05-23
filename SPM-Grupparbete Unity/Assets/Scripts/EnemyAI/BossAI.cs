@@ -44,6 +44,7 @@ public class BossAI : Tree, IDamagable
 
     protected override TreeNode SetUpTree()
     {
+        
         var agentTransform = agent.transform;
         TreeNode root = new Selector(new List<TreeNode>
         {
