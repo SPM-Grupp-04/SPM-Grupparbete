@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class TownPortal : MonoBehaviour
     [SerializeField]   private GameObject camera;
     private bool isLoading;
     public static bool isTeleporting;
+  
     
     public GameObject loadingScreen;
     public Slider Slider;
@@ -25,6 +27,19 @@ public class TownPortal : MonoBehaviour
         drone = GameObject.Find("Drone");
     }
 
+    [SerializeField] private GameObject particalSystem;
+    private GameObject copyOfParticalSystem;
+    private void OnEnable()
+    {
+       copyOfParticalSystem = Instantiate(particalSystem,transform.position,quaternion.identity);
+    }
+
+    private void OnDisable()
+    {
+        Destroy(copyOfParticalSystem);
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -33,6 +48,7 @@ public class TownPortal : MonoBehaviour
         }
         if (!isLoading)
         {
+           
             isTeleporting = true;
             isLoading = true;
             GlobalControl.SaveData();
@@ -53,6 +69,7 @@ public class TownPortal : MonoBehaviour
            
             drone.transform.position =new Vector3(playerOne.transform.position.x,
                 drone.transform.position.y, playerOne.transform.position.z);
+
            
             StartCoroutine(waitUntillActivate());
             
@@ -65,6 +82,7 @@ public class TownPortal : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+       
         isLoading = false;
     }
 

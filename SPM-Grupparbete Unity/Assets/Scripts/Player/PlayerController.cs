@@ -315,13 +315,17 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] private GameObject teleport;
+    
 
     public void Teleport(InputAction.CallbackContext teleportValue)
     {
         if (teleport.activeInHierarchy != false) return;
-
+        
+        
         teleport.transform.position = transform.position + new Vector3(1, 1, 1);
         teleport.SetActive(true);
+       
+        
     }
 
     public void SetMovementStatus(bool movementStatus)
