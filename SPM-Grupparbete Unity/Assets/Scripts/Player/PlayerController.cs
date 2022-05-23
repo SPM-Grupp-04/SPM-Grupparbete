@@ -77,39 +77,27 @@ public class PlayerController : MonoBehaviour
         currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
 
         Vector3 otherPlayerVelocity = otherPlayerController.GetPlayerVelocity();
-
-        if (currentPlayerCameraView.x <= 0.05f)
+        
+        if (currentPlayerCameraView.x <= 0.05 || currentPlayerCameraView.x >= 0.95f)
         {
             if (otherPlayerVelocity.x > 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(0.0f, otherPlayerVelocity.y, otherPlayerVelocity.z));
+                otherPlayerController.SetPlayerVelocity(new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z * 0.1f));
             }
-        }
 
-        if (currentPlayerCameraView.x >= 0.95f)
-        {
             if (otherPlayerVelocity.x < 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(0.0f, otherPlayerVelocity.y, otherPlayerVelocity.z));
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z * 0.1f));
             }
-        } 
-
-        if (currentPlayerCameraView.y <= 0.05f)
+        }
+        if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
         {
-            if (otherPlayerVelocity.z > 0.0f)
+            if (otherPlayerVelocity.z > 0.0f || otherPlayerVelocity.z < 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, 0.0f));
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x * 0.1f, otherPlayerVelocity.y, otherPlayerVelocity.z * 0.01f));
             }
         }
         
-        if (currentPlayerCameraView.y >= 0.95f)
-        {
-            if (otherPlayerVelocity.z < 0.0f)
-            {
-                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, 0.0f));
-            }
-        } 
-
         Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
         
         transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
@@ -162,7 +150,6 @@ public class PlayerController : MonoBehaviour
         }
         transform.position += velocity * movementAcceleration * Time.deltaTime;
     }
-
     public void SetPlayerVelocity(Vector3 newPlayerVelocity)
     {
         velocity = newPlayerVelocity;
