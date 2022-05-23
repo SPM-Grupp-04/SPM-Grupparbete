@@ -16,10 +16,10 @@ namespace EgilScripts.DieEvents
 
         void OnShot(EntityShot shootEventInfo)
         {
-            Throw(shootEventInfo);
+            TossObject(shootEventInfo);
         }
 
-        private void Throw(EntityShot shootEventInfo)
+        private void TossObject(EntityShot shootEventInfo)
         {
             GameObject projectile = Instantiate(shootEventInfo.throwableObject, shootEventInfo.ogPos.transform.position, quaternion.identity);
 

@@ -24,14 +24,6 @@ public class FallingObjectsTrapScript : MonoBehaviour
     {
         bounds = GetComponent<Collider>().bounds;
 
-        collidedListener = EventSystem.current.RegisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(
-            (foce) =>
-                {
-                    if (foce.CollidingObject.transform.parent == transform)
-                        objectPool.Release(foce.CollidingObject);
-                }
-            );
-
         objectPool = new ObjectPool<GameObject>(
                 createFunc: CreateObject,
                 actionOnGet: (go) => go.SetActive(true),
@@ -93,8 +85,20 @@ public class FallingObjectsTrapScript : MonoBehaviour
         go.GetComponentInChildren<Rigidbody>().AddForce(objectStartingForce * Random.Range(randomStartingForceMultiplierRange.x, randomStartingForceMultiplierRange.y));
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        collidedListener = EventSystem.current.RegisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(
+            (foce) =>
+                {
+                    if (foce.CollidingObject.transform.parent == transform)
+                        objectPool.Release(foce.CollidingObject);
+                }
+            );
+    }
+
+    private void OnDisable()
     {
         EventSystem.current.UnregisterListener<FallingObjectScript.FallingObjectCollided<GameObject>>(collidedListener);
+        collidedListener = null;
     }
 }

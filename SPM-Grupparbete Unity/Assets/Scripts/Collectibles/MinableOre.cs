@@ -1,3 +1,4 @@
+//Additional authors: Simon Canbäck, sica4801
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
