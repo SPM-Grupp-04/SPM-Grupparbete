@@ -13,7 +13,8 @@ public class UI_Crystal : MonoBehaviour
     private Text BlueCrystals;
     [SerializeField]
     private Text RedCrystals;
-
+    [SerializeField]
+    private Text GreenCrystals;
 
 
 
@@ -22,6 +23,7 @@ public class UI_Crystal : MonoBehaviour
 
         BlueCrystals.text = m_LocalPlayerDataTest.BlueCrystals.ToString();
         RedCrystals.text = m_LocalPlayerDataTest.RedCrystals.ToString();
+        GreenCrystals.text = m_LocalPlayerDataTest.GreenCrystals.ToString();
 
     }
 }
