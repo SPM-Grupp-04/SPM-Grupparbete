@@ -28,11 +28,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePosition;
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
-    private bool movementEnabled = true;
+    private  static bool movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
+    bool canShop;
 
     private bool uiEnabled;
 
@@ -80,31 +81,29 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchActionMap(InputAction.CallbackContext SwitchMap)
     {
-        if (SwitchMap.performed)
+
+        if (canShop)
         {
-            uiEnabled = !uiEnabled;
-
-            if (uiEnabled)
+            if (SwitchMap.performed)
             {
-                UI.Enable();
-                playerInput.SwitchCurrentActionMap("UI");
+                uiEnabled = !uiEnabled;
 
+                if (uiEnabled)
+                {
+                    playerInput.SwitchCurrentActionMap("UI");
+                
+                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+                }
+                else
+                {
+                    //Debug.Log(uiEnabled);
+                    //defaultMap.Enable();
+                    playerInput.SwitchCurrentActionMap("Player");
+                
 
+                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
 
-                defaultMap.Disable();
-
-                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-            }
-            else
-            {
-                //Debug.Log(uiEnabled);
-
-                //defaultMap.Enable();
-                playerInput.SwitchCurrentActionMap("Player");
-                UI.Disable();
-
-                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
+                }
             }
         }
     }
@@ -347,6 +346,11 @@ public class PlayerController : MonoBehaviour
     public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
     {
         mousePosition = mouseValue.ReadValue<Vector2>();
+    }
+
+    public void PlayerCanShop(bool value)
+    {
+        canShop = value;
     }
 
     private void UpdatePlayerRotationGamePad()
