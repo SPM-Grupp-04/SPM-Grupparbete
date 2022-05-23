@@ -34,10 +34,20 @@ public class TownPortal : MonoBehaviour
             SceneManager.LoadScene(5, LoadSceneMode.Additive);
          
             camera.transform.position = new Vector3(1000, camera.transform.position.y, 1000);
-            playerOne.transform.position = new Vector3(1000, 3, 1000); // Hamnar på 800/0/550
-            playerTwo.transform.position = new Vector3(1001, 3, 1001);
+
+            if (playerOne.activeInHierarchy)
+            {
+                playerOne.transform.position = new Vector3(1000, 3, 1000); // Hamnar på 800/0/550
+            }
+
+            if (playerTwo.activeInHierarchy)
+            {
+                playerTwo.transform.position = new Vector3(1001, 3, 1001);
+            }
+           
             drone.transform.position =new Vector3(playerOne.transform.position.x,
                 drone.transform.position.y, playerOne.transform.position.z);
+            
             StartCoroutine(waitUntillActivate());
             isLoading = false;
             

@@ -29297,7 +29297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
@@ -29361,7 +29361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7987286952311094062, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
@@ -35844,6 +35844,10 @@ PrefabInstance:
       propertyPath: zoneToSpawnIn
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5117677686175863975, guid: a51f1cb6f86fce344a37fd1b872594cf, type: 3}
+      propertyPath: canvasToSetActive
+      value: 
+      objectReference: {fileID: 1430316757}
     - target: {fileID: 5117677686175863976, guid: a51f1cb6f86fce344a37fd1b872594cf, type: 3}
       propertyPath: m_Name
       value: Respawn
@@ -39344,7 +39348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.size
@@ -44881,9 +44885,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 283001966, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 283001973, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: sceneToLoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 306512643, guid: 6890f559acc365d49a98294804986265, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228315025, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
       propertyPath: PlayerOne
@@ -45049,9 +45065,7 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1448055956, guid: 6890f559acc365d49a98294804986265, type: 3}
-    - {fileID: 1448055955, guid: 6890f559acc365d49a98294804986265, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6890f559acc365d49a98294804986265, type: 3}
 --- !u!114 &1430316756 stripped
 MonoBehaviour:
@@ -45064,6 +45078,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345a9ca22ce16724f8c7d7c38c6ba562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1430316757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 283001966, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 1430316755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1431883409
 Mesh:
   m_ObjectHideFlags: 0
@@ -50996,18 +51015,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
-      propertyPath: shopIsFree
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
-      propertyPath: shopAreaRadius
-      value: 15.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
-      propertyPath: drillLevel2CostBlue
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 807159916, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: buttonsArray.Array.size
       value: 7
@@ -51190,7 +51197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00005596876
+      value: 0.000013947487
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -64049,6 +64056,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
+      propertyPath: playerStatistics.playerMaxHealth
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
+      propertyPath: playerStatistics.playerOneHealth
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
+      propertyPath: playerStatistics.playerTwoHealth
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980725, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: m_Name
       value: GlobalController

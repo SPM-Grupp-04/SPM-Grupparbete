@@ -51,6 +51,9 @@ public class ComponentPickupScript : MonoBehaviour
             PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
             GlobalControl.Instance.playerStatistics.componentsCollectedMask =
             PlayerStatistics.Instance.componentsCollectedMask;
+            
+            // texten sätts på och av när animationen spelas, kolla på det.
+            //text.enabled = false;
             vfx.Play();
             
             StartCoroutine(Delay());
@@ -58,8 +61,14 @@ public class ComponentPickupScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        text.enabled = false;
+    }
+
     IEnumerator Delay()
     {
+        
         animator.SetBool("Alpha", true);
         yield return new WaitForSeconds(2);
         Destroy(gameObject);
