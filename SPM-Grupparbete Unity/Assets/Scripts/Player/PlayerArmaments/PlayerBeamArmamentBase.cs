@@ -12,6 +12,8 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
     protected PlayerStatistics playerStatistics = PlayerStatistics.Instance;
     protected ArmamentLevel ArmLevel => playerStatistics.armamentLevel;
 
+
+    
     [Header("Audio settings")]
     [SerializeField] protected AudioClip sound;
     private AudioSource audioSource;
@@ -21,6 +23,7 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
     [SerializeField] protected Material[] VFXMaterials;
     [SerializeField] protected ParticleSystem beamRing;
     [SerializeField] protected ParticleSystem beamEmission;
+    
     protected GameObject VFXMaxRange;
     public LineRenderer VFXLineRenderer
     {
@@ -132,8 +135,8 @@ public abstract class PlayerBeamArmamentBase : MonoBehaviour
     public enum ArmamentLevel
     {
         LEVEL_0 = 0,
-        LEVEL_1,
-        LEVEL_2,
-        LEVEL_3
+        LEVEL_1 = 1,
+        LEVEL_2 = 2,
+        LEVEL_3 = 3
     }
 }

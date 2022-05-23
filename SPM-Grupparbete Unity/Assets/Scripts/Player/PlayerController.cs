@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
-
+    [SerializeField] private GameObject teleport;
+    
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
@@ -69,6 +70,8 @@ public class PlayerController : MonoBehaviour
         {
             RestrictMovement();
         }
+        
+        
     }
 
     private void OnEnable()
@@ -304,4 +307,13 @@ public class PlayerController : MonoBehaviour
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
     }
+    
+    public void Teleport(InputAction.CallbackContext teleportValue)
+    {
+        if (teleport.activeInHierarchy) return;
+
+        teleport.transform.position = transform.position + new Vector3(1, 1, 1);
+        teleport.SetActive(true);
+    }
+
 }

@@ -48,13 +48,13 @@ public class TownPortal : MonoBehaviour
             drone.transform.position =new Vector3(playerOne.transform.position.x,
                 drone.transform.position.y, playerOne.transform.position.z);
             
-            StartCoroutine(waitUntillActivate());
+            StartCoroutine(WaitUntilActivate());
             isLoading = false;
             
         }
     }
 
-   public static IEnumerator waitUntillActivate()
+   public static IEnumerator WaitUntilActivate()
     {
         yield return new  WaitForSeconds(1);
         isTeleporting = false;
