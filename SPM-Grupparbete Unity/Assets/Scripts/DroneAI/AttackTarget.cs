@@ -66,7 +66,7 @@ public class AttackTarget : TreeNode
     {
         if (cooldown > 0.5f)
         {
-            target.gameObject.SendMessage("ReduceMaterialHP", 2);
+            target.gameObject.SendMessage("ReduceMaterialHP", 8);
             cooldown = 0;
         }
 

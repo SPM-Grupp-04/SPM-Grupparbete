@@ -17,7 +17,15 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log(PlayerPrefs.GetInt("IsMuted"));
+        if (PlayerPrefs.GetFloat("IsMuted") == 1)
+        {
+            audioMixer.SetFloat("VolumeControl", -80f);
+        }
+        else
+        {
+            audioMixer.SetFloat("VolumeControl", 1f);
+        }
         sourceOne.clip = backgroundMusic[0];
         sourceTwo.clip = combatMusic[0];
         sourceTwo.Play();

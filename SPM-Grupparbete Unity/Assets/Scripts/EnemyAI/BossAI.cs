@@ -40,10 +40,11 @@ public class BossAI : Tree, IDamagable
 
     [SerializeField] private MeleeWepon meleeWepon;
 
-    private float currentHealth = 50;
+    [SerializeField] private float currentHealth = 50;
 
     protected override TreeNode SetUpTree()
     {
+        
         var agentTransform = agent.transform;
         TreeNode root = new Selector(new List<TreeNode>
         {

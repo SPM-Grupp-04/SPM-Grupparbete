@@ -18,7 +18,7 @@ namespace Utility.EnemyAI
         private Vector3 currentVelocity;
         private float smoothDamp;
 
-        [Header("ThrowSettings")] private float throwCD = 2;
+        [Header("ThrowSettings")] private float throwCD = 5;
         private float throwUpForce;
         private float throwForce;
         private RangedAI _rangedAI;
