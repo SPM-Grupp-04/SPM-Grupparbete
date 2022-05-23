@@ -73,8 +73,6 @@ public class GlobalControl : MonoBehaviour
     }
     public void LoadData()
     {
-
-
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream saveFile = File.Open("Saves/save.binary", FileMode.Open);
 

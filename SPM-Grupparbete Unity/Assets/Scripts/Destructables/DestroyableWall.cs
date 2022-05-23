@@ -20,7 +20,7 @@ public class DestroyableWall : DestroyableObjectBase
 
     public override void ReduceMaterialHP(int amount)
     {
-        if (playerStatistics.drillLevel >= requiredWeaponLevel)
+        if ((int)playerStatistics.armamentLevel >= requiredWeaponLevel)
         {
             materialHP -= amount;
             uiObjectHp.ObjectTakeDamage(amount);

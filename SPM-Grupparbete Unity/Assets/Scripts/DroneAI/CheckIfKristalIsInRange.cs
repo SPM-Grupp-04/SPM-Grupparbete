@@ -32,7 +32,7 @@ namespace Utility.DroneAI
                 {
                     MinableOre g = colliders[0].gameObject.GetComponent<MinableOre>();
                     if (g != null && g.GetRequiredWeaponLevel() >
-                        PlayerStatistics.Instance.drillLevel)
+                        (int)PlayerStatistics.Instance.armamentLevel)
                     {
                         Debug.Log(g.GetRequiredWeaponLevel() + " Required WeaponLevel");
                         Debug.Log("Dril level to high");

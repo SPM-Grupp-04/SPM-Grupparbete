@@ -9,12 +9,11 @@ using UnityEngine.VFX;
 
 public class ComponentPickupScript : MonoBehaviour
 {
-    [SerializeField] private VictoryConditionsScript.Components componentNumber;
+    [SerializeField, Utility.Attributes.SingleEnumFlagSelect(EnumType = typeof(VictoryConditionsScript.Components))] private VictoryConditionsScript.Components componentNumber;
     [SerializeField] private GameObject canvas;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private VisualEffect vfx;
     [SerializeField] private Animator animator;
-    
 
     // Start is called before the first frame update
     void Start()

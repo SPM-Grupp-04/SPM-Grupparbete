@@ -119,7 +119,7 @@ public class Dynamite : MonoBehaviour
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
         foreach (Collider enemyObject in enemyColliders)
         {
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
+            var damageEvent = new DamageDealt(enemyObject.gameObject, 5);
             EventSystem.current.FireEvent(damageEvent);
         }
         

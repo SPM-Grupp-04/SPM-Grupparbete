@@ -46,7 +46,7 @@ public class UnloadLevel : MonoBehaviour
         }
         teleportBackPos.SetActive(false);
 
-        StartCoroutine(TownPortal.waitUntillActivate());
+        StartCoroutine(TownPortal.WaitUntilActivate());
 
         SceneManager.UnloadSceneAsync(5);
     }

@@ -82,7 +82,7 @@ public class AttackTarget : TreeNode
 
     void Laser()
     {
-        DealDamageEventInfo dealDamageEventInfo = new DealDamageEventInfo(target.gameObject, Damage * Time.deltaTime);
+        DamageDealt dealDamageEventInfo = new DamageDealt(target.gameObject, 4.0f * Time.deltaTime);
         EventSystem.current.FireEvent(dealDamageEventInfo);
         if (!lineRenderer.enabled)
         {

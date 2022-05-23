@@ -8,34 +8,32 @@ namespace EgilEventSystem
     {
         // Anyone who does anything send things in this.
 
-        private static EventSystem currentVarible;
-
+        private static EventSystem currentVariable;
 
         private void OnEnable()
         {
-            currentVarible = this;
+            currentVariable = this;
         }
 
         public static EventSystem current
         {
             get
             {
-                if (currentVarible == null)
+                if (currentVariable == null)
                 {
-                    currentVarible = GameObject.FindObjectOfType<EventSystem>();
+                    currentVariable = GameObject.FindObjectOfType<EventSystem>();
                 }
 
-                return currentVarible;
+                return currentVariable;
             }
         }
 
-
-        private delegate void EventListener(EgilEventSystem.Event e);
+        public delegate void EventListener(EgilEventSystem.Event e);
 
         // Should be set
         private Dictionary<System.Type, List<EventListener>> eventListeners;
 
-        public void RegisterListner<T>(System.Action<T> listener) where T : Event
+        public EventListener RegisterListener<T>(System.Action<T> listener) where T : Event
         {
             System.Type eventType = typeof(T);
 
@@ -49,17 +47,17 @@ namespace EgilEventSystem
                 eventListeners[eventType] = new List<EventListener>();
             }
 
-            // Wrapp a type converstion around the even listner.
+            // Wrap a type conversion around the event listener.
             void Wrapper(Event e)
             {
-                listener((T) e);
+                listener((T)e);
             }
 
             eventListeners[eventType].Add(Wrapper);
+            return Wrapper;
         }
 
-
-        public void UnregisterListener<T>(System.Action<T> listener) where T : Event
+        public void UnregisterListener<T>(EventListener listener) where T : Event
         {
             System.Type eventType = typeof(T);
 
@@ -69,29 +67,33 @@ namespace EgilEventSystem
                 return;
             }
 
-
-            void Wrapper(Event e)
-            {
-                listener((T) e);
-            }
-
-            eventListeners[eventType].Remove(Wrapper);
+            eventListeners[eventType].Remove(listener);
         }
 
         // Execute Event.
-        public void FireEvent(Event EventInfo)
+        public void FireEvent(Event firedEvent)
         {
-            System.Type trueEventOInfoClass = EventInfo.GetType();
+            System.Type firedEventType = firedEvent.GetType();
 
-            if (eventListeners == null || eventListeners[trueEventOInfoClass] == null)
+            if (eventListeners == null || eventListeners[firedEventType] == null)
             {
                 // No one is listening we are done
                 return;
             }
 
-            foreach (EventListener el in eventListeners[trueEventOInfoClass])
+            //regular for-loop instead of foreach; if an event listener is unregistered mid-loop it won't throw an error
+            for (int i = 0; i < eventListeners[firedEventType].Count; i++)
             {
-                el(EventInfo);
+                eventListeners[firedEventType][i]?.Invoke(firedEvent);
+            }
+        }
+
+        //not really needed, but the event system is throwing a lot of exceptions on application quit and this is due diligence
+        private void OnDestroy()
+        {
+            foreach (var v in eventListeners)
+            {
+                eventListeners[v.Key].Clear();
             }
         }
     }

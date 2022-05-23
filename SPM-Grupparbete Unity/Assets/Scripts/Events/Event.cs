@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace EgilEventSystem
 {
-
-public abstract class Event
-{
-    public string EventDescription;
-
+    public abstract class Event
+    {
+        public string EventDescription;
+    }
 }
-}
-    
+

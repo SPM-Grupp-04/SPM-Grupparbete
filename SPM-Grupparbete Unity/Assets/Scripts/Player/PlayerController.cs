@@ -15,10 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
 
-    [SerializeField] private AudioClip drillSound, laserSound;
-    [SerializeField] private Animator animator;
-
-
     private PlayerInput playerInput;
     private Camera mainCamera;
     private Vector3 velocity;
@@ -30,8 +26,16 @@ public class PlayerController : MonoBehaviour
     private String GamepadControlScheme = "Gamepad";
     private bool movementEnabled = true;
     private bool enteredShopArea;
-    private bool isShooting;
-    private bool isDrilling;
+    public bool IsShooting
+    {
+        get;
+        private set;
+    }
+    public bool IsDrilling
+    {
+        get;
+        private set;
+    }
     private bool useButtonPressed;
 
     private bool uiEnabled;
@@ -59,7 +63,6 @@ public class PlayerController : MonoBehaviour
         if (UI_PausMenu.GameIsPause == false)
         {
             PlayerMovement();
-            ShootOrDrill();
         }
 
         if (TownPortal.isTeleporting == false)
@@ -89,10 +92,7 @@ public class PlayerController : MonoBehaviour
                 UI.Enable();
                 playerInput.SwitchCurrentActionMap("UI");
 
-
-
                 defaultMap.Disable();
-
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
             }
             else
@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
                 UI.Disable();
 
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
             }
         }
     }
@@ -171,56 +170,6 @@ public class PlayerController : MonoBehaviour
         //  transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
     }
 
-    private void ShootOrDrill()
-    {
-        if (isShooting)
-        {
-
-
-            drillScript.Shoot(true);
-            drillScript.DrillInUse(true);
-            drillScript.Drill(false);
-            animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
-            Debug.Log(animator.isActiveAndEnabled);
-            
-
-            if (!source.isPlaying)
-            {
-                PlayLaserWeaponSound();
-            }
-        }
-        else
-        {
-            if (isDrilling)
-            {
-                drillScript.Shoot(false);
-                drillScript.Drill(true);
-                drillScript.DrillInUse(true);
-
-                animator.SetBool("IsShooting", true);
-                animator.SetBool("Idle", false);
-
-                if (!source.isPlaying)
-                {
-                    PlayDrillSound();
-                }
-            }
-            else
-            {
-                drillScript.DrillInUse(false);
-                drillScript.Shoot(false);
-                drillScript.Drill(false);
-                StopSound();
-
-                animator.SetBool("IsShooting", false);
-                animator.SetBool("Idle", true);
-
-            }
-        }
-    }
-
-
     private void PlayerMovement()
     {
         if (movementEnabled)
@@ -258,46 +207,41 @@ public class PlayerController : MonoBehaviour
         return uiEnabled;
     }
 
-    public void ShootInput(InputAction.CallbackContext shootValue)
+    public void OnShootInput(InputAction.CallbackContext shootValue)
     {
         if (shootValue.performed)
         {
-            isShooting = true;
+            IsShooting = true;
         }
         else if (shootValue.canceled)
         {
-            isShooting = false;
+            IsShooting = false;
         }
     }
 
-    public void DrillInput(InputAction.CallbackContext drillValue)
+    public void OnDrillInput(InputAction.CallbackContext drillValue)
     {
         if (drillValue.performed)
         {
-            isDrilling = true;
+            IsDrilling = true;
         }
         else if (drillValue.canceled)
         {
-            isDrilling = false;
+            IsDrilling = false;
         }
     }
 
-    private void PlayLaserWeaponSound()
+    //this is a kind of "super method" to OnShootInput()/OnDrillInput(). probably not worth using, though
+    public void OnArmamentInput(InputAction.CallbackContext value, ref bool variable)
     {
-        source.clip = laserSound;
-        source.Play();
-    }
-
-    private void PlayDrillSound()
-    {
-        source.clip = drillSound;
-        source.Play();
-    }
-
-    private void StopSound()
-    {
-        source.Stop();
-        source.clip = null;
+        if (value.performed)
+        {
+            variable = true;
+        }
+        else if (value.canceled)
+        {
+            variable = false;
+        }
     }
 
     public void UseInput(InputAction.CallbackContext useValue)
@@ -306,22 +250,8 @@ public class PlayerController : MonoBehaviour
 
         if (useValue.performed)
         {
-            useButtonPressed = true;
+            useButtonPressed = !useButtonPressed;
         }
-        else if (useValue.canceled)
-        {
-            useButtonPressed = false;
-        }
-    }
-
-    [SerializeField] private GameObject teleport;
-
-    public void Teleport(InputAction.CallbackContext teleportValue)
-    {
-        if (teleport.activeInHierarchy != false) return;
-
-        teleport.transform.position = transform.position + new Vector3(1, 1, 1);
-        teleport.SetActive(true);
     }
 
     public void SetMovementStatus(bool movementStatus)
