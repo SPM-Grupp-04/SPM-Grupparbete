@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Main Author: Axel Ingelsson Fredler
+
 public class DynamiteThrow : MonoBehaviour
 {
     [SerializeField] private GameObject dynamitePrefab;

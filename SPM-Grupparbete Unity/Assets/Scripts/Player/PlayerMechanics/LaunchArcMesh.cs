@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Main Author: Axel Ingelsson Fredler
+
 [RequireComponent(typeof(MeshFilter))]
 public class LaunchArcMesh : MonoBehaviour
 {

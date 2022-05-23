@@ -82,19 +82,23 @@ public class PlayerController : MonoBehaviour
         {
             if (otherPlayerVelocity.x > 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z * 0.1f));
+                otherPlayerController.SetPlayerVelocity(new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
             }
 
             if (otherPlayerVelocity.x < 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z * 0.1f));
+                otherPlayerController.SetPlayerVelocity(new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
             }
         }
         if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
         {
-            if (otherPlayerVelocity.z > 0.0f || otherPlayerVelocity.z < 0.0f)
+            if (otherPlayerVelocity.z > 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x * 0.1f, otherPlayerVelocity.y, otherPlayerVelocity.z * 0.01f));
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, -otherPlayerVelocity.z));
+            }
+            if (otherPlayerVelocity.z < 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z));
             }
         }
         

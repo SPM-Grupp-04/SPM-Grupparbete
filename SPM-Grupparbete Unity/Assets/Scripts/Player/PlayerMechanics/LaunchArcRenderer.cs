@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Main Author: Axel Ingelsson Fredler
+
 public class LaunchArcRenderer : MonoBehaviour
 {
     private LineRenderer lineRenderer;

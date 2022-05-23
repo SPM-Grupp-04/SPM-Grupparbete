@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+//Main Author: Axel Ingelsson Fredler
+
 public class Dynamite : MonoBehaviour
 {
     [Header("Explosion Properties")]
