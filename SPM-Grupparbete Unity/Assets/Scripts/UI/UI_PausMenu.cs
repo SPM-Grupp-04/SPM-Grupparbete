@@ -13,7 +13,6 @@ public class UI_PausMenu : MonoBehaviour
     public PlayerInput PlayerInputTwo;
     private InputAction pause;
     private InputAction pausePlayerTwo;
-
     private bool pauseButtonPressed;
     
     [Header("MenuButtonFirstSelection")]

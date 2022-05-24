@@ -64,8 +64,6 @@ public class ShopScript : MonoBehaviour
     private void Start()
     {
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
-        Debug.Log(contentGO.name);
-        
         if (buttonDictionary == null)
         {
             
@@ -77,18 +75,17 @@ public class ShopScript : MonoBehaviour
                 if (temp.gameObject.CompareTag("ShopButton"))
                 {
                     string addedButton = contentGO.transform.GetChild(i).gameObject.name;
-                    Debug.Log(addedButton);
                     buttonDictionary.Add(addedButton, false);
                     temp.name = addedButton;
                 }
             }
         }
 
-        foreach (KeyValuePair<string, bool> test in buttonDictionary)
-        {
-            
-            Debug.Log(test.Key + " " + test.Value.ToString());
-        }
+        // foreach (KeyValuePair<string, bool> test in buttonDictionary)
+        // {
+        //     
+        //     Debug.Log(test.Key + " " + test.Value.ToString());
+        // }g
 
         
         shopCollider = GetComponent<SphereCollider>();

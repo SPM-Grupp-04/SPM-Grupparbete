@@ -2439,7 +2439,7 @@ GameObject:
   - component: {fileID: 3910309286807118242}
   - component: {fileID: 8214337613064602871}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Banner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2462,8 +2462,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -50, y: 20}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -15, y: 20}
+  m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3910309286807118242
 CanvasRenderer:
@@ -2486,7 +2486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.9477272, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3053,7 +3053,6 @@ MonoBehaviour:
   slider: {fileID: 7368729969329830442}
   drill: {fileID: 0}
   barColour: {fileID: 7368729969428853979}
-  playerDrillScript: {fileID: 0}
 --- !u!1 &7368729969390628073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3089,7 +3088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: 0}
+  m_AnchoredPosition: {x: 55, y: 0}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7368729969390628068
@@ -3113,7 +3112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09927912, g: 0.9006044, b: 0.9150943, a: 1}
+  m_Color: {r: 0.026922394, g: 0.5117725, b: 0.5188679, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3484,7 +3483,6 @@ MonoBehaviour:
   slider: {fileID: 7368729969466508942}
   drill: {fileID: 0}
   barColour: {fileID: 7368729969313625000}
-  playerDrillScript: {fileID: 0}
 --- !u!1 &7368729969523589964
 GameObject:
   m_ObjectHideFlags: 0
@@ -4085,7 +4083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: 0}
+  m_AnchoredPosition: {x: 55, y: 0}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7068079396485762487
@@ -4109,7 +4107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.15294118, b: 0, a: 1}
+  m_Color: {r: 0.5188679, g: 0.08557577, b: 0.007342457, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4165,7 +4163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: 0}
+  m_AnchoredPosition: {x: 55, y: 0}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6274307577675867419
@@ -4189,7 +4187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23769657, g: 0.9137255, b: 0.09803919, a: 1}
+  m_Color: {r: 0.10779566, g: 0.33962262, b: 0.059273757, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4465,10 +4463,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cooldowns
       objectReference: {fileID: 0}
-    - target: {fileID: 8897414557443401524, guid: e54d38a53f629534195f56c9fc833376, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8897414557443401530, guid: e54d38a53f629534195f56c9fc833376, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4504,18 +4498,6 @@ PrefabInstance:
     - target: {fileID: 8897414557443401530, guid: e54d38a53f629534195f56c9fc833376, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897414557443401530, guid: e54d38a53f629534195f56c9fc833376, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897414557443401530, guid: e54d38a53f629534195f56c9fc833376, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897414557443401530, guid: e54d38a53f629534195f56c9fc833376, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8897414557443401530, guid: e54d38a53f629534195f56c9fc833376, type: 3}
       propertyPath: m_LocalPosition.x
