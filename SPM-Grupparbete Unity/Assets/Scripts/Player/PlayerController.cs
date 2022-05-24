@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
         {
             RestrictMovement();
         }
-        RestrictMovement();
     }
     
     private void OnEnable()
