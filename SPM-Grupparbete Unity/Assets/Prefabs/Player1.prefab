@@ -617,6 +617,7 @@ MonoBehaviour:
   launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
   uiCooldowns: {fileID: 0}
+  playerDrillScript: {fileID: 8182577800644812320}
 --- !u!23 &5745473002439537521
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -829,8 +830,6 @@ MonoBehaviour:
   cameraPlayerPositiveMovementThreshold: 0.9
   cameraPlayerNegativeMovementThreshold: 0.1
   otherPlayerController: {fileID: 7708049037048568331, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
-  otherPlayer: {fileID: 0}
-  teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,19 +1008,7 @@ MonoBehaviour:
     m_ActionId: b7275ac2-e73d-4a35-8dab-7e6832e3dde1
     m_ActionName: Player/Shield[/Keyboard/z]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1968085593151929628}
-        m_TargetAssemblyTypeName: DynamiteThrow, Assembly-CSharp
-        m_MethodName: ThrowDynamite
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: dc2ed2d0-0cfd-4cb1-9485-d4130f4c0bcd
     m_ActionName: Player/ThrowDynamite[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:

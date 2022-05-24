@@ -40,6 +40,8 @@ public class Dynamite : MonoBehaviour
 
     [SerializeField] private Light dynamiteExplosionLight;
 
+    [SerializeField] private AudioSource dynamiteExplosionAudioSource;
+
     [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
     private FallingRocksSpawner fallingRocksSpawner;
@@ -93,6 +95,8 @@ public class Dynamite : MonoBehaviour
         dynamiteFuseAudioSource.Stop();
         
         GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
+        
+        dynamiteExplosionAudioSource.Play();
         
         dynamiteExplosionLight.enabled = true;
         //Gamepad.current.SetMotorSpeeds(1,0);
