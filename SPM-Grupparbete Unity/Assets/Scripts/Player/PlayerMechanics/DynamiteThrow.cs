@@ -38,7 +38,7 @@ public class DynamiteThrow : MonoBehaviour
             GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
             thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
             nextFireTime = 0;
-            playerDrillScript.IncreaseOverheatAmount(25.0f);
+            playerDrillScript.IncreaseOverheatAmount(50.0f);
         }
     }
 }

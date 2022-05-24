@@ -617,6 +617,7 @@ MonoBehaviour:
   launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
   uiCooldowns: {fileID: 0}
+  playerDrillScript: {fileID: 8182577800644812320}
 --- !u!23 &5745473002439537521
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -829,7 +830,6 @@ MonoBehaviour:
   cameraPlayerPositiveMovementThreshold: 0.9
   cameraPlayerNegativeMovementThreshold: 0.1
   otherPlayerController: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
-  teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
