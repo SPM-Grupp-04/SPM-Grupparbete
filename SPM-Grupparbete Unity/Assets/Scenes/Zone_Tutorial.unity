@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.22, g: 0.22, b: 0.22, a: 1}
+  m_AmbientSkyColor: {r: 0.1677, g: 0.20845495, b: 0.39, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 1889112787}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -51178,7 +51178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.99997956
+      value: 0.00013059378
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -60455,11 +60455,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!108 &1889112787 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 150198823361116355, guid: 594f12e8ede1ae5489531e923d85f348, type: 3}
-  m_PrefabInstance: {fileID: 1566336687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1895125682
 PrefabInstance:
   m_ObjectHideFlags: 0
