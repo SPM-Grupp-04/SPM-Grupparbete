@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,32 +9,54 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject drill;
-    private PlayerDrill drillScript;
+    [Header("Collision Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private LayerMask wallLayerMask;
+    
+    [Header("Movement")]
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
-
+    [SerializeField] [Range(0.0f, 1.0f)] private float colliderMargin = 0.01f;
+    
+    [Header("Components")]
+    [SerializeField] private GameObject drill;
+    [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private AudioClip drillSound, laserSound;
     [SerializeField] private Animator animator;
 
+    private PlayerDrill drillScript;
+    
+    [Header("Player Restrictions")] 
+    [SerializeField] [Range(0.9f, 1.0f)] private float cameraPlayerPositiveMovementThreshold = 0.9f;
+    [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
+    
+    [SerializeField] private PlayerController otherPlayerController;
+    
+    private Collider[] penetrationColliders = new Collider[2];
 
     private PlayerInput playerInput;
+    
     private Camera mainCamera;
+    
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector3 gamePadLookRotation;
     private Vector2 lookRotation;
     private Vector2 mousePosition;
+
+
+    private bool invisibleWallDeployed;
+    private Vector3 invisibleWallPosition;
+    
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
-    private  static bool movementEnabled = true;
+    
+    private bool movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
-    bool canShop;
-
+    
     private bool uiEnabled;
 
     private InputActionMap UI;
@@ -42,10 +64,10 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource source;
 
-
     private void Awake()
     {
-       // animator.enabled = true;
+        playerInput = GetComponent<PlayerInput>();
+        mainCamera = Camera.main;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
@@ -62,13 +84,13 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             ShootOrDrill();
         }
-
         if (TownPortal.isTeleporting == false)
         {
             RestrictMovement();
         }
+        RestrictMovement();
     }
-
+    
     private void OnEnable()
     {
         playerInput.actions["SwitchMap"].performed += SwitchActionMap;
@@ -81,144 +103,91 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchActionMap(InputAction.CallbackContext SwitchMap)
     {
-
-        if (canShop)
+        if (SwitchMap.performed)
         {
-            if (SwitchMap.performed)
+            uiEnabled = !uiEnabled;
+
+            if (uiEnabled)
             {
-                uiEnabled = !uiEnabled;
-
-                if (uiEnabled)
-                {
-                    playerInput.SwitchCurrentActionMap("UI");
+                UI.Enable();
+                playerInput.SwitchCurrentActionMap("UI");
                 
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-                }
-                else
-                {
-                    //Debug.Log(uiEnabled);
-                    //defaultMap.Enable();
-                    playerInput.SwitchCurrentActionMap("Player");
-                
+                defaultMap.Disable();
 
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
-                }
-            }
-        }
-    }
-
-    [SerializeField] private PlayerController otherPlayer;
-
-    private void RestrictMovement()
-    {
-        Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
-        cameraView.x = Mathf.Clamp01(cameraView.x);
-        cameraView.y = Mathf.Clamp01(cameraView.y);
-
-        //bool isOutSide = false;
-
-        if (cameraView.x <= 0.1)
-        {
-           
-                velocity.x *= -1;
-            
-        }
-        else if (cameraView.x >= 0.9)
-        {
-          
-                velocity.x *= -1;
-            
-        }
-
-        if (cameraView.y <= 0.1f)
-        {
-            if (velocity == Vector3.zero)
-            {
-                otherPlayer.velocity.z *= -1;
+                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
             }
             else
             {
-                velocity.z *= -1;
+                //Debug.Log(uiEnabled);
+
+                //defaultMap.Enable();
+                playerInput.SwitchCurrentActionMap("Player");
+                UI.Disable();
+
+                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+
             }
-                
-            
         }
-        else if (cameraView.y >= 0.9)
+    }
+    
+    private void RestrictMovement()
+    {
+        Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
+        currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
+        currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
+
+        Vector3 otherPlayerVelocity = otherPlayerController.GetPlayerVelocity();
+        
+        if (currentPlayerCameraView.x <= 0.05 || currentPlayerCameraView.x >= 0.95f)
         {
-            
-                velocity.z *= -1;
-            
+            if (otherPlayerVelocity.x > 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
+            }
+
+            if (otherPlayerVelocity.x < 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
+            }
         }
-
-        /*if (cameraView.x == 0f || cameraView.x == 1)
+        if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
         {
-            isOutSide = true;
-            //  Debug.Log("Outside X ");
+            if (otherPlayerVelocity.z > 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, -otherPlayerVelocity.z));
+            }
+            if (otherPlayerVelocity.z < 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z));
+            }
         }
-
-        if (cameraView.y <= 0.2f || cameraView.y == 1)
-        {
-            isOutSide = true;
-            Debug.Log("Outside Y");
-        }*/
-
-
-        Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
-
-
-        //  transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
+        
+        Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
+        
+        transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
     }
 
     private void ShootOrDrill()
     {
         if (isShooting)
         {
-
-
-            drillScript.Shoot(true);
-            drillScript.DrillInUse(true);
-            drillScript.Drill(false);
-            animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
-            Debug.Log(animator.isActiveAndEnabled);
-            
-
-            if (!source.isPlaying)
-            {
-                PlayLaserWeaponSound();
-            }
+            Debug.Log("SHOOT");
+            drill.gameObject.SendMessage("Shoot", true);
+            drill.gameObject.SendMessage("DrillInUse", true);
         }
         else
         {
             if (isDrilling)
             {
-                drillScript.Shoot(false);
-                drillScript.Drill(true);
-                drillScript.DrillInUse(true);
-
-                animator.SetBool("IsShooting", true);
-                animator.SetBool("Idle", false);
-
-                if (!source.isPlaying)
-                {
-                    PlayDrillSound();
-                }
+                drill.gameObject.SendMessage("DrillObject");
+                drill.gameObject.SendMessage("DrillInUse", true);
             }
             else
             {
-                drillScript.DrillInUse(false);
-                drillScript.Shoot(false);
-                drillScript.Drill(false);
-                StopSound();
-
-                animator.SetBool("IsShooting", false);
-                animator.SetBool("Idle", true);
-
+                drill.gameObject.SendMessage("DrillInUse", false);
             }
         }
     }
-
 
     private void PlayerMovement()
     {
@@ -243,27 +212,35 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerRotationGamePad();
         }
-
         transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+    
+    public void SetPlayerVelocity(Vector3 newPlayerVelocity)
+    {
+        velocity = newPlayerVelocity;
+    }
+
+    public Vector3 GetPlayerVelocity()
+    {
+        return velocity;
     }
 
     public bool IsUseButtonPressed()
     {
         return useButtonPressed;
     }
-
+    
     public bool IsMapSwitched()
     {
         return uiEnabled;
     }
-
+    
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
         if (shootValue.performed)
         {
             isShooting = true;
-        }
-        else if (shootValue.canceled)
+        } else if (shootValue.canceled)
         {
             isShooting = false;
         }
@@ -280,77 +257,31 @@ public class PlayerController : MonoBehaviour
             isDrilling = false;
         }
     }
-
-    private void PlayLaserWeaponSound()
-    {
-        source.clip = laserSound;
-        source.Play();
-    }
-
-    private void PlayDrillSound()
-    {
-        source.clip = drillSound;
-        source.Play();
-    }
-
-    private void StopSound()
-    {
-        source.Stop();
-        source.clip = null;
-    }
-
+    
     public void UseInput(InputAction.CallbackContext useValue)
     {
-        //useButtonPressed = useValue.performed;
-
-        if (useValue.performed)
-        {
-            useButtonPressed = true;
-        }
-        else if (useValue.canceled)
-        {
-            useButtonPressed = false;
-        }
-    }
-
-    [SerializeField] private GameObject teleport;
-
-    public void Teleport(InputAction.CallbackContext teleportValue)
-    {
-        if (teleport.activeInHierarchy != false) return;
-
-        teleport.transform.position = transform.position + new Vector3(1, 1, 1);
-        teleport.SetActive(true);
+        useButtonPressed = useValue.performed;
     }
 
     public void SetMovementStatus(bool movementStatus)
     {
         movementEnabled = movementStatus;
     }
-
+    
     public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
-        if (velocity != Vector3.zero)
-        {
-            //animator.SetBool("MoveForward", true);
-        }
     }
 
     public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)
     {
         gamePadLookRotation = rotationValue.ReadValue<Vector2>();
     }
-
+    
     public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
     {
         mousePosition = mouseValue.ReadValue<Vector2>();
-    }
-
-    public void PlayerCanShop(bool value)
-    {
-        canShop = value;
     }
 
     private void UpdatePlayerRotationGamePad()
@@ -377,5 +308,27 @@ public class PlayerController : MonoBehaviour
         Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
+    }
+    
+    private void FixOverlapPenetration()
+    {
+        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+            boxCollider.transform.rotation, wallLayerMask);
+
+        while (colliderCount > 0)
+        {
+            for (int i = 0; i < colliderCount; i++)
+            {
+                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
+                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
+                        out var direction, out var distance))
+                {
+                    Vector3 separationVector = direction * distance;
+                    transform.position += separationVector + separationVector.normalized * colliderMargin;
+                }
+            }
+            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+                boxCollider.transform.rotation, wallLayerMask);
+        }
     }
 }

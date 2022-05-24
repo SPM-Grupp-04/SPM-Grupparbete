@@ -338,4 +338,9 @@ public class PlayerDrill : MonoBehaviour
     {
         WeaponLevel();
     }
+
+    public void IncreaseOverheatAmount(float increaseAmount)
+    {
+        overHeatAmount += increaseAmount;
+    }
 }
