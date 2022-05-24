@@ -68,7 +68,7 @@ public class ComponentPickupScript : MonoBehaviour
 
     IEnumerator Delay()
     {
-        
+        canvas.SetActive(false);
         animator.SetBool("Alpha", true);
         yield return new WaitForSeconds(2);
         Destroy(gameObject);

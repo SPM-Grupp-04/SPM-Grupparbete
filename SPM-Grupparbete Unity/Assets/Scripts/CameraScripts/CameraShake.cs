@@ -5,6 +5,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Cinemachine;
 
+//Main Author: Axel Ingelsson Fredler
+
 public class CameraShake : MonoBehaviour
 {
     private static CameraShake instance;

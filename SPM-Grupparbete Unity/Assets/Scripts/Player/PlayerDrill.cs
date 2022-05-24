@@ -6,6 +6,7 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class PlayerDrill : MonoBehaviour
@@ -33,6 +34,10 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private ParticleSystem laserEmission;
     [SerializeField] private ParticleSystem drillRing;
     [SerializeField] private ParticleSystem drillEmission;
+    
+    [SerializeField] private VisualEffect laserHit;
+
+
 
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
@@ -65,7 +70,7 @@ public class PlayerDrill : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         DrillDamage();
         WeaponLevel();
-
+        laserHit.transform.parent = null;
     }
 
     // Update is called once per frame
@@ -140,8 +145,12 @@ public class PlayerDrill : MonoBehaviour
                 laserRing.Play();
                 laserEmission.Play();
             }
+
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
+                laserHit.enabled = true;
+                laserHit.transform.position = shootHit.point;
+                laserHit.Play();
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
@@ -205,6 +214,8 @@ public class PlayerDrill : MonoBehaviour
             laserEmission.Clear();
             laserRing.Stop();
             laserRing.Clear();
+            laserHit.Stop();
+            laserHit.enabled = false;
         }
     }
     public void Drill(bool state)
@@ -287,5 +298,10 @@ public class PlayerDrill : MonoBehaviour
     public void SetWeaponLevel()
     {
         WeaponLevel();
+    }
+
+    public void IncreaseOverheatAmount(float increaseAmount)
+    {
+        overHeatAmount += increaseAmount;
     }
 }
