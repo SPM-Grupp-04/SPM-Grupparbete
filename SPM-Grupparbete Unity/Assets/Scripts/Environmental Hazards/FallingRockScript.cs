@@ -9,7 +9,7 @@ using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class FallingObjectScript : MonoBehaviour
+public class FallingRockScript : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private GameObject telegraphMarker;
@@ -38,33 +38,7 @@ public class FallingObjectScript : MonoBehaviour
     void Start()
     {
         Assert.IsFalse(layerMask == 0);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (transform.position.y < yDespawnBoundary)
-            EventSystem.current.FireEvent(new FallingObjectCollided<GameObject>(transform.parent.gameObject));
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (Utility.LayerMaskExtensions.IsInLayerMask(collision.gameObject, layerMask))
-        {
-            var damageEvent = new DamageDealt(collision.gameObject, 1);
-            EventSystem.current.FireEvent(damageEvent);
-
-            var collisionEvent = new FallingObjectCollided<GameObject>(transform.parent.gameObject);
-            EventSystem.current.FireEvent(collisionEvent);
-        }
-        else
-        {
-            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-        }
-    }
-
-    private void OnEnable()
-    {
         RaycastHit hit;
 
         Physics.Raycast(
@@ -75,37 +49,25 @@ public class FallingObjectScript : MonoBehaviour
             layerMask: layerMask - (1 << LayerMask.NameToLayer("Player")) //subtract the Player layer from the layer mask
             );
 
-        telegraphMarker.SetActive(hit.collider != null);
-
-        if(telegraphMarker.activeSelf)
-            telegraphMarker.transform.position = hit.point;
-    }
-
-    private void OnDisable() => transform.position = transform.parent.position;
-
-    public abstract class FallingObjectCollisionEventBase<T> : EgilEventSystem.Event
-    {
-        public T CollidingObject
+        if (hit.collider == null)
         {
-            get; private set;
+            telegraphMarker.SetActive(false);
+            return;
         }
 
-        public FallingObjectCollisionEventBase(T go)
-        {
-            CollidingObject = go;
-        }
+        telegraphMarker.transform.position = hit.point;
+        telegraphMarker.transform.parent = null;
     }
 
-    public class FallingObjectCollided<T> : FallingObjectCollisionEventBase<T>
+    // Update is called once per frame
+    void Update()
     {
-<<<<<<< HEAD:SPM-Grupparbete Unity/Assets/Scripts/Environmental Hazards/FallingObjectScript.cs
-        public FallingObjectCollided(T go) : base(go) { }
+        if (transform.position.y < yDespawnBoundary)
+            Destroy(gameObject);
     }
 
-    public class FallingObjectColliding<T> : FallingObjectCollisionEventBase<T>
+    void OnCollisionEnter(Collision collision)
     {
-        public FallingObjectColliding(T go) : base(go) { }
-=======
         if (Utility.LayerMaskExtensions.IsInLayerMask(collision.gameObject, layerMask))
         {
             /*if (collision.gameObject.GetComponent<IDamagable>() != null)
@@ -126,7 +88,6 @@ public class FallingObjectScript : MonoBehaviour
             StartCoroutine(CountDownToDestruction());
             
         }
->>>>>>> MainTest:SPM-Grupparbete Unity/Assets/Scripts/Environmental Hazards/FallingRockScript.cs
     }
 
     private IEnumerator CountDownToDestruction()
