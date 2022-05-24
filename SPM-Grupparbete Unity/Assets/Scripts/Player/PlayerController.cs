@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
             ShootOrDrill();
         }
 
-        if (TownPortal.isTeleporting == false)
+        if (TownPortal.IsTeleporting == false)
         {
             RestrictMovement();
         }

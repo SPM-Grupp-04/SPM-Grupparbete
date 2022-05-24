@@ -8,34 +8,44 @@ using UnityEngine.UI;
 
 public class TownPortal : MonoBehaviour
 {
+    [Header("Public")]
+    public static bool IsTeleporting;
+    public Slider slider;
+    
+    public GameObject loadingScreen;
+    
+    public Text progressText;
+    
+    [Header("Private")]
     [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject camera;
+    
     private GameObject playerOne;
     private GameObject playerTwo;
     private GameObject drone;
-    private bool isLoading;
-    public static bool isTeleporting;
+    private GameObject copyOfParticleSystem;
+    private GameObject transEnable;
     
-    public GameObject loadingScreen;
-    public Slider slider;
-    public Text progressText;
-    private GameObject copyOfParticalSystem;
-
+    private const int HubZoneShopPosition = 1000;
+    
+    private bool isLoading;
     private void Start()
     {
         playerOne = GameObject.Find("Player1");
         playerTwo = GameObject.Find("Player2");
         drone = GameObject.Find("Drone");
+        transEnable = GameObject.Find("Trans");
     }
 
     private void OnEnable()
     {
-        copyOfParticalSystem = Instantiate(particalSystem, transform.position, quaternion.identity);
+        copyOfParticleSystem = Instantiate(particalSystem, transform.position, quaternion.identity);
     }
 
     private void OnDisable()
     {
-        Destroy(copyOfParticalSystem);
+        transEnable.SetActive(true);
+        Destroy(copyOfParticleSystem);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -47,28 +57,26 @@ public class TownPortal : MonoBehaviour
 
         if (!isLoading)
         {
-            isTeleporting = true;
+            IsTeleporting = true;
             isLoading = true;
             GlobalControl.SaveData();
-            //SceneManager.LoadScene(5, LoadSceneMode.Additive);
             StartCoroutine(LoadAsync(5));
 
-            camera.transform.position = new Vector3(1000, camera.transform.position.y, 1000);
+            camera.transform.position = new Vector3(HubZoneShopPosition, camera.transform.position.y, HubZoneShopPosition);
 
             if (playerOne.activeInHierarchy)
             {
-                playerOne.transform.position = new Vector3(1000, 3, 1000); // Hamnar på 800/0/550
+                playerOne.transform.position = new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition); // Hamnar på 800/0/550
             }
 
             if (playerTwo.activeInHierarchy)
             {
-                playerTwo.transform.position = new Vector3(1001, 3, 1001);
+                playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition +1);
             }
 
             drone.transform.position = new Vector3(playerOne.transform.position.x,
                 drone.transform.position.y, playerOne.transform.position.z);
-
-
+            
             StartCoroutine(waitUntillActivate());
         }
     }
@@ -105,6 +113,6 @@ public class TownPortal : MonoBehaviour
     public static IEnumerator waitUntillActivate()
     {
         yield return new WaitForSeconds(1);
-        isTeleporting = false;
+        IsTeleporting = false;
     }
 }

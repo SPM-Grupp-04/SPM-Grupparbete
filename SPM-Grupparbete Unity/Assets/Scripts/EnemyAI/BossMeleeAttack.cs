@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace EnemyAI
 {
-    public class BossMeeleAttack : TreeNode
+    public class BossMeleeAttack : TreeNode
     {
         /*
      * Klassen gör så att fienden vänder sig mot sitt mål och sedan attackerar det. Här väljer den också
@@ -18,21 +18,21 @@ namespace EnemyAI
         
         private List<Transform> targets;
         private Vector3 currentVelocity;
-        private Animator animator;
-        private MeleeWepon meleeWepon;
-        private BossAI bossAI;
+        private readonly Animator animator;
+        private readonly MeleeWepon meleeWeapon;
+        private readonly BossAI bossAI;
         
-        public BossMeeleAttack(BossAI bossAI,NavMeshAgent agent, Animator animator, MeleeWepon meleeWepon)
+        public BossMeleeAttack(BossAI bossAI,NavMeshAgent agent, Animator animator, MeleeWepon meleeWeapon)
         {
             this.agent = agent;
             this.animator = animator;
-            this.meleeWepon = meleeWepon;
+            this.meleeWeapon = meleeWeapon;
             this.bossAI = bossAI;
         }
 
         public override NodeState Evaluate()
         {
-            if (bossAI.getCurrentHealth() < 1)
+            if (bossAI.GetCurrentHealth() < 1)
             {
                 return NodeState.FAILURE;
             }
@@ -41,7 +41,7 @@ namespace EnemyAI
             var agentT = agent.transform;
             var target = (Transform) GetData("target");
             agentT.LookAt(target);
-            if (meleeWepon.timeRemaining <= 0.1f)
+            if (meleeWeapon.timeRemaining <= 0.1f)
             {
                 animator.SetTrigger("Attack");
             }

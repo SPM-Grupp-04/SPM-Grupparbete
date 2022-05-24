@@ -26,6 +26,8 @@ public class EnemyAIHandler : MonoBehaviour
     private float closestDistance;
     private float distancePlayerOne;
     private float distancePlayerTwo;
+    
+    private  int countEnemy = 0;
 
 
     private void Start()
@@ -51,7 +53,7 @@ public class EnemyAIHandler : MonoBehaviour
     }
 
 
-        int countEnemy = 0;
+
     private void Update()
     {
         playerOneIsActive = playerOne.gameObject.activeInHierarchy;

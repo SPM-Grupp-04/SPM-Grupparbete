@@ -23,14 +23,13 @@ public class UnloadLevel : MonoBehaviour
         drone = GameObject.Find("Drone");
         teleportBackPos = GameObject.Find("TownPortal");
     }
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
         
         var teleportPosition = teleportBackPos.transform.position;
 
-        TownPortal.isTeleporting = true;
+        TownPortal.IsTeleporting = true;
 
         
         StartCoroutine(LoadAsync(5));
