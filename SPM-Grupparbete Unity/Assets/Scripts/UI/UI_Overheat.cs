@@ -10,16 +10,20 @@ public class UI_Overheat : MonoBehaviour
     [SerializeField] private GameObject weapon;
     [SerializeField] Image barColour;
     [SerializeField] PlayerWeapon playerWeaponScript;
-
-    Color green = new Color(0, 255, 0);
-    Color yellow = new Color(255, 255, 0);
-    Color red = new Color(255, 0, 0);
-    Color orange = new Color32(255, 127, 0, 255);
+	PlayerDrill playerDrillScript;
+    private Color greenColor;
+    private Color yellowColor;
+    private Color redColor;
+    private Color orangeColor;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerWeaponScript = weapon.GetComponent<PlayerWeapon>();
+        playerDrillScript = drill.GetComponent<PlayerDrill>();
+         greenColor = new Color(0, 103/255f, 0, 255);
+         yellowColor = new Color(103/255f, 103/255f, 0, 255);
+         redColor = new Color(103f/255f, 0, 0, 255);
+		orangeColor = new Color32(255, 127, 0, 255);
     }
 
     // Update is called once per frame
@@ -39,19 +43,17 @@ public class UI_Overheat : MonoBehaviour
         }
         else if (amount <= playerWeaponScript.OverheatThreshold * 0.5f)
         {
-            barColour.color = green;
+            barColour.color = greenColor;
         }
         else if (amount > playerWeaponScript.OverheatThreshold * 0.5f
             && amount <= playerWeaponScript.OverheatThreshold * 0.8f)
         {
-            barColour.color = yellow;
-        }
+            
+            barColour.color = yellowColor;
+        } 
         else
         {
-            barColour.color = red;
+            barColour.color = redColor;
         }
-
     }
-
-
 }
