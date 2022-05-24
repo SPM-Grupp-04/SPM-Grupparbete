@@ -25,7 +25,9 @@ public class PlayerStatistics
     public int Crystals;
     public int BlueCrystals;
     public int RedCrystals;
+    public int GreenCrystals;
     public PlayerBeamArmamentBase.ArmamentLevel armamentLevel = PlayerBeamArmamentBase.ArmamentLevel.LEVEL_1;
+    public int drillLevel = 0;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
     public float shieldCooldownModifer = 1f;

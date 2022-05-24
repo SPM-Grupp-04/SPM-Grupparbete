@@ -1,4 +1,5 @@
 //Author: Simon Canb�ck, sica 4801
+//Additional small changes: Axel Ingelsson Fredler
 
 using System;
 using System.Collections;

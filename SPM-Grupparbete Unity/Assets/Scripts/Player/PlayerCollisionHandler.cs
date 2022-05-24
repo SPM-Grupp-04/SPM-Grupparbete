@@ -21,7 +21,8 @@ public class PlayerCollisionHandler : MonoBehaviour
                 case "Red":
                     m_LocalPlayerDataTest.RedCrystals++;
                     break;
-                case "Colour":
+                case "Green":
+                    m_LocalPlayerDataTest.GreenCrystals++;
                     break;
 
                 default:
@@ -33,6 +34,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
         GlobalControl.Instance.playerStatistics.BlueCrystals = m_LocalPlayerDataTest.BlueCrystals;
         GlobalControl.Instance.playerStatistics.RedCrystals = m_LocalPlayerDataTest.RedCrystals;
+        GlobalControl.Instance.playerStatistics.GreenCrystals = m_LocalPlayerDataTest.GreenCrystals;
     }
 
     
