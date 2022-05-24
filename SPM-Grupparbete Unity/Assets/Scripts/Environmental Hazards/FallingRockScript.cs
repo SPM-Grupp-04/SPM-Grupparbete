@@ -74,7 +74,7 @@ public class FallingRockScript : MonoBehaviour
             {
                 collision.gameObject.GetComponent<IDamagable>().DealDamage(damage);
             }*/
-            var damageEvent = new DealDamageEventInfo(collision.gameObject, 1);
+            var damageEvent = new DamageDealt(collision.gameObject, 1);
             EventSystem.current.FireEvent(damageEvent);
             
             rockExplosionParticleSystem.Play();

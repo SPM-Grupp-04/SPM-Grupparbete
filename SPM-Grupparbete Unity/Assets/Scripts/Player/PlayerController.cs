@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip drillSound, laserSound;
     [SerializeField] private Animator animator;
 
-    private PlayerDrill drillScript;
+    private DrillBeam drillScript;
     
     [Header("Player Restrictions")] 
     [SerializeField] [Range(0.9f, 1.0f)] private float cameraPlayerPositiveMovementThreshold = 0.9f;
@@ -70,9 +70,6 @@ public class PlayerController : MonoBehaviour
     private InputActionMap defaultMap;
 
     private AudioSource source;
-
-    private Animator animator;
-
 
     private void Awake()
     {
@@ -170,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
 private void ShootOrDrill()
     {
-        if (isShooting)
+        if (IsShooting)
         {
             Debug.Log("SHOOT");
             drill.gameObject.SendMessage("Shoot", true);
@@ -178,7 +175,7 @@ private void ShootOrDrill()
         }
         else
         {
-            if (isDrilling)
+            if (IsDrilling)
             {
                 drill.gameObject.SendMessage("DrillObject");
                 drill.gameObject.SendMessage("DrillInUse", true);

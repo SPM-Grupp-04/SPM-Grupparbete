@@ -210,11 +210,11 @@ public class PlayerDrill : MonoBehaviour
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
 
-                    var takeDamge = new DealDamageEventInfo(shootHit.collider.gameObject,1);
+                    var takeDamge = new DamageDealt(shootHit.collider.gameObject,1);
                     EventSystem.current.FireEvent(takeDamge);
                 }
+
                 overHeatAmount += overHeatIncreaseAmount;
-                
             }
             else
             {
@@ -228,12 +228,12 @@ public class PlayerDrill : MonoBehaviour
     public void DrillInUse(bool state)
     {
         isUsed = state;
+
         if(isUsed == false)
         {
             isDrilling = false;
             isShooting = false;
         }
-
     }
     
     public void Shoot(bool state)

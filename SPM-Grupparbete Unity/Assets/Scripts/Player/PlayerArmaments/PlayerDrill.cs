@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerDrill : PlayerBeamArmamentBase
+public class DrillBeam : PlayerBeamArmamentBase
 {
     [SerializeField] private StateMachine laserStateMachine;
     protected override bool CanShoot => !(laserStateMachine.CurrentState is LaserWeaponFiringState);

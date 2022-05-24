@@ -318,8 +318,8 @@ public class ShopScript : MonoBehaviour
             weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
             buttonDictionary[weaponButton.name] = true;
-            GameObject.Find("Players/Player1/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
-            GameObject.Find("Players/Player2/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
+            GameObject.Find("Players/Player1/Drill").GetComponent<DrillBeam>().SetWeaponLevel();
+            GameObject.Find("Players/Player2/Drill").GetComponent<DrillBeam>().SetWeaponLevel();
             UpdateShop();
             weaponButton.Select();
         }
