@@ -20,6 +20,8 @@ public class FallingRockScript : MonoBehaviour
 
     [SerializeField] private ParticleSystem rockExplosionParticleSystem;
 
+    [SerializeField] private AudioSource rockExplosionAudioSource;
+
     [SerializeField] private MeshRenderer rockMeshRenderer;
     [SerializeField] private MeshRenderer telegraphMarkerMeshRenderer;
 
@@ -76,6 +78,7 @@ public class FallingRockScript : MonoBehaviour
             EventSystem.current.FireEvent(damageEvent);
             
             rockExplosionParticleSystem.Play();
+            rockExplosionAudioSource.Play();
 
             rockCollider.enabled = false;
             

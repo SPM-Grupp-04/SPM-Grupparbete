@@ -26,13 +26,21 @@ public class Dynamite : MonoBehaviour
     private float explosionCountdown;
     
     private bool hasExploded;
-
+    
+    
+    [Header("Components")]
+    [SerializeField] private GameObject dynamiteExplosionPrefab;
+    
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private Rigidbody capsuleRigidBody;
 
     [SerializeField] private MeshRenderer meshRenderer;
 
-    [SerializeField] private GameObject dynamiteExplosionPrefab;
+    [SerializeField] private Light dynamiteFuseLight;
+
+    [SerializeField] private Light dynamiteExplosionLight;
+
+    [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
     private FallingRocksSpawner fallingRocksSpawner;
 
@@ -48,6 +56,7 @@ public class Dynamite : MonoBehaviour
     {
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
+        dynamiteFuseAudioSource.Play();
     }
 
     void Update()
@@ -78,10 +87,19 @@ public class Dynamite : MonoBehaviour
             explosionCountdown -= Time.deltaTime;
             yield return null;
         } while (explosionCountdown > 0.0f);
+
+        dynamiteFuseLight.enabled = false;
+        
+        dynamiteFuseAudioSource.Stop();
+        
         GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
+        
+        dynamiteExplosionLight.enabled = true;
         //Gamepad.current.SetMotorSpeeds(1,0);
         capsuleCollider.enabled = false;
+        
         Explode();
+        
         do
         {
             particleSystemCountdown -= Time.deltaTime;
