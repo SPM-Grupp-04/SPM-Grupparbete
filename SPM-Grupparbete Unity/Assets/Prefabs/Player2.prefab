@@ -812,16 +812,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2f232af7217b94ebbe104266a7da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drill: {fileID: 5711041550793873810}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   movementAcceleration: 5
   rotationSmoothing: 25
+  colliderMargin: 0.01
+  drill: {fileID: 5711041550793873810}
+  boxCollider: {fileID: 0}
   drillSound: {fileID: 8300000, guid: 7d6b7b463acdf324f8275f819a265ca1, type: 3}
   laserSound: {fileID: 8300000, guid: 3840cbd66abed9e44a50d574e0c26fa2, type: 3}
   animator: {fileID: 3432154670100536797}
-  otherPlayer: {fileID: 0}
+  cameraPlayerPositiveMovementThreshold: 0.9
+  cameraPlayerNegativeMovementThreshold: 0.1
+  otherPlayerController: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
   teleport: {fileID: 0}
 --- !u!114 &2965090648212625145
 MonoBehaviour:

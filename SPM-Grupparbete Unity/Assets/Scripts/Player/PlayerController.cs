@@ -9,15 +9,30 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject drill;
-    private PlayerDrill drillScript;
+    [Header("Collision Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private LayerMask wallLayerMask;
+    
+    [Header("Movement")]
     [SerializeField] [Range(1.0f, 50.0f)] private float movementAcceleration = 5.0f;
     [SerializeField] [Range(1.0f, 1000f)] private float rotationSmoothing = 1000.0f;
-
+    [SerializeField] [Range(0.0f, 1.0f)] private float colliderMargin = 0.01f;
+    
+    [Header("Components")]
+    [SerializeField] private GameObject drill;
+    [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private AudioClip drillSound, laserSound;
     [SerializeField] private Animator animator;
-
+    
+    private PlayerDrill drillScript;
+    
+    [Header("Player Restrictions")] 
+    [SerializeField] [Range(0.9f, 1.0f)] private float cameraPlayerPositiveMovementThreshold = 0.9f;
+    [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
+    
+    [SerializeField] private PlayerController otherPlayerController;
+    
+    private Collider[] penetrationColliders = new Collider[2];
 
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -88,9 +103,7 @@ public class PlayerController : MonoBehaviour
             {
                 UI.Enable();
                 playerInput.SwitchCurrentActionMap("UI");
-
-
-
+                
                 defaultMap.Disable();
 
                 Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
@@ -108,67 +121,42 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    [SerializeField] private PlayerController otherPlayer;
-
+    
     private void RestrictMovement()
     {
-        Vector3 cameraView = mainCamera.WorldToViewportPoint(transform.position);
-        cameraView.x = Mathf.Clamp01(cameraView.x);
-        cameraView.y = Mathf.Clamp01(cameraView.y);
+        Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
+        currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
+        currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
 
-        //bool isOutSide = false;
-
-        if (cameraView.x <= 0.1)
+        Vector3 otherPlayerVelocity = otherPlayerController.GetPlayerVelocity();
+        
+        if (currentPlayerCameraView.x <= 0.05 || currentPlayerCameraView.x >= 0.95f)
         {
-           
-                velocity.x *= -1;
-            
-        }
-        else if (cameraView.x >= 0.9)
-        {
-          
-                velocity.x *= -1;
-            
-        }
-
-        if (cameraView.y <= 0.1f)
-        {
-            if (velocity == Vector3.zero)
+            if (otherPlayerVelocity.x > 0.0f)
             {
-                otherPlayer.velocity.z *= -1;
+                otherPlayerController.SetPlayerVelocity(new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
             }
-            else
+
+            if (otherPlayerVelocity.x < 0.0f)
             {
-                velocity.z *= -1;
+                otherPlayerController.SetPlayerVelocity(new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
             }
-                
-            
         }
-        else if (cameraView.y >= 0.9)
+        if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
         {
-            
-                velocity.z *= -1;
-            
+            if (otherPlayerVelocity.z > 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, -otherPlayerVelocity.z));
+            }
+            if (otherPlayerVelocity.z < 0.0f)
+            {
+                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z));
+            }
         }
-
-        /*if (cameraView.x == 0f || cameraView.x == 1)
-        {
-            isOutSide = true;
-            //  Debug.Log("Outside X ");
-        }
-
-        if (cameraView.y <= 0.2f || cameraView.y == 1)
-        {
-            isOutSide = true;
-            Debug.Log("Outside Y");
-        }*/
-
-
-        Vector3 playerPosInWorldPoint = mainCamera.ViewportToWorldPoint(cameraView);
-
-
-        //  transform.position = new Vector3(playerPosInWorldPoint.x, transform.position.y, playerPosInWorldPoint.z);
+        
+        Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
+        
+        transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
     }
 
     private void ShootOrDrill()
@@ -246,6 +234,16 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+    
+    public void SetPlayerVelocity(Vector3 newPlayerVelocity)
+    {
+        velocity = newPlayerVelocity;
+    }
+
+    public Vector3 GetPlayerVelocity()
+    {
+        return velocity;
     }
 
     public bool IsUseButtonPressed()
@@ -373,5 +371,27 @@ public class PlayerController : MonoBehaviour
         Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
+    }
+    
+    private void FixOverlapPenetration()
+    {
+        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+            boxCollider.transform.rotation, wallLayerMask);
+
+        while (colliderCount > 0)
+        {
+            for (int i = 0; i < colliderCount; i++)
+            {
+                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
+                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
+                        out var direction, out var distance))
+                {
+                    Vector3 separationVector = direction * distance;
+                    transform.position += separationVector + separationVector.normalized * colliderMargin;
+                }
+            }
+            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+                boxCollider.transform.rotation, wallLayerMask);
+        }
     }
 }
