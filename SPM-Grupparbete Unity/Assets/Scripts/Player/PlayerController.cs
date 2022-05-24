@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private bool useButtonPressed;
     
     private bool uiEnabled;
+    private bool playerCanShop;
 
     private InputActionMap UI;
     private InputActionMap defaultMap;
@@ -103,29 +104,32 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchActionMap(InputAction.CallbackContext SwitchMap)
     {
-        if (SwitchMap.performed)
+        if(playerCanShop)
         {
-            uiEnabled = !uiEnabled;
-
-            if (uiEnabled)
+            if (SwitchMap.performed)
             {
-                UI.Enable();
-                playerInput.SwitchCurrentActionMap("UI");
+                uiEnabled = !uiEnabled;
+
+                if (uiEnabled)
+                {
+                    UI.Enable();
+                    playerInput.SwitchCurrentActionMap("UI");
                 
-                defaultMap.Disable();
+                    defaultMap.Disable();
 
-                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-            }
-            else
-            {
-                //Debug.Log(uiEnabled);
+                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+                }
+                else
+                {
+                    //Debug.Log(uiEnabled);
 
-                //defaultMap.Enable();
-                playerInput.SwitchCurrentActionMap("Player");
-                UI.Disable();
+                    //defaultMap.Enable();
+                    playerInput.SwitchCurrentActionMap("Player");
+                    UI.Disable();
 
-                Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
+                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
 
+                }
             }
         }
     }
@@ -266,6 +270,12 @@ public class PlayerController : MonoBehaviour
     public void SetMovementStatus(bool movementStatus)
     {
         movementEnabled = movementStatus;
+    }
+
+    public void PlayerCanShop(bool value)
+    {
+        playerCanShop = value;
+        
     }
     
     public void PlayerMovementInput(InputAction.CallbackContext moveValue)
