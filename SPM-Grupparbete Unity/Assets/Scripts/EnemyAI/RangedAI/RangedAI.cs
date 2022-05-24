@@ -8,17 +8,17 @@ using UnityEngine.Pool;
 using Utility.EnemyAI;
 using Tree = BehaviorTree.Tree;
 
-public class RangedAI : BaseClassEnemyAI, IDamagable
+public class RangedAI : BaseEnemyAI, IDamagable
 {
     //  private TreeNode topTreeNode;
-    private float currentHealth;
+    //private float currentHealth;
     private NavMeshAgent agent;
-    [SerializeField] private float startHealth;
+   // [SerializeField] private float startHealth;
     [SerializeField] private float rangedAttackRange;
-    [SerializeField] private float movementSpeed;
+    //[SerializeField] private float movementSpeed;
     [SerializeField] private float chasingRange;
-    private Animator animator;
-    private IObjectPool<BaseClassEnemyAI> pool;
+    //private Animator animator;
+    private IObjectPool<BaseEnemyAI> pool;
     
     [Header("Throw Weapon settings")] [SerializeField]
     private GameObject throwabelObject;
@@ -35,10 +35,11 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
 
     void Start()
     {
+        movementSpeed = 4;
         base.Start();
         timer = 0;
         animator = GetComponent<Animator>();
-        currentHealth = startHealth;
+        currentHealth = startingHealth;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
         base.randomNumber = Random.Range(1, 10);
@@ -80,13 +81,13 @@ public class RangedAI : BaseClassEnemyAI, IDamagable
         Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
         Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, rangedAttackTreeNode});
 
-        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
 
-        return MTopTreeNode;
+        return TopTreeNode;
     }
 
 
-    public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
+    public override void SetPool(IObjectPool<BaseEnemyAI> pool)
     {
         this.pool = pool;
     }

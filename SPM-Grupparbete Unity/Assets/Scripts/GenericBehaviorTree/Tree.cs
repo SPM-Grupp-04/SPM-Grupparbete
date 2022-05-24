@@ -10,7 +10,7 @@ namespace BehaviorTree
     {
         private TreeNode root = null;
 
-        public void Start()
+        protected void Start()
         {
             root = SetUpTree();
         }

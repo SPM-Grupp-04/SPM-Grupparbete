@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ using UnityEngine;
 
 public class EnemyAIHandler : MonoBehaviour
 {
-    public List<BaseClassEnemyAI> units = new List<BaseClassEnemyAI>();
+    public List<BaseEnemyAI> units = new List<BaseEnemyAI>();
     
     private GameObject playerOne;
     private GameObject playerTwo;
@@ -50,6 +51,7 @@ public class EnemyAIHandler : MonoBehaviour
     }
 
 
+        int countEnemy = 0;
     private void Update()
     {
         playerOneIsActive = playerOne.gameObject.activeInHierarchy;
@@ -67,18 +69,18 @@ public class EnemyAIHandler : MonoBehaviour
         }
 
         // Used to know were to position in the circle around tha player.
-        var countEnemy = 0;
 
-        foreach (BaseClassEnemyAI enemyAI in units)
+       // StartCoroutine(slowDown());
+        foreach (BaseEnemyAI enemyAI in units)
         {
             if (enemyAI.gameObject.activeInHierarchy )
             {
-                Vector3 aiPos = enemyAI.gameObject.transform.position;
+                Vector3 aiPosition = enemyAI.gameObject.transform.position;
 
                 
                 // Checking distance from Ai-unit to Player.
-                distancePlayerOne = Vector3.Distance(playerOnePosition, aiPos);
-                distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPos);
+                distancePlayerOne = Vector3.Distance(playerOnePosition, aiPosition);
+                distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPosition);
 
                 // Resetting the old values.
                 closestTarget = new Vector3();
@@ -96,13 +98,13 @@ public class EnemyAIHandler : MonoBehaviour
                 }
 
 
-                closestDistance = ClosestDistance(enemyAI, aiPos, countEnemy,
+                closestDistance = ClosestDistance(enemyAI, aiPosition, countEnemy,
                     closestDistance, distancePlayerOne, distancePlayerTwo);
 
                 enemyAI.PositionAroundTarget(closestTarget);
                 enemyAI.DistanceToPlayerPos(closestDistance);
                 
-                enemyAI.MTopTreeNode.Evaluate();
+                enemyAI.TopTreeNode.Evaluate();
                 
                 countEnemy++;
             }
@@ -110,7 +112,52 @@ public class EnemyAIHandler : MonoBehaviour
         }
     }
 
-    private float ClosestDistance(BaseClassEnemyAI enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
+    /*IEnumerator slowDown()
+    {
+        foreach (BaseClassEnemyAI enemyAI in units)
+        {
+            if (enemyAI.gameObject.activeInHierarchy )
+            {
+                Vector3 aiPosition = enemyAI.gameObject.transform.position;
+
+                
+                // Checking distance from Ai-unit to Player.
+                distancePlayerOne = Vector3.Distance(playerOnePosition, aiPosition);
+                distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPosition);
+
+                // Resetting the old values.
+                closestTarget = new Vector3();
+                closestDistance = 100;
+
+                // A check needed to make sure the AI don't find the transform for the inactivated Game object.
+                if (!playerOneIsActive)
+                {
+                    distancePlayerOne = 1000;
+                }
+
+                if (!playerTwoIsActive)
+                {
+                    distancePlayerTwo = 1000;
+                }
+
+
+                closestDistance = ClosestDistance(enemyAI, aiPosition, countEnemy,
+                    closestDistance, distancePlayerOne, distancePlayerTwo);
+
+                enemyAI.PositionAroundTarget(closestTarget);
+                enemyAI.DistanceToPlayerPos(closestDistance);
+                
+                enemyAI.TopTreeNode.Evaluate();
+                
+                countEnemy++;
+            }
+           
+        }
+
+        yield return new WaitForSeconds(.1f);
+    }*/
+
+    private float ClosestDistance(BaseEnemyAI enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
         float distancePlayerOne, float distancePlayerTwo)
     {
         if (dynamite != Vector3.zero && enemyAI.randomNumber >= 6)

@@ -2472,6 +2472,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7524017376784620938, guid: fc50951aaea591f4bb1fad6dd463720c, type: 3}
   m_PrefabInstance: {fileID: 859450863}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1804810397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2928163712918112134, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+  m_PrefabInstance: {fileID: 2928163713140378447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82570d18c7502aa45803e5591210c06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1830458607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2497,11 +2508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[1]
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
@@ -3184,6 +3195,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: meleeWeapon
+      value: 
+      objectReference: {fileID: 1804810397}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 10
       objectReference: {fileID: 0}
@@ -3710,7 +3725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166416, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_RootOrder
@@ -3734,7 +3749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.726
+      value: 3.23
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_LocalPosition.z

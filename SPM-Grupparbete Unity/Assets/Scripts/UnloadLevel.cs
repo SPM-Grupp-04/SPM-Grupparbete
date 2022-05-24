@@ -12,7 +12,6 @@ public class UnloadLevel : MonoBehaviour
     private GameObject playerTwo;
     private GameObject drone;
     private GameObject teleportBackPos;
-
     
     public GameObject loadingScreen;
     public Slider Slider;
@@ -28,12 +27,13 @@ public class UnloadLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         var teleportPosition = teleportBackPos.transform.position;
 
         TownPortal.isTeleporting = true;
 
-        StartCoroutine(LoadAsynchronusly(5));
         
+        StartCoroutine(LoadAsync(5));
         if (playerOne != null)
         {
             playerOne.transform.position = new Vector3(teleportPosition.x + 1
@@ -57,12 +57,13 @@ public class UnloadLevel : MonoBehaviour
 
         //SceneManager.UnloadSceneAsync(5);
     }
-    
-    IEnumerator LoadAsynchronusly(int sceneIndex)
+
+
+    private IEnumerator LoadAsync(int sceneIndex)
     {
-        AsyncOperation op = SceneManager.UnloadSceneAsync(sceneIndex);
       
         loadingScreen.SetActive(true);
+        AsyncOperation op = SceneManager.UnloadSceneAsync(sceneIndex);
         while (op.isDone == false)
         {
             float progress = Mathf.Clamp01(op.progress / .9f);
@@ -70,6 +71,7 @@ public class UnloadLevel : MonoBehaviour
             progressText.text = progress * 100f + "%";
             yield return null;
         }
+
         loadingScreen.SetActive(false);
     }
     
