@@ -11,9 +11,9 @@ public class UI_Overheat : MonoBehaviour
     [SerializeField]Image barColour;
     [SerializeField] PlayerDrill playerDrillScript;
 
-    Color green = new Color(0, 255, 0);
-    Color yellow = new Color(255, 255, 0);
-    Color red = new Color (255, 0, 0);
+    Color green = new Color(0, 103, 0);
+    Color yellow = new Color(135, 103, 0);
+    Color red = new Color(103, 0, 0);
 
     // Start is called before the first frame update
     void Start()
