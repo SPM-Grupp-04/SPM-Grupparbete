@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private AudioClip drillSound, laserSound;
     [SerializeField] private Animator animator;
-    
+
     private PlayerDrill drillScript;
     
     [Header("Player Restrictions")] 
@@ -35,20 +35,28 @@ public class PlayerController : MonoBehaviour
     private Collider[] penetrationColliders = new Collider[2];
 
     private PlayerInput playerInput;
+    
     private Camera mainCamera;
+    
     private Vector3 velocity;
     private Vector3 playerMovementInput;
     private Vector3 gamePadLookRotation;
     private Vector2 lookRotation;
     private Vector2 mousePosition;
+
+
+    private bool invisibleWallDeployed;
+    private Vector3 invisibleWallPosition;
+    
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
+    
     private bool movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
-
+    
     private bool uiEnabled;
 
     private InputActionMap UI;
@@ -56,10 +64,10 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource source;
 
-
     private void Awake()
     {
-       // animator.enabled = true;
+        playerInput = GetComponent<PlayerInput>();
+        mainCamera = Camera.main;
         source = GetComponent<AudioSource>();
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
@@ -76,13 +84,13 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             ShootOrDrill();
         }
-
         if (TownPortal.isTeleporting == false)
         {
             RestrictMovement();
         }
+        RestrictMovement();
     }
-
+    
     private void OnEnable()
     {
         playerInput.actions["SwitchMap"].performed += SwitchActionMap;
@@ -163,51 +171,23 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-
-
-            drillScript.Shoot(true);
-            drillScript.DrillInUse(true);
-            drillScript.Drill(false);
-            animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
-            Debug.Log(animator.isActiveAndEnabled);
-            
-
-            if (!source.isPlaying)
-            {
-                PlayLaserWeaponSound();
-            }
+            Debug.Log("SHOOT");
+            drill.gameObject.SendMessage("Shoot", true);
+            drill.gameObject.SendMessage("DrillInUse", true);
         }
         else
         {
             if (isDrilling)
             {
-                drillScript.Shoot(false);
-                drillScript.Drill(true);
-                drillScript.DrillInUse(true);
-
-                animator.SetBool("IsShooting", true);
-                animator.SetBool("Idle", false);
-
-                if (!source.isPlaying)
-                {
-                    PlayDrillSound();
-                }
+                drill.gameObject.SendMessage("DrillObject");
+                drill.gameObject.SendMessage("DrillInUse", true);
             }
             else
             {
-                drillScript.DrillInUse(false);
-                drillScript.Shoot(false);
-                drillScript.Drill(false);
-                StopSound();
-
-                animator.SetBool("IsShooting", false);
-                animator.SetBool("Idle", true);
-
+                drill.gameObject.SendMessage("DrillInUse", false);
             }
         }
     }
-
 
     private void PlayerMovement()
     {
@@ -232,7 +212,6 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerRotationGamePad();
         }
-
         transform.position += velocity * movementAcceleration * Time.deltaTime;
     }
     
@@ -250,19 +229,18 @@ public class PlayerController : MonoBehaviour
     {
         return useButtonPressed;
     }
-
+    
     public bool IsMapSwitched()
     {
         return uiEnabled;
     }
-
+    
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
         if (shootValue.performed)
         {
             isShooting = true;
-        }
-        else if (shootValue.canceled)
+        } else if (shootValue.canceled)
         {
             isShooting = false;
         }
@@ -279,69 +257,28 @@ public class PlayerController : MonoBehaviour
             isDrilling = false;
         }
     }
-
-    private void PlayLaserWeaponSound()
-    {
-        source.clip = laserSound;
-        source.Play();
-    }
-
-    private void PlayDrillSound()
-    {
-        source.clip = drillSound;
-        source.Play();
-    }
-
-    private void StopSound()
-    {
-        source.Stop();
-        source.clip = null;
-    }
-
+    
     public void UseInput(InputAction.CallbackContext useValue)
     {
-        //useButtonPressed = useValue.performed;
-
-        if (useValue.performed)
-        {
-            useButtonPressed = true;
-        }
-        else if (useValue.canceled)
-        {
-            useButtonPressed = false;
-        }
-    }
-
-    [SerializeField] private GameObject teleport;
-
-    public void Teleport(InputAction.CallbackContext teleportValue)
-    {
-        if (teleport.activeInHierarchy != false) return;
-
-        teleport.transform.position = transform.position + new Vector3(1, 1, 1);
-        teleport.SetActive(true);
+        useButtonPressed = useValue.performed;
     }
 
     public void SetMovementStatus(bool movementStatus)
     {
         movementEnabled = movementStatus;
     }
-
+    
     public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
-        if (velocity != Vector3.zero)
-        {
-            //animator.SetBool("MoveForward", true);
-        }
     }
 
     public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)
     {
         gamePadLookRotation = rotationValue.ReadValue<Vector2>();
     }
-
+    
     public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
     {
         mousePosition = mouseValue.ReadValue<Vector2>();
