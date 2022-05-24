@@ -281,10 +281,6 @@ public class PlayerController : MonoBehaviour
     {
         playerMovementInput = moveValue.ReadValue<Vector2>();
         velocity = new Vector3(playerMovementInput.x, 0.0f, playerMovementInput.y);
-        if (velocity.normalized.x == transform.forward.x)
-        {
-            Debug.Log("MOVING FORWARDS");
-        }
     }
 
     public void PlayerRotationGamePadInput(InputAction.CallbackContext rotationValue)
