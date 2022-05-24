@@ -1,7 +1,4 @@
 //Author: Simon Canb�ck, sica4801
-//Additional small changes: Axel Ingelsson Fredler
-
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using EgilEventSystem;
@@ -15,24 +12,6 @@ public class FallingObjectScript : MonoBehaviour
     [SerializeField] private GameObject telegraphMarker;
     [SerializeField, Tooltip("Mark any layers that the rock is supposed to interact with -- most likely Player and Terrain or similar.")] private LayerMask layerMask;
     [SerializeField] private float yDespawnBoundary = -100.0f;
-
-    [SerializeField] private float particleSystemDuration = 5.0f;
-
-    [SerializeField] private ParticleSystem rockExplosionParticleSystem;
-
-    [SerializeField] private AudioSource rockExplosionAudioSource;
-
-    [SerializeField] private MeshRenderer rockMeshRenderer;
-    [SerializeField] private MeshRenderer telegraphMarkerMeshRenderer;
-
-    [SerializeField] private SphereCollider rockCollider;
-
-    private float particelSystemCountDown;
-
-    private void Awake()
-    {
-        particelSystemCountDown = particleSystemDuration;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -98,42 +77,11 @@ public class FallingObjectScript : MonoBehaviour
 
     public class FallingObjectCollided<T> : FallingObjectCollisionEventBase<T>
     {
-        if (Utility.LayerMaskExtensions.IsInLayerMask(collision.gameObject, layerMask))
-        {
-            /*if (collision.gameObject.GetComponent<IDamagable>() != null)
-            {
-                collision.gameObject.GetComponent<IDamagable>().DealDamage(damage);
-            }*/
-            var damageEvent = new DealDamageEventInfo(collision.gameObject, 1);
-            EventSystem.current.FireEvent(damageEvent);
-            
-            rockExplosionParticleSystem.Play();
-            rockExplosionAudioSource.Play();
-
-            rockCollider.enabled = false;
-            
-            rockMeshRenderer.enabled = false;
-            telegraphMarkerMeshRenderer.enabled = false;
-
-            StartCoroutine(CountDownToDestruction());
-            
-        }
+        public FallingObjectCollided(T go) : base(go) { }
     }
 
     public class FallingObjectColliding<T> : FallingObjectCollisionEventBase<T>
     {
         public FallingObjectColliding(T go) : base(go) { }
-    }
-
-    private IEnumerator CountDownToDestruction()
-    {
-        do
-        {
-            particelSystemCountDown -= Time.deltaTime;
-            yield return null;
-        } while (particelSystemCountDown > 0.0f);
-        
-        Destroy(telegraphMarker);
-        Destroy(gameObject);
     }
 }
