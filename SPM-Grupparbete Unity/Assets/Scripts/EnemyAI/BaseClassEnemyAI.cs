@@ -11,6 +11,7 @@ public abstract class BaseClassEnemyAI : Tree
     public TreeNode MTopTreeNode;
 
     public int randomNumber;
+    protected EgilEventSystem.EventSystem.EventListener damageDealtListener;
 
     public abstract void SetPool(IObjectPool<BaseClassEnemyAI> pool);
     public abstract void PositionAroundTarget(Vector3 targetPos);

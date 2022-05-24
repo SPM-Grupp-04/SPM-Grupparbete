@@ -36,6 +36,10 @@ public class FallingObjectScript : MonoBehaviour
             var collisionEvent = new FallingObjectCollided<GameObject>(transform.parent.gameObject);
             EventSystem.current.FireEvent(collisionEvent);
         }
+        else
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        }
     }
 
     private void OnEnable()

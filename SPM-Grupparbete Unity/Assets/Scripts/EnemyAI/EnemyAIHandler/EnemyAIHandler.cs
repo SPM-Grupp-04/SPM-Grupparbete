@@ -42,8 +42,6 @@ public class EnemyAIHandler : MonoBehaviour
         {
             playerTwo = playerOne;
         }
-        
-        Debug.Log(playerOne.transform.position);
     }
 
     public static void SetDynamite(Vector3 dyn)
