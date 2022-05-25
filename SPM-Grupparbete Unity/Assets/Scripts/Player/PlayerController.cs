@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
     
     [SerializeField] private PlayerController otherPlayerController;
+   [SerializeField] private GameObject teleport;
     
     private Collider[] penetrationColliders = new Collider[2];
 
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource source;
 
+    
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -76,6 +78,8 @@ public class PlayerController : MonoBehaviour
         drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
+        //teleport = GameObject.Find("TownPortal");
+       
     }
 
     private void Update()
@@ -318,6 +322,17 @@ public class PlayerController : MonoBehaviour
     public void PlayerMousePositionInput(InputAction.CallbackContext mouseValue)
     {
         mousePosition = mouseValue.ReadValue<Vector2>();
+    }
+    public void Teleport(InputAction.CallbackContext teleportValue)
+    {
+        if (teleport.activeInHierarchy) return;
+        
+        
+        teleport.SetActive(true);
+        teleport.transform.position = transform.position + new Vector3(1, 1, 1);
+
+       
+        
     }
 
     private void UpdatePlayerRotationGamePad()
