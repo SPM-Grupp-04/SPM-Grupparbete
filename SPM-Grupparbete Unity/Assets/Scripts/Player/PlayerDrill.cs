@@ -161,6 +161,8 @@ public class PlayerDrill : MonoBehaviour
                 overHeatAmount += overHeatIncreaseAmount;
                 return;
             }
+
+            laserHit.enabled = false;
             LaserBetweenPoints(transform.position, laserPoint.transform.position, 2); 
             overHeatAmount += overHeatIncreaseAmount;
         }
@@ -171,10 +173,8 @@ public class PlayerDrill : MonoBehaviour
                 lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
-                laserEmission.Stop();
-                laserEmission.Clear();
-                laserRing.Stop();
-                laserRing.Clear();
+                StopLaserParticles();
+
             }
         }
     }
@@ -201,6 +201,9 @@ public class PlayerDrill : MonoBehaviour
         {
             isDrilling = false;
             isShooting = false;
+            
+            StopLaserParticles();
+            StopDrillParticles();
         }
 
     }
@@ -210,23 +213,42 @@ public class PlayerDrill : MonoBehaviour
         isShooting = state;
         if (!isShooting)
         {
-            laserEmission.Stop();
-            laserEmission.Clear();
-            laserRing.Stop();
-            laserRing.Clear();
-            laserHit.Stop();
-            laserHit.enabled = false;
+            StopLaserParticles();
         }
     }
+
+    private void StopLaserParticles()
+    {
+        if (!isUsed)
+        {
+            lr.enabled = false;
+        }
+        laserEmission.Stop();
+        laserEmission.Clear();
+        laserRing.Stop();
+        laserRing.Clear();
+        laserHit.Stop();
+        laserHit.enabled = false;
+    }
+
+    private void StopDrillParticles()
+    {
+        if (!isUsed)
+        {
+            lr.enabled = false;
+        }
+        drillEmission.Stop();
+        drillEmission.Clear();
+        drillRing.Stop();
+        drillRing.Clear();
+    }
+
     public void Drill(bool state)
     {
         isDrilling = state;
         if (!isDrilling)
         {
-            drillEmission.Stop();
-            drillEmission.Clear();
-            drillRing.Stop();
-            drillRing.Clear();
+            StopDrillParticles();
         }
     }
 

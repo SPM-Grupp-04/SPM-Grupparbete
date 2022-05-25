@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
     
     [SerializeField] private PlayerController otherPlayerController;
+   [SerializeField] private GameObject teleport;
     
     private Collider[] penetrationColliders = new Collider[2];
 
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-    private bool movementEnabled = true;
+    private static bool movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource source;
 
+    
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -76,6 +78,8 @@ public class PlayerController : MonoBehaviour
         drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
+        //teleport = GameObject.Find("TownPortal");
+       
     }
 
     private void Update()
@@ -85,7 +89,7 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             ShootOrDrill();
         }
-        if (TownPortal.isTeleporting == false)
+        if (TownPortal.IsTeleporting == false)
         {
             RestrictMovement();
         }
@@ -174,20 +178,47 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-            Debug.Log("SHOOT");
-            drill.gameObject.SendMessage("Shoot", true);
-            drill.gameObject.SendMessage("DrillInUse", true);
+
+
+            drillScript.Shoot(true);
+            drillScript.DrillInUse(true);
+            drillScript.Drill(false);
+            animator.SetBool("IsShooting", true);
+            animator.SetBool("Idle", false);
+            Debug.Log(animator.isActiveAndEnabled);
+            
+
+            if (!source.isPlaying)
+            {
+                PlayLaserWeaponSound();
+            }
         }
         else
         {
             if (isDrilling)
             {
-                drill.gameObject.SendMessage("DrillObject");
-                drill.gameObject.SendMessage("DrillInUse", true);
+                drillScript.Shoot(false);
+                drillScript.Drill(true);
+                drillScript.DrillInUse(true);
+
+                animator.SetBool("IsShooting", true);
+                animator.SetBool("Idle", false);
+
+                if (!source.isPlaying)
+                {
+                    PlayDrillSound();
+                }
             }
             else
             {
-                drill.gameObject.SendMessage("DrillInUse", false);
+                drillScript.DrillInUse(false);
+                drillScript.Shoot(false);
+                drillScript.Drill(false);
+                StopSound();
+
+                animator.SetBool("IsShooting", false);
+                animator.SetBool("Idle", true);
+
             }
         }
     }
@@ -292,6 +323,17 @@ public class PlayerController : MonoBehaviour
     {
         mousePosition = mouseValue.ReadValue<Vector2>();
     }
+    public void Teleport(InputAction.CallbackContext teleportValue)
+    {
+        if (teleport.activeInHierarchy) return;
+        
+        
+        teleport.SetActive(true);
+        teleport.transform.position = transform.position + new Vector3(1, 1, 1);
+
+       
+        
+    }
 
     private void UpdatePlayerRotationGamePad()
     {
@@ -317,6 +359,24 @@ public class PlayerController : MonoBehaviour
         Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
+    }
+    
+    private void PlayLaserWeaponSound()
+    {
+        source.clip = laserSound;
+        source.Play();
+    }
+
+    private void PlayDrillSound()
+    {
+        source.clip = drillSound;
+        source.Play();
+    }
+
+    private void StopSound()
+    {
+        source.Stop();
+        source.clip = null;
     }
     
     private void FixOverlapPenetration()

@@ -1266,7 +1266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -1308,11 +1308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedSpawnTime
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 40
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.size
@@ -1324,11 +1324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
-      value: 95
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[1]
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
@@ -1674,6 +1674,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
 --- !u!4 &33347027 stripped
@@ -1828,6 +1836,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1861,7 +1873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7921805650946238599, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.442436
+      value: -13.99
       objectReference: {fileID: 0}
     - target: {fileID: 7921805650946238599, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1906,6 +1918,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: CheckForLaserFOV
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
@@ -2595,6 +2611,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
 --- !u!4 &51843751 stripped
@@ -2664,6 +2688,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -2810,8 +2842,16 @@ PrefabInstance:
       value: Ore_Red (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -2890,7 +2930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -4039,6 +4079,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
       value: 50
@@ -4667,7 +4711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -5768,6 +5812,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -6294,6 +6342,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: waypoints.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -6486,7 +6538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -6649,7 +6701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -6746,6 +6798,10 @@ PrefabInstance:
     - target: {fileID: 6979470723937351640, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
@@ -7013,7 +7069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -8206,10 +8262,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9454,6 +9514,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo (9)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 2
       objectReference: {fileID: 0}
@@ -9624,6 +9688,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -11406,7 +11478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -11492,10 +11564,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11849,7 +11925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -12024,7 +12100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedSpawnTime
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
@@ -12040,11 +12116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
-      value: 95
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[1]
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
@@ -12742,8 +12818,16 @@ PrefabInstance:
       value: Ore_Red (11)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -14258,7 +14342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -14336,6 +14420,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue_ModelOne (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
@@ -14893,6 +14981,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelOne (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
 --- !u!4 &323349552 stripped
@@ -14965,7 +15057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -14999,6 +15091,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: CheckForLaserFOV
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
@@ -15245,7 +15341,15 @@ PrefabInstance:
       value: Ore_Red (10)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -15918,7 +16022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -16142,7 +16246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -16947,7 +17051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -17173,6 +17277,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -18710,61 +18818,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.452087
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -89.587166
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 54.317677
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.085974455
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.99629736
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -170.136
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876971727103880159, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5936133483455519476, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
+    - target: {fileID: 8524379718836166416, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_Name
       value: Drone
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730277939360074344, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8406411114864276275, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: playerTransform
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_RootOrder
@@ -18772,15 +18828,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -66.305916
+      value: -74.92
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 92.48484
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -57.417675
+      value: 0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_LocalRotation.x
@@ -18794,13 +18854,17 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8524379718836166428, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0754a74dde4c4b840b7a0212a4a901eb, type: 2}
-    - target: {fileID: 8524379718836166429, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+    - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166430, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: playerTransform
@@ -18988,10 +19052,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -19140,7 +19208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -19383,7 +19451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -19462,6 +19530,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -20276,7 +20352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -20581,7 +20657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -20704,6 +20780,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -24140,7 +24220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -26345,6 +26425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
       value: 62
@@ -28073,7 +28157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -28237,10 +28321,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -28599,7 +28687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -29398,7 +29486,15 @@ PrefabInstance:
       value: Ore_Red (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -29559,7 +29655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -30225,8 +30321,16 @@ PrefabInstance:
       value: -3.825
       objectReference: {fileID: 0}
     - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2429452918239139694, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
       propertyPath: m_Name
@@ -30375,7 +30479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -30542,7 +30646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -30922,11 +31026,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -31071,6 +31179,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -31675,7 +31787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -33275,7 +33387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -35625,6 +35737,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 2
       objectReference: {fileID: 0}
@@ -35785,8 +35901,16 @@ PrefabInstance:
       value: Ore_Red (9)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -36828,8 +36952,16 @@ PrefabInstance:
       value: Ore_Red (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -37014,7 +37146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -38191,10 +38323,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -40307,6 +40443,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
       objectReference: {fileID: 0}
@@ -40554,7 +40694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -42857,6 +42997,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
       objectReference: {fileID: 0}
@@ -43795,11 +43939,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -45370,6 +45518,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 2
       objectReference: {fileID: 0}
@@ -45705,7 +45857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -47031,6 +47183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
       value: 56
@@ -47436,6 +47592,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -47756,7 +47916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -48154,7 +48314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -48177,6 +48337,18 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 856888544}
+    - target: {fileID: 2971810965652456986, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1234095708}
+    - target: {fileID: 2971810965652456986, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
+      propertyPath: progressText
+      value: 
+      objectReference: {fileID: 1969212843}
+    - target: {fileID: 2971810965652456986, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1203262771}
     - target: {fileID: 2971810965652456987, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -48231,6 +48403,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971810965652456987, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971810965652457061, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2971810965652457063, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
@@ -49538,6 +49714,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -50879,11 +51059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
-      value: 95
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[1]
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
@@ -51480,11 +51660,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -51753,7 +51937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -51960,6 +52144,10 @@ PrefabInstance:
     - target: {fileID: 6979470723937351640, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
@@ -52184,6 +52372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+--- !u!1 &1203262771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9005655306301937368, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 7368729970608807084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1205158518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53008,6 +53201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelOne
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
 --- !u!4 &1222669245 stripped
@@ -53421,6 +53618,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232385441}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1234095708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9005655304268320121, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 7368729970608807084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1237416244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53528,11 +53736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
-      value: 95
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[1]
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
@@ -53675,7 +53883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -54823,7 +55031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -55457,6 +55665,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: CheckForLaserFOV
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: laserAttackRange
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
@@ -56498,7 +56710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -57777,6 +57989,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2429452918239139694, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelOne
@@ -58468,6 +58688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelOne (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
 --- !u!4 &1363954722 stripped
@@ -58790,7 +59014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -60901,7 +61125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -61024,7 +61248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -61411,6 +61635,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -63235,7 +63463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -63352,7 +63580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -63442,7 +63670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -64243,6 +64471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelOne
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
 --- !u!4 &1546355901 stripped
@@ -64584,6 +64816,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo (8)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 2
       objectReference: {fileID: 0}
@@ -64730,7 +64966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -65255,7 +65491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -65341,7 +65577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -66332,7 +66568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -66776,10 +67012,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -67881,6 +68121,10 @@ PrefabInstance:
       value: Ore_Blue (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
       value: 2
       objectReference: {fileID: 0}
@@ -68153,6 +68397,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: m_Name
       value: Ore_Blue_ModelOne (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
@@ -68929,6 +69177,10 @@ PrefabInstance:
     - target: {fileID: 6979470723937351640, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
@@ -70162,11 +70414,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -70258,7 +70514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -70306,8 +70562,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671794661}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000058913014}
-  m_LocalPosition: {x: -111.31, y: 2.71, z: 83.02}
-  m_LocalScale: {x: 6.69384, y: 1, z: 0.8014428}
+  m_LocalPosition: {x: -111.31, y: 2.71, z: 120.84}
+  m_LocalScale: {x: 25.952019, y: 1, z: 8.270088}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 596505373}
@@ -71880,10 +72136,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -72032,7 +72292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -72353,6 +72613,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -72994,6 +73262,10 @@ PrefabInstance:
       value: Ore_Blue (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
       objectReference: {fileID: 0}
@@ -73075,7 +73347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -73401,7 +73673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -74162,6 +74434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
       value: 60
@@ -74702,7 +74978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -74991,7 +75267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -75018,6 +75294,10 @@ PrefabInstance:
     - target: {fileID: 6979470723937351640, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
@@ -75723,6 +76003,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -77162,6 +77450,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -79158,7 +79454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -81214,6 +81510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d19584c94e9424398319a847427ad6, type: 3}
 --- !u!4 &1937331253 stripped
@@ -82183,6 +82483,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7424582255688393629, guid: e255b5c39211ac547918986801d4d810, type: 3}
   m_PrefabInstance: {fileID: 1967604244}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1969212843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9005655304805623872, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 7368729970608807084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1970176848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82660,10 +82971,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -82898,6 +83213,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -83667,6 +83986,10 @@ PrefabInstance:
       value: Green_Ore_ModelTwo (7)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
       value: 2
       objectReference: {fileID: 0}
@@ -83820,7 +84143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: requierdWeaponLevel
@@ -84099,7 +84422,15 @@ PrefabInstance:
       value: Ore_Red (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -84192,7 +84523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -85276,8 +85607,16 @@ PrefabInstance:
       value: Ore_Red
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -85452,7 +85791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -85531,6 +85870,14 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -86312,8 +86659,16 @@ PrefabInstance:
       value: Ore_Red (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -86616,6 +86971,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -86928,11 +87287,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: oreMaterialHP
-      value: 70
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
@@ -87333,11 +87696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[0]
-      value: 95
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.data[1]
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
@@ -88090,7 +88453,15 @@ PrefabInstance:
       value: Ore_Red (7)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
       propertyPath: collecitbleCrystals
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -88169,7 +88540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreRequierdWeaponLevel
@@ -89416,7 +89787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: collecitbleCrystals
@@ -89578,6 +89949,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Red_ModelTwo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 232e73cd2959cc14fb385b801ac9f47f, type: 3}
 --- !u!4 &2146450617 stripped
@@ -89647,6 +90026,10 @@ PrefabInstance:
     - target: {fileID: 4305440644248331396, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: m_Name
       value: Green_Ore_ModelTwo (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
+      propertyPath: oreMaterialHP
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: e85bc0fefcbf6d24bb9b6585786333d2, type: 3}
       propertyPath: collecitbleCrystals
@@ -89730,6 +90113,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
+      propertyPath: oreMaterialHP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429452918239139693, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
+      propertyPath: oreRequierdWeaponLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2429452918239139694, guid: 8f483da4997853745858f0a70ffe2ae4, type: 3}
       propertyPath: m_Name
       value: Ore_Red (8)
@@ -89743,6 +90134,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1398454981}
     m_Modifications:
+    - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: uiIconBW
+      value: 
+      objectReference: {fileID: 7368729970608807086}
     - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: uiCooldowns
       value: 
@@ -89907,6 +90302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: oreMaterialHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -90019,6 +90418,46 @@ PrefabInstance:
     - target: {fileID: 66828223588515921, guid: 6890f559acc365d49a98294804986265, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680082, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 129862249591680085, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: speed
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1996421792845265979, guid: 6890f559acc365d49a98294804986265, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -90256,9 +90695,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7368729970608807084}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 028cef38af61fad4abca9f72d0c1ab13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7368729970608807086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7368729969912052088, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 7368729970608807084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8043463475365818443
@@ -90391,6 +90841,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1398454981}
     m_Modifications:
     - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: uiIconBW
+      value: 
+      objectReference: {fileID: 7368729970608807086}
+    - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 2115056028}
@@ -90415,12 +90869,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7368729970608807085}
     - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[28].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8871867442437586764}
+    - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PauseButtonInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[28].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Teleport
       objectReference: {fileID: 0}
     - target: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -90499,5 +90961,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8871867442437586764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+  m_PrefabInstance: {fileID: 8871867442437586753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8871867442437586755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2f232af7217b94ebbe104266a7da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
