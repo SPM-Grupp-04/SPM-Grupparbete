@@ -327,9 +327,9 @@ public class PlayerController : MonoBehaviour
     {
         if (teleport.activeInHierarchy) return;
         
-        
-        teleport.SetActive(true);
         teleport.transform.position = transform.position + new Vector3(1, 1, 1);
+        teleport.SetActive(true);
+      
 
        
         
