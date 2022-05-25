@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-    private bool movementEnabled = true;
+    private static bool movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
@@ -174,20 +174,47 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-            Debug.Log("SHOOT");
-            drill.gameObject.SendMessage("Shoot", true);
-            drill.gameObject.SendMessage("DrillInUse", true);
+
+
+            drillScript.Shoot(true);
+            drillScript.DrillInUse(true);
+            drillScript.Drill(false);
+            animator.SetBool("IsShooting", true);
+            animator.SetBool("Idle", false);
+            Debug.Log(animator.isActiveAndEnabled);
+            
+
+            if (!source.isPlaying)
+            {
+                PlayLaserWeaponSound();
+            }
         }
         else
         {
             if (isDrilling)
             {
-                drill.gameObject.SendMessage("DrillObject");
-                drill.gameObject.SendMessage("DrillInUse", true);
+                drillScript.Shoot(false);
+                drillScript.Drill(true);
+                drillScript.DrillInUse(true);
+
+                animator.SetBool("IsShooting", true);
+                animator.SetBool("Idle", false);
+
+                if (!source.isPlaying)
+                {
+                    PlayDrillSound();
+                }
             }
             else
             {
-                drill.gameObject.SendMessage("DrillInUse", false);
+                drillScript.DrillInUse(false);
+                drillScript.Shoot(false);
+                drillScript.Drill(false);
+                StopSound();
+
+                animator.SetBool("IsShooting", false);
+                animator.SetBool("Idle", true);
+
             }
         }
     }
@@ -317,6 +344,24 @@ public class PlayerController : MonoBehaviour
         Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
         Physics.Raycast(mouseRay, out var hitInfo, Mathf.Infinity, groundLayerMask);
         return hitInfo.point;
+    }
+    
+    private void PlayLaserWeaponSound()
+    {
+        source.clip = laserSound;
+        source.Play();
+    }
+
+    private void PlayDrillSound()
+    {
+        source.clip = drillSound;
+        source.Play();
+    }
+
+    private void StopSound()
+    {
+        source.Stop();
+        source.clip = null;
     }
     
     private void FixOverlapPenetration()
