@@ -15,7 +15,7 @@ public class ShieldAbility : MonoBehaviour
     [SerializeField] private float upTimeShield = 5f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
 
-    [SerializeField] private Image uiIconBW;
+    private Image uiIconBW;
     
     private float coolDown = 15f;
     private static float cooldownToNextUse;
@@ -28,6 +28,7 @@ public class ShieldAbility : MonoBehaviour
 
     private void Start()
     {
+        uiIconBW = GameObject.Find("UI/Cooldowns/ShieldTestBW").GetComponent<Image>();
         shieldCooldownModifer = playerStatistics.shieldCooldownModifer;
         coolDown += upTimeShield;
         canUseShield = true;

@@ -35,6 +35,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private ParticleSystem drillEmission;
     
     [SerializeField] private VisualEffect laserHit;
+    [SerializeField] private VisualEffect drillHit;
 
 
 
@@ -70,6 +71,7 @@ public class PlayerDrill : MonoBehaviour
         DrillDamage();
         WeaponLevel();
         laserHit.transform.parent = null;
+        drillHit.transform.parent = null;
     }
 
     // Update is called once per frame
@@ -124,12 +126,19 @@ public class PlayerDrill : MonoBehaviour
             drillRing.Play();
             drillEmission.Play();
         }
-        if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
+        if (Physics.Raycast(transform.position, fwd, out hit, 3, igenoreMask))
         {
+            drillHit.enabled = true;
+            drillHit.transform.position = hit.point;
+            drillHit.Play();
             LaserBetweenPoints(transform.position, hit.point, 1);
-            hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            if (hit.collider.gameObject.CompareTag("Rocks"))
+            {
+                hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            }
             return;
         }
+        drillHit.enabled = false;
         LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
     }
     
@@ -241,6 +250,7 @@ public class PlayerDrill : MonoBehaviour
         drillEmission.Clear();
         drillRing.Stop();
         drillRing.Clear();
+        drillHit.enabled = false;
     }
 
     public void Drill(bool state)
