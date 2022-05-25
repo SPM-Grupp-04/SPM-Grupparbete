@@ -164,8 +164,8 @@ public class ShopScript : MonoBehaviour
             {
                 m_PlayerState.Heal();
                 m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCostBlue;
-                healButton.Select();
                 healButton.interactable = false;
+                healButton.Select();
             }
     }
 

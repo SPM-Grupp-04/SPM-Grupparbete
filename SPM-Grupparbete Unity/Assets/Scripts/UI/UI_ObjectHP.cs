@@ -8,6 +8,8 @@ public class UI_ObjectHP : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject gameObjectHP;
+    [SerializeField] private float hideUITime = 2f;
+    private float timer;
     
 
     private void Start()
@@ -33,7 +35,19 @@ public class UI_ObjectHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                timer = 0;
+            }
+        }
         
+        if (timer == 0)
+        {
+            HideUI();
+        }
     }
 
     public void ObjectTakeDamage(int amount)
@@ -43,8 +57,9 @@ public class UI_ObjectHP : MonoBehaviour
         transform.rotation = Camera.main.transform.rotation;
 
         slider.value -= amount;
-        Invoke("HideUI", 2);
-        
+
+        timer = hideUITime;
+
     }
     private void HideUI()
     {
