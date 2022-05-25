@@ -115,7 +115,7 @@ public class ShopScript : MonoBehaviour
             return;
         other.GetComponent<PlayerController>().PlayerCanShop(true);
         UpdateShop(drill1Button);
-        playersInShop.Add(other);
+        //playersInShop.Add(other);
     }
 
     private void OnTriggerStay(Collider other)
