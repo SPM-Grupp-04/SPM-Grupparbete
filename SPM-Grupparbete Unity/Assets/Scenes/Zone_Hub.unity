@@ -3993,6 +3993,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+--- !u!114 &1410578743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7368729969912052088, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 1470495122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1460583486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,6 +4223,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1895369540}
+    - target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: PlayerInputTwo
+      value: 
+      objectReference: {fileID: 2043014066}
     - target: {fileID: 1448055955, guid: 6890f559acc365d49a98294804986265, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -5477,6 +5496,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2086816598}
     m_Modifications:
     - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: uiIconBW
+      value: 
+      objectReference: {fileID: 1410578743}
+    - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 1470495123}
@@ -5747,7 +5770,7 @@ PrefabInstance:
       objectReference: {fileID: 982201736}
     - target: {fileID: 6278994302253887646, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7777778
+      value: 1.3333334
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887647, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_RootOrder
@@ -5800,6 +5823,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6278994302253887647, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
   m_PrefabInstance: {fileID: 1890737762}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1895369540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2965090648212625145, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+  m_PrefabInstance: {fileID: 1777691067}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1907913891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6118,6 +6152,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2086816598}
     m_Modifications:
     - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: uiIconBW
+      value: 
+      objectReference: {fileID: 1410578743}
+    - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 1470495123}
@@ -6217,6 +6255,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe2f232af7217b94ebbe104266a7da87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2043014066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2965090648212625145, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+  m_PrefabInstance: {fileID: 2043014047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2084186074
