@@ -6,6 +6,7 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class PlayerDrill : MonoBehaviour
@@ -33,16 +34,21 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private ParticleSystem laserEmission;
     [SerializeField] private ParticleSystem drillRing;
     [SerializeField] private ParticleSystem drillEmission;
+    
+    [SerializeField] private VisualEffect laserHit;
+
 
 
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
-    private float timer = 0;
+    
     private GameObject laserPoint;
     private GameObject drillPoint;
 
-    private bool isUsed;
+    private float timer = 0;
     private bool canShoot = true;
+    
+    private bool isUsed;
     private bool isShooting;
     private bool isDrilling;
 
@@ -64,18 +70,12 @@ public class PlayerDrill : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         DrillDamage();
         WeaponLevel();
-
+        laserHit.transform.parent = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (isUsed == false)
-        {
-            lr.enabled = false;
-        }
-
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -84,22 +84,15 @@ public class PlayerDrill : MonoBehaviour
                 timer = 0;
             }
         }
-       
-
+        
         if(Time.time >= nextColour && isDisco == true)
         {
-
             randomColour1 = Random.Range(0, 255);
             randomColour2 = Random.Range(0, 255);
             randomColour3 = Random.Range(0, 255);
             //lrMaterial.color = new Color(randomColour1, randomColour2, randomColour3);
-          
             nextColour = Time.time + delayTimer;
         }
-        
-
-       
-       
     }
 
     private void FixedUpdate()
@@ -112,7 +105,7 @@ public class PlayerDrill : MonoBehaviour
             DrillObject();
         }
         
-        if (timer == 0 && isShooting == false)
+        if (timer == 0 && (isShooting == false || canShoot == false))
         {
             CoolDownDrill();
             if (overHeatAmount <= 0)
@@ -121,9 +114,7 @@ public class PlayerDrill : MonoBehaviour
             }
         }
     }
-
-
-
+    
     private void DrillObject()
     {
         RaycastHit hit;
@@ -134,71 +125,32 @@ public class PlayerDrill : MonoBehaviour
             drillRing.Play();
             drillEmission.Play();
         }
-        
         if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
         {
-            Debug.DrawLine(transform.position, hit.point, Color.green);
             LaserBetweenPoints(transform.position, hit.point, 1);
-
             hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
             return;
         }
-        else
-        {
-            LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
-            return;
-        }
-        
-
+        LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
     }
-
-
-    void LaserBetweenPoints(Vector3 start, Vector3 end, int material)
-    {
-        if (material == 1)
-        {
-            lr.material = beamMaterials[0];
-        }
-
-        else if(material == 2)
-        {
-            lr.material = beamMaterials[1];
-        }
-
-        lr.enabled = true;
-        lr.SetPosition(0, start);
-        lr.SetPosition(1, end);
-    }
-
+    
     private void ShootObject()
     {
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (overHeatAmount < 100 && canShoot && isShooting)
+        if (overHeatAmount <= 100 && canShoot && isShooting)
         {
-            if (overHeatAmount >= 100)
-            {
-                if (timer <= 0)
-                {
-                    lr.enabled = false;
-                    canShoot = false;
-                    timer = coolDownTimerStart;
-                    isShooting = false;
-                    laserEmission.Stop();
-                    laserEmission.Clear();
-                    laserRing.Stop();
-                    laserRing.Clear();
-                    return;
-                }
-            }
-            
             if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
             {
                 laserRing.Play();
                 laserEmission.Play();
             }
+
             if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
             {
+                laserHit.enabled = true;
+                laserHit.transform.position = shootHit.point;
+                laserHit.Play();
                 LaserBetweenPoints(transform.position, shootHit.point, 2);
                 if (shootHit.collider.gameObject.CompareTag("Enemy"))
                 {
@@ -207,15 +159,39 @@ public class PlayerDrill : MonoBehaviour
                     EventSystem.current.FireEvent(takeDamge);
                 }
                 overHeatAmount += overHeatIncreaseAmount;
-                
+                return;
             }
-            else
+            LaserBetweenPoints(transform.position, laserPoint.transform.position, 2); 
+            overHeatAmount += overHeatIncreaseAmount;
+        }
+        else
+        {
+            if (timer <= 0 && canShoot)
             {
-                LaserBetweenPoints(transform.position, laserPoint.transform.position, 2);
-                overHeatAmount += overHeatIncreaseAmount;
+                lr.enabled = false;
+                canShoot = false;
+                timer = coolDownTimerStart;
+                laserEmission.Stop();
+                laserEmission.Clear();
+                laserRing.Stop();
+                laserRing.Clear();
             }
         }
-       
+    }
+    
+    void LaserBetweenPoints(Vector3 start, Vector3 end, int material)
+    {
+        if (material == 1)
+        {
+            lr.material = beamMaterials[0];
+        }
+        else if(material == 2)
+        {
+            lr.material = beamMaterials[1];
+        }
+        lr.enabled = true;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
     }
 
     public void DrillInUse(bool state)
@@ -238,6 +214,8 @@ public class PlayerDrill : MonoBehaviour
             laserEmission.Clear();
             laserRing.Stop();
             laserRing.Clear();
+            laserHit.Stop();
+            laserHit.enabled = false;
         }
     }
     public void Drill(bool state)
@@ -264,17 +242,7 @@ public class PlayerDrill : MonoBehaviour
     {
         return overHeatAmount;
     }
-
-    public int GetDrillDamageOres()
-    {
-        return drillDamageOres;
-    }
-
-    public int GetDrillDamageMonsters()
-    {
-        return drillDamageMonsters;
-    }
-
+    
     private void DrillDamage()
     {
         int drillLevel = playerStatistics.drillLevel;
@@ -300,10 +268,7 @@ public class PlayerDrill : MonoBehaviour
                 drillDamageOres = 3;
                 drillDamageMonsters = 3;
                 break;
-                
-
         }
-
     }
 
     private void WeaponLevel()
@@ -322,20 +287,21 @@ public class PlayerDrill : MonoBehaviour
             case 3:
                 laserDistance = 20f;
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
-
                 break;
             default:
                 laserDistance = 20f;
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
-
                 break;
-                
-
         }
     }
 
     public void SetWeaponLevel()
     {
         WeaponLevel();
+    }
+
+    public void IncreaseOverheatAmount(float increaseAmount)
+    {
+        overHeatAmount += increaseAmount;
     }
 }

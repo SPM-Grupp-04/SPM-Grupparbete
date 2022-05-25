@@ -18,6 +18,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] [Range(1.0f, 30.0f)] private float shopAreaRadius = 5.0f;
     [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private bool shopIsFree;
     
     private Collider[] shopColliders;
     private SphereCollider shopCollider;
@@ -26,16 +27,23 @@ public class ShopScript : MonoBehaviour
     private bool GameIsPause;
     private bool doOnce = false;
     
+    
     [Header("Costs for shop")]
-    [SerializeField] private int drillLevelCostBlue;
     [SerializeField] private int healCostBlue;
     [SerializeField] private int weaponCostBlue;
     [SerializeField] private int speedCostBlue;
     [SerializeField] private int discoCostBlue;
+    
+    [Header("Drill Upgrades")]
+    [SerializeField] private int drillLevelCostBlue;
+    [SerializeField] private int drillLevel2CostBlue;
     [SerializeField] private int drillLevel2CostRed;
+    [Header("Health Upgrades")]
     [SerializeField] private int healthLevel1CostBlue;
     [SerializeField] private int healthLevel2CostBlue;
     [SerializeField] private int healthLevel2CostRed;
+    [SerializeField] private int healthLevel3CostBlue;
+    [SerializeField] private int healthLevel3CostRed;
     
     
     
@@ -46,16 +54,16 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button accelerateButton;
     [SerializeField] private Button healthOneButton;
     [SerializeField] private Button healthTwoButton;
+    [SerializeField] private Button healthThreeButton;
     [SerializeField] private Button drill2Button;
+
     
     private Dictionary<string, bool> buttonDictionary;
-    
-    
+
+    private Stopwatch stopWatch;
     private void Start()
     {
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
-        Debug.Log(contentGO.name);
-        
         if (buttonDictionary == null)
         {
             
@@ -67,18 +75,17 @@ public class ShopScript : MonoBehaviour
                 if (temp.gameObject.CompareTag("ShopButton"))
                 {
                     string addedButton = contentGO.transform.GetChild(i).gameObject.name;
-                    Debug.Log(addedButton);
                     buttonDictionary.Add(addedButton, false);
                     temp.name = addedButton;
                 }
             }
         }
 
-        foreach (KeyValuePair<string, bool> test in buttonDictionary)
-        {
-            
-            Debug.Log(test.Key + " " + test.Value.ToString());
-        }
+        // foreach (KeyValuePair<string, bool> test in buttonDictionary)
+        // {
+        //     
+        //     Debug.Log(test.Key + " " + test.Value.ToString());
+        // }g
 
         
         shopCollider = GetComponent<SphereCollider>();
@@ -90,11 +97,25 @@ public class ShopScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (shopIsFree)
+        {
+            drillLevelCostBlue = 0;
+            healCostBlue = 0;
+            weaponCostBlue = 0;
+            speedCostBlue = 0;
+            discoCostBlue = 0;
+            drillLevel2CostBlue = 0;
+            drillLevel2CostRed = 0;
+            healthLevel1CostBlue = 0;
+            healthLevel2CostBlue = 0;
+            healthLevel2CostRed = 0;
+            
+        }
         
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
-        
-        UpdateShop();
+        other.GetComponent<PlayerController>().PlayerCanShop(true);
+        UpdateShop(drill1Button);
         
     }
 
@@ -109,12 +130,15 @@ public class ShopScript : MonoBehaviour
             {
                 drill1Button.Select();
                 doOnce = true;
+                other.GetComponent<PlayerController>().SetMovementStatus(false);
             }
         }
         else
         {
             CloseShopInterface();
-            doOnce = false;
+            other.GetComponent<PlayerController>().SetMovementStatus(true);
+
+           
         }
         
     }
@@ -123,28 +147,21 @@ public class ShopScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         CloseShopInterface();
-        
+        doOnce = false;
+        other.GetComponent<PlayerController>().PlayerCanShop(false);
     }
 
     private void OpenShopInterface()
     {
         shopInterfaceBackground.SetActive(true);
-
     }
     
     private void CloseShopInterface()
     {
         PlayerStatistics.Instance.buttonDictionary = buttonDictionary;
+        doOnce = false;
         shopInterfaceBackground.SetActive(false);
 
-    }
-   
-
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
     }
     
     public void Heal()
@@ -166,28 +183,22 @@ public class ShopScript : MonoBehaviour
             case 1:
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
                 {
-                    Debug.Log("I am called");
-                    drill1Button.interactable = false;
                     m_PlayerState.m_LocalPlayerData.drillLevel = level;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
                     GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-                    drill1Button.Select();
-                    buttonDictionary[drill1Button.name] = true;
-                    UpdateShop();
+                    DisableShopButton(drill1Button);
+                    UpdateShop(drill1Button);
                 }
                 break;
             case 2:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= 20 && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostRed)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostRed)
                 {
-                    Debug.Log("I am called");
-                    drill2Button.interactable = false;
                     m_PlayerState.m_LocalPlayerData.drillLevel = level;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= drillLevelCostBlue;
                     m_PlayerState.m_LocalPlayerData.RedCrystals -= drillLevel2CostRed;
                     GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-                    drill2Button.Select();
-                    buttonDictionary[drill2Button.name] = true;
-                    UpdateShop();
+                    DisableShopButton(drill2Button);
+                    UpdateShop(drill2Button);
                 }
                 break;
                 
@@ -203,35 +214,41 @@ public class ShopScript : MonoBehaviour
             case 1:
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel1CostBlue)
                 {
-                    Debug.Log("I am called");
-                    healthOneButton.interactable = false;
                     m_PlayerState.m_LocalPlayerData.playerMaxHealth += 10;
                     m_PlayerState.m_LocalPlayerData.playerOneHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
                     m_PlayerState.m_LocalPlayerData.playerTwoHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= healthLevel1CostBlue;
                     GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-                    healthOneButton.Select();
-                    buttonDictionary[healthOneButton.name] = true;
-                    UpdateShop();
+                    DisableShopButton(healthOneButton);
+                    UpdateShop(healthOneButton);
                 }
                 break;
             case 2:
                 if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostRed)
                 {
-                    Debug.Log("I am called");
-                    healthTwoButton.interactable = false;
                     m_PlayerState.m_LocalPlayerData.playerMaxHealth += 20;
                     m_PlayerState.m_LocalPlayerData.playerOneHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
                     m_PlayerState.m_LocalPlayerData.playerTwoHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
                     m_PlayerState.m_LocalPlayerData.BlueCrystals -= healthLevel2CostBlue;
                     m_PlayerState.m_LocalPlayerData.RedCrystals -= healthLevel2CostRed;
                     GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
-                    healthTwoButton.Select();
-                    buttonDictionary[healthTwoButton.name] = true;
-                    UpdateShop();
+                    DisableShopButton(healthTwoButton);
+                    UpdateShop(healthTwoButton);
                 }
                 break;
-                
+            case 3:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel3CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel3CostRed)
+                {
+                    m_PlayerState.m_LocalPlayerData.playerMaxHealth += 30;
+                    m_PlayerState.m_LocalPlayerData.playerOneHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
+                    m_PlayerState.m_LocalPlayerData.playerTwoHealth = m_PlayerState.m_LocalPlayerData.playerMaxHealth;
+                    m_PlayerState.m_LocalPlayerData.BlueCrystals -= healthLevel3CostBlue;
+                    m_PlayerState.m_LocalPlayerData.RedCrystals -= healthLevel3CostRed;
+                    GlobalControl.Instance.playerStatistics = PlayerStatistics.Instance;
+                    DisableShopButton(healthThreeButton);
+                    UpdateShop(healthThreeButton);
+                }
+                break;
 
         }
     }
@@ -240,14 +257,11 @@ public class ShopScript : MonoBehaviour
     {
         if (GlobalControl.Instance.playerStatistics.BlueCrystals >= speedCostBlue)
         {
-            accelerateButton.interactable = false;
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerTwoAcceleration + addedAcceleration);
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
-
-            buttonDictionary[accelerateButton.name] = true;
-
-            accelerateButton.Select();
+            DisableShopButton(accelerateButton);
+            UpdateShop(accelerateButton);
         }
     }
 
@@ -270,13 +284,18 @@ public class ShopScript : MonoBehaviour
         if (GlobalControl.Instance.playerStatistics.BlueCrystals >= weaponCostBlue)
         {
             m_PlayerState.m_LocalPlayerData.weaponLevel = level;
-            weaponButton.interactable = false;
             m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
-            buttonDictionary[weaponButton.name] = true;
             GameObject.Find("Players/Player1/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
             GameObject.Find("Players/Player2/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
-            weaponButton.Select();
+            DisableShopButton(weaponButton);
+            UpdateShop(weaponButton);
         }
+    }
+
+    private void DisableShopButton(Button button)
+    {
+        button.interactable = false;
+        buttonDictionary[button.name] = true;
     }
 
     private void CanPlayersHeal()
@@ -291,12 +310,10 @@ public class ShopScript : MonoBehaviour
         healButton.interactable = true;
     }
 
-    private void UpdateShop()
+    private void UpdateShop(Button button)
     {
+        TestTime(true);
 
-        
-        Stopwatch stopWatch = new Stopwatch();
-        stopWatch.Start();
         if (buttonDictionary[drill1Button.name] == false)
         {
             foreach (string buttonName in buttonDictionary.Keys)
@@ -307,46 +324,94 @@ public class ShopScript : MonoBehaviour
                     
                 }
             }
-
-            
         }
         else
         {
             foreach (string buttonName in buttonDictionary.Keys)
             {
-                if (buttonDictionary[buttonName] == false)
+                Button currentButton = FindButton(buttonName);
+                Selectable buttonAbove = currentButton.FindSelectableOnUp();
+                if (buttonAbove != null)
                 {
-                    FindButton(buttonName).interactable = true;
-                    
-                    if (buttonName.Equals(healButton.name))
+                    if (buttonDictionary[buttonAbove.name] == true)
                     {
-                        CanPlayersHeal();
-                        
+                        currentButton.interactable = true;
+                        Selectable left = currentButton.FindSelectableOnLeft();
+                        Selectable right = currentButton.FindSelectableOnRight();
+
+                        if (left != null)
+                        {
+                            if (buttonDictionary[left.name] == false)
+                            {
+                                left.interactable = true;
+                            }
+                            else
+                            {
+                                left.interactable = false;
+                            }
+
+                        }
+
+                        if (right != null)
+                        {
+                            if (buttonDictionary[right.name] == false)
+                            {
+                                right.interactable = true;
+                            }
+                            else
+                            {
+                                right.interactable = false;
+                            }
+                        }
+
+                        buttonAbove.interactable = false;
+                        if (buttonDictionary[currentButton.name] == true)
+                        {
+                            currentButton.interactable = false;
+                        }
+
                     }
-                }
-                else
-                {
-                    
-                    FindButton(buttonName).interactable = false;
+                    else
+                    {
+                        currentButton.interactable = false;
+                    }
                     
                 }
             }
         }
-        stopWatch.Stop();
-        TimeSpan ts = stopWatch.Elapsed;
-       
-        Debug.Log("Run time: " + ts);
+        CanPlayersHeal();
+        TestTime(false);
+        button.Select();
+
     }
 
     private Button FindButton(string buttonName)
     {
-        Debug.Log(buttonName);
         GameObject temp = GameObject.Find("UI_Shop/ShopCanvas/ShopInterfaceBackground/ScrollView/Viewport/Content/" + buttonName);
-        Debug.Log(temp);
         Button tempButton = temp.GetComponent<Button>();
-        
-
         return tempButton;
+    }
+
+    private void TestTime(bool value)
+    {
+        if (value)
+        {
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
+        }
+        else
+        {
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            Debug.Log("Run time: " + ts);
+        }
+    }
+    
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
     }
 
     

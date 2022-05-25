@@ -3,45 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class AudioSettings : MonoBehaviour
 {
 
     [SerializeField] private AudioMixer audioMixer;
 
-    private bool isMuted = false;
-    // Start is called before the first frame update
+    private Slider audioSlider;
+    
     void Start()
     {
-        if (PlayerPrefs.HasKey("IsMuted") == false)
-        {
-            audioMixer.SetFloat("VolumeControl", 1);
-            return;
-        }
-
-        audioMixer.SetFloat("VolumeControl", PlayerPrefs.GetFloat("IsMuted"));
+        audioSlider = gameObject.GetComponent<Slider>();
+        audioMixer.SetFloat("VolumeControl", PlayerPrefs.GetFloat("Volume"));
+        audioSlider.value = PlayerPrefs.GetFloat("Volume");
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void ChangeVolume(float sliderValue)
     {
-        
-    }
-
-    public void ChangeMutedAudio()
-    {
-        if (isMuted)
-        {
-            audioMixer.SetFloat("VolumeControl", 1f);
-            isMuted = false;
-            PlayerPrefs.SetFloat("IsMuted", 0);
-            return;
-        }
-
-        audioMixer.SetFloat("VolumeControl", -80f);
-        isMuted = true;
-        PlayerPrefs.SetFloat("IsMuted", 1);
-
-
+        audioMixer.SetFloat("VolumeControl", sliderValue);
+        PlayerPrefs.SetFloat("Volume", sliderValue);
     }
 }

@@ -13,9 +13,9 @@ public class UI_PlayerHealth : MonoBehaviour
 
     private PlayerStatistics m_LocalPlayerDataTest = PlayerStatistics.Instance;
 
-    Color green = new Color(0, 255, 0);
-    Color yellow = new Color(255, 255, 0);
-    Color red = new Color(255, 0, 0);
+    Color green = new Color(0, 103/255f, 0);
+    Color yellow = new Color(103/255f, 103/255f, 0);
+    Color red = new Color(103/255f, 0, 0);
 
     private void Update()
     {
