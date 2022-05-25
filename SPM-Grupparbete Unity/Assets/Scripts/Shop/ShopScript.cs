@@ -17,7 +17,6 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private GameObject contentGO;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] [Range(1.0f, 30.0f)] private float shopAreaRadius = 5.0f;
-    [SerializeField] private RectTransform rectTransform;
     [SerializeField] private bool shopIsFree;
     
     private Collider[] shopColliders;
@@ -137,8 +136,6 @@ public class ShopScript : MonoBehaviour
         {
             CloseShopInterface();
             other.GetComponent<PlayerController>().SetMovementStatus(true);
-
-           
         }
         
     }

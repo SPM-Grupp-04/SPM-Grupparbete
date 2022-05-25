@@ -130,6 +130,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_MoveAction
+      value: 
+      objectReference: {fileID: -8770741591401497550, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_PointAction
+      value: 
+      objectReference: {fileID: 3406088252110517391, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_ActionsAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_CancelAction
+      value: 
+      objectReference: {fileID: 6135849320486823300, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_SubmitAction
+      value: 
+      objectReference: {fileID: 7592788474634784221, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_LeftClickAction
+      value: 
+      objectReference: {fileID: -7556307808956698008, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_RightClickAction
+      value: 
+      objectReference: {fileID: -8468278570265084520, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_MiddleClickAction
+      value: 
+      objectReference: {fileID: 3007187395677293013, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_ScrollWheelAction
+      value: 
+      objectReference: {fileID: 6016666612693010491, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_TrackedDevicePositionAction
+      value: 
+      objectReference: {fileID: 6748814014743112842, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
+    - target: {fileID: 3406019106847174912, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
+      propertyPath: m_TrackedDeviceOrientationAction
+      value: 
+      objectReference: {fileID: -3843180880693473237, guid: 4f84c616bf1f6cf419c6c01a019b836b, type: 3}
     - target: {fileID: 3406019106847174913, guid: 6ef1fd2cbfd2077478d84c5df871881e, type: 3}
       propertyPath: m_Name
       value: UI_EventSystem
@@ -1415,6 +1459,17 @@ RectTransform:
   m_AnchoredPosition: {x: -9.45, y: 3.46}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &500675888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7368729969912052088, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 1470495122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &504616730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5477,6 +5532,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2086816598}
     m_Modifications:
     - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: uiIconBW
+      value: 
+      objectReference: {fileID: 500675888}
+    - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 1470495123}
@@ -6117,6 +6176,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2086816598}
     m_Modifications:
+    - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: uiIconBW
+      value: 
+      objectReference: {fileID: 500675888}
     - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: uiCooldowns
       value: 

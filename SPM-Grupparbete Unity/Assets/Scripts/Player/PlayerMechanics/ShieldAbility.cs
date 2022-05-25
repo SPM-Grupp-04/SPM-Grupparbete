@@ -63,7 +63,7 @@ public class ShieldAbility : MonoBehaviour
 
         if (cooldownToNextUse >= Time.time)
         {
-            uiIconBW.fillAmount -= 1 / cooldownToNextUse * Time.deltaTime;
+            uiIconBW.fillAmount -= 1 / (coolDown * 2) * Time.deltaTime;
             uiCooldowns.GetShieldText().text = ((int)cooldownToNextUse - (int)Time.time).ToString();
         }
         else
@@ -89,7 +89,7 @@ public class ShieldAbility : MonoBehaviour
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
             uiIconBW.fillAmount = 1;
-            cooldownToNextUse = Time.time + (coolDown * shieldCooldownModifer);
+            cooldownToNextUse = Time.time + coolDown;
         }
     }
 

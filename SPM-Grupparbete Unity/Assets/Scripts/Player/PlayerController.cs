@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-    private bool movementEnabled = true;
+    private static bool  movementEnabled = true;
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
