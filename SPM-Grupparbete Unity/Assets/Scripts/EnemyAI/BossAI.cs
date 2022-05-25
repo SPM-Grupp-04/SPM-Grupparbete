@@ -27,24 +27,23 @@ public class BossAI : Tree, IDamagable
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform firePointTwo;
 
-    [SerializeField] private float CheckForMeeleAttackFOV = 3f;
-    [SerializeField] private float CheckForLaserFOV = 15;
-    [SerializeField] private float CheckForRangeAttackFOV = 20;
-    [SerializeField] private float CheckIfIShouldMoveToPlayerFOV = 30;
-    [SerializeField] private float laerAttackRange;
+    [SerializeField] private float checkForMeleeAttackFOV = 3f;
+    [SerializeField] private float checkForLaserFOV = 15;
+    [SerializeField] private float checkForRangeAttackFOV = 20;
+    [SerializeField] private float checkIfIShouldMoveToPlayerFOV = 30;
+    [SerializeField] private float laserAttackRange;
 
     [SerializeField] private float throwForce = 30;
     [SerializeField] private float throwUpForce = 2;
 
     [SerializeField] private List<Transform> waypoints;
 
-    [SerializeField] private MeleeWepon meleeWepon;
+    [SerializeField] private MeleeWepon meleeWeapon;
 
     [SerializeField] private float currentHealth = 50;
 
     protected override TreeNode SetUpTree()
     {
-        
         var agentTransform = agent.transform;
         TreeNode root = new Selector(new List<TreeNode>
         {
@@ -52,29 +51,29 @@ public class BossAI : Tree, IDamagable
             new Sequence(new List<TreeNode>
             {
                 new CheckPlayerInAttackRange(this
-                    , agentTransform, CheckForMeeleAttackFOV),
-                new BossMeeleAttack(this, agent, animator, meleeWepon)
+                    , agentTransform, checkForMeleeAttackFOV),
+                new BossMeleeAttack(this, agent, animator, meleeWeapon)
             }),
 
             // Skjuter spelaren.
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(this, agentTransform, CheckForLaserFOV),
-                new BossAttackWithLaser(this, agent, lineRenderer, lineRendererTwo, firePoint,
-                    firePointTwo, laerAttackRange, animator),
+                new CheckPlayerInAttackRange(this, agentTransform, checkForLaserFOV),
+                new BossLaserAttack(this, agent, lineRenderer, lineRendererTwo, firePoint,
+                    firePointTwo, laserAttackRange, animator),
             }),
 
             // Slänger stenar mot spelaren.
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(this, transform, CheckForRangeAttackFOV),
+                new CheckPlayerInAttackRange(this, transform, checkForRangeAttackFOV),
                 new BossRangeAttack(this, rockToThrow, agent, throwUpForce, throwForce, rockThrowPosition, animator)
             }),
 
             // Springer efters seplaren
             new Sequence(new List<TreeNode>
             {
-                new CheckPlayerInAttackRange(this, agentTransform, CheckIfIShouldMoveToPlayerFOV),
+                new CheckPlayerInAttackRange(this, agentTransform, checkIfIShouldMoveToPlayerFOV),
                 new BossMoveToPlayers(agent, animator),
             }),
 
@@ -83,17 +82,6 @@ public class BossAI : Tree, IDamagable
         });
 
         return root;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(agent.transform.position, CheckIfIShouldMoveToPlayerFOV);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(agent.transform.position, CheckForLaserFOV);
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(agent.transform.position, CheckForRangeAttackFOV);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(agent.transform.position, CheckForMeeleAttackFOV);
     }
 
     public void DealDamage(float damage)
@@ -107,7 +95,7 @@ public class BossAI : Tree, IDamagable
         }
     }
 
-    public float getCurrentHealth()
+    public float GetCurrentHealth()
     {
         return currentHealth;
     }

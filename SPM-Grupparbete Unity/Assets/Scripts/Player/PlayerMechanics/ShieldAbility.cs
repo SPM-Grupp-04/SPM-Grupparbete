@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class ShieldAbility : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class ShieldAbility : MonoBehaviour
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float upTimeShield = 5f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
+
+    [SerializeField] private Image uiIconBW;
     
     private float coolDown = 15f;
     private static float cooldownToNextUse;
@@ -20,10 +23,7 @@ public class ShieldAbility : MonoBehaviour
     private float destroyShieldTimer;
     private static bool canUseShield;
     private float shieldCooldownModifer;
-
     
-
-
     private bool shieldButtonPressed;
 
     private void Start()
@@ -31,6 +31,7 @@ public class ShieldAbility : MonoBehaviour
         shieldCooldownModifer = playerStatistics.shieldCooldownModifer;
         coolDown += upTimeShield;
         canUseShield = true;
+        uiIconBW.fillAmount = 0;
     }
 
     
@@ -62,11 +63,14 @@ public class ShieldAbility : MonoBehaviour
 
         if (cooldownToNextUse >= Time.time)
         {
+            uiIconBW.fillAmount -= 1 / cooldownToNextUse * Time.deltaTime;
             uiCooldowns.GetShieldText().text = ((int)cooldownToNextUse - (int)Time.time).ToString();
         }
         else
         { 
-            uiCooldowns.GetShieldText().text = "Sköld";
+            //uiCooldowns.GetShieldText().text = "Sköld";
+            uiIconBW.fillAmount = 0;
+            uiCooldowns.GetShieldText().text = "";
             canUseShield = true;
         }
     }
@@ -84,8 +88,8 @@ public class ShieldAbility : MonoBehaviour
             destroyShieldTimer = upTimeShield;
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
+            uiIconBW.fillAmount = 1;
             cooldownToNextUse = Time.time + (coolDown * shieldCooldownModifer);
-            Debug.Log(cooldownToNextUse);
         }
     }
 

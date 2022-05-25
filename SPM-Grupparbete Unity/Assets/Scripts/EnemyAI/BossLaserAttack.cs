@@ -8,7 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 
-public class BossAttackWithLaser : TreeNode
+public class BossLaserAttack : TreeNode
 {
     private readonly NavMeshAgent agent;
     private readonly Transform firePoint;
@@ -18,10 +18,10 @@ public class BossAttackWithLaser : TreeNode
     private readonly LineRenderer lineTwo;
     private readonly float attackRange;
     private const float OverHeatTime = 5;
-    private BossAI bossAI;
-    private int sheildMask;
+    private readonly BossAI bossAi;
+    private readonly int shieldMask;
 
-    public BossAttackWithLaser(BossAI bossAI, NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
+    public BossLaserAttack(BossAI bossAI, NavMeshAgent agent, LineRenderer lineRenderer, LineRenderer lineTwo,
         Transform firePoint, Transform firePointTwo, float fov, Animator animator)
     {
         this.lineTwo = lineTwo;
@@ -30,9 +30,9 @@ public class BossAttackWithLaser : TreeNode
         this.firePoint = firePoint;
         this.animator = animator;
         this.lineRenderer = lineRenderer;
-        this.bossAI = bossAI;
+        this.bossAi = bossAI;
         attackRange = fov;
-        sheildMask = LayerMask.GetMask("Shield");
+        shieldMask = LayerMask.GetMask("Shield");
     }
 
     private bool isOverHeated = false;
@@ -41,9 +41,9 @@ public class BossAttackWithLaser : TreeNode
 
     public override NodeState Evaluate()
     {
-        if (bossAI.getCurrentHealth() < 1)
+        if (bossAi.GetCurrentHealth() < 1)
         {
-            disableLineRenderer();
+            DisableLineRenderer();
             return NodeState.FAILURE;
         }
 
@@ -60,7 +60,7 @@ public class BossAttackWithLaser : TreeNode
         if (isOverHeated)
         {
             timer -= Time.deltaTime;
-            disableLineRenderer();
+            DisableLineRenderer();
             ClearData("target");
             return NodeState.FAILURE;
         }
@@ -75,7 +75,7 @@ public class BossAttackWithLaser : TreeNode
         if (target == null || !target.gameObject.activeInHierarchy ||
             Vector3.Distance(agent.transform.position, target.position) > attackRange)
         {
-            disableLineRenderer();
+            DisableLineRenderer();
             ClearData("target");
             state = NodeState.FAILURE;
             return state;
@@ -92,7 +92,7 @@ public class BossAttackWithLaser : TreeNode
         return NodeState.RUNNING;
     }
 
-    private void disableLineRenderer()
+    private void DisableLineRenderer()
     {
         lineRenderer.enabled = false;
         lineTwo.enabled = false;
@@ -100,13 +100,13 @@ public class BossAttackWithLaser : TreeNode
 
     void Laser()
     {
-        Debug.DrawRay(bossAI.transform.position, target.position - bossAI.transform.position  , Color.black);
+        Debug.DrawRay(bossAi.transform.position, target.position - bossAi.transform.position  , Color.black);
         RaycastHit hit;
-        if (Physics.Raycast(bossAI.transform.position, target.position - bossAI.transform.position ,out hit, 
-                attackRange, sheildMask))
+        if (Physics.Raycast(bossAi.transform.position, target.position - bossAi.transform.position ,out hit, 
+                attackRange, shieldMask))
         {
             EnableLineRenders();
-            SetLinerendersPos(hit.point);
+            SetLineRenderPosition(hit.point);
             return;
         }
 
@@ -115,7 +115,7 @@ public class BossAttackWithLaser : TreeNode
         EventSystem.current.FireEvent(dealDamageEventInfo);
         EnableLineRenders();
         Vector3 lineHitPoint = new Vector3(target.position.x, target.position.y + 0.5f, target.position.z);
-        SetLinerendersPos(lineHitPoint);
+        SetLineRenderPosition(lineHitPoint);
     }
 
     private void EnableLineRenders()
@@ -127,7 +127,7 @@ public class BossAttackWithLaser : TreeNode
         }
     }
 
-    private void SetLinerendersPos(Vector3 lineHitPoint)
+    private void SetLineRenderPosition(Vector3 lineHitPoint)
     {
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, lineHitPoint);

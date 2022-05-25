@@ -5026,8 +5026,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44ff71c288ac7d4c83f5bc8c16d2bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDelay: 3
-  explosionRadius: 7.5
+  explosionDelay: 2.04
+  explosionRadius: 5.3
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 7240
@@ -5038,7 +5038,7 @@ MonoBehaviour:
   capsuleCollider: {fileID: -2474082930302201402}
   capsuleRigidBody: {fileID: 6742602341496923280}
   meshRenderer: {fileID: 586008625529941990}
-  dynamiteExplosionPrefab: {fileID: 4889733576662073570, guid: e26eccca74a55e24288f6c9c0ca4afc1, type: 3}
+  dynamiteExplosionPrefab: {fileID: 4889733576662073570, guid: 4dfa59f5cba2f184b9b3ce141920107a, type: 3}
 --- !u!82 &1633756564643780838
 AudioSource:
   m_ObjectHideFlags: 0

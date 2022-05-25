@@ -18,13 +18,6 @@ public class DropComponent : MonoBehaviour
         infoText.enabled = false;
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
