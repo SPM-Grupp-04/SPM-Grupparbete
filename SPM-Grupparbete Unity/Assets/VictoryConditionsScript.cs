@@ -41,8 +41,7 @@ public class VictoryConditionsScript : MonoBehaviour
     //not a flag enum, as you should only be able to select one
     public enum Components
     {
-        UNASSIGNED =
-            0b_0000_0000, //default value that should only serve to make assertions fail. remember to set your component values!
+        UNASSIGNED = 0b_0000_0000,
         COMPONENT_1 = 0b_0000_0001,
         COMPONENT_2 = 0b_0000_0010,
         COMPONENT_3 = 0b_0000_0100,
@@ -67,4 +66,5 @@ public class VictoryConditionsScript : MonoBehaviour
         COMPONENT_7 = 0b_0100_0000,
         COMPONENT_8 = 0b_1000_0000
     }
+    
 }

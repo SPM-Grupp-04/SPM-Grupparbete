@@ -28,7 +28,7 @@ public class DropComponent : MonoBehaviour
 
             if (other.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
             {
-                text.text = GlobalControl.Instance.playerStatistics.componentsCollectedMask.ToString() + "/5";
+                text.text = PlayerStatistics.Instance.componentsCollectedNumber + "/5";
             }
         }
 
