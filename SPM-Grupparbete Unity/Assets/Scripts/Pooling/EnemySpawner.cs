@@ -11,8 +11,8 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<BaseClassEnemyAI> pool;
-    private BaseClassEnemyAI enemy;
+    private ObjectPool<BaseEnemyAI> pool;
+    private BaseEnemyAI enemy;
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
 
@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
     private EnemyAIHandler enemyAIHandler;
-    [SerializeField] private BaseClassEnemyAI[] genericListOfBaseClassEnemyAI;
+    [SerializeField] private BaseEnemyAI[] genericListOfBaseClassEnemyAI;
     [SerializeField] private float[] prioListMatchingObjektOrder;
     [SerializeField] private int totalAllowedEnimesAtSpawner = 10;
     [SerializeField] private float totalAllowedSpawnTime = 5;
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         timer = totalAllowedSpawnTime;
-        pool = new ObjectPool<BaseClassEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
+        pool = new ObjectPool<BaseEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
         enemyAIHandler = GetComponent<EnemyAIHandler>();
         /*for (int i = 0; i < gameObjects.Length; i++)
@@ -46,11 +46,11 @@ public class EnemySpawner : MonoBehaviour
             genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
         }*/
 
-        // Räknar ut vad som är 100%
+       // Räknar ut vad som är 100%
         for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
         {
             totalProcent += prioListMatchingObjektOrder[i];
-        }
+        } 
 
         //Sätter procent av den totala summan prioNummret är.
         for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    private BaseClassEnemyAI CreateEnemy()
+    private BaseEnemyAI CreateEnemy()
     {
         // så att man kan sätta hur många % av en typ man vill ska finnas.
 
@@ -103,14 +103,14 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-   private void OnTakeEnemyAIFromPool(BaseClassEnemyAI meeleEnemyAI)
+   private void OnTakeEnemyAIFromPool(BaseEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.transform.position = SpawnPos;
         meeleEnemyAI.gameObject.SetActive(true);
     }
 
 
-    public void OnReturnBallToPool(BaseClassEnemyAI meeleEnemyAI)
+    public void OnReturnBallToPool(BaseEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.gameObject.SetActive(false);
     }

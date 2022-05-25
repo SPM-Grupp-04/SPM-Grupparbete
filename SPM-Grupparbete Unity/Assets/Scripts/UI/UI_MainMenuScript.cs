@@ -1,17 +1,21 @@
  using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+ using System.IO;
+ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+ using UnityEngine.UI;
 
-public class UI_MainMenuScript : MonoBehaviour
+ public class UI_MainMenuScript : MonoBehaviour
 {
     private PlayerStatistics playerStats = PlayerStatistics.Instance;
 
     [SerializeField] private GameObject firstSelected;
     [SerializeField] private int sceneToLoad = 0;
 
-  
+    public GameObject loadingScreen;
+    public Slider Slider;
+    public Text progressText;
 
    // [SerializeField] private GameObject settingsMenu;
     // Start is called before the first frame update
@@ -28,14 +32,14 @@ public class UI_MainMenuScript : MonoBehaviour
 
         public void LoadGame()
         {
-            if (GlobalControl.Instance.playerStatistics.drillLevel >= 1)
+            if (Directory.Exists("Saves"))
             {
-             SceneManager.LoadScene(2);
-                
+               StartCoroutine(LoadAsynchronusly(2));
+
             }
             else
             {
-                SceneManager.LoadScene(1);
+               StartCoroutine( LoadAsynchronusly(1));
             }
             
         }
@@ -49,8 +53,8 @@ public class UI_MainMenuScript : MonoBehaviour
        public void LoadStartScene()
         {
             
-            SceneManager.LoadScene(sceneToLoad); 
-            Debug.Log("Just nu laddar vi bara in i Scene på INDEX som vi sätter i inspectorn.");
+            StartCoroutine(LoadAsynchronusly(sceneToLoad));
+            
         }
 
         public void Quit()
@@ -59,7 +63,19 @@ public class UI_MainMenuScript : MonoBehaviour
             Application.Quit();
         }
 
-      
+        IEnumerator LoadAsynchronusly(int sceneIndex)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+            loadingScreen.SetActive(true);
+            while (operation.isDone == false)
+            {
+                float progress = Mathf.Clamp01(operation.progress / .9f);
+                Slider.value = progress;
+                progressText.text = progress * 100f + "%";
+                yield return null;
+            }
+        }
         
     
     

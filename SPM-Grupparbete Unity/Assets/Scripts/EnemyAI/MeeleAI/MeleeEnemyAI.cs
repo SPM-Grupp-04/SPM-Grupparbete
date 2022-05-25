@@ -6,48 +6,33 @@ using UnityEngine.AI;
 using UnityEngine.Pool;
 
 
-public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
+public class MeleeEnemyAI : BaseEnemyAI, IDamagable
 {
-    [SerializeField] private float startingHealth;
-    private float currentHealth;
 
-    [SerializeField] private float healthRestoreRate;
     [SerializeField] private float chasingRange;
     [SerializeField] private float hitRange;
-    [SerializeField] private float movementSpeed;
-
-    [SerializeField] private MeleeWepon _meleeWepon;
-
-    private List<Transform> playerTransform = new List<Transform>();
-
-    private IObjectPool<BaseClassEnemyAI> pool;
-
-    private Animator _animator;
-
+    [SerializeField] private MeleeWepon meleeWeapon;
+  
+    private IObjectPool<BaseEnemyAI> pool;
     private NavMeshAgent agent;
-    //public TreeNode m_TopTreeNode;
-
     public Vector3 target = new Vector3(100, 0, 100);
     public float distanceToTarget = 100;
     public Vector3 playerPos = new Vector3(100, 0, 100);
-    private float timeUntillAnimationPlay;
+    private float timeUntilAnimationPlay;
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     void Start()
     {
         base.Start();
         base.randomNumber = Random.Range(1, 10);
 
-        _animator = GetComponent<Animator>();
-        // playerTransform.Add(GameObject.Find("Player1").transform);
-        // playerTransform.Add(GameObject.Find("Player2").transform);
-
+        animator = GetComponent<Animator>();
+        movementSpeed = 7;
         agent.speed = movementSpeed;
-        base.Start();
         currentHealth = startingHealth;
-
-
-        // SetUpTree();
-        // SetUpTree();
     }
 
 
@@ -55,86 +40,70 @@ public class MeeleEnemyAI : BaseClassEnemyAI, IDamagable
     {
         SetUpTree();
 
-        if (currentHealth < startingHealth)
-        {
-            currentHealth += Time.deltaTime * healthRestoreRate;
-        }
-
         if (currentHealth <= 1)
         {
-           
-           // StartCoroutine(WaitBeforeDie());
-
             if (this.pool != null)
             {
                 currentHealth = startingHealth;
-              //  _animator.SetTrigger("Die");
-              agent.speed = 0;
-              StartCoroutine(WaitBeforeDie());
-              //  pool.Release(this);
+                agent.speed = 0;
+                StartCoroutine(WaitBeforeDie());
             }
             else
             {
                 Debug.Log("Pool is null");
                 agent.speed = 0;
                 StartCoroutine(waitbeforeDieWithoutPool());
-                // StartCoroutine(WaitBeforeDie());
-                // gameObject.SetActive(false);
             }
         }
-
-        // m_TopTreeNode.Evaluate();
     }
 
     private IEnumerator waitbeforeDieWithoutPool()
     {
-        _animator.SetTrigger("Die");
+        animator.SetTrigger("Die");
         yield return new WaitForSeconds(2);
         agent.speed = movementSpeed;
         gameObject.SetActive(false);
     }
+
     private IEnumerator WaitBeforeDie()
     {
-        _animator.SetTrigger("Die");
+        animator.SetTrigger("Die");
         yield return new WaitForSeconds(2);
         agent.speed = movementSpeed;
         pool.Release(this);
     }
 
 
-    private void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
-
+ 
 
     protected override TreeNode SetUpTree()
     {
-        // Istället för att skcika med spelarens transform hela tiden så skicka bara med platsen.
-
+        // Setting up nodes
         ChaseTreeNodeMelee chaseTreeNodeMelee =
-            new ChaseTreeNodeMelee(target, distanceToTarget, agent, _animator); // Animator.
+            new ChaseTreeNodeMelee(target, distanceToTarget, agent, animator); 
 
         RangeTreeNodeMelee inChaseRange =
-            new RangeTreeNodeMelee(chasingRange, distanceToTarget, _animator);
+            new RangeTreeNodeMelee(chasingRange, distanceToTarget, animator);
 
         RangeTreeNodeMelee inMeleeRange =
-            new RangeTreeNodeMelee(hitRange, distanceToTarget, _animator);
+            new RangeTreeNodeMelee(hitRange, distanceToTarget, animator);
 
         MeeleAttackTreeNode meeleAttackTreeNode =
-            new MeeleAttackTreeNode(playerPos, agent, _animator, _meleeWepon);
-
-
+            new MeeleAttackTreeNode(playerPos, agent, animator, meleeWeapon);
+        // 
+        
+        // Setting up sequence.
         Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
+     
         Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
-        MTopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
-
-
-        return MTopTreeNode;
+        // Choosing one of de sequence taking the first one that has returned Success/Running. Order is important 
+        TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+        
+        return TopTreeNode;
     }
 
-    public override void SetPool(IObjectPool<BaseClassEnemyAI> pool)
+    public override void SetPool(IObjectPool<BaseEnemyAI> pool)
     {
         this.pool = pool;
     }

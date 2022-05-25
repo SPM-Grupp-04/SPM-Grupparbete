@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 4460789450242686155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -88.406006, y: 11.811, z: -4.284768}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3401902884480118667}
@@ -212,14 +212,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomNumber: 0
-  startHealth: 7
-  rangedAttackRange: 10
   movementSpeed: 4
+  currentHealth: 0
+  startingHealth: 15
+  rangedAttackRange: 10
   chasingRange: 30
-  throwabelObject: {fileID: 7467092179448219033, guid: fb4c100fbf9b34c4e8dbc210f82c1dd5, type: 3}
-  throwCooldown: 5
-  throwUpForce: 1
-  throwForce: 2
+  throwabelObject: {fileID: 7467092179448219033, guid: d0c21e217aa831646988b1c43d19ea14, type: 3}
+  throwCooldown: 7
+  throwUpForce: 2
+  throwForce: 8
   firePoint: {fileID: 7692960205702161346}
   target: {x: 100, y: 0, z: 100}
   distanceToTargetPlayer: 100

@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2971810965652456987
 Transform:
   m_ObjectHideFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2971810965652457063}
-  m_LocalRotation: {x: -0.69468284, y: -0, z: -0, w: 0.7193162}
+  m_LocalRotation: {x: -0.6946834, y: 0, z: 0, w: 0.71931565}
   m_LocalPosition: {x: 5.74, y: 1.61, z: 9.22}
   m_LocalScale: {x: 1.6109891, y: 0.017139852, z: 2.5714068}
   m_ConstrainProportionsScale: 0
@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2971810965652457063}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -111,3 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+  particalSystem: {fileID: 4599268045824250025, guid: 2f67799987d550c4e9858c89dca53da3, type: 3}
+  loadingScreen: {fileID: 0}
+  Slider: {fileID: 0}
+  progressText: {fileID: 0}

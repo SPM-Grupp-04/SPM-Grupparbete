@@ -18,14 +18,11 @@ public class MeleeWepon : MonoBehaviour
    
     private void OnTriggerStay(Collider other)
     {
-     
         if (timeRemaining < 0.0f)
         {
-           
             var damageEvent = new DealDamageEventInfo(other.gameObject, 1);
             EventSystem.current.FireEvent(damageEvent);
         }
-
         if (timeRemaining < 0.0f)
         {
             timeRemaining = cooldownTime;

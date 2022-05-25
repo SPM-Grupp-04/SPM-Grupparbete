@@ -58,8 +58,10 @@ public class ShieldAbility : MonoBehaviour
 
         if (cooldownToNextUse >= Time.time)
         {
+
             uiIconBW.fillAmount -= 1 / (coolDown * 2) * Time.deltaTime;
             uiCooldowns.GetShieldText().text = ((int)cooldownToNextUse - (int)Time.time).ToString();
+
         }
         else
         { 
