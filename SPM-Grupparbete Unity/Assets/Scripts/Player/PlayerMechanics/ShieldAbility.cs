@@ -33,10 +33,7 @@ public class ShieldAbility : MonoBehaviour
         canUseShield = true;
         uiIconBW.fillAmount = 0;
     }
-
     
-
-
     // Update is called once per frame
     void Update()
     {
@@ -58,8 +55,6 @@ public class ShieldAbility : MonoBehaviour
         {
             ActivateShield();
         }
-
-
 
         if (cooldownToNextUse >= Time.time)
         {

@@ -15,14 +15,13 @@ public class PlayerDrill : MonoBehaviour
 
     [SerializeField] private LayerMask igenoreMask;
 
+    
     [SerializeField] private float overHeatAmount = 0;
     [SerializeField] private float overHeatIncreaseAmount = 0.5f;
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
-
-
-    [SerializeField] private int drillDamageOres = 1;
-    [SerializeField] private int drillDamageMonsters = 1;
+    private int drillDamageOres = 1;
+    private int drillDamageMonsters = 1;
     
     
     //[SerializeField] Material lrMaterial;
@@ -214,6 +213,7 @@ public class PlayerDrill : MonoBehaviour
             laserEmission.Clear();
             laserRing.Stop();
             laserRing.Clear();
+            
             laserHit.Stop();
             laserHit.enabled = false;
         }
