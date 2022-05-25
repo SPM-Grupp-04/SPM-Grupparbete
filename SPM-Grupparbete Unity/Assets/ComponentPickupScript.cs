@@ -72,6 +72,8 @@ public class ComponentPickupScript : MonoBehaviour
         animator.SetBool("Alpha", true);
         yield return new WaitForSeconds(2);
         PlayerStatistics.Instance.componentsCollectedNumber += 1;
+        GlobalControl.Instance.playerStatistics.componentsCollectedNumber =
+            PlayerStatistics.Instance.componentsCollectedNumber;
         Destroy(gameObject);
 
     }
