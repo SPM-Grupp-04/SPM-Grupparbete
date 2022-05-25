@@ -40,12 +40,12 @@ public class TownPortal : MonoBehaviour
     private void OnEnable()
     {
         copyOfParticleSystem = Instantiate(particalSystem, transform.position, quaternion.identity);
-        particalSystem.GetComponent<ParticleSystem>().Play();
+       
     }
 
     private void OnDisable()
     {
-        transEnable.SetActive(true);
+      
         Destroy(copyOfParticleSystem);
         
         

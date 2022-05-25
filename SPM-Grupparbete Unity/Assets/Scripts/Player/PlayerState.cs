@@ -27,6 +27,7 @@ public class PlayerState : MonoBehaviour, IDamagable
         m_LocalPlayerData.drillLevel = GlobalControl.Instance.playerStatistics.drillLevel;
         m_LocalPlayerData.componentsCollectedMask = GlobalControl.Instance.playerStatistics.componentsCollectedMask;
         m_LocalPlayerData.playerMaxHealth = GlobalControl.Instance.playerStatistics.playerMaxHealth;
+        m_LocalPlayerData.componentsCollectedNumber = GlobalControl.Instance.playerStatistics.componentsCollectedNumber;
       
         if (playerName == "PlayerOne")
         {
