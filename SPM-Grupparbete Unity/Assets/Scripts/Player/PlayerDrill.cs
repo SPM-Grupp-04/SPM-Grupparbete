@@ -36,9 +36,7 @@ public class PlayerDrill : MonoBehaviour
     
     [SerializeField] private VisualEffect laserHit;
     [SerializeField] private VisualEffect drillHit;
-
-
-
+    
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
     
@@ -52,6 +50,8 @@ public class PlayerDrill : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
 
+    private bool coolDownLaser;
+
     private bool isDisco = false;
     Color c1 = Color.white;
     Color c2;
@@ -60,6 +60,11 @@ public class PlayerDrill : MonoBehaviour
     int randomColour3;
     float nextColour;
     [SerializeField] private float delayTimer = 1;
+    
+    public bool CanShoot
+    {
+        get { return canShoot; }
+    }
     
 
     private void Awake()
@@ -182,7 +187,6 @@ public class PlayerDrill : MonoBehaviour
                 canShoot = false;
                 timer = coolDownTimerStart;
                 StopLaserParticles();
-
             }
         }
     }
