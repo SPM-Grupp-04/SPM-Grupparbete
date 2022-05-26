@@ -1994,6 +1994,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
       objectReference: {fileID: 0}
@@ -2078,6 +2082,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
@@ -3973,23 +3981,23 @@ PrefabInstance:
       objectReference: {fileID: 646600793}
     - target: {fileID: 6278994302253887646, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 80
+      value: 87.08607
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887646, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Lens.FarClipPlane
-      value: 19.1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887646, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Lens.NearClipPlane
-      value: 1.6
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887646, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.9719388
+      value: 2.1654274
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887646, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 10.1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6278994302253887647, guid: 2eb98a7973b858c4484048d06983bdf4, type: 3}
       propertyPath: m_RootOrder
@@ -6453,6 +6461,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
       objectReference: {fileID: 0}
@@ -7014,6 +7026,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
@@ -16622,6 +16638,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
       objectReference: {fileID: 0}
@@ -18404,11 +18424,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1.6
-  far clip plane: 19.1
-  field of view: 80
+  near clip plane: 3.3
+  far clip plane: 1000
+  field of view: 87.08607
   orthographic: 0
-  orthographic size: 10.1
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -35546,6 +35566,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7794534380075475759, guid: bcc3be1a4ef229044b1cfbad7037b8c6, type: 3}
   m_PrefabInstance: {fileID: 721397134}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &722363177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7794534380075475758, guid: bcc3be1a4ef229044b1cfbad7037b8c6, type: 3}
+  m_PrefabInstance: {fileID: 1919574653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &725249388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44471,6 +44496,18 @@ PrefabInstance:
       propertyPath: playerStatistics.drillLevel
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
+      propertyPath: playerStatistics.playerMaxHealth
+      value: 1999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
+      propertyPath: playerStatistics.playerOneHealth
+      value: 2888
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
+      propertyPath: playerStatistics.playerTwoHealth
+      value: 3288
+      objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980725, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: m_Name
       value: GlobalController
@@ -47993,7 +48030,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 7.78304, y: 0.5, z: 0.870639}
+  m_Extents: {x: 11.5, y: 0.5, z: 0.870639}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -48884,6 +48921,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4ff656d8144e0fd4abd1cf04be1265d3, type: 3}
   m_PrefabInstance: {fileID: 1010387034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1010931482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7794534380075475758, guid: bcc3be1a4ef229044b1cfbad7037b8c6, type: 3}
+  m_PrefabInstance: {fileID: 169120868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &1010931484
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010931482}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.244147, y: 2.996569, z: 1.3431945}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.2648398, y: 2.4965692, z: 0.41884497}
+  m_TimeToStationary: 0.5
 --- !u!1 &1011915470
 GameObject:
   m_ObjectHideFlags: 0
@@ -52103,6 +52161,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
       objectReference: {fileID: 0}
@@ -54605,7 +54667,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 6.2, y: 0.5, z: 0.85}
+  m_Extents: {x: 7.31, y: 0.5, z: 0.85}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -55867,7 +55929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedSpawnTime
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
@@ -60934,6 +60996,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1393571464}
     m_Modifications:
+    - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
+      propertyPath: currentHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7396099057248465467, guid: 4301e00e3dcd8514eb437dd07ec8c82d, type: 3}
       propertyPath: laerAttackRange
       value: 15
@@ -67281,6 +67347,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 9.487825, y: 0, z: 2.7534075}
   m_TimeToStationary: 0.5
+--- !u!1 &1446622596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7743936491426465648, guid: 0c1b3da5f2fb32c40a01c855a6347dd4, type: 3}
+  m_PrefabInstance: {fileID: 932705743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &1446622598
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446622596}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.4255563, y: 2.99657, z: 1.170578}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.083431244, y: 2.4965692, z: 0.13110352}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1447305654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68145,7 +68232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 45
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.size
@@ -88452,6 +88539,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7794534380075475759, guid: bcc3be1a4ef229044b1cfbad7037b8c6, type: 3}
   m_PrefabInstance: {fileID: 1919574653}
   m_PrefabAsset: {fileID: 0}
+--- !u!208 &1919574656
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722363177}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.244147, y: 2.99657, z: 1.3431942}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.2648398, y: 2.4965692, z: 0.41884497}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1920197780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99395,7 +99498,7 @@ PrefabInstance:
       objectReference: {fileID: 8871867442437586754}
     - target: {fileID: 4072212179780880416, guid: 2673fd81315ff04409635c440831b46a, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.0897958
+      value: 2.1654274
       objectReference: {fileID: 0}
     - target: {fileID: 4072212179780880417, guid: 2673fd81315ff04409635c440831b46a, type: 3}
       propertyPath: m_RootOrder
@@ -99504,7 +99607,7 @@ PrefabInstance:
       objectReference: {fileID: 3438931142091801694}
     - target: {fileID: 2774416382322736387, guid: 145f3c13cfe34b042b9b038f4988c9d6, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.0897958
+      value: 2.1654274
       objectReference: {fileID: 0}
     - target: {fileID: 2774416382322736412, guid: 145f3c13cfe34b042b9b038f4988c9d6, type: 3}
       propertyPath: m_Name
