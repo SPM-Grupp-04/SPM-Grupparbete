@@ -28,7 +28,9 @@ namespace EnemyAI
 
             if (timer >= 5)
             {
-                agent.SetDestination(wayPoints[randomPoint].position);
+                agent.SetDestination(new Vector3(wayPoints[randomPoint].position.x, agent.transform.position.y,
+                    wayPoints[randomPoint].position.x));
+                
                 timer = 0;
             }
 

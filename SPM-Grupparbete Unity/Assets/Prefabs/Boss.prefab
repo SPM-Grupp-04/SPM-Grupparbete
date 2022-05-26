@@ -551,7 +551,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 29eae5163f8d3324fb2ea4c6d4d7cf6f, type: 2}
+  - {fileID: 2100000, guid: e618bddf04ba69f4fa2bfef32a988f4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -682,7 +682,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 29eae5163f8d3324fb2ea4c6d4d7cf6f, type: 2}
+  - {fileID: 2100000, guid: e618bddf04ba69f4fa2bfef32a988f4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1559,11 +1559,11 @@ MonoBehaviour:
   rockThrowPosition: {fileID: 2928163713559858329}
   firePoint: {fileID: 2928163714414702610}
   firePointTwo: {fileID: 2928163713033930847}
-  CheckForMeeleAttackFOV: 3
-  CheckForLaserFOV: 15
-  CheckForRangeAttackFOV: 20
-  CheckIfIShouldMoveToPlayerFOV: 30
-  laerAttackRange: 0
+  checkForMeleeAttackFOV: 3
+  checkForLaserFOV: 15
+  checkForRangeAttackFOV: 20
+  checkIfIShouldMoveToPlayerFOV: 30
+  laserAttackRange: 0
   throwForce: 30
   throwUpForce: 2
   waypoints:
@@ -1572,7 +1572,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  meleeWepon: {fileID: 2928163712918112134}
+  meleeWeapon: {fileID: 0}
+  currentHealth: 50
 --- !u!1 &7528456455522946346
 GameObject:
   m_ObjectHideFlags: 0

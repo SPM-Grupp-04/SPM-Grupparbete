@@ -10,13 +10,24 @@ public class AudioSettings : MonoBehaviour
 
     [SerializeField] private AudioMixer audioMixer;
 
-    private Slider audioSlider;
+   [SerializeField] private Slider audioSlider;
     
     void Start()
     {
-        audioSlider = gameObject.GetComponent<Slider>();
-        audioMixer.SetFloat("VolumeControl", PlayerPrefs.GetFloat("Volume"));
-        audioSlider.value = PlayerPrefs.GetFloat("Volume");
+        //audioSlider = gameObject.GetComponent<Slider>();
+        
+     
+
+        if (PlayerPrefs.HasKey("Volume"))
+        {
+            audioMixer.SetFloat("VolumeControl", PlayerPrefs.GetFloat("Volume"));
+            audioSlider.value = PlayerPrefs.GetFloat("Volume");
+        }
+        else
+        {
+            Debug.Log(audioSlider.value);
+            audioSlider.value = 1;
+        }
     }
     
     public void ChangeVolume(float sliderValue)

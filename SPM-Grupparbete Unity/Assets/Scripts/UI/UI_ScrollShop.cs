@@ -19,16 +19,15 @@ public class UI_ScrollShop : MonoBehaviour {
         
         
         GameObject selected = EventSystem.current.currentSelectedGameObject;
-        // Return if there are none.
+        
         if (selected == null) {
             return;
         }
-        // Return if the selected game object is not inside the scroll rect.
+        
         if (selected.transform.parent != contentPanel.transform) {
             return;
         }
-        // Return if the selected game object is the same as it was last frame,
-        // meaning we haven't moved.
+        
         if (selected == lastSelected) {
             return;
         }

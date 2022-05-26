@@ -15,7 +15,7 @@ public class ShieldAbility : MonoBehaviour
     [SerializeField] private float upTimeShield = 5f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
 
-    [SerializeField] private Image uiIconBW;
+    private Image uiIconBW;
     
     private float coolDown = 15f;
     private static float cooldownToNextUse;
@@ -28,15 +28,13 @@ public class ShieldAbility : MonoBehaviour
 
     private void Start()
     {
+        uiIconBW = GameObject.Find("UI/Cooldowns/ShieldTestBW").GetComponent<Image>();
         shieldCooldownModifer = playerStatistics.shieldCooldownModifer;
         coolDown += upTimeShield;
         canUseShield = true;
         uiIconBW.fillAmount = 0;
     }
-
     
-
-
     // Update is called once per frame
     void Update()
     {
@@ -59,12 +57,12 @@ public class ShieldAbility : MonoBehaviour
             ActivateShield();
         }
 
-
-
         if (cooldownToNextUse >= Time.time)
         {
-            uiIconBW.fillAmount -= 1 / cooldownToNextUse * Time.deltaTime;
+
+            uiIconBW.fillAmount -= 1 / (coolDown * 2) * Time.deltaTime;
             uiCooldowns.GetShieldText().text = ((int)cooldownToNextUse - (int)Time.time).ToString();
+
         }
         else
         { 
@@ -89,7 +87,7 @@ public class ShieldAbility : MonoBehaviour
             shieldGO = Instantiate(shieldPrefab, player.transform.position, player.transform.rotation);
             canUseShield = false;
             uiIconBW.fillAmount = 1;
-            cooldownToNextUse = Time.time + (coolDown * shieldCooldownModifer);
+            cooldownToNextUse = Time.time + coolDown;
         }
     }
 

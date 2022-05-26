@@ -8,27 +8,26 @@ using UnityEngine.UI;
 
 public class TownPortal : MonoBehaviour
 {
-    [Header("Public")]
-    public static bool IsTeleporting;
+    [Header("Public")] public static bool IsTeleporting;
     public Slider slider;
-    
+
     public GameObject loadingScreen;
-    
+
     public Text progressText;
-    
-    [Header("Private")]
-    [SerializeField] private GameObject particalSystem;
+
+    [Header("Private")] [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject camera;
-    
+
     private GameObject playerOne;
     private GameObject playerTwo;
     private GameObject drone;
     private GameObject copyOfParticleSystem;
     private GameObject transEnable;
-    
+
     private const int HubZoneShopPosition = 1000;
-    
+
     private bool isLoading;
+
     private void Start()
     {
         playerOne = GameObject.Find("Player1");
@@ -44,10 +43,9 @@ public class TownPortal : MonoBehaviour
 
     private void OnDisable()
     {
-        transEnable.SetActive(true);
         Destroy(copyOfParticleSystem);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -62,21 +60,26 @@ public class TownPortal : MonoBehaviour
             GlobalControl.SaveData();
             StartCoroutine(LoadAsync(5));
 
-            camera.transform.position = new Vector3(HubZoneShopPosition, camera.transform.position.y, HubZoneShopPosition);
+            camera.transform.position =
+                new Vector3(HubZoneShopPosition, camera.transform.position.y, HubZoneShopPosition);
 
             if (playerOne.activeInHierarchy)
             {
-                playerOne.transform.position = new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition); // Hamnar på 800/0/550
+                playerOne.transform.position =
+                    new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition); // Hamnar på 800/0/550
             }
 
             if (playerTwo.activeInHierarchy)
             {
-                playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition +1);
+                playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition + 1);
             }
 
-            drone.transform.position = new Vector3(playerOne.transform.position.x,
-                drone.transform.position.y, playerOne.transform.position.z);
-            
+            if (drone.activeInHierarchy)
+            {
+                drone.transform.position = new Vector3(playerOne.transform.position.x,
+                    3, playerOne.transform.position.z);
+            }
+
             StartCoroutine(waitUntillActivate());
         }
     }
@@ -101,7 +104,7 @@ public class TownPortal : MonoBehaviour
 
         StartCoroutine(FakeLoadTime());
     }
-    
+
     private IEnumerator FakeLoadTime()
     {
         Time.timeScale = 0;

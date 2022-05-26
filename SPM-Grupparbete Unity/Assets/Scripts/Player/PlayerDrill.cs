@@ -15,14 +15,13 @@ public class PlayerDrill : MonoBehaviour
 
     [SerializeField] private LayerMask igenoreMask;
 
+    
     [SerializeField] private float overHeatAmount = 0;
     [SerializeField] private float overHeatIncreaseAmount = 0.5f;
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
-
-
-    [SerializeField] private int drillDamageOres = 1;
-    [SerializeField] private int drillDamageMonsters = 1;
+    private int drillDamageOres = 1;
+    private int drillDamageMonsters = 1;
     
     
     //[SerializeField] Material lrMaterial;
@@ -36,6 +35,7 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private ParticleSystem drillEmission;
     
     [SerializeField] private VisualEffect laserHit;
+    [SerializeField] private VisualEffect drillHit;
 
 
 
@@ -71,6 +71,7 @@ public class PlayerDrill : MonoBehaviour
         DrillDamage();
         WeaponLevel();
         laserHit.transform.parent = null;
+        drillHit.transform.parent = null;
     }
 
     // Update is called once per frame
@@ -125,12 +126,19 @@ public class PlayerDrill : MonoBehaviour
             drillRing.Play();
             drillEmission.Play();
         }
-        if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
+        if (Physics.Raycast(transform.position, fwd, out hit, 3, igenoreMask))
         {
+            drillHit.enabled = true;
+            drillHit.transform.position = hit.point;
+            drillHit.Play();
             LaserBetweenPoints(transform.position, hit.point, 1);
-            hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            if (hit.collider.gameObject.CompareTag("Rocks"))
+            {
+                hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            }
             return;
         }
+        drillHit.enabled = false;
         LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
     }
     
@@ -161,6 +169,8 @@ public class PlayerDrill : MonoBehaviour
                 overHeatAmount += overHeatIncreaseAmount;
                 return;
             }
+
+            laserHit.enabled = false;
             LaserBetweenPoints(transform.position, laserPoint.transform.position, 2); 
             overHeatAmount += overHeatIncreaseAmount;
         }
@@ -171,10 +181,8 @@ public class PlayerDrill : MonoBehaviour
                 lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
-                laserEmission.Stop();
-                laserEmission.Clear();
-                laserRing.Stop();
-                laserRing.Clear();
+                StopLaserParticles();
+
             }
         }
     }
@@ -201,6 +209,9 @@ public class PlayerDrill : MonoBehaviour
         {
             isDrilling = false;
             isShooting = false;
+            
+            StopLaserParticles();
+            StopDrillParticles();
         }
 
     }
@@ -210,23 +221,44 @@ public class PlayerDrill : MonoBehaviour
         isShooting = state;
         if (!isShooting)
         {
-            laserEmission.Stop();
-            laserEmission.Clear();
-            laserRing.Stop();
-            laserRing.Clear();
-            laserHit.Stop();
-            laserHit.enabled = false;
+            StopLaserParticles();
+
         }
     }
+
+    private void StopLaserParticles()
+    {
+        if (!isUsed)
+        {
+            lr.enabled = false;
+        }
+        laserEmission.Stop();
+        laserEmission.Clear();
+        laserRing.Stop();
+        laserRing.Clear();
+        laserHit.Stop();
+        laserHit.enabled = false;
+    }
+
+    private void StopDrillParticles()
+    {
+        if (!isUsed)
+        {
+            lr.enabled = false;
+        }
+        drillEmission.Stop();
+        drillEmission.Clear();
+        drillRing.Stop();
+        drillRing.Clear();
+        drillHit.enabled = false;
+    }
+
     public void Drill(bool state)
     {
         isDrilling = state;
         if (!isDrilling)
         {
-            drillEmission.Stop();
-            drillEmission.Clear();
-            drillRing.Stop();
-            drillRing.Clear();
+            StopDrillParticles();
         }
     }
 
