@@ -22,7 +22,7 @@ public class UI_PausMenu : MonoBehaviour
     private void Start()
     { 
        playerInput = GetComponent<PlayerInput>();
-       pause = playerInput.actions["Pause"];
+       //pause = playerInput.actions["Pause"];
        pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
 
