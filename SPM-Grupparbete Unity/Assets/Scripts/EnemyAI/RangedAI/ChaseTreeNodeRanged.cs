@@ -1,43 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BehaviorTree;
+﻿using BehaviorTree;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class ChaseTreeNodeRanged : TreeNode
+namespace EnemyAI.RangedAI
 {
-    private Vector3 target;
-    private float distanceToTarget;
-    private NavMeshAgent agent;
-    private Animator animator;
-
-
-    public ChaseTreeNodeRanged(Vector3 target,float distanceToTarget, NavMeshAgent agent, Animator animator)
+    public class ChaseTreeNodeRanged : TreeNode
     {
-        this.animator = animator;
-        this.target = target;
-        this.distanceToTarget = distanceToTarget;
-        this.agent = agent;
+        private Vector3 target;
+        private float distanceToTarget;
+        private NavMeshAgent agent;
+        private Animator animator;
+
+
+        public ChaseTreeNodeRanged(Vector3 target,float distanceToTarget, NavMeshAgent agent, Animator animator)
+        {
+            this.animator = animator;
+            this.target = target;
+            this.distanceToTarget = distanceToTarget;
+            this.agent = agent;
         
-    }
-
-    public override NodeState Evaluate()
-    {
-        if (distanceToTarget > 0.2f)
-        {
-            agent.isStopped = false;
-            agent.SetDestination(target);
-
-            return NodeState.RUNNING;
         }
-        else
+
+        public override NodeState Evaluate()
         {
-            agent.isStopped = true;
-            state = NodeState.SUCCESS;
-            return state;
+            if (distanceToTarget > 0.2f)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target);
+
+                return NodeState.RUNNING;
+            }
+            else
+            {
+                agent.isStopped = true;
+                state = NodeState.SUCCESS;
+                return state;
+            }
         }
-    }
     
     
+    }
 }
