@@ -25,25 +25,25 @@ public class ShopScript : MonoBehaviour
     bool pauseButtonPressed;
     private bool GameIsPause;
     private bool doOnce = false;
-    
-    
+
+    [Header("E1 = Blue, E2 = Red, E3 = Green")]
     [Header("Costs for misc upgrades")]
-    [SerializeField] private int healCostBlue;
-    [SerializeField] private int weaponCostBlue;
-    [SerializeField] private int speedCostBlue;
-    [SerializeField] private int discoCostBlue;
+    [SerializeField] private int[] healCost = new int[3];
+    [SerializeField] private int[] weaponCost = new int[3];
+    [SerializeField] private int[] speedCost = new int[3];
+    [SerializeField] private int[] discoCost = new int[3];
     
     [Header("Cost Drill Upgrades")]
-    [SerializeField] private int drillLevelCostBlue;
-    [SerializeField] private int drillLevel2CostBlue;
-    [SerializeField] private int drillLevel2CostRed;
+    [SerializeField] private int[] drillLevel1Cost = new int[3];
+    [SerializeField] private int[] drillLevel2Cost = new int[3];
+    [SerializeField] private int[] drillLevel3Cost = new int[3];
+
     
     [Header("Cost Health Upgrades")]
-    [SerializeField] private int healthLevel1CostBlue;
-    [SerializeField] private int healthLevel2CostBlue;
-    [SerializeField] private int healthLevel2CostRed;
-    [SerializeField] private int healthLevel3CostBlue;
-    [SerializeField] private int healthLevel3CostRed;
+    [SerializeField] private int[] healthLevel1Cost = new int[3];
+    [SerializeField] private int[] healthLevel2Cost = new int[3];
+    [SerializeField] private int[] healthLevel3Cost = new int[3];
+
     
     [Header("Buttons for shop")]
     [SerializeField] private Button drill1Button;
@@ -59,6 +59,9 @@ public class ShopScript : MonoBehaviour
     private Dictionary<string, bool> buttonDictionary;
     private List<Collider> playersInShop;
     private Stopwatch stopWatch;
+
+    private GameObject playerOneDrill;
+    private GameObject playerTwoDrill;
     
     private void Start()
     {
@@ -86,6 +89,8 @@ public class ShopScript : MonoBehaviour
         //     Debug.Log(test.Key + " " + test.Value.ToString());
         // }g
 
+        playerOneDrill = GameObject.Find("Players/Player1/Drill");
+        playerTwoDrill = GameObject.Find("Players/Player2/Drill");
         
         shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
@@ -98,16 +103,18 @@ public class ShopScript : MonoBehaviour
     {
         if (shopIsFree)
         {
-            drillLevelCostBlue = 0;
-            healCostBlue = 0;
-            weaponCostBlue = 0;
-            speedCostBlue = 0;
-            discoCostBlue = 0;
-            drillLevel2CostBlue = 0;
-            drillLevel2CostRed = 0;
-            healthLevel1CostBlue = 0;
-            healthLevel2CostBlue = 0;
-            healthLevel2CostRed = 0;
+            healCost = new int[3];
+            weaponCost = new int[3];
+            speedCost = new int[3];
+            discoCost = new int[3];
+
+            drillLevel1Cost = new int[3];
+            drillLevel2Cost = new int[3];
+            drillLevel3Cost = new int[3];
+            
+            healthLevel1Cost = new int[3];
+            healthLevel2Cost = new int[3];
+            healthLevel3Cost = new int[3];
             
         }
         
@@ -162,10 +169,10 @@ public class ShopScript : MonoBehaviour
     public void Heal()
     {
         
-            if (m_PlayerState.m_LocalPlayerData.BlueCrystals >= healCostBlue)
+            if (m_PlayerState.m_LocalPlayerData.BlueCrystals >= healCost[0])
             {
                 m_PlayerState.Heal();
-                m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCostBlue;
+                m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCost[0];
                 healButton.interactable = false;
                 healButton.Select();
             }
@@ -176,19 +183,22 @@ public class ShopScript : MonoBehaviour
         switch (level)
         {
             case 1:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevelCostBlue)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel1Cost[0] 
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= drillLevel1Cost[1]
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= drillLevel1Cost[2])
                 {
-                    DrillUpgradeBase(level, drillLevelCostBlue, 0, 0);
+                    DrillUpgradeBase(level, drillLevel1Cost[0], drillLevel1Cost[1], drillLevel1Cost[2]);
                     DisableShopButton(drill1Button);
                     UpdateShop(drill1Button);
                 }
                 break;
            
             case 2:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2CostRed)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel2Cost[0] 
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= drillLevel2Cost[1] 
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= drillLevel2Cost[2])
                 {
-                    DrillUpgradeBase(level, drillLevel2CostBlue, drillLevel2CostRed, 0);
-
+                    DrillUpgradeBase(level, drillLevel2Cost[0], drillLevel2Cost[1], drillLevel2Cost[2]);
                     DisableShopButton(drill2Button);
                     UpdateShop(drill2Button);
                 }
@@ -210,25 +220,31 @@ public class ShopScript : MonoBehaviour
         switch (level)
         {
             case 1:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel1CostBlue)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel1Cost[0]
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= healthLevel1Cost[1]
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= healthLevel1Cost[2])
                 {
-                    HealthUpgradeBase(level, healthLevel1CostBlue, 0,0);
+                    HealthUpgradeBase(level, healthLevel1Cost[0], healthLevel1Cost[1],healthLevel1Cost[2]);
                     DisableShopButton(healthOneButton);
                     UpdateShop(healthOneButton);
                 }
                 break;
             case 2:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2CostRed)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel2Cost[0] 
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= healthLevel2Cost[1]
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= healthLevel2Cost[2])
                 {
-                    HealthUpgradeBase(level, healthLevel2CostBlue, healthLevel2CostRed,0);
+                    HealthUpgradeBase(level, healthLevel2Cost[0], healthLevel2Cost[1], healthLevel2Cost[2]);
                     DisableShopButton(healthTwoButton);
                     UpdateShop(healthTwoButton);
                 }
                 break;
             case 3:
-                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel3CostBlue && GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel3CostRed)
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= healthLevel3Cost[0] 
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= healthLevel3Cost[1]
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= healthLevel3Cost[2])
                 {
-                    HealthUpgradeBase(level, healthLevel3CostBlue, healthLevel3CostRed,0);
+                    HealthUpgradeBase(level, healthLevel1Cost[0], healthLevel1Cost[1],healthLevel3Cost[2]);
                     DisableShopButton(healthThreeButton);
                     UpdateShop(healthThreeButton);
                 }
@@ -250,11 +266,15 @@ public class ShopScript : MonoBehaviour
 
     public void Accelerate(float addedAcceleration)
     {
-        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= speedCostBlue)
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= speedCost[0]
+            && GlobalControl.Instance.playerStatistics.RedCrystals >= speedCost[1]
+            && GlobalControl.Instance.playerStatistics.GreenCrystals >= speedCost[2])
         {
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerOneAcceleration + addedAcceleration);
             m_PlayerState.SetAcceleration(PlayerStatistics.Instance.playerTwoAcceleration + addedAcceleration);
-            m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCostBlue;
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= speedCost[0];
+            m_PlayerState.m_LocalPlayerData.RedCrystals -= speedCost[1];
+            m_PlayerState.m_LocalPlayerData.GreenCrystals -= speedCost[2];
             DisableShopButton(accelerateButton);
             UpdateShop(accelerateButton);
         }
@@ -276,12 +296,12 @@ public class ShopScript : MonoBehaviour
 
     public void WeaponUpgrade(int level)
     {
-        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= weaponCostBlue)
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= weaponCost[0])
         {
             m_PlayerState.m_LocalPlayerData.weaponLevel = level;
-            m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCostBlue;
-            GameObject.Find("Players/Player1/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
-            GameObject.Find("Players/Player2/Drill").GetComponent<PlayerDrill>().SetWeaponLevel();
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= weaponCost[0];
+            playerOneDrill.GetComponent<PlayerDrill>().SetWeaponLevel();
+            playerTwoDrill.GetComponent<PlayerDrill>().SetWeaponLevel();
             DisableShopButton(weaponButton);
             UpdateShop(weaponButton);
         }

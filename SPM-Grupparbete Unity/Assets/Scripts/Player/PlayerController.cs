@@ -121,23 +121,11 @@ public class PlayerController : MonoBehaviour
 
                 if (uiEnabled)
                 {
-                    UI.Enable();
                     playerInput.SwitchCurrentActionMap("UI");
-                
-                    defaultMap.Disable();
-
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
                 }
                 else
                 {
-                    //Debug.Log(uiEnabled);
-
-                    //defaultMap.Enable();
                     playerInput.SwitchCurrentActionMap("Player");
-                    UI.Disable();
-
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
                 }
             }
         }
@@ -197,15 +185,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-
-
             drillScript.Shoot(true);
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
             animator.SetBool("Idle", false);
-           
-            
 
             if (!source.isPlaying)
             {
@@ -219,7 +203,6 @@ public class PlayerController : MonoBehaviour
                 drillScript.Shoot(false);
                 drillScript.Drill(true);
                 drillScript.DrillInUse(true);
-
                 animator.SetBool("IsShooting", true);
                 animator.SetBool("Idle", false);
 

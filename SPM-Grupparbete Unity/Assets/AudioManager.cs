@@ -17,7 +17,6 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetInt("IsMuted"));
         if (PlayerPrefs.GetFloat("IsMuted") == 1)
         {
             audioMixer.SetFloat("VolumeControl", -80f);
@@ -57,7 +56,6 @@ public class AudioManager : MonoBehaviour
         inCombat = true;
         sourceTwo.clip = combatMusic[index];
         audioMixer.FindSnapshot("CombatMusic").TransitionTo(1f);
-        Debug.Log("Här");
     }
 
     public bool InCombat()
