@@ -28,10 +28,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(false);
+        }
     }
+
+    
 
     private void OnEnable()
     {
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(true);
+        }
         timer = totalAllowedSpawnTime;
     }
 
@@ -99,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
         enemyAIHandler.units.Add(enemy);
 
         enemy.SetPool(pool);
-
+        
         return enemy;
     }
 

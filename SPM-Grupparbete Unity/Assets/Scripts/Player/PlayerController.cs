@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
             animator.SetBool("Idle", false);
-            Debug.Log(animator.isActiveAndEnabled);
+           
             
 
             if (!source.isPlaying)

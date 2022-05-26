@@ -56,6 +56,7 @@ public class EnemyAIHandler : MonoBehaviour
 
     private void Update()
     {
+        
         playerOneIsActive = playerOne.gameObject.activeInHierarchy;
         playerTwoIsActive = playerTwo.gameObject.activeInHierarchy;
 
@@ -72,7 +73,7 @@ public class EnemyAIHandler : MonoBehaviour
 
         // Used to know were to position in the circle around tha player.
 
-       // StartCoroutine(slowDown());
+      
         foreach (BaseEnemyAI enemyAI in units)
         {
             if (enemyAI.gameObject.activeInHierarchy )
@@ -116,7 +117,9 @@ public class EnemyAIHandler : MonoBehaviour
 
     /*IEnumerator slowDown()
     {
-        foreach (BaseClassEnemyAI enemyAI in units)
+        
+        yield return new WaitForSeconds(1f);
+        foreach (BaseEnemyAI enemyAI in units)
         {
             if (enemyAI.gameObject.activeInHierarchy )
             {
@@ -156,7 +159,7 @@ public class EnemyAIHandler : MonoBehaviour
            
         }
 
-        yield return new WaitForSeconds(.1f);
+        
     }*/
 
     private float ClosestDistance(BaseEnemyAI enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,

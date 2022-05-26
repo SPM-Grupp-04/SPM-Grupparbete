@@ -12,14 +12,14 @@ public class RangeTreeNodeMelee : TreeNode
     // private List<Transform> targets;
     //private Transform orgin;
 
-    private Animator _animator;
+    private Animator animator;
 
     private float distanceToPlayer;
 
     public RangeTreeNodeMelee(float range, float distanceToPlayer, Animator animator)
     {
         this.range = range;
-        _animator = animator;
+        this.animator = animator;
 
         this.distanceToPlayer = distanceToPlayer;
     }
@@ -31,7 +31,7 @@ public class RangeTreeNodeMelee : TreeNode
         state = distanceToPlayer <= range ? NodeState.SUCCESS : NodeState.FAILURE;
         if (state == NodeState.FAILURE)
         {
-            _animator.SetBool("Run", false);
+            animator.SetBool("Run", false);
         }
 
         return state;
