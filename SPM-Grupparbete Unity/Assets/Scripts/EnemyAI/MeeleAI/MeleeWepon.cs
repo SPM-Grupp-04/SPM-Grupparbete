@@ -2,8 +2,8 @@ using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 
-namespace EnemyAI.MeeleAI
-{
+
+
     public class MeleeWepon : MonoBehaviour
     {
         private float cooldownTime = 0.5f;
@@ -32,4 +32,4 @@ namespace EnemyAI.MeeleAI
 
    
     }
-}
+

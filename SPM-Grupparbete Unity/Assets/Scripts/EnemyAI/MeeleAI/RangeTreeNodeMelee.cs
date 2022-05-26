@@ -33,7 +33,7 @@ namespace EnemyAI.MeeleAI
             if (state == NodeState.FAILURE)
             {
                 animator.SetBool("Run", false);
-                animator.SetBool("Idle", true);
+              
             }
 
             return state;

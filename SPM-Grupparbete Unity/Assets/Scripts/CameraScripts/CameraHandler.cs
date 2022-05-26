@@ -31,9 +31,9 @@ public class CameraHandler : MonoBehaviour
 
     private Vector3 directionCtoA;
     private Vector3 directionCtoB;
-    private const float FOVMULTIPLIER = 6.6f;
-    private const int FOVMIN = 80;
-    private const int FOVMAX = 100;
+    private const float FOVMULTIPLIER = 3.3f;
+    private const int FOVMIN = 25;
+    private const int FOVMAX = 45;
 
     private Vector3 LenghtBetweenPlayers;
     
@@ -68,7 +68,7 @@ public class CameraHandler : MonoBehaviour
 
         SetCameraLensFOV();
 
-        transform.position += new Vector3(midpointAtoB.x, 0, midpointAtoB.z);
+        transform.position += new Vector3(midpointAtoB.x, 0, midpointAtoB.z - 8);
 
     }
 
