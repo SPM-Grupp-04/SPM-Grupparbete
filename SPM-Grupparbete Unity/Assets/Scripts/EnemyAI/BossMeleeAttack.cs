@@ -35,17 +35,19 @@ namespace EnemyAI
         {
             if (bossAI.GetCurrentHealth() < 1)
             {
+                Debug.Log("Boss return Fail In Melee");
                 return NodeState.FAILURE;
             }
-            
+            Debug.Log("SHould stand still and hit.");
             agent.isStopped = true;
+            animator.SetBool("Run", false);
             var agentT = agent.transform;
             var target = (Transform) GetData("target");
             agentT.LookAt(target);
-            if (meleeWeapon.timeRemaining <= 0.1f)
-            {
+           // if (meleeWeapon.timeRemaining <= 0.1f)
+           // {
                 animator.SetTrigger("Attack");
-            }
+           // }
 
             return NodeState.RUNNING;
         }

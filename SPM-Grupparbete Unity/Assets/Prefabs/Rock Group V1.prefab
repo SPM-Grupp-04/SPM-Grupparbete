@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7743936491426465649}
   - component: {fileID: 7241525816161044154}
+  - component: {fileID: 6075249658557465008}
   m_Layer: 0
   m_Name: Rock Group V1
   m_TagString: Untagged
@@ -51,6 +52,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.8511124, y: 5.9931383, z: 2.341156}
   m_Center: {x: 0.083431244, y: 2.4965692, z: 0.13110352}
+--- !u!208 &6075249658557465008
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743936491426465648}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.4255563, y: 2.99657, z: 1.170578}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.083431244, y: 2.4965692, z: 0.13110352}
+  m_TimeToStationary: 0.5
 --- !u!1001 &7743936490600925331
 PrefabInstance:
   m_ObjectHideFlags: 0
