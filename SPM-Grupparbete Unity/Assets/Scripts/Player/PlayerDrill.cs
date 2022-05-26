@@ -250,6 +250,7 @@ public class PlayerDrill : MonoBehaviour
         drillEmission.Clear();
         drillRing.Stop();
         drillRing.Clear();
+        drillHit.Stop();
         drillHit.enabled = false;
     }
 

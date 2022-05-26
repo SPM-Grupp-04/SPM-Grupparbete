@@ -9,10 +9,14 @@ public class UI_PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     [SerializeField] private GameObject pauseMenuUI;
+    
+    
     public PlayerInput playerInput;
     public PlayerInput PlayerInputTwo;
     private InputAction pause;
     private InputAction pausePlayerTwo;
+    
+    
     private bool pauseButtonPressed;
     
     [Header("MenuButtonFirstSelection")]
@@ -20,8 +24,8 @@ public class UI_PausMenu : MonoBehaviour
 
     
     private void Start()
-    { 
-       playerInput = GetComponent<PlayerInput>();
+    {
+        playerInput = GetComponent<PlayerInput>();
        //pause = playerInput.actions["Pause"];
        pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
