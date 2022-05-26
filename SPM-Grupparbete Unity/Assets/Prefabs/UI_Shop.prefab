@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 254404803984606745}
   - component: {fileID: 42110313}
   - component: {fileID: 1696193632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UI_Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,20 +769,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shopAreaRadius: 15.5
-  rectTransform: {fileID: 0}
   shopIsFree: 1
-  healCostBlue: 5
-  weaponCostBlue: 10
-  speedCostBlue: 10
-  discoCostBlue: 50
-  drillLevelCostBlue: 5
-  drillLevel2CostBlue: 20
-  drillLevel2CostRed: 20
-  healthLevel1CostBlue: 20
-  healthLevel2CostBlue: 40
-  healthLevel2CostRed: 20
-  healthLevel3CostBlue: 0
-  healthLevel3CostRed: 0
+  healCost: 050000000000000000000000
+  weaponCost: 0a0000000000000000000000
+  speedCost: 0a0000000000000000000000
+  discoCost: 320000000000000000000000
+  drillLevel1Cost: 050000000000000000000000
+  drillLevel2Cost: 140000001400000000000000
+  drillLevel3Cost: 000000000000000000000000
+  healthLevel1Cost: 140000000000000000000000
+  healthLevel2Cost: 280000001400000000000000
+  healthLevel3Cost: 500000002800000000000000
   drill1Button: {fileID: 254404803258351252}
   healButton: {fileID: 254404803675625744}
   weaponButton: {fileID: 5895394464882621039}
@@ -1162,7 +1159,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3769734912698923960}
   m_Direction: 2
   m_Value: 1.0000001
-  m_Size: 0.15660001
+  m_Size: 0.1566
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1509,7 +1506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000035762787, y: -0.00048828125}
+  m_AnchoredPosition: {x: 0.0006713867, y: -0.0004873348}
   m_SizeDelta: {x: -1, y: 5000}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3513947962972649923
@@ -1989,7 +1986,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6845508007053417975}
   m_HandleRect: {fileID: 3593866802213349653}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

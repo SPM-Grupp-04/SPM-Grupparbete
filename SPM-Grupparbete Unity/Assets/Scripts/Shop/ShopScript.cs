@@ -57,7 +57,7 @@ public class ShopScript : MonoBehaviour
 
     
     private Dictionary<string, bool> buttonDictionary;
-    private List<Collider> playersInShop;
+    private List<Collider> playersInShop = new List<Collider>();
     private Stopwatch stopWatch;
 
     private GameObject playerOneDrill;
@@ -132,6 +132,7 @@ public class ShopScript : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>().IsMapSwitched())
         {
             OpenShopInterface();
+
             if (!doOnce)
             {
                 drill1Button.Select();
@@ -151,6 +152,7 @@ public class ShopScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         other.GetComponent<PlayerController>().PlayerCanShop(false);
+
     }
 
     private void OpenShopInterface()
