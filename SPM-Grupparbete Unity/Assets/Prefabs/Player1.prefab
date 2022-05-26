@@ -1369,8 +1369,8 @@ Transform:
   - {fileID: 6093184860417170500}
   - {fileID: 3468054973967685349}
   - {fileID: 1996551283298249531}
-  - {fileID: 76930953}
   - {fileID: 7233835604443078218}
+  - {fileID: 2995146244812344274}
   m_Father: {fileID: 2965090648212625148}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   laserEmission: {fileID: 4434256802509919334}
   drillRing: {fileID: 6093184860417170503}
   drillEmission: {fileID: 4434256800842360651}
-  laserHit: {fileID: 76930955}
+  laserHit: {fileID: 2995146244812344272}
   drillHit: {fileID: 7233835604443078216}
   drillDistance: 3
   laserDistance: 10
@@ -2191,7 +2191,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
   m_PrefabInstance: {fileID: 869886704481875205}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2268841457234692810
+--- !u!1001 &3957660136047124113
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2200,11 +2200,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2268841457176712514, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
       propertyPath: m_Name
-      value: LaserHitEffect
+      value: LaserHitEffect 1
       objectReference: {fileID: 0}
     - target: {fileID: 2268841457176712515, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2268841457176712515, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2248,15 +2248,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
---- !u!4 &76930953 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2268841457176712515, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
-  m_PrefabInstance: {fileID: 2268841457234692810}
-  m_PrefabAsset: {fileID: 0}
---- !u!2083052967 &76930955 stripped
+--- !u!2083052967 &2995146244812344272 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 2268841457176712513, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
-  m_PrefabInstance: {fileID: 2268841457234692810}
+  m_PrefabInstance: {fileID: 3957660136047124113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2995146244812344274 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2268841457176712515, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
+  m_PrefabInstance: {fileID: 3957660136047124113}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3997818425866339671
 PrefabInstance:
@@ -2333,7 +2333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2268841457176712515, guid: 256986bc380fa6845af9a87a211b6882, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2268841457176712515, guid: 256986bc380fa6845af9a87a211b6882, type: 3}
       propertyPath: m_LocalPosition.x
