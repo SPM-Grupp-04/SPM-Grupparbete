@@ -25,25 +25,8 @@ public class UI_PausMenu : MonoBehaviour
        pause = playerInput.actions["Pause"];
        pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
-    
 
-    public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
-    {
-        if (pauseButtonValue.performed)
-        {
-            pauseButtonPressed = !pauseButtonPressed;
-        }
-        if (pauseButtonPressed)
-        {
-            Pause();
-        }
-        else
-        {
-            Resume();
-        }
-    }
-    
-    private void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;

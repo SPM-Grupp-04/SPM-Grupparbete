@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-    private static bool movementEnabled = true;
+
+    private static bool  movementEnabled = true;
+
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
@@ -60,6 +62,9 @@ public class PlayerController : MonoBehaviour
     
     private bool uiEnabled;
     private bool playerCanShop;
+
+    private GameObject pauseMenuUI;
+    private bool pauseButtonPressed;
 
     private InputActionMap UI;
     private InputActionMap defaultMap;
@@ -78,6 +83,7 @@ public class PlayerController : MonoBehaviour
         drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
+        pauseMenuUI = GameObject.Find("UI");
         //teleport = GameObject.Find("TownPortal");
        
     }
@@ -136,7 +142,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
+    public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
+    {
+        if (pauseButtonValue.performed)
+        {
+            pauseButtonPressed = !pauseButtonPressed;
+        }
+
+        if (pauseButtonPressed)
+        {
+            pauseMenuUI.GetComponent<UI_PausMenu>().Pause();
+        }
+    }
+
     private void RestrictMovement()
     {
         Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
