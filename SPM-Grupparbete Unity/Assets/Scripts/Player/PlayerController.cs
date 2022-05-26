@@ -197,19 +197,21 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-
-
+            
             drillScript.Shoot(true);
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
             animator.SetBool("Idle", false);
             Debug.Log(animator.isActiveAndEnabled);
-            
 
-            if (!source.isPlaying)
+            if (!source.isPlaying && drillScript.CanShoot)
             {
                 PlayLaserWeaponSound();
+            }
+            else if (!drillScript.CanShoot)
+            {
+                StopSound();
             }
         }
         else

@@ -64037,7 +64037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 45
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.size
@@ -92432,6 +92432,18 @@ PrefabInstance:
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 2115056028}
+    - target: {fileID: 1923348166, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: m_Range
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923348166, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: m_SpotAngle
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923348166, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 77
+      objectReference: {fileID: 0}
     - target: {fileID: 1968085593151929628, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: uiCooldowns
       value: 
@@ -93046,7 +93058,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7368729970608807084}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 028cef38af61fad4abca9f72d0c1ab13, type: 3}
   m_Name: 
@@ -93203,6 +93215,18 @@ PrefabInstance:
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 2115056028}
+    - target: {fileID: 1923348166, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_Range
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923348166, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_SpotAngle
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923348166, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 77
+      objectReference: {fileID: 0}
     - target: {fileID: 1968085593151929628, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: uiCooldowns
       value: 
