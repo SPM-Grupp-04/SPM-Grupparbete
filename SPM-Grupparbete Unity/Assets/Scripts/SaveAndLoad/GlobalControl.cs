@@ -57,6 +57,8 @@ public class GlobalControl : MonoBehaviour
     }
 
 
+    
+
     [ContextMenu("Save Data")]
     public void SaveInInspector()
     {
