@@ -419,7 +419,7 @@ public class ShopScript : MonoBehaviour
         {
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
-            Debug.Log("Run time: " + ts);
+//            Debug.Log("Run time: " + ts);
         }
     }
     

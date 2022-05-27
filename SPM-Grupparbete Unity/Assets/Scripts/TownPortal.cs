@@ -33,7 +33,7 @@ public class TownPortal : MonoBehaviour
         playerOne = GameObject.Find("Player1");
         playerTwo = GameObject.Find("Player2");
         
-        Debug.Log(playerOne + " PlayerOne" + playerTwo + " PlayerTwo");
+//        Debug.Log(playerOne + " PlayerOne" + playerTwo + " PlayerTwo");
         
         drone = GameObject.Find("Drone");
         transEnable = GameObject.Find("Trans");
