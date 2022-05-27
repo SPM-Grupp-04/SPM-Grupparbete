@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1991099669579705417}
   - component: {fileID: 4342940982520764547}
   - component: {fileID: 2531317136655872878}
+  - component: {fileID: 4312356476055580395}
   m_Layer: 0
   m_Name: Environment_Rock
   m_TagString: Untagged
@@ -98,3 +99,19 @@ CapsuleCollider:
   m_Height: 2.2
   m_Direction: 0
   m_Center: {x: -0.030743092, y: 1.1859101, z: 0.057122827}
+--- !u!208 &4312356476055580395
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829885233888590166}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.0090001, y: 1.1470001, z: 1.212}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.031000001, y: 1.1860001, z: 0.057000004}
+  m_TimeToStationary: 0.5
