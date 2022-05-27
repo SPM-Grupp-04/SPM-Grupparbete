@@ -37,6 +37,7 @@ public class TownPortal : MonoBehaviour
         
         drone = GameObject.Find("Drone");
         transEnable = GameObject.Find("Trans");
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()

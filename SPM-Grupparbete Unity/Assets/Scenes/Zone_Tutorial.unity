@@ -12985,7 +12985,7 @@ Transform:
   - {fileID: 2071177755}
   - {fileID: 1363700241}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1124901972
 PrefabInstance:
@@ -13932,7 +13932,7 @@ Transform:
   - {fileID: 467767715}
   - {fileID: 1785199013}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1172334608
 GameObject:
@@ -20167,6 +20167,18 @@ PrefabInstance:
       propertyPath: shopIsFree
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: healthLevel1Cost.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: healthLevel2Cost.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: healthLevel3Cost.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 807159916, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: buttonsArray.Array.size
       value: 7
@@ -20353,7 +20365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00017726421
+      value: 0.00008559227
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -29007,7 +29019,7 @@ Transform:
   - {fileID: 496340304}
   - {fileID: 1014215086}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1572659502117556233
 MeshFilter:
