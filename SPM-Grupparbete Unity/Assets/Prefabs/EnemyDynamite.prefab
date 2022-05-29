@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1104689677393535271}
   - component: {fileID: 128340177053101416}
   - component: {fileID: 7176019616613321667}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 8873296492448345659}
   - component: {fileID: 7070531873000112175}
   - component: {fileID: 3351763947782931408}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Dynamite Fuse Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 719059355565962319}
   - component: {fileID: 331319525371052924}
   - component: {fileID: 371101874827262871}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5120,7 +5120,7 @@ GameObject:
   - component: {fileID: 8070047593951852703}
   - component: {fileID: 6599366790148719500}
   - component: {fileID: 7942896222743486800}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Dynamite Explosion Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5237,9 +5237,9 @@ GameObject:
   - component: {fileID: 586008625529941990}
   - component: {fileID: 6742602341496923280}
   - component: {fileID: -2474082930302201402}
-  - component: {fileID: 8521678323379612420}
+  - component: {fileID: 2149838367724578233}
   - component: {fileID: 1633756564643780838}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: EnemyDynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5343,7 +5343,7 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &8521678323379612420
+--- !u!114 &2149838367724578233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5352,7 +5352,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7467092179448219033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44ff71c288ac7d4c83f5bc8c16d2bc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f146a1f21d162c4eba395ef1b98de78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDelay: 3
