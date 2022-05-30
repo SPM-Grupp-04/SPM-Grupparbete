@@ -70,12 +70,13 @@ namespace EnemyAI.EnemyAIHandler
             }
 
             // Used to know were to position in the circle around tha player.
-
+            
       
             foreach (BaseEnemyAI enemyAI in units)
             {
                 if (enemyAI.gameObject.activeInHierarchy )
                 {
+                   
                     Vector3 aiPosition = enemyAI.gameObject.transform.position;
 
                 
@@ -97,16 +98,18 @@ namespace EnemyAI.EnemyAIHandler
                     {
                         distancePlayerTwo = 1000;
                     }
-
-
+                    
+                    
                     closestDistance = ClosestDistance(enemyAI, aiPosition, countEnemy,
                         closestDistance, distancePlayerOne, distancePlayerTwo);
 
+                    
+                    
                     enemyAI.PositionAroundTarget(closestTarget);
                     enemyAI.DistanceToPlayerPos(closestDistance);
                 
                     enemyAI.TopTreeNode.Evaluate();
-                
+                    
                     countEnemy++;
                 }
            
