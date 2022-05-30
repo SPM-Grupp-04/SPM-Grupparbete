@@ -1156,7 +1156,6 @@ MonoBehaviour:
     shieldCooldownModifer: 1
   playerName: PlayerTwo
   animator: {fileID: 3432154670100536797}
-  dieSound: {fileID: 8300000, guid: 0ca4fbf430085744694c1a1eb98cca06, type: 3}
   source: {fileID: 5900485362087750162}
 --- !u!114 &5868905720494507359
 MonoBehaviour:
@@ -1170,7 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8f03b609dcb146b1b8496e1a490e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 4361447376998521467, guid: f06716529f13da14c87e593c836e0696, type: 3}
 --- !u!208 &1032194585
 NavMeshObstacle:
   m_ObjectHideFlags: 0
