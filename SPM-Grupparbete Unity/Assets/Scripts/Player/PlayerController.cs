@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     private bool isDrilling;
     private bool useButtonPressed;
     
-    private bool uiEnabled;
+    private static bool uiEnabled;
     private bool playerCanShop;
 
     private bool insideShield;
@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
         pauseMenuUI = GameObject.Find("UI");
-        //teleport = GameObject.Find("TownPortal");
-       
     }
 
     private void Update()
@@ -95,6 +93,10 @@ public class PlayerController : MonoBehaviour
         if (TownPortal.IsTeleporting == false)
         {
             RestrictMovement();
+        }
+        if (uiEnabled == false && playerInput.currentActionMap.name.Equals("UI"))
+        {
+            playerInput.SwitchCurrentActionMap("Player");
         }
     }
     
@@ -227,6 +229,7 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            FixOverlapPenetration();
         }
         else
         {
@@ -263,7 +266,7 @@ public class PlayerController : MonoBehaviour
         return useButtonPressed;
     }
     
-    public bool IsMapSwitched()
+    public bool IsShopOpen()
     {
         return uiEnabled;
     }
@@ -273,6 +276,7 @@ public class PlayerController : MonoBehaviour
         get { return insideShield; }
         set { insideShield = value; }
     }
+
     
     public void ShootInput(InputAction.CallbackContext shootValue)
     {

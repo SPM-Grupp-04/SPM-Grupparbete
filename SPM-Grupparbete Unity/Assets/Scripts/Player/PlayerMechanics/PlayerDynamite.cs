@@ -98,9 +98,7 @@ public class PlayerDynamite : MonoBehaviour
         dynamiteFuseLight.enabled = false;
         
         dynamiteFuseAudioSource.Stop();
-        
-        CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
-        
+
         GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
         
         dynamiteExplosionAudioSource.Play();
@@ -130,6 +128,7 @@ public class PlayerDynamite : MonoBehaviour
             var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
             EventSystem.current.FireEvent(damageEvent);
         }
+        CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
         fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
         fallingRocksSpawner.SpawnRocks(true);
         meshRenderer.enabled = false;

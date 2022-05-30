@@ -54,6 +54,8 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healthTwoButton;
     [SerializeField] private Button healthThreeButton;
     [SerializeField] private Button drill2Button;
+    [SerializeField] private Button drill3Button;
+
 
     
     private Dictionary<string, bool> buttonDictionary;
@@ -62,7 +64,15 @@ public class ShopScript : MonoBehaviour
 
     private GameObject playerOneDrill;
     private GameObject playerTwoDrill;
-    
+
+    private GameObject playerOne;
+    private GameObject playerTwo;
+
+    private PlayerController playerControllerOne;
+    private PlayerController playerControllerTwo;
+
+   
+
     private void Start()
     {
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
@@ -88,6 +98,11 @@ public class ShopScript : MonoBehaviour
         //     
         //     Debug.Log(test.Key + " " + test.Value.ToString());
         // }g
+        
+        playerOne = GameObject.Find("Players/Player1");
+        playerTwo = GameObject.Find("Players/Player2");
+        playerControllerOne = playerOne.GetComponent<PlayerController>();
+        playerControllerTwo = playerTwo.GetComponent<PlayerController>();
 
         playerOneDrill = GameObject.Find("Players/Player1/Drill");
         playerTwoDrill = GameObject.Find("Players/Player2/Drill");
@@ -124,8 +139,8 @@ public class ShopScript : MonoBehaviour
         UpdateShop(drill1Button);
         //playersInShop.Add(other);
     }
-
-    private void OnTriggerStay(Collider other)
+    
+    /*private void OnTriggerStay(Collider other)
     {
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
@@ -146,6 +161,38 @@ public class ShopScript : MonoBehaviour
             other.GetComponent<PlayerController>().SetMovementStatus(true);
         }
         
+    }*/
+
+    private void Update()
+    {
+        if (playerControllerOne.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
+        {
+            OpenShopInterface();
+            SetPlayerMovement(false);
+        }
+        else if (!playerControllerOne.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
+        {
+            CloseShopInterface();
+            SetPlayerMovement(true);
+            
+        } else if (playerControllerTwo.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
+        {
+            OpenShopInterface();
+            SetPlayerMovement(false);
+
+        }
+        else if (!playerControllerTwo.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
+        {
+            CloseShopInterface();
+            SetPlayerMovement(true);
+            
+        }
+    }
+
+    private void SetPlayerMovement(bool value)
+    {
+        playerControllerOne.SetMovementStatus(value);
+        playerControllerTwo.SetMovementStatus(value);
     }
 
 
@@ -203,6 +250,16 @@ public class ShopScript : MonoBehaviour
                     DrillUpgradeBase(level, drillLevel2Cost[0], drillLevel2Cost[1], drillLevel2Cost[2]);
                     DisableShopButton(drill2Button);
                     UpdateShop(drill2Button);
+                }
+                break;
+            case 3:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel3Cost[0] 
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= drillLevel3Cost[1] 
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= drillLevel3Cost[2])
+                {
+                    DrillUpgradeBase(level, drillLevel3Cost[0], drillLevel3Cost[1], drillLevel3Cost[2]);
+                    DisableShopButton(drill3Button);
+                    UpdateShop(drill3Button);
                 }
                 break;
         }

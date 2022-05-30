@@ -98,7 +98,6 @@ public class EnemyDynamite : MonoBehaviour
         dynamiteExplosionAudioSource.Play();
         
         dynamiteExplosionLight.enabled = true;
-        //Gamepad.current.SetMotorSpeeds(1,0);
         capsuleCollider.enabled = false;
         
         Explode();
@@ -109,7 +108,6 @@ public class EnemyDynamite : MonoBehaviour
             yield return null;
         } while (particleSystemCountdown > 0.0f);
         
-        //Gamepad.current.SetMotorSpeeds(0,0);
         Destroy(dynamiteExplosion);
         Destroy(gameObject);
     }
@@ -121,7 +119,7 @@ public class EnemyDynamite : MonoBehaviour
         {
             if (!enemyObject.gameObject.GetComponent<PlayerController>().InsideShield)
             {
-                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
+                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 10);
                 EventSystem.current.FireEvent(damageEvent);
             }
         }
