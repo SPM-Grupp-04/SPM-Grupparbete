@@ -45,14 +45,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookRotation;
     private Vector2 mousePosition;
 
-
-    private bool invisibleWallDeployed;
-    private Vector3 invisibleWallPosition;
-    
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-
     private static bool  movementEnabled = true;
 
     private bool enteredShopArea;
@@ -62,6 +57,8 @@ public class PlayerController : MonoBehaviour
     
     private static bool uiEnabled;
     private bool playerCanShop;
+
+    private bool insideShield;
 
     private GameObject pauseMenuUI;
     private bool pauseButtonPressed;
@@ -276,6 +273,12 @@ public class PlayerController : MonoBehaviour
         return uiEnabled;
     }
     
+    public bool InsideShield
+    {
+        get { return insideShield; }
+        set { insideShield = value; }
+    }
+
     
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
@@ -337,10 +340,6 @@ public class PlayerController : MonoBehaviour
         
         teleport.transform.position = transform.position + new Vector3(1, 1, 1);
         teleport.SetActive(true);
-      
-
-       
-        
     }
 
     private void UpdatePlayerRotationGamePad()
