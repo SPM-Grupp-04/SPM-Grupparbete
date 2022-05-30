@@ -21,8 +21,8 @@ namespace EnemyAI.MeeleAI
 
         public override NodeState Evaluate()
         {
-            animator.SetBool("Run", true);
-        
+            animator.SetBool("Run", agent.velocity.magnitude > 0.3);
+            
             if (distanceToTarget > 0.2f)
             {
                 agent.isStopped = false;

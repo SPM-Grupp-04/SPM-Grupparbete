@@ -27,11 +27,12 @@ namespace EnemyAI.MeeleAI
 
         void Start()
         {
+            animator = GetComponent<Animator>();
+            animator.speed = Random.Range(0.9f, 1.3f);
             base.Start();
             base.randomNumber = Random.Range(1, 10);
             agent.radius = Random.Range(0.3f, 0.7f);
-            animator = GetComponent<Animator>();
-            movementSpeed = 7;
+            movementSpeed = Random.Range(6,7);
             agent.autoBraking = true;
             agent.speed = movementSpeed;
             currentHealth = startingHealth;
@@ -130,6 +131,10 @@ namespace EnemyAI.MeeleAI
             return currentHealth;
         }
 
+        public void tryToHitPlayer()
+        {
+            meleeWeapon.HitPlayer();
+        }
         public void DealDamage(float damage)
         {
             currentHealth -= damage;

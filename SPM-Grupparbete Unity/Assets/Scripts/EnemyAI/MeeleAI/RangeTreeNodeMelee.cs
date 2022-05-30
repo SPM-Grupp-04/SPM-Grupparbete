@@ -30,11 +30,7 @@ namespace EnemyAI.MeeleAI
        
 
             state = distanceToPlayer <= range ? NodeState.SUCCESS : NodeState.FAILURE;
-            if (state == NodeState.FAILURE)
-            {
-                animator.SetBool("Run", false);
-              
-            }
+           
 
             return state;
         }
