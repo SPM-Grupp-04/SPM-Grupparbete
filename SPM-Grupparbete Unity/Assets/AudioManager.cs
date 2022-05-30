@@ -8,7 +8,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] backgroundMusic;
     [SerializeField] private AudioClip[] combatMusic;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private AudioSource sourceOne, sourceTwo;
+    [SerializeField] private AudioSource sourceOne, sourceTwo, sourceThree, sourceFour;
+    [SerializeField] private AudioClip pickUp;  
+    
     
     
     private int index;
@@ -42,6 +44,19 @@ public class AudioManager : MonoBehaviour
             index = 0;
         }
         
+    }
+
+    public void PlayCrystalSound()
+    {
+        sourceThree.Play();
+    }
+
+    public void PlayCrystalPickUpSound()
+    {
+        Debug.Log(pickUp);
+        sourceFour.PlayOneShot(pickUp);
+        
+        Debug.Log("hej");
     }
 
     public void CombatMusic()

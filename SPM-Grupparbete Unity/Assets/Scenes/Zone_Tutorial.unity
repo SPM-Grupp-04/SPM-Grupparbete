@@ -3304,6 +3304,10 @@ PrefabInstance:
       value: Ore_Blue_ModelTwo (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -4501,6 +4505,10 @@ PrefabInstance:
       value: Ore_Blue (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -5106,6 +5114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
@@ -6169,6 +6181,10 @@ PrefabInstance:
       value: Ore_Blue (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -6356,6 +6372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelOne (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
@@ -7933,6 +7953,10 @@ PrefabInstance:
       value: Ore_Blue_ModelOne (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -9253,11 +9277,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5868905720494507359, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 6385055751904336009, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1042659813}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
 --- !u!4 &1042659812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2965090648212625148, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+  m_PrefabInstance: {fileID: 1042659811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1042659813 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 41274958454490615, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
   m_PrefabInstance: {fileID: 1042659811}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1042659814 stripped
@@ -11318,6 +11355,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5868905720494507359, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
 --- !u!4 &1261272711 stripped
@@ -11968,6 +12009,10 @@ PrefabInstance:
       value: Ore_Blue_ModelOne
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -12092,6 +12137,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Rocks
       objectReference: {fileID: 0}
+    - target: {fileID: 4471920123488140563, guid: 23a25c4dedcd43f4dbfe3a5eb15b7dcd, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 4471920123488140567, guid: 23a25c4dedcd43f4dbfe3a5eb15b7dcd, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -14459,6 +14508,10 @@ PrefabInstance:
       value: Ore_Blue (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -15606,6 +15659,10 @@ PrefabInstance:
       value: Rocks
       objectReference: {fileID: 0}
     - target: {fileID: 4471920123488140563, guid: 23a25c4dedcd43f4dbfe3a5eb15b7dcd, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4471920123488140563, guid: 23a25c4dedcd43f4dbfe3a5eb15b7dcd, type: 3}
       propertyPath: oreMaterialHP
       value: 200
       objectReference: {fileID: 0}
@@ -16122,6 +16179,10 @@ PrefabInstance:
       value: Ore_Blue_ModelTwo
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -16396,11 +16457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.99999285
+      value: 0.99998987
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.00006
+      value: 416.99988
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
@@ -16789,6 +16850,10 @@ PrefabInstance:
       value: Ore_Blue (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -17011,6 +17076,10 @@ PrefabInstance:
       value: Ore_Blue_ModelTwo (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -17139,6 +17208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelOne (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
@@ -19031,6 +19104,10 @@ PrefabInstance:
       value: Ore_Blue (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -19140,6 +19217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: oreMaterialHP
       value: 100
@@ -22321,6 +22402,10 @@ PrefabInstance:
       value: Ore_Blue_ModelOne (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
+    - target: {fileID: 4305440644248331399, guid: f4d19584c94e9424398319a847427ad6, type: 3}
       propertyPath: oreMaterialHP
       value: 100
       objectReference: {fileID: 0}
@@ -22380,6 +22465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ore_Blue_ModelTwo (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 6979470723937351643, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
       propertyPath: oreMaterialHP
       value: 100
@@ -22585,6 +22674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallOne
       objectReference: {fileID: 0}
+    - target: {fileID: 4471920123488140563, guid: 23a25c4dedcd43f4dbfe3a5eb15b7dcd, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4361447377897472299}
     - target: {fileID: 4471920123488140567, guid: 23a25c4dedcd43f4dbfe3a5eb15b7dcd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -23009,10 +23102,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3696430684195172011, guid: f06716529f13da14c87e593c836e0696, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0deb0f45c3638624383309d8908c3375, type: 3}
     - target: {fileID: 4361447376998521466, guid: f06716529f13da14c87e593c836e0696, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4361447376998521467, guid: f06716529f13da14c87e593c836e0696, type: 3}
+      propertyPath: pickUp
+      value: 
+      objectReference: {fileID: 8300000, guid: c8c7c2ad9290e4c4cae68e0b1548db5f, type: 3}
     - target: {fileID: 4361447376998521470, guid: f06716529f13da14c87e593c836e0696, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -23057,109 +23158,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7717302490210897599, guid: f06716529f13da14c87e593c836e0696, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c8c7c2ad9290e4c4cae68e0b1548db5f, type: 3}
+    - target: {fileID: 7717302490210897599, guid: f06716529f13da14c87e593c836e0696, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f06716529f13da14c87e593c836e0696, type: 3}
---- !u!1 &4361447377897472297 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4361447376998521466, guid: f06716529f13da14c87e593c836e0696, type: 3}
+--- !u!114 &4361447377897472299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4361447376998521467, guid: f06716529f13da14c87e593c836e0696, type: 3}
   m_PrefabInstance: {fileID: 4361447377897472296}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &4361447377897472298
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4361447377897472297}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a38c0c0e914f542993d2e50e3b99ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &4634843170734181220
 MeshRenderer:
   m_ObjectHideFlags: 0
