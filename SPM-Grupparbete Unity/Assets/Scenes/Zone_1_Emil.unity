@@ -44775,15 +44775,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerMaxHealth
-      value: 1999
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerOneHealth
-      value: 2888
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerTwoHealth
-      value: 3288
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980725, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: m_Name
@@ -99573,6 +99573,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7368729970608807086}
     - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 8871867442437586755}
+    - target: {fileID: 728746467, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 2115056028}
@@ -99696,6 +99700,10 @@ PrefabInstance:
       propertyPath: teleport
       value: 
       objectReference: {fileID: 1090645080}
+    - target: {fileID: 7708049037048568331, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 3438931142091801710}
     - target: {fileID: 8182577800644812320, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: igenoreMask.m_Bits
       value: 6399
@@ -99723,6 +99731,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3438931142091801710 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2965090648212625151, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+  m_PrefabInstance: {fileID: 3438931142091801693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4305440643063232741 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6979470723937351647, guid: 9a77992581bfd444baec50d6f87631d5, type: 3}
@@ -100412,6 +100425,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7368729970608807086}
     - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 3438931142091801695}
+    - target: {fileID: 728746467, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: uiCooldowns
       value: 
       objectReference: {fileID: 2115056028}
@@ -100543,6 +100560,10 @@ PrefabInstance:
       propertyPath: teleport
       value: 
       objectReference: {fileID: 1090645080}
+    - target: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 8871867442437586771}
     - target: {fileID: 8182577800644812320, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
       propertyPath: igenoreMask.m_Bits
       value: 6399
@@ -100581,3 +100602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2f232af7217b94ebbe104266a7da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8871867442437586771 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2965090648212625151, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+  m_PrefabInstance: {fileID: 8871867442437586753}
+  m_PrefabAsset: {fileID: 0}

@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
         {
             RestrictMovement();
         }
-
         if (uiEnabled == false)
         {
             playerInput.SwitchCurrentActionMap("Player");
@@ -232,6 +231,7 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            FixOverlapPenetration();
         }
         else
         {

@@ -10,7 +10,8 @@ public class ShieldAbility : MonoBehaviour
 {
     private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
 
-    [SerializeField] GameObject player;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject otherPlayer;
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float upTimeShield = 5f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
@@ -25,6 +26,8 @@ public class ShieldAbility : MonoBehaviour
     private float shieldCooldownModifer;
     
     private bool shieldButtonPressed;
+
+    private bool shieldActive;
 
     private void Start()
     {
@@ -88,13 +91,20 @@ public class ShieldAbility : MonoBehaviour
             canUseShield = false;
             uiIconBW.fillAmount = 1;
             cooldownToNextUse = Time.time + coolDown;
+            shieldActive = true;
         }
     }
 
+    public bool ShieldActive
+    {
+        get { return shieldActive; }
+    }
+
     private void DestroyShield()
-    {   
-         
-         Destroy(shieldGO);
-         
+    {
+        player.GetComponent<PlayerController>().InsideShield = false;
+        otherPlayer.GetComponent<PlayerController>().InsideShield = false;
+        Destroy(shieldGO);
+
     }
 }

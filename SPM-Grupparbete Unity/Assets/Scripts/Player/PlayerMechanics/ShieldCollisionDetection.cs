@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShieldCollisionDetection : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -13,12 +13,13 @@ public class ShieldCollisionDetection : MonoBehaviour
             Debug.Log("Inside Shield: " + other.gameObject.GetComponent<PlayerController>().InsideShield);
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerController>().InsideShield = false;
+            Debug.Log("Inside Shield: " + other.gameObject.GetComponent<PlayerController>().InsideShield);
         }
     }
 }

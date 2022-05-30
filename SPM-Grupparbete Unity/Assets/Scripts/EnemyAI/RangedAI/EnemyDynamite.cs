@@ -121,7 +121,7 @@ public class EnemyDynamite : MonoBehaviour
         {
             if (!enemyObject.gameObject.GetComponent<PlayerController>().InsideShield)
             {
-                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
+                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 10);
                 EventSystem.current.FireEvent(damageEvent);
             }
         }
