@@ -15,9 +15,6 @@ public class FallingRocksSpawner : MonoBehaviour
 
     [SerializeField] private float rockSpawnDuration = 3.0f;
 
-    [SerializeField] [Range(1.0f, 20.0f)] private float cameraShakeMagnitude;
-    [SerializeField] [Range(0.1f, 5.0f)] private float cameraShakeDuration;
-
     private float rockSpawnCountDown;
     
     [SerializeField] private GameObject rockPrefab;
@@ -84,7 +81,6 @@ public class FallingRocksSpawner : MonoBehaviour
         if (spawnRocks)
         {
             StartCoroutine(SpawnRocksForDuration());
-            CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
             spawnRocks = false;
         }
     }

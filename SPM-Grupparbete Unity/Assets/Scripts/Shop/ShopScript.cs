@@ -62,7 +62,15 @@ public class ShopScript : MonoBehaviour
 
     private GameObject playerOneDrill;
     private GameObject playerTwoDrill;
-    
+
+    private GameObject playerOne;
+    private GameObject playerTwo;
+
+    private PlayerController playerControllerOne;
+    private PlayerController playerControllerTwo;
+
+   
+
     private void Start()
     {
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
@@ -88,6 +96,11 @@ public class ShopScript : MonoBehaviour
         //     
         //     Debug.Log(test.Key + " " + test.Value.ToString());
         // }g
+        
+        playerOne = GameObject.Find("Players/Player1");
+        playerTwo = GameObject.Find("Players/Player2");
+        playerControllerOne = playerOne.GetComponent<PlayerController>();
+        playerControllerTwo = playerTwo.GetComponent<PlayerController>();
 
         playerOneDrill = GameObject.Find("Players/Player1/Drill");
         playerTwoDrill = GameObject.Find("Players/Player2/Drill");
@@ -124,8 +137,8 @@ public class ShopScript : MonoBehaviour
         UpdateShop(drill1Button);
         //playersInShop.Add(other);
     }
-
-    private void OnTriggerStay(Collider other)
+    
+    /*private void OnTriggerStay(Collider other)
     {
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
@@ -146,6 +159,38 @@ public class ShopScript : MonoBehaviour
             other.GetComponent<PlayerController>().SetMovementStatus(true);
         }
         
+    }*/
+
+    private void Update()
+    {
+        if (playerControllerOne.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
+        {
+            OpenShopInterface();
+            SetPlayerMovement(false);
+        }
+        else if (!playerControllerOne.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
+        {
+            CloseShopInterface();
+            SetPlayerMovement(true);
+            
+        } else if (playerControllerTwo.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
+        {
+            OpenShopInterface();
+            SetPlayerMovement(false);
+
+        }
+        else if (!playerControllerTwo.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
+        {
+            CloseShopInterface();
+            SetPlayerMovement(true);
+            
+        }
+    }
+
+    private void SetPlayerMovement(bool value)
+    {
+        playerControllerOne.SetMovementStatus(value);
+        playerControllerTwo.SetMovementStatus(value);
     }
 
 
