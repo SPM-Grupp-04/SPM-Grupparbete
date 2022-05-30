@@ -13386,6 +13386,7 @@ Transform:
   - {fileID: 250572450}
   - {fileID: 1173982569}
   - {fileID: 1280694087}
+  - {fileID: 624250541}
   m_Father: {fileID: 39721483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24014,6 +24015,103 @@ Transform:
   m_Father: {fileID: 730354414}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &461856077
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 243450197}
+    m_Modifications:
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: timer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: meeleEnemyPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: totalAllowedSpawnTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: totalAllowedEnimesAtSpawner
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: prioListMatchingObjektOrder.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: genericListOfBaseClassEnemyAI.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: prioListMatchingObjektOrder.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: genericListOfBaseClassEnemyAI.Array.data[0]
+      value: 
+      objectReference: {fileID: -9158013848336497969, guid: c359f25d5e6e1a2408df6d3caa9b78bb, type: 3}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 74.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.665
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987286952311094062, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnerFive (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987286952311094062, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987286952311094062, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
 --- !u!4 &462062479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bc145cbb31cf5044a5239b7ded9c6ac, type: 3}
@@ -31070,6 +31168,11 @@ BoxCollider:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5684895818698529127, guid: 6890f559acc365d49a98294804986265, type: 3}
   m_PrefabInstance: {fileID: 7368729970608807084}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &624250541 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7705741150849415780, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
+  m_PrefabInstance: {fileID: 461856077}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &625487954
 PrefabInstance:
@@ -44775,15 +44878,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerMaxHealth
-      value: 500
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerOneHealth
-      value: 500
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerTwoHealth
-      value: 500
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980725, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: m_Name
