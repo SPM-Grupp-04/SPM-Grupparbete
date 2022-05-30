@@ -377,6 +377,11 @@ public class PlayerController : MonoBehaviour
         playerCanShop = value;
         
     }
+
+    public bool IsPauseMenuOpen()
+    {
+        return pauseButtonPressed;
+    }
     
     public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
