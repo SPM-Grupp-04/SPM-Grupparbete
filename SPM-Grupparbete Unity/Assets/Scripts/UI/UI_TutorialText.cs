@@ -7,23 +7,26 @@ using UnityEngine.UI;
 
 public class UI_TutorialText : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    
     [SerializeField] private GameObject canvas;
 
     private void Awake()
     {
-        text.gameObject.SetActive(false);
+       
+       canvas.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)
     {
+        canvas.SetActive(true);
         canvas.transform.rotation = Camera.main.transform.rotation;
 
-        text.gameObject.SetActive(true);
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        text.gameObject.SetActive(false);
+        canvas.SetActive(false);
+        
     }
 }

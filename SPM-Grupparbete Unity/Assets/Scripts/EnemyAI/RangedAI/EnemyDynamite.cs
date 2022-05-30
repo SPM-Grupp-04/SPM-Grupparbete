@@ -43,18 +43,17 @@ public class EnemyDynamite : MonoBehaviour
 
     [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
+    private Collider[] playerColliders;
+
     private FallingRocksSpawner fallingRocksSpawner;
 
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
-
-    private void Awake()
-    {
-        fallingRocksSpawner = FallingRocksSpawner.Instance;
-    }
-
+    
     private void Start()
     {
+        fallingRocksSpawner = FallingRocksSpawner.Instance;
+        playerColliders = new Collider[2];
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
         dynamiteFuseAudioSource.Play();
@@ -98,7 +97,6 @@ public class EnemyDynamite : MonoBehaviour
         dynamiteExplosionAudioSource.Play();
         
         dynamiteExplosionLight.enabled = true;
-        //Gamepad.current.SetMotorSpeeds(1,0);
         capsuleCollider.enabled = false;
         
         Explode();
@@ -109,19 +107,18 @@ public class EnemyDynamite : MonoBehaviour
             yield return null;
         } while (particleSystemCountdown > 0.0f);
         
-        //Gamepad.current.SetMotorSpeeds(0,0);
         Destroy(dynamiteExplosion);
         Destroy(gameObject);
     }
 
     private void Explode()
     {
-        Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
-        foreach (Collider enemyObject in enemyColliders)
+        Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, playerColliders,  enemyLayerMask);
+        foreach (Collider enemyObject in playerColliders)
         {
             if (!enemyObject.gameObject.GetComponent<PlayerController>().InsideShield)
             {
-                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
+                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 10);
                 EventSystem.current.FireEvent(damageEvent);
             }
         }

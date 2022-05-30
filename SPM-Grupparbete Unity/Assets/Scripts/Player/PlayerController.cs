@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
         pauseMenuUI = GameObject.Find("UI");
-        //teleport = GameObject.Find("TownPortal");
-       
     }
 
     private void Update()
@@ -96,8 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             RestrictMovement();
         }
-
-        if (uiEnabled == false)
+        if (uiEnabled == false && playerInput.currentActionMap.name.Equals("UI"))
         {
             playerInput.SwitchCurrentActionMap("Player");
         }
@@ -232,6 +229,7 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            FixOverlapPenetration();
         }
         else
         {
@@ -355,8 +353,8 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMouseAim()
     {
-        Vector3 mousePosition = GetMousePosition();
-        Vector3 mouseDirection = (mousePosition - transform.localPosition) * rotationSmoothing;
+        Vector3 mousePositionOnScreen = GetMousePosition();
+        Vector3 mouseDirection = (mousePositionOnScreen - transform.localPosition) * rotationSmoothing;
         mouseDirection.y = 0;
         transform.forward = mouseDirection;
     }
