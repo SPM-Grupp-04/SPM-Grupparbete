@@ -229,6 +229,7 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            AnimatePlayer();
             FixOverlapPenetration();
         }
         else
@@ -249,6 +250,66 @@ public class PlayerController : MonoBehaviour
             UpdatePlayerRotationGamePad();
         }
         transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+
+    private void AnimatePlayer()
+    {
+        if (velocity != Vector3.zero)
+        {
+            animator.SetBool("Moving", true);
+            animator.SetBool("Idle", false);
+            
+            Vector2 roundedVelocity =
+                new Vector2((float)Math.Round(velocity.normalized.x), (float)Math.Round(velocity.normalized.z));
+
+            Vector2 roundedTransformForward = new Vector2((float)Math.Round(transform.forward.x),
+                (float)Math.Round(transform.forward.z));
+
+            Vector2 roundedTransformRight = new Vector2((float)Math.Round(transform.right.x),
+                (float)Math.Round(transform.right.z));
+
+            if (roundedVelocity.x <= roundedTransformForward.x + 0.1f && 
+                roundedVelocity.x >= roundedTransformForward.x - 0.1f ||
+                roundedVelocity.y <= roundedTransformForward.y + 0.1f && 
+                roundedVelocity.y >= roundedTransformForward.y - 0.1f)
+            {
+                Debug.Log("MOVING FORWARD/BACKWAYS");
+            } 
+            else if (roundedVelocity.x <= roundedTransformRight.x + 0.1f &&
+                       roundedVelocity.x >= roundedTransformRight.x - 0.1f ||
+                       roundedVelocity.y <= roundedTransformRight.y + 0.1f &&
+                       roundedVelocity.y >= roundedTransformRight.y - 0.1f)
+            {
+                Debug.Log("MOVING SIDEWAYS");
+            }
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+            animator.SetBool("Forward", false);
+        }
+    }
+    
+    private void FixOverlapPenetration()
+    {
+        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+            boxCollider.transform.rotation, wallLayerMask);
+
+        while (colliderCount > 0)
+        {
+            for (int i = 0; i < colliderCount; i++)
+            {
+                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
+                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
+                        out var direction, out var distance))
+                {
+                    Vector3 separationVector = direction * distance;
+                    transform.position += separationVector + separationVector.normalized * colliderMargin;
+                }
+            }
+            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+                boxCollider.transform.rotation, wallLayerMask);
+        }
     }
     
     public void SetPlayerVelocity(Vector3 newPlayerVelocity)
@@ -382,27 +443,5 @@ public class PlayerController : MonoBehaviour
     {
         source.Stop();
         source.clip = null;
-    }
-    
-    private void FixOverlapPenetration()
-    {
-        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-            boxCollider.transform.rotation, wallLayerMask);
-
-        while (colliderCount > 0)
-        {
-            for (int i = 0; i < colliderCount; i++)
-            {
-                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
-                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
-                        out var direction, out var distance))
-                {
-                    Vector3 separationVector = direction * distance;
-                    transform.position += separationVector + separationVector.normalized * colliderMargin;
-                }
-            }
-            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-                boxCollider.transform.rotation, wallLayerMask);
-        }
     }
 }
