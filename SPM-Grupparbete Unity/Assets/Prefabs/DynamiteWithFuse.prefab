@@ -5363,12 +5363,9 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  collisionIgnoreLayerMask:
-    serializedVersion: 2
-    m_Bits: 1216
   particleSystemPlayDuration: 5
-  cameraShakeMagnitude: 0
-  cameraShakeDuration: 0
+  cameraShakeMagnitude: 10
+  cameraShakeDuration: 0.75
   dynamiteExplosionPrefab: {fileID: 4889733576662073570, guid: e26eccca74a55e24288f6c9c0ca4afc1, type: 3}
   capsuleCollider: {fileID: -2474082930302201402}
   capsuleRigidBody: {fileID: 6742602341496923280}
