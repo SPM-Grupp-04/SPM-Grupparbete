@@ -69,6 +69,11 @@ public class UI_ShopDisplayText : MonoBehaviour
                 cost = "Cost: 20 blue & 20 red";
                 body = "This makes drill go even more BBBRRRRRRRR";
                 break;
+            case 7:
+                header = "Drill 3";
+                cost = "Cost: 20 blue & 20 red";
+                body = "This makes drill go even more BBBRRRRRRRR";
+                break;
             
             
         }

@@ -54,6 +54,8 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healthTwoButton;
     [SerializeField] private Button healthThreeButton;
     [SerializeField] private Button drill2Button;
+    [SerializeField] private Button drill3Button;
+
 
     
     private Dictionary<string, bool> buttonDictionary;
@@ -248,6 +250,16 @@ public class ShopScript : MonoBehaviour
                     DrillUpgradeBase(level, drillLevel2Cost[0], drillLevel2Cost[1], drillLevel2Cost[2]);
                     DisableShopButton(drill2Button);
                     UpdateShop(drill2Button);
+                }
+                break;
+            case 3:
+                if (GlobalControl.Instance.playerStatistics.BlueCrystals >= drillLevel3Cost[0] 
+                    && GlobalControl.Instance.playerStatistics.RedCrystals >= drillLevel3Cost[1] 
+                    && GlobalControl.Instance.playerStatistics.GreenCrystals >= drillLevel3Cost[2])
+                {
+                    DrillUpgradeBase(level, drillLevel3Cost[0], drillLevel3Cost[1], drillLevel3Cost[2]);
+                    DisableShopButton(drill3Button);
+                    UpdateShop(drill3Button);
                 }
                 break;
         }
