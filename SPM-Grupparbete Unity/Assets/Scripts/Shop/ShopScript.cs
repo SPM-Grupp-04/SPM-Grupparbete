@@ -59,7 +59,7 @@ public class ShopScript : MonoBehaviour
 
     
     private Dictionary<string, bool> buttonDictionary;
-    private List<Collider> playersInShop = new List<Collider>();
+    private List<int[]> arrayList;
     private Stopwatch stopWatch;
 
     private GameObject playerOneDrill;
@@ -75,6 +75,10 @@ public class ShopScript : MonoBehaviour
 
     private void Start()
     {
+        
+        arrayList = new List<int[]>{healCost, weaponCost, speedCost, discoCost, drillLevel1Cost,drillLevel2Cost,
+            drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost};
+
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
         if (buttonDictionary == null)
         {
@@ -487,5 +491,10 @@ public class ShopScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
     }
 
-    
+    public List<int[]> GetShopArrays()
+    {
+        return arrayList;
+    }
+
+
 }

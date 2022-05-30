@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 {
     private PlayerStatistics playerStats = PlayerStatistics.Instance;
 
-    [SerializeField] private GameObject firstSelected;
+    [SerializeField] private Button firstSelected;
     [SerializeField] private int sceneToLoad = 0;
 
     public GameObject loadingScreen;
@@ -19,11 +19,10 @@ using UnityEngine.EventSystems;
 
    // [SerializeField] private GameObject settingsMenu;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
        // gameObject.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
+        firstSelected.Select();
     }
 
   
