@@ -21,7 +21,7 @@ namespace EnemyAI.MeeleAI
         private List<Transform> targets;
         private Vector3 currentVelocity;
         private float smoothDamp;
-        private Animator _animator;
+        private Animator animator;
         private MeleeWepon _meleeWepon;
         private Vector3 target;
 
@@ -32,24 +32,18 @@ namespace EnemyAI.MeeleAI
             //  this.gameObject = gameObject;
 
             this.target = target;
-
+            
             smoothDamp = 1f;
-            _animator = animator;
+            this.animator = animator;
             _meleeWepon = meleeWepon;
         }
 
         public override NodeState Evaluate()
         {
+           
             agent.isStopped = true;
             Transform agentT = agent.transform;
-            agentT.LookAt(target);
-
-            // TODO: Ändra senare.!!!!!!!
-            if (_meleeWepon.timeRemaining <= 0.1f)
-            {
-           
-                _animator.SetTrigger("Attack");
-            }
+            agentT.LookAt(new Vector3(target.x, agent.transform.position.y,target.z));
 
             state = NodeState.RUNNING;
             return state;
