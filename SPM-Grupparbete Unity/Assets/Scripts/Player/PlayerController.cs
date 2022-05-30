@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     private bool isDrilling;
     private bool useButtonPressed;
     
-    private bool uiEnabled;
+    private static bool uiEnabled;
     private bool playerCanShop;
 
     private GameObject pauseMenuUI;
@@ -98,6 +98,11 @@ public class PlayerController : MonoBehaviour
         if (TownPortal.IsTeleporting == false)
         {
             RestrictMovement();
+        }
+
+        if (uiEnabled == false)
+        {
+            playerInput.SwitchCurrentActionMap("Player");
         }
     }
     
@@ -266,10 +271,11 @@ public class PlayerController : MonoBehaviour
         return useButtonPressed;
     }
     
-    public bool IsMapSwitched()
+    public bool IsShopOpen()
     {
         return uiEnabled;
     }
+    
     
     public void ShootInput(InputAction.CallbackContext shootValue)
     {

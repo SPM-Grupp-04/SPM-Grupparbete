@@ -163,33 +163,27 @@ public class ShopScript : MonoBehaviour
 
     private void Update()
     {
-        if (playerControllerOne.IsMapSwitched() && !shopInterfaceBackground.activeInHierarchy)
+        if (playerControllerOne.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
         {
             OpenShopInterface();
             SetPlayerMovement(false);
         }
-        else
+        else if (!playerControllerOne.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
         {
-            if (playerControllerOne.IsMapSwitched() && shopInterfaceBackground.activeInHierarchy)
-            {
-                CloseShopInterface();
-                SetPlayerMovement(true);
-            }
-        }
-        
-        if (playerControllerTwo.IsMapSwitched() && !shopInterfaceBackground.activeInHierarchy)
+            CloseShopInterface();
+            SetPlayerMovement(true);
+            
+        } else if (playerControllerTwo.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
         {
             OpenShopInterface();
             SetPlayerMovement(false);
 
         }
-        else
+        else if (!playerControllerTwo.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
         {
-            if (playerControllerTwo.IsMapSwitched() && shopInterfaceBackground.activeInHierarchy)
-            {
-                CloseShopInterface();
-                SetPlayerMovement(true);
-            }
+            CloseShopInterface();
+            SetPlayerMovement(true);
+            
         }
     }
 
