@@ -11,7 +11,6 @@ public class ComponentPickupScript : MonoBehaviour
 {
     [SerializeField] private VictoryConditionsScript.Components componentNumber;
     [SerializeField] private GameObject canvas;
-    [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private VisualEffect vfx;
     [SerializeField] private Animator animator;
     
@@ -19,8 +18,7 @@ public class ComponentPickupScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        text.enabled = false;
+        canvas.SetActive(false);
         //checks if the mask contains the value for the component
         if ((PlayerStatistics.Instance.componentsCollectedMask & (int)componentNumber) > 0)
             Destroy(gameObject);
@@ -43,7 +41,7 @@ public class ComponentPickupScript : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player") )
             return;
-        text.enabled = true;
+        canvas.SetActive(true);
         canvas.transform.rotation = Camera.main.transform.rotation;
         if (collision.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
         {
@@ -63,7 +61,7 @@ public class ComponentPickupScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        text.enabled = false;
+        canvas.SetActive(false);
     }
 
     IEnumerator Delay()

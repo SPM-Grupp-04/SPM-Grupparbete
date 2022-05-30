@@ -43,18 +43,17 @@ public class EnemyDynamite : MonoBehaviour
 
     [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
+    private Collider[] playerColliders;
+
     private FallingRocksSpawner fallingRocksSpawner;
 
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
-
-    private void Awake()
-    {
-        fallingRocksSpawner = FallingRocksSpawner.Instance;
-    }
-
+    
     private void Start()
     {
+        fallingRocksSpawner = FallingRocksSpawner.Instance;
+        playerColliders = new Collider[2];
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
         dynamiteFuseAudioSource.Play();
@@ -114,8 +113,8 @@ public class EnemyDynamite : MonoBehaviour
 
     private void Explode()
     {
-        Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
-        foreach (Collider enemyObject in enemyColliders)
+        Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, playerColliders,  enemyLayerMask);
+        foreach (Collider enemyObject in playerColliders)
         {
             if (!enemyObject.gameObject.GetComponent<PlayerController>().InsideShield)
             {
