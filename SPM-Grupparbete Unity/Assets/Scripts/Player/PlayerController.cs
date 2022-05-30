@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Idle", false);
             
             Vector2 roundedVelocity =
-                new Vector2((float)Math.Round(velocity.normalized.x), (float)Math.Round(velocity.normalized.z));
+                new Vector2((float)Math.Round(velocity.x), (float)Math.Round(velocity.z));
 
             Vector2 roundedTransformForward = new Vector2((float)Math.Round(transform.forward.x),
                 (float)Math.Round(transform.forward.z));
@@ -268,19 +268,31 @@ public class PlayerController : MonoBehaviour
             Vector2 roundedTransformRight = new Vector2((float)Math.Round(transform.right.x),
                 (float)Math.Round(transform.right.z));
 
-            if (roundedVelocity.x <= roundedTransformForward.x + 0.1f && 
-                roundedVelocity.x >= roundedTransformForward.x - 0.1f ||
-                roundedVelocity.y <= roundedTransformForward.y + 0.1f && 
-                roundedVelocity.y >= roundedTransformForward.y - 0.1f)
+            if (roundedVelocity.normalized.x <= roundedTransformForward.x + 0.1f && 
+                roundedVelocity.normalized.x >= roundedTransformForward.x - 0.1f ||
+                roundedVelocity.normalized.y <= roundedTransformForward.y + 0.1f && 
+                roundedVelocity.normalized.y >= roundedTransformForward.y - 0.1f)
             {
-                Debug.Log("MOVING FORWARD/BACKWAYS");
+                if (roundedVelocity.normalized.y + roundedTransformForward.y > 0)
+                {
+                    Debug.Log("MOVING FORWARD");
+                }
+                else
+                {
+                    Debug.Log("MOVING BACKWARD");
+                }
+                // Debug.Log("RVX: " + roundedVelocity.normalized.x);
+                // Debug.Log("RTFX: " + roundedTransformForward.x);
+                
+                // Debug.Log("RVZ: " + roundedVelocity.normalized.y);
+                // Debug.Log("RTFZ: " + roundedTransformForward.y);
             } 
-            else if (roundedVelocity.x <= roundedTransformRight.x + 0.1f &&
-                       roundedVelocity.x >= roundedTransformRight.x - 0.1f ||
-                       roundedVelocity.y <= roundedTransformRight.y + 0.1f &&
-                       roundedVelocity.y >= roundedTransformRight.y - 0.1f)
+            else if (roundedVelocity.normalized.x <= roundedTransformRight.x + 0.1f &&
+                       roundedVelocity.normalized.x >= roundedTransformRight.x - 0.1f ||
+                       roundedVelocity.normalized.y <= roundedTransformRight.y + 0.1f &&
+                       roundedVelocity.normalized.y >= roundedTransformRight.y - 0.1f)
             {
-                Debug.Log("MOVING SIDEWAYS");
+                //Debug.Log("MOVING SIDEWAYS");
             }
         }
         else
