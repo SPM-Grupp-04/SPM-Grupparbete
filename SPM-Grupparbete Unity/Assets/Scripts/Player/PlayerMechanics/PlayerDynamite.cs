@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 //Main Author: Axel Ingelsson Fredler
 
-public class Dynamite : MonoBehaviour
+public class PlayerDynamite : MonoBehaviour
 {
     [Header("Explosion Properties")]
     [SerializeField] [Range(1.0f, 10.0f)] private float explosionDelay = 3.0f;
@@ -21,6 +22,10 @@ public class Dynamite : MonoBehaviour
     
     [Header("Particle System")]
     [SerializeField] private float particleSystemPlayDuration = 5.0f;
+    
+    [Header("Camera Shake")]
+    [SerializeField] [Range(1.0f, 20.0f)] private float cameraShakeMagnitude;
+    [SerializeField] [Range(0.1f, 5.0f)] private float cameraShakeDuration;
     
     private float particleSystemCountdown;
     private float explosionCountdown;
@@ -93,6 +98,8 @@ public class Dynamite : MonoBehaviour
         dynamiteFuseLight.enabled = false;
         
         dynamiteFuseAudioSource.Stop();
+        
+        CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
         
         GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
         
