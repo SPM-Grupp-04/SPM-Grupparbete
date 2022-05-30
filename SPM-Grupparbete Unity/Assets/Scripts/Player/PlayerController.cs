@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
         pauseMenuUI = GameObject.Find("UI");
-        //teleport = GameObject.Find("TownPortal");
-       
     }
 
     private void Update()

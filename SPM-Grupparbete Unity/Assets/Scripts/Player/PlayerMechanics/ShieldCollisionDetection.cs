@@ -10,7 +10,6 @@ public class ShieldCollisionDetection : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerController>().InsideShield = true;
-            Debug.Log("Inside Shield: " + other.gameObject.GetComponent<PlayerController>().InsideShield);
         }
     }
     
@@ -19,7 +18,6 @@ public class ShieldCollisionDetection : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerController>().InsideShield = false;
-            Debug.Log("Inside Shield: " + other.gameObject.GetComponent<PlayerController>().InsideShield);
         }
     }
 }
