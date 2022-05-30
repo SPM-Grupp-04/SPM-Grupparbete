@@ -5,131 +5,134 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 
-
-public class MeleeEnemyAI : BaseEnemyAI, IDamagable
+namespace EnemyAI.MeeleAI
 {
+    public class MeleeEnemyAI : BaseEnemyAI, IDamagable
+    {
 
-    [SerializeField] private float chasingRange;
-    [SerializeField] private float hitRange;
-    [SerializeField] private MeleeWepon meleeWeapon;
+        [SerializeField] private float chasingRange;
+        [SerializeField] private float hitRange;
+        [SerializeField] private MeleeWepon meleeWeapon;
   
-    private IObjectPool<BaseEnemyAI> pool;
-    private NavMeshAgent agent;
-    public Vector3 target = new Vector3(100, 0, 100);
-    public float distanceToTarget = 100;
-    public Vector3 playerPos = new Vector3(100, 0, 100);
-    private float timeUntilAnimationPlay;
-    private void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
-
-    void Start()
-    {
-        base.Start();
-        base.randomNumber = Random.Range(1, 10);
-
-        animator = GetComponent<Animator>();
-        movementSpeed = 7;
-        agent.speed = movementSpeed;
-        currentHealth = startingHealth;
-    }
-
-
-    private void Update()
-    {
-        SetUpTree();
-
-        if (currentHealth <= 1)
+        private IObjectPool<BaseEnemyAI> pool;
+        private NavMeshAgent agent;
+        public Vector3 target = new Vector3(100, 0, 100);
+        public float distanceToTarget = 100;
+        public Vector3 playerPos = new Vector3(100, 0, 100);
+        private float timeUntilAnimationPlay;
+        private void Awake()
         {
-            if (this.pool != null)
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+        void Start()
+        {
+            base.Start();
+            base.randomNumber = Random.Range(1, 10);
+            agent.radius = Random.Range(0.3f, 0.7f);
+            animator = GetComponent<Animator>();
+            movementSpeed = 7;
+            agent.autoBraking = true;
+            agent.speed = movementSpeed;
+            currentHealth = startingHealth;
+        }
+
+
+        private void Update()
+        {
+            SetUpTree();
+
+            if (currentHealth <= 1)
             {
-                currentHealth = startingHealth;
-                agent.speed = 0;
-                StartCoroutine(WaitBeforeDie());
-            }
-            else
-            {
-                Debug.Log("Pool is null");
-                agent.speed = 0;
-                StartCoroutine(waitbeforeDieWithoutPool());
+                if (this.pool != null)
+                {
+                    currentHealth = startingHealth;
+                    agent.speed = 0;
+                    StartCoroutine(WaitBeforeDie());
+                }
+                else
+                {
+                    Debug.Log("Pool is null");
+                    agent.speed = 0;
+                    StartCoroutine(waitbeforeDieWithoutPool());
+                }
             }
         }
-    }
 
-    private IEnumerator waitbeforeDieWithoutPool()
-    {
-        animator.SetTrigger("Die");
-        yield return new WaitForSeconds(2);
-        agent.speed = movementSpeed;
-        gameObject.SetActive(false);
-    }
+        private IEnumerator waitbeforeDieWithoutPool()
+        {
+            animator.SetTrigger("Die");
+            yield return new WaitForSeconds(2);
+            agent.speed = movementSpeed;
+            gameObject.SetActive(false);
+        }
 
-    private IEnumerator WaitBeforeDie()
-    {
-        animator.SetTrigger("Die");
-        yield return new WaitForSeconds(2);
-        agent.speed = movementSpeed;
-        pool.Release(this);
-    }
+        private IEnumerator WaitBeforeDie()
+        {
+            animator.SetTrigger("Die");
+            yield return new WaitForSeconds(2);
+            agent.speed = movementSpeed;
+            pool.Release(this);
+        }
 
 
  
 
-    protected override TreeNode SetUpTree()
-    {
-        // Setting up nodes
-        ChaseTreeNodeMelee chaseTreeNodeMelee =
-            new ChaseTreeNodeMelee(target, distanceToTarget, agent, animator); 
+        protected override TreeNode SetUpTree()
+        {
+            // Setting up nodes
+            ChaseTreeNodeMelee chaseTreeNodeMelee =
+                new ChaseTreeNodeMelee(target, distanceToTarget, agent, animator); 
 
-        RangeTreeNodeMelee inChaseRange =
-            new RangeTreeNodeMelee(chasingRange, distanceToTarget, animator);
+            RangeTreeNodeMelee inChaseRange =
+                new RangeTreeNodeMelee(chasingRange, distanceToTarget, animator);
 
-        RangeTreeNodeMelee inMeleeRange =
-            new RangeTreeNodeMelee(hitRange, distanceToTarget, animator);
+            RangeTreeNodeMelee inMeleeRange =
+                new RangeTreeNodeMelee(hitRange, distanceToTarget, animator);
 
-        MeeleAttackTreeNode meeleAttackTreeNode =
-            new MeeleAttackTreeNode(playerPos, agent, animator, meleeWeapon);
-        // 
+            MeeleAttackTreeNode meeleAttackTreeNode =
+                new MeeleAttackTreeNode(playerPos, agent, animator, meleeWeapon);
+            // 
         
-        // Setting up sequence.
-        Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
+            // Setting up sequence.
+            Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
      
-        Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
+            Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
-        // Choosing one of de sequence taking the first one that has returned Success/Running. Order is important 
-        TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+            // Choosing one of de sequence taking the first one that has returned Success/Running. Order is important 
+            TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
         
-        return TopTreeNode;
-    }
+            return TopTreeNode;
+        }
 
-    public override void SetPool(IObjectPool<BaseEnemyAI> pool)
-    {
-        this.pool = pool;
-    }
+        public override void SetPool(IObjectPool<BaseEnemyAI> pool)
+        {
+            this.pool = pool;
+        }
 
-    public override void PositionAroundTarget(Vector3 targeDistance)
-    {
-        target = targeDistance;
-    }
+        public override void PositionAroundTarget(Vector3 targeDistance)
+        {
+            target = targeDistance;
+        }
 
-    public override void DistanceToPlayerPos(float distance)
-    {
-        this.distanceToTarget = distance;
-    }
+        public override void DistanceToPlayerPos(float distance)
+        {
+            this.distanceToTarget = distance;
+        }
 
-    public override void PlayerPos(Vector3 playerPos)
-    {
-        this.playerPos = playerPos;
-    }
+        public override void PlayerPos(Vector3 playerPos)
+        {
+            this.playerPos = playerPos;
+        }
 
-    public override float GetCurrentHealth()
-    {
-        return currentHealth;
-    }
+        public override float GetCurrentHealth()
+        {
+            return currentHealth;
+        }
 
-    public void DealDamage(float damage)
-    {
-        currentHealth -= damage;
+        public void DealDamage(float damage)
+        {
+            currentHealth -= damage;
+        }
     }
 }

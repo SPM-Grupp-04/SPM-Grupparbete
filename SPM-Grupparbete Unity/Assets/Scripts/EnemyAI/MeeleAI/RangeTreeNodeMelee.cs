@@ -1,39 +1,42 @@
-﻿using System.Collections.Generic;
-using BehaviorTree;
+﻿using BehaviorTree;
 using UnityEngine;
 
-public class RangeTreeNodeMelee : TreeNode
+namespace EnemyAI.MeeleAI
 {
-    /*
+    public class RangeTreeNodeMelee : TreeNode
+    {
+        /*
      * Klassen kollar om ett target finns inom det in skickade värdet. 
      */
-    private float range;
-    // private Transform target;
-    // private List<Transform> targets;
-    //private Transform orgin;
+        private float range;
+        // private Transform target;
+        // private List<Transform> targets;
+        //private Transform orgin;
 
-    private Animator _animator;
+        private Animator animator;
 
-    private float distanceToPlayer;
+        private float distanceToPlayer;
 
-    public RangeTreeNodeMelee(float range, float distanceToPlayer, Animator animator)
-    {
-        this.range = range;
-        _animator = animator;
-
-        this.distanceToPlayer = distanceToPlayer;
-    }
-
-    public override NodeState Evaluate()
-    {
-       
-
-        state = distanceToPlayer <= range ? NodeState.SUCCESS : NodeState.FAILURE;
-        if (state == NodeState.FAILURE)
+        public RangeTreeNodeMelee(float range, float distanceToPlayer, Animator animator)
         {
-            _animator.SetBool("Run", false);
+            this.range = range;
+            this.animator = animator;
+
+            this.distanceToPlayer = distanceToPlayer;
         }
 
-        return state;
+        public override NodeState Evaluate()
+        {
+       
+
+            state = distanceToPlayer <= range ? NodeState.SUCCESS : NodeState.FAILURE;
+            if (state == NodeState.FAILURE)
+            {
+                animator.SetBool("Run", false);
+              
+            }
+
+            return state;
+        }
     }
 }

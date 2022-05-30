@@ -1,27 +1,28 @@
-﻿using System.Collections.Generic;
-using BehaviorTree;
+﻿using BehaviorTree;
 using UnityEngine;
 
-public class RangeTreeNodeRange : TreeNode
+namespace EnemyAI.RangedAI
 {
-    private float range;
-    private Vector3 target;
-    private float distanceToTarget;
-
-
-    private Animator _animator;
-
-    public RangeTreeNodeRange(Vector3 target, float distanceToTarget, float range, Animator animator)
+    public class RangeTreeNodeRange : TreeNode
     {
-        this.range = range;
-        this.target = target;
-        this.distanceToTarget = distanceToTarget;
-        _animator = animator;
-    }
+        private float range;
+        private Vector3 target;
+        private float distanceToTarget;
 
-    public override NodeState Evaluate()
-    {
-        /*float distance = largeDistanceNumber;
+
+        private Animator _animator;
+
+        public RangeTreeNodeRange(Vector3 target, float distanceToTarget, float range, Animator animator)
+        {
+            this.range = range;
+            this.target = target;
+            this.distanceToTarget = distanceToTarget;
+            _animator = animator;
+        }
+
+        public override NodeState Evaluate()
+        {
+            /*float distance = largeDistanceNumber;
         foreach (Transform target in targets)
         {
             float tempdistance = Vector3.Distance(target.position, orgin.position);
@@ -35,8 +36,9 @@ public class RangeTreeNodeRange : TreeNode
                 
         }*/
 
-        state = distanceToTarget <= range ? NodeState.SUCCESS : NodeState.FAILURE;
+            state = distanceToTarget <= range ? NodeState.SUCCESS : NodeState.FAILURE;
 
-        return state;
+            return state;
+        }
     }
 }

@@ -45,14 +45,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookRotation;
     private Vector2 mousePosition;
 
-
-    private bool invisibleWallDeployed;
-    private Vector3 invisibleWallPosition;
-    
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-
     private static bool  movementEnabled = true;
 
     private bool enteredShopArea;
@@ -60,8 +55,10 @@ public class PlayerController : MonoBehaviour
     private bool isDrilling;
     private bool useButtonPressed;
     
-    private bool uiEnabled;
+    private static bool uiEnabled;
     private bool playerCanShop;
+
+    private bool insideShield;
 
     private GameObject pauseMenuUI;
     private bool pauseButtonPressed;
@@ -84,8 +81,6 @@ public class PlayerController : MonoBehaviour
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
         pauseMenuUI = GameObject.Find("UI");
-        //teleport = GameObject.Find("TownPortal");
-       
     }
 
     private void Update()
@@ -98,6 +93,10 @@ public class PlayerController : MonoBehaviour
         if (TownPortal.IsTeleporting == false)
         {
             RestrictMovement();
+        }
+        if (uiEnabled == false && playerInput.currentActionMap.name.Equals("UI"))
+        {
+            playerInput.SwitchCurrentActionMap("Player");
         }
     }
     
@@ -121,23 +120,11 @@ public class PlayerController : MonoBehaviour
 
                 if (uiEnabled)
                 {
-                    UI.Enable();
                     playerInput.SwitchCurrentActionMap("UI");
-                
-                    defaultMap.Disable();
-
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
                 }
                 else
                 {
-                    //Debug.Log(uiEnabled);
-
-                    //defaultMap.Enable();
                     playerInput.SwitchCurrentActionMap("Player");
-                    UI.Disable();
-
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
                 }
             }
         }
@@ -197,15 +184,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-
-
             drillScript.Shoot(true);
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
             animator.SetBool("Idle", false);
-            Debug.Log(animator.isActiveAndEnabled);
-            
 
             if (!source.isPlaying)
             {
@@ -219,7 +202,6 @@ public class PlayerController : MonoBehaviour
                 drillScript.Shoot(false);
                 drillScript.Drill(true);
                 drillScript.DrillInUse(true);
-
                 animator.SetBool("IsShooting", true);
                 animator.SetBool("Idle", false);
 
@@ -247,6 +229,7 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            FixOverlapPenetration();
         }
         else
         {
@@ -283,10 +266,17 @@ public class PlayerController : MonoBehaviour
         return useButtonPressed;
     }
     
-    public bool IsMapSwitched()
+    public bool IsShopOpen()
     {
         return uiEnabled;
     }
+    
+    public bool InsideShield
+    {
+        get { return insideShield; }
+        set { insideShield = value; }
+    }
+
     
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
@@ -348,10 +338,6 @@ public class PlayerController : MonoBehaviour
         
         teleport.transform.position = transform.position + new Vector3(1, 1, 1);
         teleport.SetActive(true);
-      
-
-       
-        
     }
 
     private void UpdatePlayerRotationGamePad()

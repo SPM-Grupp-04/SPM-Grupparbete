@@ -32,8 +32,12 @@ public class TownPortal : MonoBehaviour
     {
         playerOne = GameObject.Find("Player1");
         playerTwo = GameObject.Find("Player2");
+        
+//        Debug.Log(playerOne + " PlayerOne" + playerTwo + " PlayerTwo");
+        
         drone = GameObject.Find("Drone");
         transEnable = GameObject.Find("Trans");
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -77,7 +81,7 @@ public class TownPortal : MonoBehaviour
             if (drone.activeInHierarchy)
             {
                 drone.transform.position = new Vector3(playerOne.transform.position.x,
-                    3, playerOne.transform.position.z);
+                    playerOne.transform.position.y +3, playerOne.transform.position.z);
             }
 
             StartCoroutine(waitUntillActivate());

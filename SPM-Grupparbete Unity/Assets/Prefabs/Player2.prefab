@@ -336,7 +336,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.990566, g: 0.9834716, b: 0.864409, a: 1}
-  m_Intensity: 125
+  m_Intensity: 80
   m_Range: 10
   m_SpotAngle: 77
   m_InnerSpotAngle: 54
@@ -1196,6 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2965090648212624896}
+  otherPlayer: {fileID: 2965090648212624896, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
   shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
   upTimeShield: 5
   uiCooldowns: {fileID: 0}
@@ -1353,13 +1354,12 @@ GameObject:
   - component: {fileID: 4672151869594460666}
   - component: {fileID: 5280966975305392073}
   - component: {fileID: 1121384810989093041}
-  - component: {fileID: 6112303480211096869}
   - component: {fileID: 8182577800644812320}
   - component: {fileID: 515942599}
   m_Layer: 6
   m_Name: Drill
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1371,7 +1371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5711041550793873810}
   m_LocalRotation: {x: -0.00000002107342, y: 0.00000005960463, z: 0.00000002107342, w: 1}
-  m_LocalPosition: {x: 0.50000066, y: 0.71999997, z: 0.5000006}
+  m_LocalPosition: {x: 0.5, y: 1, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1436,19 +1436,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6112303480211096869
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5711041550793873810}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8182577800644812320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,7 +1450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igenoreMask:
     serializedVersion: 2
-    m_Bits: 255
+    m_Bits: 4351
   overHeatAmount: 0
   overHeatIncreaseAmount: 0.5
   overHeatDecreaseAmount: 1
