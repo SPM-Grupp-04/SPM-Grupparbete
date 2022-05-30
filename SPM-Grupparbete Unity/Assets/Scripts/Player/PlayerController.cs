@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             RestrictMovement();
         }
-        if (uiEnabled == false && playerInput.currentActionMap.Equals(UI))
+        if (uiEnabled == false && playerInput.currentActionMap.name.Equals("UI"))
         {
             playerInput.SwitchCurrentActionMap("Player");
         }
