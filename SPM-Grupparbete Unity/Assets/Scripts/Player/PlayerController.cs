@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         {
             RestrictMovement();
         }
+        Debug.Log("Inside shield: " + insideShield);
     }
     
     private void OnEnable()
@@ -227,6 +228,7 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            FixOverlapPenetration();
         }
         else
         {
