@@ -259,46 +259,53 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Moving", true);
             animator.SetBool("Idle", false);
             
-            Vector2 roundedVelocity =
-                new Vector2((float)Math.Round(velocity.x), (float)Math.Round(velocity.z));
+            Vector3 roundedVelocity =
+                new Vector3((float)Math.Round(velocity.x, 2), (float)Math.Round(velocity.y, 2), (float)Math.Round(velocity.z, 2));
+            
+            Vector3 roundedTransformForward = new Vector3((float)Math.Round(transform.forward.x, 2), (float)Math.Round(transform.forward.y, 2),
+                (float)Math.Round(transform.forward.z, 2));
+            
+            Vector3 roundedTransformRight = new Vector3((float)Math.Round(transform.right.x, 2), (float)Math.Round(transform.right.y, 2),
+                (float)Math.Round(transform.right.z, 2));
 
-            Vector2 roundedTransformForward = new Vector2((float)Math.Round(transform.forward.x),
-                (float)Math.Round(transform.forward.z));
+            float distanceBetweenVelocityAndTransformForward =
+                Vector3.Distance(roundedTransformForward, roundedVelocity);
 
-            Vector2 roundedTransformRight = new Vector2((float)Math.Round(transform.right.x),
-                (float)Math.Round(transform.right.z));
+            distanceBetweenVelocityAndTransformForward = (float)Math.Round(distanceBetweenVelocityAndTransformForward, 2);
+            
+            float distanceBetweenVelocityAndTransformRight =
+                Vector3.Distance(roundedTransformRight, roundedVelocity);
 
-            if (roundedVelocity.normalized.x <= roundedTransformForward.x + 0.1f && 
-                roundedVelocity.normalized.x >= roundedTransformForward.x - 0.1f ||
-                roundedVelocity.normalized.y <= roundedTransformForward.y + 0.1f && 
-                roundedVelocity.normalized.y >= roundedTransformForward.y - 0.1f)
+            distanceBetweenVelocityAndTransformRight = (float) Math.Round(distanceBetweenVelocityAndTransformRight, 2);
+
+            if (distanceBetweenVelocityAndTransformForward <= 0.75f &&
+                distanceBetweenVelocityAndTransformForward >= 0.0f)
             {
-                if (roundedVelocity.normalized.y + roundedTransformForward.y > 0)
-                {
-                    Debug.Log("MOVING FORWARD");
-                }
-                else
-                {
-                    Debug.Log("MOVING BACKWARD");
-                }
-                // Debug.Log("RVX: " + roundedVelocity.normalized.x);
-                // Debug.Log("RTFX: " + roundedTransformForward.x);
-                
-                // Debug.Log("RVZ: " + roundedVelocity.normalized.y);
-                // Debug.Log("RTFZ: " + roundedTransformForward.y);
+                Debug.Log("MOVING FORWARDS");
+                animator.SetBool("Forward", true);
+            } else if (distanceBetweenVelocityAndTransformForward >= 1.75f &&
+                       distanceBetweenVelocityAndTransformForward <= 2.0f)
+            {
+                Debug.Log("MOVING BACKWARDS");
+                animator.SetBool("Backward", true);
             } 
-            else if (roundedVelocity.normalized.x <= roundedTransformRight.x + 0.1f &&
-                       roundedVelocity.normalized.x >= roundedTransformRight.x - 0.1f ||
-                       roundedVelocity.normalized.y <= roundedTransformRight.y + 0.1f &&
-                       roundedVelocity.normalized.y >= roundedTransformRight.y - 0.1f)
+            else if (distanceBetweenVelocityAndTransformRight <= 0.75f &&
+                     distanceBetweenVelocityAndTransformRight >= 0.0f)
             {
-                //Debug.Log("MOVING SIDEWAYS");
+                Debug.Log("MOVING RIGHT");
+                animator.SetBool("Right", true);
             }
+            else if (distanceBetweenVelocityAndTransformRight >= 1.75f &&
+                       distanceBetweenVelocityAndTransformRight <= 2.0f)
+            {
+                Debug.Log("MOVING LEFT");
+                animator.SetBool("Left", true);
+            }
+            Debug.Log(distanceBetweenVelocityAndTransformRight);
         }
         else
         {
             animator.SetBool("Moving", false);
-            animator.SetBool("Forward", false);
         }
     }
     
