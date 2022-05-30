@@ -4157,6 +4157,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 4, z: 2.7376208}
   m_Center: {x: 0, y: 2, z: 0.011676848}
+--- !u!65 &415346347 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2965090648212625151, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+  m_PrefabInstance: {fileID: 1042659811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &418859010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bc145cbb31cf5044a5239b7ded9c6ac, type: 3}
@@ -7448,18 +7453,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1789053286}
     m_Modifications:
-    - target: {fileID: 3407422657525713341, guid: 0b279cec9ec95fc4b83965fb7b58ae99, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3407422657525713341, guid: 0b279cec9ec95fc4b83965fb7b58ae99, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3407422657525713341, guid: 0b279cec9ec95fc4b83965fb7b58ae99, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
     - target: {fileID: 3532238295401504451, guid: 0b279cec9ec95fc4b83965fb7b58ae99, type: 3}
       propertyPath: m_Name
       value: Wires
@@ -9827,6 +9820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 415346347}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
 --- !u!4 &1042659812 stripped
@@ -12181,6 +12178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7708049037048568331, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 1790782015}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
 --- !u!4 &1261272711 stripped
@@ -14978,6 +14979,10 @@ PrefabInstance:
       propertyPath: PlayerInputTwo
       value: 
       objectReference: {fileID: 355534242}
+    - target: {fileID: 1448055950, guid: 6890f559acc365d49a98294804986265, type: 3}
+      propertyPath: pauseFirstButton
+      value: 
+      objectReference: {fileID: 2106280342}
     - target: {fileID: 5684895818698529127, guid: 6890f559acc365d49a98294804986265, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -17481,7 +17486,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: shopIsFree
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: healthLevel1Cost.Array.size
@@ -17685,7 +17690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.00046
+      value: 417.00095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
@@ -20034,6 +20039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9696d22ad6dd49c42b412f04d3ecccc9, type: 3}
+--- !u!65 &1790782015 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2965090648212625151, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+  m_PrefabInstance: {fileID: 1261272710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1791146967 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9696d22ad6dd49c42b412f04d3ecccc9, type: 3}
@@ -23387,6 +23397,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12.221058, y: 1, z: 2.2085397}
   m_Center: {x: 24.38105, y: 0, z: -0.09396316}
+--- !u!114 &2106280342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8151652415232787345, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 1430316755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2108082912
 PrefabInstance:
   m_ObjectHideFlags: 0

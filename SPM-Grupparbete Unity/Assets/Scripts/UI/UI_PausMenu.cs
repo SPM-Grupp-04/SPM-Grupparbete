@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_PausMenu : MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class UI_PausMenu : MonoBehaviour
     private bool pauseButtonPressed;
     
     [Header("MenuButtonFirstSelection")]
-    [SerializeField] private GameObject pauseFirstButton;
+    [SerializeField] private Button pauseFirstButton;
+
+    [Header("Buttons in menu")] [SerializeField]
+    private GameObject[] buttonsInMenu;
 
     
     private void Start()
@@ -33,9 +37,9 @@ public class UI_PausMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
+        SetButtonState(true);
         Time.timeScale = 0f;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+        pauseFirstButton.Select();
         GameIsPause = true;
 
     }
@@ -53,4 +57,15 @@ public class UI_PausMenu : MonoBehaviour
         Debug.Log("QuitGame");
         Application.Quit();
     }
+
+    public void SetButtonState(bool value)
+    {
+        foreach (GameObject button in buttonsInMenu)
+        {
+            button.SetActive(value);
+        }
+
+      
+    }
+    
 }
