@@ -10,7 +10,7 @@ public class UI_PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     [SerializeField] private GameObject pauseMenuUI;
-    
+    [SerializeField] private GameObject PlayerHUD;
     
     public PlayerInput playerInput;
     public PlayerInput PlayerInputTwo;
@@ -36,6 +36,7 @@ public class UI_PausMenu : MonoBehaviour
 
     public void Pause()
     {
+        PlayerHUD.SetActive(false);
         pauseMenuUI.SetActive(true);
         SetButtonState(true);
         Time.timeScale = 0f;
@@ -47,6 +48,7 @@ public class UI_PausMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        PlayerHUD.SetActive(true);
         Time.timeScale = 1f;
         GameIsPause = false;
 
