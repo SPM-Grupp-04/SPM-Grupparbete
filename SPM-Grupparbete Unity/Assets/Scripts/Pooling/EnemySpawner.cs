@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyAI.gameObject.SetActive(true);
         }
-        timer = totalAllowedSpawnTime;
+        //timer = totalAllowedSpawnTime;
     }
 
     private void Awake()
@@ -79,9 +79,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-
+    private bool spawnEnemies = true;
     private void FixedUpdate()
     {
+        if(spawnEnemies == false) 
+        {
+            return;
+        }
+        
+        
         if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
         {
             SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
@@ -92,13 +98,19 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            this.enabled = false;
+            spawnEnemies = false;   
+            enabled = false;
+            pool = null;
         }
         
         
-        timer -= Time.deltaTime;
+      
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
 
     private BaseEnemyAI CreateEnemy()
     {
