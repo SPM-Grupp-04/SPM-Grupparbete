@@ -256,54 +256,18 @@ public class PlayerController : MonoBehaviour
     {
         if (velocity != Vector3.zero)
         {
+            animator.SetBool("Idle", false);
             animator.SetBool("Moving", true);
 
-            Vector3 roundedVelocity =
-                new Vector3((float)Math.Round(velocity.x, 2), (float)Math.Round(velocity.y, 2), (float)Math.Round(velocity.z, 2));
-            
-            Vector3 roundedTransformForward = new Vector3((float)Math.Round(transform.forward.x, 2), (float)Math.Round(transform.forward.y, 2),
-                (float)Math.Round(transform.forward.z, 2));
-            
-            Vector3 roundedTransformRight = new Vector3((float)Math.Round(transform.right.x, 2), (float)Math.Round(transform.right.y, 2),
-                (float)Math.Round(transform.right.z, 2));
+            float velocityInDirectionOfWherePlayerIsFacing = Vector3.Dot(transform.forward, velocity.normalized);
+            float velocityInDirectionOfPlayersSides = Vector3.Dot(transform.right, velocity.normalized):
 
-            float distanceBetweenVelocityAndTransformForward =
-                Vector3.Distance(roundedTransformForward, roundedVelocity);
-
-            distanceBetweenVelocityAndTransformForward = (float)Math.Round(distanceBetweenVelocityAndTransformForward, 2);
-            
-            float distanceBetweenVelocityAndTransformRight =
-                Vector3.Distance(roundedTransformRight, roundedVelocity);
-
-            distanceBetweenVelocityAndTransformRight = (float) Math.Round(distanceBetweenVelocityAndTransformRight, 2);
-
-            if (distanceBetweenVelocityAndTransformForward <= 0.75f &&
-                distanceBetweenVelocityAndTransformForward >= 0.0f)
-            {
-                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
-                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
-            } else if (distanceBetweenVelocityAndTransformForward >= 1.75f &&
-                       distanceBetweenVelocityAndTransformForward <= 2.0f)
-            {
-                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
-                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
-            } 
-            else if (distanceBetweenVelocityAndTransformRight <= 0.75f &&
-                     distanceBetweenVelocityAndTransformRight >= 0.0f)
-            {
-                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
-                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
-            }
-            else if (distanceBetweenVelocityAndTransformRight >= 1.75f &&
-                       distanceBetweenVelocityAndTransformRight <= 2.0f)
-            {
-                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
-                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
-            }
-            //Debug.Log(distanceBetweenVelocityAndTransformRight);
+            animator.SetFloat("ForwardAndBackwardMovement", velocityInDirectionOfWherePlayerIsFacing);
+            animator.SetFloat("SidewaysMovement", velocityInDirectionOfPlayersSides);
         }
         else
         {
+            animator.SetBool("Moving", false);
             animator.SetBool("Idle", true);
         }
     }
