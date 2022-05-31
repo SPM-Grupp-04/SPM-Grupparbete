@@ -13,11 +13,11 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private IObjectPool<BaseEnemyAI> pool;
+    private ObjectPool<BaseEnemyAI> pool;
     private BaseEnemyAI enemy;
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
-    private int inActive = 0;
+
     private float totalProcent;
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
@@ -28,17 +28,30 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float totalAllowedSpawnTime = 5;
     private float timer;
 
+    private void Start()
+    {
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(false);
+        }
 
+        this.enabled = false;
+    }
     
-
-  
+    private void OnEnable()
+    {
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(true);
+        }
+        //timer = totalAllowedSpawnTime;
+    }
 
     private void Awake()
     {
-        Debug.Log("Awake in EnemySpawner");
         timer = totalAllowedSpawnTime;
         pool = new ObjectPool<BaseEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
-        Debug.Log("After Creating a new pool");
+
         enemyAIHandler = GetComponent<EnemyAIHandler>();
 
         // Räknar ut vad som är 100%
@@ -55,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
 
         boxCollider = GetComponent<BoxCollider>();
         SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
-        Debug.Log("After Calculating how many enemies that should spawn");
+
         for (var i = 0; i < genericListOfBaseClassEnemyAI.Length; i++) // 2 gånger
         {
             enemy = genericListOfBaseClassEnemyAI[i];
@@ -64,52 +77,40 @@ public class EnemySpawner : MonoBehaviour
                 CreateEnemy();
             }
         }
-        Debug.Log("After creating enemies. End of Awake.");
     }
 
-    private void Start()
-    {
-        Debug.Log("In start set all enemies to Inactive");
-        foreach (var enemyAI in enemyAIHandler.units)
-        {
-            enemyAI.gameObject.SetActive(false);
-        }
-        Debug.Log("End of start.");
-    }
-    
-    private void OnEnable()
-    {
-        Debug.Log("Entering Enable");
-        foreach (var enemyAI in enemyAIHandler.units)
-        {
-            enemyAI.gameObject.SetActive(true);
-        }
-        timer = totalAllowedSpawnTime;
-        Debug.Log("Exiting enable");
-    }
-
-    
+    private bool spawnEnemies = true;
     private void FixedUpdate()
     {
-        
-        if (inActive < totalAllowedEnimesAtSpawner && timer > 0)
+        if(spawnEnemies == false) 
         {
-            Debug.Log("Setting spawn position ");
+            return;
+        }
+        
+        
+        if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
+        {
             SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
             for (var i = 0; i < pool.CountInactive; i++)
             {
-                Debug.Log("Removing objekts from the pool");
                 pool.Get();
             }
         }
         else
         {
-            this.enabled = false;
+            spawnEnemies = false;   
+            enabled = false;
+            pool = null;
         }
-
-        timer -= Time.deltaTime;
+        
+        
+      
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
 
     private BaseEnemyAI CreateEnemy()
     {
@@ -117,10 +118,9 @@ public class EnemySpawner : MonoBehaviour
 
         enemy = Instantiate(enemy, transform.position, quaternion.identity);
         enemyAIHandler.units.Add(enemy);
-        inActive++;
+
         enemy.SetPool(pool);
         
-        Debug.Log("Should have spawned Enemies");
         return enemy;
     }
 
@@ -128,15 +128,11 @@ public class EnemySpawner : MonoBehaviour
     {
         meeleEnemyAI.transform.position = SpawnPos;
         meeleEnemyAI.gameObject.SetActive(true);
-        inActive--;
-        Debug.Log("Takeing the eneimes from the pool.");
     }
 
 
     public void OnReturnBallToPool(BaseEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.gameObject.SetActive(false);
-        inActive++;
-        Debug.Log("Returning enemies to the pool");
     }
 }

@@ -43,7 +43,7 @@ public class EnemyDynamite : MonoBehaviour
 
     [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
-    private Collider[] playerColliders;
+    private Collider[] playerColliders = new Collider[2];
 
     private FallingRocksSpawner fallingRocksSpawner;
 
@@ -116,6 +116,7 @@ public class EnemyDynamite : MonoBehaviour
         Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, playerColliders,  enemyLayerMask);
         foreach (Collider enemyObject in playerColliders)
         {
+            Debug.Log(enemyObject.gameObject.GetComponent<PlayerController>().InsideShield);
             if (!enemyObject.gameObject.GetComponent<PlayerController>().InsideShield)
             {
                 var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 10);

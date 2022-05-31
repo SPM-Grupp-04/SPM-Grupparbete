@@ -47,6 +47,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-7911456360178671386
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 01e1313e59f45a8488144ac6a9e9dd8b
+  m_EffectName: Attenuation
+  m_MixLevel: 88c3ba5a28af8a648b34b7c3ebb08f87
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-6809453536588289765
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -116,6 +130,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-4432316765976986526
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Overheat
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 03a9d17af05bc6046a43b203a55519b7
+  m_Children: []
+  m_Volume: 67e850ff6bdfeb74c9339e07b20a147f
+  m_Pitch: 30c320870119f284693145cec32ae45b
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -7911456360178671386}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &-4414490181301705747
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -292,6 +325,7 @@ AudioMixerController:
     - 8f44b0f313e9c6645807d8344896cf01
     - cf636c30f3ee0ec4382dfb36b593c15c
     - 2b6758cc2ac0a8f41b7f0c722142f179
+    - 03a9d17af05bc6046a43b203a55519b7
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -318,6 +352,7 @@ AudioMixerGroupController:
   - {fileID: 7102812063211866051}
   - {fileID: -8025856070650690638}
   - {fileID: -1472455216687606084}
+  - {fileID: -4432316765976986526}
   m_Volume: 594e655538262444299bc5b557d4885f
   m_Pitch: e0ed1f0e0ed3a4749958bd1267ceb9be
   m_Send: 00000000000000000000000000000000
@@ -365,6 +400,7 @@ AudioMixerSnapshotController:
     e047cccc48822b749adf5495428f4b33: -40.607674
     82555b7df867d0d4185f700c51cda76a: -80
     62eee6be1180f2142abd74097de978e1: -27.169544
+    67e850ff6bdfeb74c9339e07b20a147f: -24.900726
   m_TransitionOverrides: {}
 --- !u!244 &471311927963544369
 AudioMixerEffectController:
