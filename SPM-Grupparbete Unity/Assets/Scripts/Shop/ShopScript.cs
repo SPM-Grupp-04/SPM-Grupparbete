@@ -152,6 +152,18 @@ public class ShopScript : MonoBehaviour
     
     private void Update()
     {
+        if (playerOne.activeInHierarchy)
+        {
+            PlayerOneOpenShop();
+        }
+        if (playerTwo.activeInHierarchy)
+        {
+            PlayerTwoOpenShop();
+        }
+    }
+
+    private void PlayerOneOpenShop()
+    {
         if (playerControllerOne.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
         {
             OpenShopInterface();
@@ -162,7 +174,11 @@ public class ShopScript : MonoBehaviour
             CloseShopInterface();
             SetPlayerMovement(true);
             
-        } else if (playerControllerTwo.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
+        }
+    }
+    private void PlayerTwoOpenShop()
+    {
+        if (playerControllerTwo.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
         {
             OpenShopInterface();
             SetPlayerMovement(false);
@@ -210,6 +226,15 @@ public class ShopScript : MonoBehaviour
             if (m_PlayerState.m_LocalPlayerData.BlueCrystals >= healCost[0])
             {
                 m_PlayerState.Heal();
+                if (!playerOne.activeInHierarchy)
+                {
+                    playerOne.SetActive(true);
+                }
+
+                if (!playerTwo.activeInHierarchy)
+                {
+                    playerTwo.SetActive(true);
+                }
                 m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCost[0];
                 healButton.interactable = false;
                 healButton.Select();
@@ -358,6 +383,12 @@ public class ShopScript : MonoBehaviour
     {
         button.interactable = false;
         buttonDictionary[button.name] = true;
+       ShowUpgradedSprite(button);
+        
+    }
+
+    private void ShowUpgradedSprite(Button button)
+    {
         switch (button.name)
         {
             case "WeaponButton":
@@ -385,7 +416,6 @@ public class ShopScript : MonoBehaviour
                 button.GetComponent<Image>().sprite = upgradeImage[4];
                 break;
         }
-        
     }
 
     private void CanPlayersHeal()
@@ -403,7 +433,7 @@ public class ShopScript : MonoBehaviour
     private void UpdateShop(Button button)
     {
         TestTime(true);
-
+        
         if (buttonDictionary[drill1Button.name] == false)
         {
             foreach (string buttonName in buttonDictionary.Keys)
@@ -453,18 +483,22 @@ public class ShopScript : MonoBehaviour
                         }
 
                         buttonAbove.interactable = false;
-                        if (buttonDictionary[currentButton.name] == true)
+                        if (buttonDictionary[currentButton.name])
                         {
                             currentButton.interactable = false;
+                            ShowUpgradedSprite(button);
                         }
                     }
                     else
                     {
                         currentButton.interactable = false;
+                        ShowUpgradedSprite(button);
                     }
                 }
             }
         }
+        
+        
         CanPlayersHeal();
         TestTime(false);
         button.Select();
