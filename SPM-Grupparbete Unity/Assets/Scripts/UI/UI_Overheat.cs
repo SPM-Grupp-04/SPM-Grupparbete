@@ -25,27 +25,26 @@ public class UI_Overheat : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         IncreaseOverheatSlider(playerDrillScript.GetOverheatAmount());
     }
-
+    
     private void IncreaseOverheatSlider(float amount)
     {
         slider.value = amount * 0.01f;
-        if (amount <= 50)
-        {
-            barColour.color = greenColor;
-        }
-        else if (amount > 50 && amount <= 80) 
-        {
-            
-            barColour.color = yellowColor;
-        } 
-        else
-        {
-            barColour.color = redColor;
-        }
+        // if (amount <= 50)
+        // {
+        //     barColour.color = greenColor;
+        // }
+        // else if (amount > 50 && amount <= 80) 
+        // {
+        //     
+        //     barColour.color = yellowColor;
+        // } 
+        // else
+        // {
+        //     barColour.color = redColor;
+        // }
     }
 }

@@ -8,7 +8,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] backgroundMusic;
     [SerializeField] private AudioClip[] combatMusic;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private AudioSource sourceOne, sourceTwo;
+    [SerializeField] private AudioSource sourceOne, sourceTwo, sourceThree, sourceFour;
+    [SerializeField] private AudioClip pickUp;  
+    
     
     
     private int index;
@@ -17,15 +19,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetInt("IsMuted"));
-        if (PlayerPrefs.GetFloat("IsMuted") == 1)
-        {
-            audioMixer.SetFloat("VolumeControl", -80f);
-        }
-        else
-        {
-            audioMixer.SetFloat("VolumeControl", 1f);
-        }
+        audioMixer.SetFloat("VolumeControl", PlayerPrefs.GetFloat("Volume"));
         sourceOne.clip = backgroundMusic[0];
         sourceTwo.clip = combatMusic[0];
         sourceTwo.Play();
@@ -52,12 +46,21 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    public void PlayCrystalSound()
+    {
+        sourceThree.Play();
+    }
+
+    public void PlayCrystalPickUpSound()
+    {
+        //sourceFour.PlayOneShot(pickUp);
+    }
+
     public void CombatMusic()
     {
         inCombat = true;
         sourceTwo.clip = combatMusic[index];
         audioMixer.FindSnapshot("CombatMusic").TransitionTo(1f);
-        Debug.Log("Här");
     }
 
     public bool InCombat()

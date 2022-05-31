@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1104689677393535271}
   - component: {fileID: 128340177053101416}
   - component: {fileID: 7176019616613321667}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964493500663204702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.5, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.543, z: 0}
+  m_LocalScale: {x: 0.062854916, y: 0.15713729, z: 0.062854916}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 719059355565962319}
@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964493500663204702}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 8873296492448345659}
   - component: {fileID: 7070531873000112175}
   - component: {fileID: 3351763947782931408}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Dynamite Fuse Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2769137878178196160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -226,8 +226,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.9528302, g: 0.6253566, b: 0.48989856, a: 1}
-  m_Intensity: 10
+  m_Color: {r: 0.9245283, g: 0.23985407, b: 0.74220335, a: 1}
+  m_Intensity: 0.11
   m_Range: 2.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -308,13 +308,13 @@ GameObject:
   - component: {fileID: 719059355565962319}
   - component: {fileID: 331319525371052924}
   - component: {fileID: 371101874827262871}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &719059355565962319
 Transform:
   m_ObjectHideFlags: 0
@@ -5120,7 +5120,7 @@ GameObject:
   - component: {fileID: 8070047593951852703}
   - component: {fileID: 6599366790148719500}
   - component: {fileID: 7942896222743486800}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Dynamite Explosion Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5153,7 +5153,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.9528302, g: 0.6253566, b: 0.48989856, a: 1}
+  m_Color: {r: 0.9254902, g: 0.23921569, b: 0.7411765, a: 1}
   m_Intensity: 200
   m_Range: 35
   m_SpotAngle: 30
@@ -5237,9 +5237,9 @@ GameObject:
   - component: {fileID: 586008625529941990}
   - component: {fileID: 6742602341496923280}
   - component: {fileID: -2474082930302201402}
-  - component: {fileID: 8521678323379612420}
+  - component: {fileID: 2149838367724578233}
   - component: {fileID: 1633756564643780838}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: EnemyDynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5255,7 +5255,7 @@ Transform:
   m_GameObject: {fileID: 7467092179448219033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3792798487467395415}
@@ -5270,7 +5270,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7467092179448219033}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 5010670309272171360, guid: 43c6d6021686c4b439cc5aa1d7388069, type: 3}
 --- !u!23 &586008625529941990
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5291,7 +5291,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 89a1c851e8c1a89429bc8b9bf4b760b3, type: 2}
+  - {fileID: 2100000, guid: bfe4f73fc50fafc4b86c5859aba92bf4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5343,7 +5343,7 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &8521678323379612420
+--- !u!114 &2149838367724578233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5352,7 +5352,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7467092179448219033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44ff71c288ac7d4c83f5bc8c16d2bc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f146a1f21d162c4eba395ef1b98de78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDelay: 3

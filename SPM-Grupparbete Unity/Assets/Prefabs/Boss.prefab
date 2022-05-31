@@ -422,6 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeRemaining: 0
+  navMeshAgent: {fileID: 7666623249729998697}
+  animator: {fileID: 7666623249729998698}
 --- !u!65 &2928163712918112132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -551,7 +553,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 29eae5163f8d3324fb2ea4c6d4d7cf6f, type: 2}
+  - {fileID: 2100000, guid: e618bddf04ba69f4fa2bfef32a988f4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -682,7 +684,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 29eae5163f8d3324fb2ea4c6d4d7cf6f, type: 2}
+  - {fileID: 2100000, guid: e618bddf04ba69f4fa2bfef32a988f4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

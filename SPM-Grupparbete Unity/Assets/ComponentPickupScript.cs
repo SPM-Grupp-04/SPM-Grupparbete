@@ -49,9 +49,9 @@ public class ComponentPickupScript : MonoBehaviour
         {
             //the mask now contains the value for the component
             PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
-            GlobalControl.Instance.playerStatistics.componentsCollectedMask =
-            PlayerStatistics.Instance.componentsCollectedMask;
+            GlobalControl.Instance.playerStatistics.componentsCollectedMask = PlayerStatistics.Instance.componentsCollectedMask;
             
+
             // texten sätts på och av när animationen spelas, kolla på det.
             //text.enabled = false;
             vfx.Play();
@@ -71,6 +71,9 @@ public class ComponentPickupScript : MonoBehaviour
         canvas.SetActive(false);
         animator.SetBool("Alpha", true);
         yield return new WaitForSeconds(2);
+        PlayerStatistics.Instance.componentsCollectedNumber += 1;
+        GlobalControl.Instance.playerStatistics.componentsCollectedNumber =
+            PlayerStatistics.Instance.componentsCollectedNumber;
         Destroy(gameObject);
 
     }

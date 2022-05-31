@@ -1,13 +1,7 @@
 //primary author:
 //additional programming: Simon Canbäck, sica4801
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
+using System.Collections.Generic;
 [System.Serializable]
 public class PlayerStatistics
 {
@@ -29,8 +23,12 @@ public class PlayerStatistics
     public int drillLevel = 0;
     public int weaponLevel;
     public int componentsCollectedMask = 0;
+    public int componentsCollectedNumber;
     public float shieldCooldownModifer = 1f;
     public Dictionary<string, bool> buttonDictionary;
+    public float[] playerOneColor;
+    public float[] playerTwoColor;
+
 
 
 

@@ -8,6 +8,7 @@ public class OreCollection : MonoBehaviour
 {
     [SerializeField] string oreName = "";
     [SerializeField] private float minModifier, maxModifier;
+    [SerializeField] private AudioManager audioManager;
 
     private float speed = 7;
     private Vector3 velocity = Vector3.zero;
@@ -15,45 +16,37 @@ public class OreCollection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player")) return;
 
         if (target == null)
         {
             target = other.gameObject;
             speed = Random.Range(minModifier, maxModifier);
         }
-        
-
     }
-
-//    private void OnTriggerStay(Collider other)
- //   {
-  //      if (!other.CompareTag("Player")) return;
-
-  //      transform.position = Vector3.SmoothDamp(transform.position, other.gameObject.transform.position, ref velocity,
-  //          Time.deltaTime * Random.Range(minModifier, maxModifier));
-  //  }
-
     private void FixedUpdate()
     {
-              transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-                  
-               //  Vector3.SmoothDamp(transform.position, target.transform.position, ref velocity,
-              //   Time.deltaTime * Random.Range(minModifier, maxModifier));
+        if (target == null)
+        {
+            return;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
 
     public void CollectOre()
-    {
+    { 
+        
         DestroyObject();
     }
-    
+
     private void DestroyObject()
     {
         Destroy(this.gameObject);
     }
+
     public string GetName()
     {
         return oreName;
     }
-
 }

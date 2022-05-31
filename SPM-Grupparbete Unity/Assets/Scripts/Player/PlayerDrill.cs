@@ -15,14 +15,13 @@ public class PlayerDrill : MonoBehaviour
 
     [SerializeField] private LayerMask igenoreMask;
 
+    
     [SerializeField] private float overHeatAmount = 0;
     [SerializeField] private float overHeatIncreaseAmount = 0.5f;
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
-
-
-    [SerializeField] private int drillDamageOres = 1;
-    [SerializeField] private int drillDamageMonsters = 1;
+    private int drillDamageOres = 1;
+    private int drillDamageMonsters = 1;
     
     
     //[SerializeField] Material lrMaterial;
@@ -34,13 +33,16 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private ParticleSystem laserEmission;
     [SerializeField] private ParticleSystem drillRing;
     [SerializeField] private ParticleSystem drillEmission;
+    [SerializeField] private ParticleSystem overheatEmission;
+
     
     [SerializeField] private VisualEffect laserHit;
-
-
-
+    [SerializeField] private VisualEffect drillHit;
+    
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
+
+    [SerializeField] private AudioSource source;
     
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -52,6 +54,8 @@ public class PlayerDrill : MonoBehaviour
     private bool isShooting;
     private bool isDrilling;
 
+    private bool coolDownLaser;
+
     private bool isDisco = false;
     Color c1 = Color.white;
     Color c2;
@@ -60,6 +64,11 @@ public class PlayerDrill : MonoBehaviour
     int randomColour3;
     float nextColour;
     [SerializeField] private float delayTimer = 1;
+    
+    public bool CanShoot
+    {
+        get { return canShoot; }
+    }
     
 
     private void Awake()
@@ -71,6 +80,7 @@ public class PlayerDrill : MonoBehaviour
         DrillDamage();
         WeaponLevel();
         laserHit.transform.parent = null;
+        drillHit.transform.parent = null;
     }
 
     // Update is called once per frame
@@ -111,6 +121,7 @@ public class PlayerDrill : MonoBehaviour
             if (overHeatAmount <= 0)
             {
                 canShoot = true;
+                
             }
         }
     }
@@ -125,12 +136,19 @@ public class PlayerDrill : MonoBehaviour
             drillRing.Play();
             drillEmission.Play();
         }
-        if (Physics.Raycast(transform.position, fwd, out hit, 3) && hit.collider.gameObject.CompareTag("Rocks"))
+        if (Physics.Raycast(transform.position, fwd, out hit, 3, igenoreMask))
         {
+            drillHit.enabled = true;
+            drillHit.transform.position = hit.point;
+            drillHit.Play();
             LaserBetweenPoints(transform.position, hit.point, 1);
-            hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            if (hit.collider.gameObject.CompareTag("Rocks"))
+            {
+                hit.collider.gameObject.SendMessage("ReduceMaterialHP", drillDamageOres);
+            }
             return;
         }
+        drillHit.enabled = false;
         LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
     }
     
@@ -140,13 +158,14 @@ public class PlayerDrill : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount <= 100 && canShoot && isShooting)
         {
+            
             if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
             {
                 laserRing.Play();
                 laserEmission.Play();
             }
 
-            if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
+            if (Physics.Raycast(transform.position, fwd, out shootHit, laserDistance, igenoreMask))
             {
                 laserHit.enabled = true;
                 laserHit.transform.position = shootHit.point;
@@ -170,11 +189,18 @@ public class PlayerDrill : MonoBehaviour
         {
             if (timer <= 0 && canShoot)
             {
+                if (!source.isPlaying)
+                {
+                    source.Play();
+                }
+
                 lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
                 StopLaserParticles();
-
+            }
+            if(overheatEmission.isPlaying == false){
+               overheatEmission.Play();
             }
         }
     }
@@ -214,6 +240,8 @@ public class PlayerDrill : MonoBehaviour
         if (!isShooting)
         {
             StopLaserParticles();
+            overheatEmission.Stop();
+            overheatEmission.Clear();
         }
     }
 
@@ -241,6 +269,8 @@ public class PlayerDrill : MonoBehaviour
         drillEmission.Clear();
         drillRing.Stop();
         drillRing.Clear();
+        drillHit.Stop();
+        drillHit.enabled = false;
     }
 
     public void Drill(bool state)

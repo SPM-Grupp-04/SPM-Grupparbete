@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnemyAI;
+using EnemyAI.EnemyAIHandler;
 using Unity.Jobs.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
@@ -28,11 +30,21 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-    }
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(false);
+        }
 
+        this.enabled = false;
+    }
+    
     private void OnEnable()
     {
-        timer = totalAllowedSpawnTime;
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(true);
+        }
+        //timer = totalAllowedSpawnTime;
     }
 
     private void Awake()
@@ -41,12 +53,8 @@ public class EnemySpawner : MonoBehaviour
         pool = new ObjectPool<BaseEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
         enemyAIHandler = GetComponent<EnemyAIHandler>();
-        /*for (int i = 0; i < gameObjects.Length; i++)
-        {
-            genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
-        }*/
 
-       // Räknar ut vad som är 100%
+        // Räknar ut vad som är 100%
         for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
         {
             totalProcent += prioListMatchingObjektOrder[i];
@@ -71,9 +79,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-
+    private bool spawnEnemies = true;
     private void FixedUpdate()
     {
+        if(spawnEnemies == false) 
+        {
+            return;
+        }
+        
+        
         if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
         {
             SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
@@ -84,12 +98,19 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            this.enabled = false;
+            spawnEnemies = false;   
+            enabled = false;
+            pool = null;
         }
-
-        timer -= Time.deltaTime;
+        
+        
+      
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
 
     private BaseEnemyAI CreateEnemy()
     {
@@ -99,7 +120,7 @@ public class EnemySpawner : MonoBehaviour
         enemyAIHandler.units.Add(enemy);
 
         enemy.SetPool(pool);
-
+        
         return enemy;
     }
 

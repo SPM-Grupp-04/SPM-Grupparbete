@@ -4,51 +4,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_PausMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject PlayerHUD;
+    
     public PlayerInput playerInput;
     public PlayerInput PlayerInputTwo;
     private InputAction pause;
     private InputAction pausePlayerTwo;
+    
+    
     private bool pauseButtonPressed;
     
     [Header("MenuButtonFirstSelection")]
-    [SerializeField] private GameObject pauseFirstButton;
+    [SerializeField] private Button pauseFirstButton;
+
+    [Header("Buttons in menu")] [SerializeField]
+    private GameObject[] buttonsInMenu;
 
     
     private void Start()
-    { 
-       playerInput = GetComponent<PlayerInput>();
-       pause = playerInput.actions["Pause"];
+    {
+        playerInput = GetComponent<PlayerInput>();
+       //pause = playerInput.actions["Pause"];
        pausePlayerTwo = PlayerInputTwo.actions["Pause"];
     }
-    
 
-    public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
+    public void Pause()
     {
-        if (pauseButtonValue.performed)
-        {
-            pauseButtonPressed = !pauseButtonPressed;
-        }
-        if (pauseButtonPressed)
-        {
-            Pause();
-        }
-        else
-        {
-            Resume();
-        }
-    }
-    
-    private void Pause()
-    {
+        PlayerHUD.SetActive(false);
         pauseMenuUI.SetActive(true);
+        SetButtonState(true);
         Time.timeScale = 0f;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+        pauseFirstButton.Select();
         GameIsPause = true;
 
     }
@@ -56,6 +48,7 @@ public class UI_PausMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        PlayerHUD.SetActive(true);
         Time.timeScale = 1f;
         GameIsPause = false;
 
@@ -66,4 +59,15 @@ public class UI_PausMenu : MonoBehaviour
         Debug.Log("QuitGame");
         Application.Quit();
     }
+
+    public void SetButtonState(bool value)
+    {
+        foreach (GameObject button in buttonsInMenu)
+        {
+            button.SetActive(value);
+        }
+
+      
+    }
+    
 }

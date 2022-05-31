@@ -45,21 +45,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookRotation;
     private Vector2 mousePosition;
 
-
-    private bool invisibleWallDeployed;
-    private Vector3 invisibleWallPosition;
-    
     private String KeyboardAndMouseControlScheme = "Keyboard&Mouse";
     private String GamepadControlScheme = "Gamepad";
     
-    private static bool movementEnabled = true;
+    private static bool  movementEnabled = true;
+
     private bool enteredShopArea;
     private bool isShooting;
     private bool isDrilling;
     private bool useButtonPressed;
     
-    private bool uiEnabled;
+    private static bool uiEnabled;
     private bool playerCanShop;
+
+    private bool insideShield;
+
+    private GameObject pauseMenuUI;
+    private bool pauseButtonPressed;
 
     private InputActionMap UI;
     private InputActionMap defaultMap;
@@ -78,8 +80,7 @@ public class PlayerController : MonoBehaviour
         drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
-        //teleport = GameObject.Find("TownPortal");
-       
+        pauseMenuUI = GameObject.Find("UI");
     }
 
     private void Update()
@@ -92,6 +93,10 @@ public class PlayerController : MonoBehaviour
         if (TownPortal.IsTeleporting == false)
         {
             RestrictMovement();
+        }
+        if (uiEnabled == false && playerInput.currentActionMap.name.Equals("UI"))
+        {
+            playerInput.SwitchCurrentActionMap("Player");
         }
     }
     
@@ -115,28 +120,29 @@ public class PlayerController : MonoBehaviour
 
                 if (uiEnabled)
                 {
-                    UI.Enable();
                     playerInput.SwitchCurrentActionMap("UI");
-                
-                    defaultMap.Disable();
-
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
                 }
                 else
                 {
-                    //Debug.Log(uiEnabled);
-
-                    //defaultMap.Enable();
                     playerInput.SwitchCurrentActionMap("Player");
-                    UI.Disable();
-
-                    Debug.Log(uiEnabled + playerInput.currentActionMap.ToString());
-
                 }
             }
         }
     }
-    
+
+    public void PauseButtonInput(InputAction.CallbackContext pauseButtonValue)
+    {
+        if (pauseButtonValue.performed)
+        {
+            pauseButtonPressed = !pauseButtonPressed;
+        }
+
+        if (pauseButtonPressed)
+        {
+            pauseMenuUI.GetComponent<UI_PausMenu>().Pause();
+        }
+    }
+
     private void RestrictMovement()
     {
         Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
@@ -178,15 +184,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isShooting)
         {
-
-
             drillScript.Shoot(true);
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
-            Debug.Log(animator.isActiveAndEnabled);
-            
+            //animator.SetBool("Idle", false);
 
             if (!source.isPlaying)
             {
@@ -200,9 +202,8 @@ public class PlayerController : MonoBehaviour
                 drillScript.Shoot(false);
                 drillScript.Drill(true);
                 drillScript.DrillInUse(true);
-
                 animator.SetBool("IsShooting", true);
-                animator.SetBool("Idle", false);
+                //animator.SetBool("Idle", false);
 
                 if (!source.isPlaying)
                 {
@@ -217,7 +218,7 @@ public class PlayerController : MonoBehaviour
                 StopSound();
 
                 animator.SetBool("IsShooting", false);
-                animator.SetBool("Idle", true);
+                //animator.SetBool("Idle", true);
 
             }
         }
@@ -228,6 +229,8 @@ public class PlayerController : MonoBehaviour
         if (movementEnabled)
         {
             UpdatePlayer();
+            AnimatePlayer();
+            FixOverlapPenetration();
         }
         else
         {
@@ -248,6 +251,48 @@ public class PlayerController : MonoBehaviour
         }
         transform.position += velocity * movementAcceleration * Time.deltaTime;
     }
+
+    private void AnimatePlayer()
+    {
+        if (velocity != Vector3.zero)
+        {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Moving", true);
+
+            float velocityInDirectionOfWherePlayerIsFacing = Vector3.Dot(transform.forward, velocity.normalized);
+            float velocityInDirectionOfPlayersSides = Vector3.Dot(transform.right, velocity.normalized);
+
+            animator.SetFloat("ForwardAndBackwardMovement", velocityInDirectionOfWherePlayerIsFacing);
+            animator.SetFloat("SidewaysMovement", velocityInDirectionOfPlayersSides);
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+            animator.SetBool("Idle", true);
+        }
+    }
+    
+    private void FixOverlapPenetration()
+    {
+        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+            boxCollider.transform.rotation, wallLayerMask);
+
+        while (colliderCount > 0)
+        {
+            for (int i = 0; i < colliderCount; i++)
+            {
+                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
+                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
+                        out var direction, out var distance))
+                {
+                    Vector3 separationVector = direction * distance;
+                    transform.position += separationVector + separationVector.normalized * colliderMargin;
+                }
+            }
+            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+                boxCollider.transform.rotation, wallLayerMask);
+        }
+    }
     
     public void SetPlayerVelocity(Vector3 newPlayerVelocity)
     {
@@ -264,10 +309,17 @@ public class PlayerController : MonoBehaviour
         return useButtonPressed;
     }
     
-    public bool IsMapSwitched()
+    public bool IsShopOpen()
     {
         return uiEnabled;
     }
+    
+    public bool InsideShield
+    {
+        get { return insideShield; }
+        set { insideShield = value; }
+    }
+
     
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
@@ -307,6 +359,11 @@ public class PlayerController : MonoBehaviour
         playerCanShop = value;
         
     }
+
+    public bool IsPauseMenuOpen()
+    {
+        return pauseButtonPressed;
+    }
     
     public void PlayerMovementInput(InputAction.CallbackContext moveValue)
     {
@@ -327,12 +384,8 @@ public class PlayerController : MonoBehaviour
     {
         if (teleport.activeInHierarchy) return;
         
-        
-        teleport.SetActive(true);
         teleport.transform.position = transform.position + new Vector3(1, 1, 1);
-
-       
-        
+        teleport.SetActive(true);
     }
 
     private void UpdatePlayerRotationGamePad()
@@ -348,8 +401,8 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMouseAim()
     {
-        Vector3 mousePosition = GetMousePosition();
-        Vector3 mouseDirection = (mousePosition - transform.localPosition) * rotationSmoothing;
+        Vector3 mousePositionOnScreen = GetMousePosition();
+        Vector3 mouseDirection = (mousePositionOnScreen - transform.localPosition) * rotationSmoothing;
         mouseDirection.y = 0;
         transform.forward = mouseDirection;
     }
@@ -377,27 +430,5 @@ public class PlayerController : MonoBehaviour
     {
         source.Stop();
         source.clip = null;
-    }
-    
-    private void FixOverlapPenetration()
-    {
-        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-            boxCollider.transform.rotation, wallLayerMask);
-
-        while (colliderCount > 0)
-        {
-            for (int i = 0; i < colliderCount; i++)
-            {
-                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
-                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
-                        out var direction, out var distance))
-                {
-                    Vector3 separationVector = direction * distance;
-                    transform.position += separationVector + separationVector.normalized * colliderMargin;
-                }
-            }
-            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-                boxCollider.transform.rotation, wallLayerMask);
-        }
     }
 }

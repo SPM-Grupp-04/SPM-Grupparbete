@@ -1,35 +1,39 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Serialization;
+
 
 public class MeleeWepon : MonoBehaviour
 {
     private float cooldownTime = 0.5f;
     public float timeRemaining;
+    private GameObject otherP;
+    [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
         timeRemaining = cooldownTime;
     }
 
-   
+    public void HitPlayer()
+    {
+        var damageEvent = new DealDamageEventInfo(otherP, 1);
+        EventSystem.current.FireEvent(damageEvent);
+    }
+    
+
     private void OnTriggerStay(Collider other)
     {
-        if (timeRemaining < 0.0f)
-        {
-            var damageEvent = new DealDamageEventInfo(other.gameObject, 1);
-            EventSystem.current.FireEvent(damageEvent);
-        }
-        if (timeRemaining < 0.0f)
-        {
-            timeRemaining = cooldownTime;
-        }
+        if (!other.CompareTag("Player")) return;
+       // Debug.Log("Count");
+        navMeshAgent.isStopped = true;
 
-        timeRemaining -= Time.deltaTime;
+        animator.SetBool("Run", false);
+        animator.SetTrigger("Attack");
+        otherP = other.gameObject;
     }
-
-   
 }

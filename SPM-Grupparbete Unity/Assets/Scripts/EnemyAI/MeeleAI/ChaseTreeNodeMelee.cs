@@ -1,43 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BehaviorTree;
+﻿using BehaviorTree;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class ChaseTreeNodeMelee : TreeNode
+namespace EnemyAI.MeeleAI
 {
-    private readonly NavMeshAgent agent;
-    private readonly Animator animator;
-    private readonly Vector3 target;
-    private readonly float distanceToTarget;
-    
-    public ChaseTreeNodeMelee(Vector3 target,float distanceToTarget ,NavMeshAgent agent, Animator animator)
+    public class ChaseTreeNodeMelee : TreeNode
     {
-        this.animator = animator;
-        this.agent = agent;
-        this.target = target;
-        this.distanceToTarget = distanceToTarget;
-    }
-
-    public override NodeState Evaluate()
-    {
-        animator.SetBool("Run", true);
-        
-        if (distanceToTarget > 0.2f)
+        private readonly NavMeshAgent agent;
+        private readonly Animator animator;
+        private readonly Vector3 target;
+        private readonly float distanceToTarget;
+    
+        public ChaseTreeNodeMelee(Vector3 target,float distanceToTarget ,NavMeshAgent agent, Animator animator)
         {
-            agent.isStopped = false;
-            agent.SetDestination(target);
+            this.animator = animator;
+            this.agent = agent;
+            this.target = target;
+            this.distanceToTarget = distanceToTarget;
+        }
 
-            return NodeState.RUNNING;
-        }
-        else
+        public override NodeState Evaluate()
         {
-            agent.isStopped = true;
-            state = NodeState.SUCCESS;
-            return state;
+            animator.SetBool("Run", agent.velocity.magnitude > 0.3);
+            
+            if (distanceToTarget > 0.2f)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target);
+
+                return NodeState.RUNNING;
+            }
+            else
+            {
+                agent.isStopped = true;
+                state = NodeState.SUCCESS;
+                return state;
+            }
         }
-    }
     
     
+    }
 }

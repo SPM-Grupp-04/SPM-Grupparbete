@@ -12,8 +12,11 @@ public class PlayerState : MonoBehaviour, IDamagable
 
     [SerializeField] private String playerName;
     [SerializeField] private Animator animator;
+    
+    [SerializeField] private AudioSource source;
     private void Awake()
     {
+        
         m_LocalPlayerData = PlayerStatistics.Instance;
     }
 
@@ -27,6 +30,7 @@ public class PlayerState : MonoBehaviour, IDamagable
         m_LocalPlayerData.drillLevel = GlobalControl.Instance.playerStatistics.drillLevel;
         m_LocalPlayerData.componentsCollectedMask = GlobalControl.Instance.playerStatistics.componentsCollectedMask;
         m_LocalPlayerData.playerMaxHealth = GlobalControl.Instance.playerStatistics.playerMaxHealth;
+        m_LocalPlayerData.componentsCollectedNumber = GlobalControl.Instance.playerStatistics.componentsCollectedNumber;
       
         if (playerName == "PlayerOne")
         {
@@ -74,9 +78,15 @@ public class PlayerState : MonoBehaviour, IDamagable
         }
     }
 
+    
+    
     IEnumerator WaitForAnimation(GameObject g)
     {
         animator.SetBool("IsDead",true);
+        if (!source.isPlaying)
+        {
+            source.Play();
+        }
         yield return new WaitForSeconds(1.1f);
         die(g);
     }

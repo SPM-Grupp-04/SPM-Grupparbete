@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using BehaviorTree;
-using UnityEditor.Timeline.Actions;
+
 
 public class FollowPlayer : TreeNode
 {

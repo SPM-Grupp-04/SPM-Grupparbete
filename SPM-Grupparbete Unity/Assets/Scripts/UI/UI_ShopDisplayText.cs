@@ -7,20 +7,26 @@ using UnityEngine.UI;
 public class UI_ShopDisplayText : MonoBehaviour
 {
     [SerializeField] private Text textHeader;
-    [SerializeField] private Text textCost;
+    [SerializeField] private Text textCostBlue;
+    [SerializeField] private Text textCostRed;
+    [SerializeField] private Text textCostGreen;
     [SerializeField] private Text textBody;
-    [SerializeField] private GameObject[] buttonsArray;
-
+    [SerializeField] private GameObject shop;
+    private ShopScript shopScript;
+    List<int[]> shopCostsArray;
+    
     private string header = "";
 
-    private string cost = "";
-
+    private int costBlue;
+    private int costRed;
+    private int costGreen;
+    
     private string body = "";
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        shopScript = shop.GetComponent<ShopScript>();
     }
 
     // Update is called once per frame
@@ -28,79 +34,104 @@ public class UI_ShopDisplayText : MonoBehaviour
     {
         
     }
+    /* Index for shop costs in list.
+     * healCost,0
+     * weaponCost, 1
+     * speedCost, 2
+     * discoCost, 3
+     * drillLevel1Cost, 4
+     * drillLevel2Cost, 5
+     * drillLevel3Cost, 6
+     * healthLevel1Cost, 7
+     * healthLevel2Cost, 8
+     * healthLevel3Cost} 9
+     */
 
     public void DisplayText(GameObject gameObject)
     {
-        int i = FindIndex(gameObject);
-        switch (i)
+        shopCostsArray = shopScript.GetShopCostArrays();
+        switch (gameObject.name)
         {
-            case 0:
-                header = "Drill Upgrade";
-                cost = "Cost: 5 blue";
-                body = "This makes drill go brrrr";
-                break;
-            case 1:
+            
+            case "HealButton":
                 header = "Heal";
-                cost = "Cost: 5 blue";
+                SetPriceShopText(0);
                 body = "This heals the player, many HP";
                 break;
-            case 2:
+            case "WeaponButton":
                 header = "Weapon Upgrade";
-                cost = "Cost: 10 blue";
+                SetPriceShopText(1);
                 body = "This makes laser go far";
                 break;
-            case 3:
+            case "SpeedButton":
                 header = "Speed Upgrade";
-                cost = "Cost: 10 blue";
+                SetPriceShopText(2);
                 body = "This makes players gor wroom";
                 break;
-            case 4:
-                header = "Health 1";
-                cost = "Cost: 20 blue";
-                body = "Player gets 10 extra HP";
+            case "DrillButton":
+                header = "Drill Upgrade";
+                SetPriceShopText(4);
+                body = "This makes drill go brrrr";
                 break;
-            case 5:
-                header = "Health 2";
-                cost = "Cost: 40 blue & 20 red";
-                body = "Player gets 20 extra HP";
-                break;
-            case 6:
+            case "DrillButton2":
                 header = "Drill 2";
-                cost = "Cost: 20 blue & 20 red";
+                SetPriceShopText(5);
                 body = "This makes drill go even more BBBRRRRRRRR";
                 break;
-            
-            
+            case "DrillButton3":
+                header = "Drill 3";
+                SetPriceShopText(6);
+                body = "This makes drill go even more BBBRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR";
+                break;
+            case "Health1Button":
+                header = "Health 1";
+                SetPriceShopText(7);
+                body = "Player gets 10 extra HP";
+                break;
+            case "Health2Button":
+                header = "Health 2";
+                SetPriceShopText(8);
+                body = "Player gets 20 extra HP";
+                break;
+            case "Health3Button":
+                header = "Health 3";
+                SetPriceShopText(9);
+                body = "Player gets 30 extra HP";
+                break;
         }
         
         
         textHeader.fontSize = 70;
         textHeader.text += header + "\n";
-        textCost.fontSize = 40;
-        textCost.text += cost + "\n";
+        
+        textCostBlue.fontSize = 40;
+        textCostBlue.text += costBlue + "\n";
+        textCostRed.fontSize = 40;
+        textCostRed.text += costRed + "\n";
+        textCostGreen.fontSize = 40;
+        textCostGreen.text += costGreen + "\n";
+        
         textBody.fontSize = 25;
         textBody.text += body;
+    }
+
+    private void SetPriceShopText(int i)
+    {
+        costBlue = shopCostsArray[i][0];
+        costRed = shopCostsArray[i][1];
+        costGreen = shopCostsArray[i][2];
+
     }
 
     public void RemoveDisplayText()
     {
         textHeader.text = "";
-        textCost.text = "";
+        textCostBlue.text = "";
+        textCostRed.text = "";
+        textCostGreen.text = "";
         textBody.text = "";
     }
 
-    private int FindIndex(GameObject gameObject)
-    {
-        for (int i = 0; i < buttonsArray.Length; i++)
-        {
-            if (buttonsArray.GetValue(i).Equals(gameObject))
-            {
-                return i;
-            }
-        }
-
-        return -1;
-    }
 
 
 }

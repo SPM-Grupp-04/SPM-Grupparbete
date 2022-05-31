@@ -24,7 +24,7 @@ public class DestroyableWall : DestroyableObjectBase
         {
             materialHP -= amount;
             uiObjectHp.ObjectTakeDamage(amount);
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
             if (materialHP <= 0)
             {
                 DestroyObject();

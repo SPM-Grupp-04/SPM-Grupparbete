@@ -1,38 +1,37 @@
-﻿using System.Collections.Generic;
-using BehaviorTree;
+﻿using BehaviorTree;
 using EgilEventSystem;
 using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.AI;
-using Event = UnityEngine.Event;
 
-namespace Utility.EnemyAI
+namespace EnemyAI.RangedAI
 {
     public class RangedAttackTreeNode : TreeNode
     {
-        private NavMeshAgent agent;
-        private Vector3 target;
-        private Transform firePoint;
+        private readonly NavMeshAgent agent;
+        private readonly Vector3 target;
+        private readonly Transform firePoint;
 
-        private GameObject throwableObject;
+        private readonly GameObject throwableObject;
         private Vector3 currentVelocity;
-        private float smoothDamp;
 
-        [Header("ThrowSettings")] private float throwCD = 7;
-        private float throwUpForce;
-        private float throwForce;
-        private RangedAI _rangedAI;
+
+        [Header("ThrowSettings")] 
+        private const float ThrowCd = 7;
+        private readonly float throwUpForce;
+        private readonly float throwForce;
+        private readonly RangedAI rangedAI;
 
 
         public RangedAttackTreeNode(Transform firePoint,Vector3 target, NavMeshAgent agent,
-            GameObject throwabelObject, float throwUpForce, float throwForce, RangedAI rangedAI)
+            GameObject throwableObject, float throwUpForce, float throwForce, RangedAI rangedAI)
         {
             this.firePoint = firePoint;
             this.agent = agent;
             this.target = target;
-            this.throwableObject = throwabelObject;
-            smoothDamp = 1f;
-            _rangedAI = rangedAI;
+            this.throwableObject = throwableObject;
+            
+            this.rangedAI = rangedAI;
             this.throwUpForce = throwUpForce;
             this.throwForce = throwForce;
         }
@@ -44,12 +43,12 @@ namespace Utility.EnemyAI
             
             agentT.LookAt(target);
 
-            if (_rangedAI.timer < 0)
+            if (rangedAI.timer < 0)
             {
                 var shootEventInfo = new ShootEventInfo(firePoint,
                     this.throwableObject, throwUpForce, throwForce);
                 EventSystem.current.FireEvent(shootEventInfo);
-                _rangedAI.timer = throwCD;
+                rangedAI.timer = ThrowCd;
             }
             
             state = NodeState.RUNNING;

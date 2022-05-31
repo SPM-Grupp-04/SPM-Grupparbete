@@ -34,8 +34,8 @@ namespace Utility.DroneAI
                     if (g != null && g.GetRequiredWeaponLevel() >
                         PlayerStatistics.Instance.drillLevel)
                     {
-                        Debug.Log(g.GetRequiredWeaponLevel() + " Required WeaponLevel");
-                        Debug.Log("Dril level to high");
+                       // Debug.Log(g.GetRequiredWeaponLevel() + " Required WeaponLevel");
+                       // Debug.Log("Dril level to high");
                         state = NodeState.FAILURE;
                         return state;
                     }

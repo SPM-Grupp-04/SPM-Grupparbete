@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class MinableOre : DestroyableObjectBase
@@ -11,6 +12,7 @@ public class MinableOre : DestroyableObjectBase
     [SerializeField] GameObject ore;
     [SerializeField] GameObject uiHP;
     [SerializeField] [Range(1, 3)] private int collecitbleCrystals = 1;
+    [SerializeField] private AudioManager audioManager;
 
     UI_ObjectHP uiObjectHp;
 
@@ -19,6 +21,7 @@ public class MinableOre : DestroyableObjectBase
         requiredWeaponLevel = oreRequierdWeaponLevel;
         materialHP = oreMaterialHP;
         uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
+        
     }
 
     public override void ReduceMaterialHP(int amount)
@@ -43,6 +46,7 @@ public class MinableOre : DestroyableObjectBase
     private void DestoryObject()
     {
 
+        //audioManager.PlayCrystalSound();
         
         for (int i = 0; i < collecitbleCrystals; i++)
         {

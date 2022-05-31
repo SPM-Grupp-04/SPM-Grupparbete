@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.PlayerLoop;
@@ -7,10 +9,8 @@ using UnityEngine.UI;
 
 public class AudioSettings : MonoBehaviour
 {
-
     [SerializeField] private AudioMixer audioMixer;
-
-   [SerializeField] private Slider audioSlider;
+    [SerializeField] private Slider audioSlider;
     
     void Start()
     {
@@ -29,7 +29,12 @@ public class AudioSettings : MonoBehaviour
             audioSlider.value = 1;
         }
     }
-    
+
+    private void Awake()
+    {
+        audioSlider.Select();
+    }
+
     public void ChangeVolume(float sliderValue)
     {
         audioMixer.SetFloat("VolumeControl", sliderValue);
