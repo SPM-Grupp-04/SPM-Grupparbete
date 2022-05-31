@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
     private int inActive = 0;
+    private int active = 0;
     private float totalProcent;
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
@@ -70,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         Debug.Log("In start set all enemies to Inactive");
-        foreach (var enemyAI in enemyAIHandler.units)
+        foreach (BaseEnemyAI enemyAI in enemyAIHandler.units)
         {
             enemyAI.gameObject.SetActive(false);
         }
@@ -80,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("Entering Enable");
-        foreach (var enemyAI in enemyAIHandler.units)
+        foreach (BaseEnemyAI enemyAI in enemyAIHandler.units)
         {
             enemyAI.gameObject.SetActive(true);
         }
@@ -91,21 +92,22 @@ public class EnemySpawner : MonoBehaviour
     
     private void FixedUpdate()
     {
-        
-        if (inActive < totalAllowedEnimesAtSpawner && timer > 0)
+        if (timer < 0)
         {
-            Debug.Log("Setting spawn position ");
+            this.enabled = false;
+        }
+        Debug.Log(inActive + " Inactive");
+        if ( active < totalAllowedEnimesAtSpawner )
+        {
+          
             SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
-            for (var i = 0; i < pool.CountInactive; i++)
+            for (int i = 0; i < totalAllowedEnimesAtSpawner - active; i++)
             {
                 Debug.Log("Removing objekts from the pool");
                 pool.Get();
             }
         }
-        else
-        {
-            this.enabled = false;
-        }
+        
 
         timer -= Time.deltaTime;
     }
@@ -129,6 +131,7 @@ public class EnemySpawner : MonoBehaviour
         meeleEnemyAI.transform.position = SpawnPos;
         meeleEnemyAI.gameObject.SetActive(true);
         inActive--;
+        active++;
         Debug.Log("Takeing the eneimes from the pool.");
     }
 
@@ -137,6 +140,7 @@ public class EnemySpawner : MonoBehaviour
     {
         meeleEnemyAI.gameObject.SetActive(false);
         inActive++;
+        active--;
         Debug.Log("Returning enemies to the pool");
     }
 }
