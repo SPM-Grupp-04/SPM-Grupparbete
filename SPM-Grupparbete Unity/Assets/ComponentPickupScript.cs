@@ -20,7 +20,8 @@ public class ComponentPickupScript : MonoBehaviour
     void Start()
     {
         
-        text.enabled = false;
+        //text.enabled = false;
+        canvas.SetActive(false);
         //checks if the mask contains the value for the component
         if ((PlayerStatistics.Instance.componentsCollectedMask & (int)componentNumber) > 0)
             Destroy(gameObject);
@@ -43,7 +44,8 @@ public class ComponentPickupScript : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player") )
             return;
-        text.enabled = true;
+        //text.enabled = true;
+        canvas.SetActive(true);
         canvas.transform.rotation = Camera.main.transform.rotation;
         if (collision.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
         {
@@ -63,7 +65,8 @@ public class ComponentPickupScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        text.enabled = false;
+        //text.enabled = false;
+        canvas.SetActive(false);
     }
 
     IEnumerator Delay()
