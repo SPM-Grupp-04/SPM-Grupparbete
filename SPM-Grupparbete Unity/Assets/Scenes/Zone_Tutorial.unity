@@ -3821,6 +3821,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 423875065}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &359925694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5339,6 +5341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 233636583}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &493687853
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12756,6 +12760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1768898551}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &1273709681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14412,6 +14418,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1172334608}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!1 &1340630516
 GameObject:
   m_ObjectHideFlags: 0
@@ -15963,6 +15971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1749544692}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &1460620967
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17987,6 +17997,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
+      propertyPath: playerUI
+      value: 
+      objectReference: {fileID: 1903128849}
+    - target: {fileID: 42110313, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: shopIsFree
       value: 0
       objectReference: {fileID: 0}
@@ -18188,11 +18202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000023007393
+      value: 0.99993426
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.00067
+      value: 434.093
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
@@ -21622,6 +21636,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1548665261696217942, guid: 306bda579b4be6147abf8782959a51de, type: 3}
   m_PrefabInstance: {fileID: 1897970475}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1903128849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4987479579759969508, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 1430316755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1904873960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22354,6 +22373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 220590180}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &1932285561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23115,6 +23136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 715303002}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &2027640227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23243,6 +23266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1146024794}
+  playerOne: {fileID: 1042659815}
+  playerTwo: {fileID: 1261272714}
 --- !u!65 &2040887764
 BoxCollider:
   m_ObjectHideFlags: 0
