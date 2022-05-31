@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayCrystalPickUpSound()
     {
-        sourceFour.PlayOneShot(pickUp);
+        //sourceFour.PlayOneShot(pickUp);
     }
 
     public void CombatMusic()
