@@ -19,6 +19,9 @@ public class PlayerDynamite : MonoBehaviour
     [Header("Explosion Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask enemyLayerMask;
+
+    [Header("Explosion Light")] 
+    [SerializeField] private float explosionLightDuration = 5.0f;
     
     [Header("Particle System")]
     [SerializeField] private float particleSystemPlayDuration = 5.0f;
@@ -26,12 +29,6 @@ public class PlayerDynamite : MonoBehaviour
     [Header("Camera Shake")]
     [SerializeField] [Range(1.0f, 20.0f)] private float cameraShakeMagnitude;
     [SerializeField] [Range(0.1f, 5.0f)] private float cameraShakeDuration;
-    
-    private float particleSystemCountdown;
-    private float explosionCountdown;
-    
-    private bool hasExploded;
-    
     
     [Header("Components")]
     [SerializeField] private GameObject dynamiteExplosionPrefab;
@@ -41,29 +38,38 @@ public class PlayerDynamite : MonoBehaviour
 
     [SerializeField] private MeshRenderer meshRenderer;
 
-    [SerializeField] private Light dynamiteFuseLight;
-
     [SerializeField] private Light dynamiteExplosionLight;
+    
+    [SerializeField] private Light dynamiteFuseLight;
 
     [SerializeField] private AudioSource dynamiteExplosionAudioSource;
 
     [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
+    [SerializeField] private ParticleSystem dynamiteFuseParticleSystem;
+
     private FallingRocksSpawner fallingRocksSpawner;
+
+    private GameObject dynamiteExplosion;
 
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
 
-    private void Awake()
-    {
-        fallingRocksSpawner = FallingRocksSpawner.Instance;
-    }
+    private float explosionLightTime;
+    
+    private float particleSystemCountdown;
+    private float explosionCountdown;
+    
+    private bool hasExploded;
 
     private void Start()
     {
+        fallingRocksSpawner = FallingRocksSpawner.Instance;
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
+        explosionLightTime = explosionLightDuration;
         dynamiteFuseAudioSource.Play();
+        Debug.Log(explosionLightTime);
     }
 
     void Update()
@@ -75,7 +81,16 @@ public class PlayerDynamite : MonoBehaviour
     {
         if (DynamiteCollidedWithGround() && !hasExploded)
         {
-            StartCoroutine(CountdownToExplode());
+            StartCoroutine(DynamiteExplosion());
+            
+            while (explosionLightTime > 0.0f)
+            {
+                Debug.Log(explosionLightTime);
+                dynamiteExplosionLight.intensity -= Time.deltaTime;
+                explosionLightTime -= Time.deltaTime;
+            }
+
+            StartCoroutine(PlayParticleSystem());
             hasExploded = true;
         }
     }
@@ -87,41 +102,52 @@ public class PlayerDynamite : MonoBehaviour
         return capsuleCast.collider;
     }
 
-    private IEnumerator CountdownToExplode()
+    private IEnumerator DynamiteExplosion()
     {
         do
         {
             explosionCountdown -= Time.deltaTime;
             yield return null;
         } while (explosionCountdown > 0.0f);
+        ExplodeDynamiteAndDisableDynamiteFuse();
+    }
 
-        dynamiteFuseLight.enabled = false;
-        
-        dynamiteFuseAudioSource.Stop();
-
-        GameObject dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
-        
-        dynamiteExplosionAudioSource.Play();
-        
-        dynamiteExplosionLight.enabled = true;
-        //Gamepad.current.SetMotorSpeeds(1,0);
-        capsuleCollider.enabled = false;
-        
-        Explode();
-        
+    private IEnumerator PlayParticleSystem()
+    {
         do
         {
             particleSystemCountdown -= Time.deltaTime;
             yield return null;
         } while (particleSystemCountdown > 0.0f);
-        
-        //Gamepad.current.SetMotorSpeeds(0,0);
-        Destroy(dynamiteExplosion);
-        Destroy(gameObject);
+        DestroyGameObjects();
+    }
+    
+    private void ExplodeDynamiteAndDisableDynamiteFuse()
+    {
+        DisableDynamiteFuse();
+
+        Explode();
     }
 
+    private void DisableDynamiteFuse()
+    {
+        dynamiteFuseLight.enabled = false;
+        
+        dynamiteFuseAudioSource.Stop();
+        
+        dynamiteFuseParticleSystem.Stop();
+    }
+    
     private void Explode()
     {
+        dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
+        
+        dynamiteExplosionAudioSource.Play();
+        
+        dynamiteExplosionLight.enabled = true;
+
+        capsuleCollider.enabled = false;
+        
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
         foreach (Collider enemyObject in enemyColliders)
         {
@@ -132,5 +158,11 @@ public class PlayerDynamite : MonoBehaviour
         fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
         fallingRocksSpawner.SpawnRocks(true);
         meshRenderer.enabled = false;
+    }
+
+    private void DestroyGameObjects()
+    {
+        Destroy(dynamiteExplosion);
+        Destroy(gameObject);
     }
 }

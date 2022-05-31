@@ -281,27 +281,27 @@ public class PlayerController : MonoBehaviour
             if (distanceBetweenVelocityAndTransformForward <= 0.75f &&
                 distanceBetweenVelocityAndTransformForward >= 0.0f)
             {
-                Debug.Log("MOVING FORWARDS");
+                //Debug.Log("MOVING FORWARDS");
                 animator.SetBool("Forward", true);
             } else if (distanceBetweenVelocityAndTransformForward >= 1.75f &&
                        distanceBetweenVelocityAndTransformForward <= 2.0f)
             {
-                Debug.Log("MOVING BACKWARDS");
+                //Debug.Log("MOVING BACKWARDS");
                 animator.SetBool("Backward", true);
             } 
             else if (distanceBetweenVelocityAndTransformRight <= 0.75f &&
                      distanceBetweenVelocityAndTransformRight >= 0.0f)
             {
-                Debug.Log("MOVING RIGHT");
+                //Debug.Log("MOVING RIGHT");
                 animator.SetBool("Right", true);
             }
             else if (distanceBetweenVelocityAndTransformRight >= 1.75f &&
                        distanceBetweenVelocityAndTransformRight <= 2.0f)
             {
-                Debug.Log("MOVING LEFT");
+                //Debug.Log("MOVING LEFT");
                 animator.SetBool("Left", true);
             }
-            Debug.Log(distanceBetweenVelocityAndTransformRight);
+            //Debug.Log(distanceBetweenVelocityAndTransformRight);
         }
         else
         {
