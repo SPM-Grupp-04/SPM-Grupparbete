@@ -38,6 +38,11 @@ namespace EnemyAI
 
         [SerializeField] private float currentHealth = 50;
 
+        
+        public void tryToHitPlayer()
+        {
+            meleeWeapon.HitPlayer();
+        }
         protected override TreeNode SetUpTree()
         {
             var agentTransform = agent.transform;

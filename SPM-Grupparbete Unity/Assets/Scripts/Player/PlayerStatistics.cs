@@ -1,13 +1,7 @@
 //primary author:
 //additional programming: Simon Canbäck, sica4801
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
+using System.Collections.Generic;
 [System.Serializable]
 public class PlayerStatistics
 {

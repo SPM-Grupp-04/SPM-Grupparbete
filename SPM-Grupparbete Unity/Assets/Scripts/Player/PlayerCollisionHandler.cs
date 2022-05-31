@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class PlayerCollisionHandler : MonoBehaviour
 {
     private PlayerStatistics m_LocalPlayerDataTest = PlayerStatistics.Instance;
+    [SerializeField] private AudioManager audioManager;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag.Equals("Currency"))
         {
             collision.gameObject.GetComponent<OreCollection>().CollectOre();
+            audioManager.PlayCrystalPickUpSound();
             switch (collision.gameObject.GetComponent<OreCollection>().GetName())
             {
                 case "Blue":
@@ -26,7 +28,6 @@ public class PlayerCollisionHandler : MonoBehaviour
                     break;
 
                 default:
-                    Debug.Log("No name");
                     break;
 
             }
