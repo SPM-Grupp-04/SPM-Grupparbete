@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2965090648212624896}
-  otherPlayer: {fileID: 2965090648212624896, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+  otherPlayer: {fileID: 0}
   shieldPrefab: {fileID: 4422724548094833572, guid: d214ab6d6d937bc4bbc9075fd5b04edb, type: 3}
   upTimeShield: 5
   uiCooldowns: {fileID: 0}
@@ -1408,7 +1408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1996551283298249531}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: DrillPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 6112303480211096869}
   - component: {fileID: 8182577800644812320}
   - component: {fileID: 515942599}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Drill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1471,6 +1471,7 @@ Transform:
   - {fileID: 1996551283298249531}
   - {fileID: 7233835604443078218}
   - {fileID: 2995146244812344274}
+  - {fileID: 5627676003160626987}
   m_Father: {fileID: 2965090648212625148}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1551,7 +1552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igenoreMask:
     serializedVersion: 2
-    m_Bits: 4351
+    m_Bits: 6399
   overHeatAmount: 0
   overHeatIncreaseAmount: 0.5
   overHeatDecreaseAmount: 1
@@ -1563,6 +1564,7 @@ MonoBehaviour:
   laserEmission: {fileID: 4434256802509919334}
   drillRing: {fileID: 6093184860417170503}
   drillEmission: {fileID: 4434256800842360651}
+  overheatEmission: {fileID: 5086412801599387175}
   laserHit: {fileID: 2995146244812344272}
   drillHit: {fileID: 7233835604443078216}
   drillDistance: 3
@@ -1676,7 +1678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3468054973967685349}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: LaserPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1755,7 +1757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7491565813691508484, guid: 2962193939bf77f49a6dea01b332d785, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2962193939bf77f49a6dea01b332d785, type: 3}
@@ -1838,7 +1840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6093184859343044076, guid: 04bb2260c25184f4aae98d7ecab88bce, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04bb2260c25184f4aae98d7ecab88bce, type: 3}
@@ -1987,7 +1989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6093184859343044076, guid: 52d4140de87b0bb49be94b42e10fe8c7, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d4140de87b0bb49be94b42e10fe8c7, type: 3}
@@ -2070,7 +2072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7491565813691508484, guid: 48d5aee8f7ff4804992eaede2366588e, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48d5aee8f7ff4804992eaede2366588e, type: 3}
@@ -2338,6 +2340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserHitEffect 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2268841457176712514, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2268841457176712515, guid: c18f5d596eb9f034f9d6ac997ea28e71, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2467,6 +2473,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DrillHitEffect 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2268841457176712514, guid: 256986bc380fa6845af9a87a211b6882, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2268841457176712515, guid: 256986bc380fa6845af9a87a211b6882, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2522,4 +2532,71 @@ VisualEffect:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2268841457176712515, guid: 256986bc380fa6845af9a87a211b6882, type: 3}
   m_PrefabInstance: {fileID: 8871867442504502025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8871867444274684228
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4672151869594460666}
+    m_Modifications:
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491565813691508484, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+      propertyPath: m_Name
+      value: LaserEmissionOverheat
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+--- !u!198 &5086412801599387175 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4434256800724604771, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+  m_PrefabInstance: {fileID: 8871867444274684228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5627676003160626987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3820936966966965871, guid: b15a4d7be035a0a4d84c21e3217369d7, type: 3}
+  m_PrefabInstance: {fileID: 8871867444274684228}
   m_PrefabAsset: {fileID: 0}
