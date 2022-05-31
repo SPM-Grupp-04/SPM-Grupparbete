@@ -993,13 +993,12 @@ MonoBehaviour:
     m_Bits: 64
   shopAreaRadius: 3.5
   shopIsFree: 0
-  playerUI: {fileID: 0}
   healCost: 050000000000000000000000
   weaponCost: 0a0000000000000000000000
   speedCost: 0a0000000000000000000000
   discoCost: 320000000000000000000000
   drillLevel1Cost: 050000000000000000000000
-  drillLevel2Cost: 140000001400000000000000
+  drillLevel2Cost: 140000000000000000000000
   drillLevel3Cost: 000000000000000000000000
   healthLevel1Cost: 140000000000000000000000
   healthLevel2Cost: 280000001400000000000000
@@ -1392,8 +1391,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8094908428147790490}
   m_HandleRect: {fileID: 3769734912698923960}
   m_Direction: 2
-  m_Value: 0.0000002812082
-  m_Size: 0.63825405
+  m_Value: -0.000020668804
+  m_Size: 0.6382479
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1741,7 +1740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.0000396, y: 434.0923}
+  m_AnchoredPosition: {x: 1.0000396, y: 434.10135}
   m_SizeDelta: {x: -1, y: 1200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3513947962972649923
