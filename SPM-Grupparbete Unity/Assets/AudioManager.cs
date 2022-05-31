@@ -53,10 +53,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayCrystalPickUpSound()
     {
-        Debug.Log(pickUp);
         sourceFour.PlayOneShot(pickUp);
-        
-        Debug.Log("hej");
     }
 
     public void CombatMusic()

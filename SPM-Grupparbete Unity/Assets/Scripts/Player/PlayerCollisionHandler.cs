@@ -28,7 +28,6 @@ public class PlayerCollisionHandler : MonoBehaviour
                     break;
 
                 default:
-                    Debug.Log("No name");
                     break;
 
             }

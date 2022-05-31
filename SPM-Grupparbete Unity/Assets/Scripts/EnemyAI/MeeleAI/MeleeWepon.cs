@@ -29,7 +29,7 @@ public class MeleeWepon : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        Debug.Log("Count");
+       // Debug.Log("Count");
         navMeshAgent.isStopped = true;
 
         animator.SetBool("Run", false);
