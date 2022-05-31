@@ -58,6 +58,8 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button drill3Button;
 
 
+    [Header("Images for upgrades")] [SerializeField]
+    private Sprite[] upgradeImage;
     
     private Dictionary<string, bool> buttonDictionary;
     private List<Collider> playersInShop = new List<Collider>();
@@ -354,6 +356,34 @@ public class ShopScript : MonoBehaviour
     {
         button.interactable = false;
         buttonDictionary[button.name] = true;
+        switch (button.name)
+        {
+            case "WeaponButton":
+                button.GetComponent<Image>().sprite = upgradeImage[1];
+                break;
+            case "SpeedButton":
+                button.GetComponent<Image>().sprite = upgradeImage[0];
+                break;
+            case "DrillButton":
+                button.GetComponent<Image>().sprite = upgradeImage[5];
+                break;
+            case "DrillButton2":
+                button.GetComponent<Image>().sprite = upgradeImage[6];
+                break;
+            case "DrillButton3":
+                button.GetComponent<Image>().sprite = upgradeImage[7];
+                break;
+            case "Health1Button":
+                button.GetComponent<Image>().sprite = upgradeImage[2];
+                break;
+            case "Health2Button":
+                button.GetComponent<Image>().sprite = upgradeImage[3];
+                break;
+            case "Health3Button":
+                button.GetComponent<Image>().sprite = upgradeImage[4];
+                break;
+        }
+        
     }
 
     private void CanPlayersHeal()

@@ -28,7 +28,7 @@ namespace EnemyAI.EnemyAIHandler
         private  int countEnemy = 0;
 
 
-        private void Start()
+        private void Awake()
         {
             playerOne = GameObject.Find("Player1");
             playerTwo = GameObject.Find("Player2");
@@ -116,53 +116,7 @@ namespace EnemyAI.EnemyAIHandler
             }
         }
 
-        /*IEnumerator slowDown()
-    {
-        
-        yield return new WaitForSeconds(1f);
-        foreach (BaseEnemyAI enemyAI in units)
-        {
-            if (enemyAI.gameObject.activeInHierarchy )
-            {
-                Vector3 aiPosition = enemyAI.gameObject.transform.position;
-
-                
-                // Checking distance from Ai-unit to Player.
-                distancePlayerOne = Vector3.Distance(playerOnePosition, aiPosition);
-                distancePlayerTwo = Vector3.Distance(playerTowPosition, aiPosition);
-
-                // Resetting the old values.
-                closestTarget = new Vector3();
-                closestDistance = 100;
-
-                // A check needed to make sure the AI don't find the transform for the inactivated Game object.
-                if (!playerOneIsActive)
-                {
-                    distancePlayerOne = 1000;
-                }
-
-                if (!playerTwoIsActive)
-                {
-                    distancePlayerTwo = 1000;
-                }
-
-
-                closestDistance = ClosestDistance(enemyAI, aiPosition, countEnemy,
-                    closestDistance, distancePlayerOne, distancePlayerTwo);
-
-                enemyAI.PositionAroundTarget(closestTarget);
-                enemyAI.DistanceToPlayerPos(closestDistance);
-                
-                enemyAI.TopTreeNode.Evaluate();
-                
-                countEnemy++;
-            }
-           
-        }
-
-        
-    }*/
-
+      
         private float ClosestDistance(BaseEnemyAI enemyAI, Vector3 aiPos, int countEnemy, float closestDistance,
             float distancePlayerOne, float distancePlayerTwo)
         {
