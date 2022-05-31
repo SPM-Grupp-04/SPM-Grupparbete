@@ -188,6 +188,7 @@ public class PlayerDrill : MonoBehaviour
                 timer = coolDownTimerStart;
                 StopLaserParticles();
             }
+            
         }
     }
     

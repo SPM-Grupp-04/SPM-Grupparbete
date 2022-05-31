@@ -61,6 +61,7 @@ public class ShopScript : MonoBehaviour
     private Dictionary<string, bool> buttonDictionary;
     private List<Collider> playersInShop = new List<Collider>();
     private Stopwatch stopWatch;
+    private List<int[]> shopCostsArray;
 
     private GameObject playerOneDrill;
     private GameObject playerTwoDrill;
@@ -75,6 +76,7 @@ public class ShopScript : MonoBehaviour
 
     private void Start()
     {
+        shopCostsArray = new List<int[]>() {healCost, weaponCost, speedCost, discoCost, drillLevel1Cost, drillLevel2Cost, drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost};
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
         if (buttonDictionary == null)
         {
@@ -485,6 +487,11 @@ public class ShopScript : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, shopAreaRadius);
+    }
+
+    public List<int[]> GetShopCostArrays()
+    {
+        return shopCostsArray;
     }
 
     
