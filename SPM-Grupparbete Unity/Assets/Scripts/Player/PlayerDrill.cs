@@ -119,6 +119,7 @@ public class PlayerDrill : MonoBehaviour
             if (overHeatAmount <= 0)
             {
                 canShoot = true;
+                
             }
         }
     }
@@ -190,7 +191,9 @@ public class PlayerDrill : MonoBehaviour
                 timer = coolDownTimerStart;
                 StopLaserParticles();
             }
+
             overheatEmission.Play();
+            
         }
     }
     
