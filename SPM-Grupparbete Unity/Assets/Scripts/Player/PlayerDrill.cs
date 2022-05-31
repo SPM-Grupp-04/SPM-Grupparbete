@@ -191,9 +191,9 @@ public class PlayerDrill : MonoBehaviour
                 timer = coolDownTimerStart;
                 StopLaserParticles();
             }
-
-            overheatEmission.Play();
-            
+            if(overheatEmission.isPlaying == false){
+               overheatEmission.Play();
+            }
         }
     }
     
