@@ -13,11 +13,11 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPool<BaseEnemyAI> pool;
+    private IObjectPool<BaseEnemyAI> pool;
     private BaseEnemyAI enemy;
     private Vector3 SpawnPos;
     private BoxCollider boxCollider;
-
+    private int inActive = 0;
     private float totalProcent;
     //private EnemyAIHandler enemyAIHandler = EnemyAIHandler.Instance;
 
@@ -92,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
+        if (inActive < totalAllowedEnimesAtSpawner && timer > 0)
         {
             Debug.Log("Setting spawn position ");
             SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
@@ -117,7 +117,7 @@ public class EnemySpawner : MonoBehaviour
 
         enemy = Instantiate(enemy, transform.position, quaternion.identity);
         enemyAIHandler.units.Add(enemy);
-
+        inActive++;
         enemy.SetPool(pool);
         
         Debug.Log("Should have spawned Enemies");
@@ -128,6 +128,7 @@ public class EnemySpawner : MonoBehaviour
     {
         meeleEnemyAI.transform.position = SpawnPos;
         meeleEnemyAI.gameObject.SetActive(true);
+        inActive--;
         Debug.Log("Takeing the eneimes from the pool.");
     }
 
@@ -135,6 +136,7 @@ public class EnemySpawner : MonoBehaviour
     public void OnReturnBallToPool(BaseEnemyAI meeleEnemyAI)
     {
         meeleEnemyAI.gameObject.SetActive(false);
+        inActive++;
         Debug.Log("Returning enemies to the pool");
     }
 }
