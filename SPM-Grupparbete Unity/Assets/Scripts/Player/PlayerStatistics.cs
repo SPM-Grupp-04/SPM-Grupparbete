@@ -26,6 +26,9 @@ public class PlayerStatistics
     public int componentsCollectedNumber;
     public float shieldCooldownModifer = 1f;
     public Dictionary<string, bool> buttonDictionary;
+    public float[] playerOneColor = new []{190/255f, 190/255f, 40/255f};
+    public float[] playerTwoColor = new []{40/255f, 190/255f, 190/255f};
+
 
 
 
