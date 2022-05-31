@@ -259,34 +259,53 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Moving", true);
             animator.SetBool("Idle", false);
             
-            Vector2 roundedVelocity =
-                new Vector2((float)Math.Round(velocity.normalized.x), (float)Math.Round(velocity.normalized.z));
+            Vector3 roundedVelocity =
+                new Vector3((float)Math.Round(velocity.x, 2), (float)Math.Round(velocity.y, 2), (float)Math.Round(velocity.z, 2));
+            
+            Vector3 roundedTransformForward = new Vector3((float)Math.Round(transform.forward.x, 2), (float)Math.Round(transform.forward.y, 2),
+                (float)Math.Round(transform.forward.z, 2));
+            
+            Vector3 roundedTransformRight = new Vector3((float)Math.Round(transform.right.x, 2), (float)Math.Round(transform.right.y, 2),
+                (float)Math.Round(transform.right.z, 2));
 
-            Vector2 roundedTransformForward = new Vector2((float)Math.Round(transform.forward.x),
-                (float)Math.Round(transform.forward.z));
+            float distanceBetweenVelocityAndTransformForward =
+                Vector3.Distance(roundedTransformForward, roundedVelocity);
 
-            Vector2 roundedTransformRight = new Vector2((float)Math.Round(transform.right.x),
-                (float)Math.Round(transform.right.z));
+            distanceBetweenVelocityAndTransformForward = (float)Math.Round(distanceBetweenVelocityAndTransformForward, 2);
+            
+            float distanceBetweenVelocityAndTransformRight =
+                Vector3.Distance(roundedTransformRight, roundedVelocity);
 
-            if (roundedVelocity.x <= roundedTransformForward.x + 0.1f && 
-                roundedVelocity.x >= roundedTransformForward.x - 0.1f ||
-                roundedVelocity.y <= roundedTransformForward.y + 0.1f && 
-                roundedVelocity.y >= roundedTransformForward.y - 0.1f)
+            distanceBetweenVelocityAndTransformRight = (float) Math.Round(distanceBetweenVelocityAndTransformRight, 2);
+
+            if (distanceBetweenVelocityAndTransformForward <= 0.75f &&
+                distanceBetweenVelocityAndTransformForward >= 0.0f)
             {
-                Debug.Log("MOVING FORWARD/BACKWAYS");
+                //Debug.Log("MOVING FORWARDS");
+                animator.SetBool("Forward", true);
+            } else if (distanceBetweenVelocityAndTransformForward >= 1.75f &&
+                       distanceBetweenVelocityAndTransformForward <= 2.0f)
+            {
+                //Debug.Log("MOVING BACKWARDS");
+                animator.SetBool("Backward", true);
             } 
-            else if (roundedVelocity.x <= roundedTransformRight.x + 0.1f &&
-                       roundedVelocity.x >= roundedTransformRight.x - 0.1f ||
-                       roundedVelocity.y <= roundedTransformRight.y + 0.1f &&
-                       roundedVelocity.y >= roundedTransformRight.y - 0.1f)
+            else if (distanceBetweenVelocityAndTransformRight <= 0.75f &&
+                     distanceBetweenVelocityAndTransformRight >= 0.0f)
             {
-                Debug.Log("MOVING SIDEWAYS");
+                //Debug.Log("MOVING RIGHT");
+                animator.SetBool("Right", true);
             }
+            else if (distanceBetweenVelocityAndTransformRight >= 1.75f &&
+                       distanceBetweenVelocityAndTransformRight <= 2.0f)
+            {
+                //Debug.Log("MOVING LEFT");
+                animator.SetBool("Left", true);
+            }
+            //Debug.Log(distanceBetweenVelocityAndTransformRight);
         }
         else
         {
             animator.SetBool("Moving", false);
-            animator.SetBool("Forward", false);
         }
     }
     

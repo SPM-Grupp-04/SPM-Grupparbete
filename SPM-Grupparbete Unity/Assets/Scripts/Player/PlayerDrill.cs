@@ -33,6 +33,8 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private ParticleSystem laserEmission;
     [SerializeField] private ParticleSystem drillRing;
     [SerializeField] private ParticleSystem drillEmission;
+    [SerializeField] private ParticleSystem overheatEmission;
+
     
     [SerializeField] private VisualEffect laserHit;
     [SerializeField] private VisualEffect drillHit;
@@ -187,6 +189,7 @@ public class PlayerDrill : MonoBehaviour
                 canShoot = false;
                 timer = coolDownTimerStart;
                 StopLaserParticles();
+                overheatEmission.Play();
             }
             
         }
@@ -227,7 +230,8 @@ public class PlayerDrill : MonoBehaviour
         if (!isShooting)
         {
             StopLaserParticles();
-
+            overheatEmission.Stop();
+            overheatEmission.Clear();
         }
     }
 
