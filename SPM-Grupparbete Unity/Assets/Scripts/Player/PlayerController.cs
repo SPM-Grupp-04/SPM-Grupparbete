@@ -257,8 +257,7 @@ public class PlayerController : MonoBehaviour
         if (velocity != Vector3.zero)
         {
             animator.SetBool("Moving", true);
-            animator.SetBool("Idle", false);
-            
+
             Vector3 roundedVelocity =
                 new Vector3((float)Math.Round(velocity.x, 2), (float)Math.Round(velocity.y, 2), (float)Math.Round(velocity.z, 2));
             
@@ -281,31 +280,31 @@ public class PlayerController : MonoBehaviour
             if (distanceBetweenVelocityAndTransformForward <= 0.75f &&
                 distanceBetweenVelocityAndTransformForward >= 0.0f)
             {
-                //Debug.Log("MOVING FORWARDS");
-                animator.SetBool("Forward", true);
+                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
+                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
             } else if (distanceBetweenVelocityAndTransformForward >= 1.75f &&
                        distanceBetweenVelocityAndTransformForward <= 2.0f)
             {
-                //Debug.Log("MOVING BACKWARDS");
-                animator.SetBool("Backward", true);
+                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
+                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
             } 
             else if (distanceBetweenVelocityAndTransformRight <= 0.75f &&
                      distanceBetweenVelocityAndTransformRight >= 0.0f)
             {
-                //Debug.Log("MOVING RIGHT");
-                animator.SetBool("Right", true);
+                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
+                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
             }
             else if (distanceBetweenVelocityAndTransformRight >= 1.75f &&
                        distanceBetweenVelocityAndTransformRight <= 2.0f)
             {
-                //Debug.Log("MOVING LEFT");
-                animator.SetBool("Left", true);
+                animator.SetFloat("ForwardAndBackwardMovement", distanceBetweenVelocityAndTransformForward);
+                animator.SetFloat("SidewaysMovement", distanceBetweenVelocityAndTransformRight);
             }
             //Debug.Log(distanceBetweenVelocityAndTransformRight);
         }
         else
         {
-            animator.SetBool("Moving", false);
+            animator.SetBool("Idle", true);
         }
     }
     
