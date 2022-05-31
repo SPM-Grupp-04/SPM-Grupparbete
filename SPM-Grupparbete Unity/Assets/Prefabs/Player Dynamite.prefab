@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 3290730881911528244}
   - component: {fileID: 317643277337752907}
   - component: {fileID: 4832437319142315135}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 1977544591797988905}
   - component: {fileID: 6084807379358227306}
   - component: {fileID: 9218424315727961220}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player Dynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,6 +685,10 @@ PrefabInstance:
     - target: {fileID: 5317593686156972994, guid: 2e77332e23b383b4f8f980cfeade5507, type: 3}
       propertyPath: m_Name
       value: DynamiteParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317593686156972994, guid: 2e77332e23b383b4f8f980cfeade5507, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5317593686156972995, guid: 2e77332e23b383b4f8f980cfeade5507, type: 3}
       propertyPath: m_Flip.y
