@@ -28,24 +28,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float totalAllowedSpawnTime = 5;
     private float timer;
 
-    private void Start()
-    {
-        foreach (var enemyAI in enemyAIHandler.units)
-        {
-            enemyAI.gameObject.SetActive(false);
-        }
-    }
 
     
 
-    private void OnEnable()
-    {
-        foreach (var enemyAI in enemyAIHandler.units)
-        {
-            enemyAI.gameObject.SetActive(true);
-        }
-        timer = totalAllowedSpawnTime;
-    }
+  
 
     private void Awake()
     {
@@ -53,12 +39,8 @@ public class EnemySpawner : MonoBehaviour
         pool = new ObjectPool<BaseEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
         enemyAIHandler = GetComponent<EnemyAIHandler>();
-        /*for (int i = 0; i < gameObjects.Length; i++)
-        {
-            genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
-        }*/
 
-       // Räknar ut vad som är 100%
+        // Räknar ut vad som är 100%
         for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
         {
             totalProcent += prioListMatchingObjektOrder[i];
@@ -83,7 +65,24 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(false);
+        }
+    }
+    
+    private void OnEnable()
+    {
+        foreach (var enemyAI in enemyAIHandler.units)
+        {
+            enemyAI.gameObject.SetActive(true);
+        }
+        timer = totalAllowedSpawnTime;
+    }
 
+    
     private void FixedUpdate()
     {
         if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
