@@ -2262,7 +2262,7 @@ RectTransform:
   m_Children:
   - {fileID: 394724351}
   m_Father: {fileID: 5383131968195109090}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2529,6 +2529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3211444031197878444}
   - component: {fileID: 183006262}
+  - component: {fileID: 1490136880}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -2571,6 +2572,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df51ceca6c065504a8ca16b4e6f66b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1490136880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987479579759969508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c96d3f4f070e54da10b45a8f4abfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOneHud: {fileID: 1251320573805990745}
+  playerTwoHud: {fileID: 2952943933608633861}
 --- !u!1 &5541445707740678638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2599,8 +2614,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2721825314933909534}
   - {fileID: 2438519084541875457}
+  - {fileID: 2721825314933909534}
   m_Father: {fileID: 3211444031197878444}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2719,7 +2734,7 @@ RectTransform:
   m_Children:
   - {fileID: 2106064072}
   m_Father: {fileID: 5383131968195109090}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3967,6 +3982,9 @@ MonoBehaviour:
   mainMenuButton: {fileID: 8151652415232787345}
   settingsMenuSlider: {fileID: 5809258457236868159}
   showCrontrollerMenuButton: {fileID: 6690889899762015267}
+  showCustomizeMenuButton: {fileID: 0}
+  playerOneCustomSlider: {fileID: 0}
+  playerTwoCustomSlider: {fileID: 0}
 --- !u!1 &7368729969466508979
 GameObject:
   m_ObjectHideFlags: 0
