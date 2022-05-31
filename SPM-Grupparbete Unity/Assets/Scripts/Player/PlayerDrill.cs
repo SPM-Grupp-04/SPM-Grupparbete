@@ -41,6 +41,8 @@ public class PlayerDrill : MonoBehaviour
     
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
+
+    [SerializeField] private AudioSource source;
     
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -156,6 +158,7 @@ public class PlayerDrill : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount <= 100 && canShoot && isShooting)
         {
+            
             if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
             {
                 laserRing.Play();
@@ -186,6 +189,11 @@ public class PlayerDrill : MonoBehaviour
         {
             if (timer <= 0 && canShoot)
             {
+                if (!source.isPlaying)
+                {
+                    source.Play();
+                }
+
                 lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
