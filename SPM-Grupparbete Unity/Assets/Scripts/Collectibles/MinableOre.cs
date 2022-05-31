@@ -46,7 +46,7 @@ public class MinableOre : DestroyableObjectBase
     private void DestoryObject()
     {
 
-        audioManager.PlayCrystalSound();
+        //audioManager.PlayCrystalSound();
         
         for (int i = 0; i < collecitbleCrystals; i++)
         {
