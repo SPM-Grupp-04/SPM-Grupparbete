@@ -992,7 +992,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shopAreaRadius: 3.5
-  shopIsFree: 1
+  shopIsFree: 0
   playerUI: {fileID: 0}
   healCost: 050000000000000000000000
   weaponCost: 0a0000000000000000000000
@@ -1383,8 +1383,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8094908428147790490}
   m_HandleRect: {fileID: 3769734912698923960}
   m_Direction: 2
-  m_Value: -0.0000002812082
-  m_Size: 0.6382564
+  m_Value: -0.0000036557067
+  m_Size: 0.63825405
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1732,7 +1732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 434.09247}
+  m_AnchoredPosition: {x: 0.000023007393, y: 434.09393}
   m_SizeDelta: {x: -1, y: 1200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3513947962972649923
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6845508007053417975}
   m_HandleRect: {fileID: 3593866802213349653}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
