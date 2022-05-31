@@ -34,10 +34,10 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyAI.gameObject.SetActive(false);
         }
+
+        this.enabled = false;
     }
-
     
-
     private void OnEnable()
     {
         foreach (var enemyAI in enemyAIHandler.units)
@@ -53,12 +53,8 @@ public class EnemySpawner : MonoBehaviour
         pool = new ObjectPool<BaseEnemyAI>(CreateEnemy, OnTakeEnemyAIFromPool, OnReturnBallToPool);
 
         enemyAIHandler = GetComponent<EnemyAIHandler>();
-        /*for (int i = 0; i < gameObjects.Length; i++)
-        {
-            genericListOfBaseClassEnemyAI[i] = gameObjects[i].GetComponent<BaseClassEnemyAI>();
-        }*/
 
-       // Räknar ut vad som är 100%
+        // Räknar ut vad som är 100%
         for (int i = 0; i < genericListOfBaseClassEnemyAI.Length; i++)
         {
             totalProcent += prioListMatchingObjektOrder[i];
@@ -98,7 +94,8 @@ public class EnemySpawner : MonoBehaviour
         {
             this.enabled = false;
         }
-
+        
+        
         timer -= Time.deltaTime;
     }
 
