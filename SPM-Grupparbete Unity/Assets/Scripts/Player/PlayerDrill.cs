@@ -162,7 +162,7 @@ public class PlayerDrill : MonoBehaviour
                 laserEmission.Play();
             }
 
-            if (Physics.Raycast(transform.position, fwd, out shootHit, 10f, igenoreMask))
+            if (Physics.Raycast(transform.position, fwd, out shootHit, laserDistance, igenoreMask))
             {
                 laserHit.enabled = true;
                 laserHit.transform.position = shootHit.point;
