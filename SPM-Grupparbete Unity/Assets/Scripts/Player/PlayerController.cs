@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Moving", true);
 
             float velocityInDirectionOfWherePlayerIsFacing = Vector3.Dot(transform.forward, velocity.normalized);
-            float velocityInDirectionOfPlayersSides = Vector3.Dot(transform.right, velocity.normalized):
+            float velocityInDirectionOfPlayersSides = Vector3.Dot(transform.right, velocity.normalized);
 
             animator.SetFloat("ForwardAndBackwardMovement", velocityInDirectionOfWherePlayerIsFacing);
             animator.SetFloat("SidewaysMovement", velocityInDirectionOfPlayersSides);
