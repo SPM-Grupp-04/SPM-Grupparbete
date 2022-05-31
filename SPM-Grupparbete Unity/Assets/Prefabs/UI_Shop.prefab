@@ -992,8 +992,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shopAreaRadius: 3.5
-  shopIsFree: 1
-  playerUI: {fileID: 0}
+  shopIsFree: 0
   healCost: 050000000000000000000000
   weaponCost: 0a0000000000000000000000
   speedCost: 0a0000000000000000000000
@@ -1392,8 +1391,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8094908428147790490}
   m_HandleRect: {fileID: 3769734912698923960}
   m_Direction: 2
-  m_Value: -0.0000002812082
-  m_Size: 0.63824946
+  m_Value: -0.0000014060411
+  m_Size: 0.6382555
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1433,7 +1432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -200, y: -100}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2234270924990347295
@@ -1741,7 +1740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.9999752, y: 434.09238}
+  m_AnchoredPosition: {x: 0.99992895, y: 434.09293}
   m_SizeDelta: {x: -1, y: 1200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3513947962972649923
