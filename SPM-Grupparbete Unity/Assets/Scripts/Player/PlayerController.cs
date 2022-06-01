@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
             drillScript.DrillInUse(true);
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
-            animator.SetBool("Idle", false);
+            //animator.SetBool("Idle", false);
 
             if (!source.isPlaying)
             {
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
                 drillScript.Drill(true);
                 drillScript.DrillInUse(true);
                 animator.SetBool("IsShooting", true);
-                animator.SetBool("Idle", false);
+                //animator.SetBool("Idle", false);
 
                 if (!source.isPlaying)
                 {
@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
                 StopSound();
 
                 animator.SetBool("IsShooting", false);
-                animator.SetBool("Idle", true);
+                //animator.SetBool("Idle", true);
 
             }
         }

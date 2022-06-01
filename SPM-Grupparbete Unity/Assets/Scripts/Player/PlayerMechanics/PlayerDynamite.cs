@@ -68,7 +68,6 @@ public class PlayerDynamite : MonoBehaviour
         particleSystemCountdown = particleSystemPlayDuration;
         explosionLightTime = explosionLightDuration;
         dynamiteFuseAudioSource.Play();
-        Debug.Log(explosionLightTime);
     }
 
     void Update()
@@ -81,14 +80,6 @@ public class PlayerDynamite : MonoBehaviour
         if (DynamiteCollidedWithGround() && !hasExploded)
         {
             StartCoroutine(DynamiteExplosion());
-            
-            while (explosionLightTime > 0.0f)
-            {
-                Debug.Log(explosionLightTime);
-                dynamiteExplosionLight.intensity -= Time.deltaTime;
-                explosionLightTime -= Time.deltaTime;
-            }
-
             StartCoroutine(PlayParticleSystem());
             hasExploded = true;
         }
@@ -125,7 +116,7 @@ public class PlayerDynamite : MonoBehaviour
     {
         DisableDynamiteFuse();
 
-        Explode();
+        ExplodeDynamite();
     }
 
     private void DisableDynamiteFuse()
@@ -137,7 +128,7 @@ public class PlayerDynamite : MonoBehaviour
         dynamiteFuseParticleSystem.Stop();
     }
     
-    private void Explode()
+    private void ExplodeDynamite()
     {
         dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
         

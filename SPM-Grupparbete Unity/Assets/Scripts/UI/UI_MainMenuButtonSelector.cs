@@ -9,6 +9,11 @@ public class UI_MainMenuButtonSelector : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Slider settingsMenuSlider;
     [SerializeField] private Button showCrontrollerMenuButton;
+    
+    [SerializeField] private Button showCustomizeMenuButton;
+
+    [SerializeField] private Slider playerOneCustomSlider;
+    [SerializeField] private Slider playerTwoCustomSlider;
 
 
     public void MainMenu()
@@ -24,5 +29,19 @@ public class UI_MainMenuButtonSelector : MonoBehaviour
     public void ShowControllerMenu()
     {
         showCrontrollerMenuButton.Select();
+    }
+
+    public void ShowCustomizeMenu()
+    {
+        showCustomizeMenuButton.Select();
+    }
+
+    public void ShowCustomizePlayerOneMenu()
+    {
+        playerOneCustomSlider.Select();
+    }
+    public void ShowCustomizePlayerTwoMenu()
+    {
+        playerTwoCustomSlider.Select();   
     }
 }
