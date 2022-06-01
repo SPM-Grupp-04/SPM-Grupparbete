@@ -124,7 +124,7 @@ public class TownPortal : MonoBehaviour
             progressText.text = progress * 100f + "%";
             yield return null;
         }
-
+        loadingScreen.SetActive(false);
         StartCoroutine(FakeLoadTime());
     }
 

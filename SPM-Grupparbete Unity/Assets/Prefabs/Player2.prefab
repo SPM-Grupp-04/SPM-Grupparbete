@@ -613,10 +613,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e2db1ae360c4f48a5cd3d019c8552a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dynamitePrefab: {fileID: 5015474018498646633, guid: dcd48d49b2b3d0f44ba51495a307608e, type: 3}
-  launchArcMesh: {fileID: 3739641424811235321}
   coolDownTime: 5
   uiCooldowns: {fileID: 0}
+  overheatAmount: 75
+  dynamitePrefab: {fileID: 3377278299351938946, guid: dcd48d49b2b3d0f44ba51495a307608e, type: 3}
+  launchArcMesh: {fileID: 3739641424811235321}
   playerDrillScript: {fileID: 8182577800644812320}
 --- !u!23 &5745473002439537521
 MeshRenderer:
@@ -684,7 +685,6 @@ MonoBehaviour:
   velocity: 1
   angle: 45
   trajectoryArcIncreaseSpeed: 5
-  trajectoryArcAngleIncreaseSpeed: 1
   lineSegments: 10
   collisionLayerMask:
     serializedVersion: 2
@@ -826,9 +826,6 @@ MonoBehaviour:
   colliderMargin: 0.01
   drill: {fileID: 5711041550793873810}
   boxCollider: {fileID: 2965090648212625151}
-  animator: {fileID: 3432154670100536797}
-  cameraPlayerPositiveMovementThreshold: 0.9
-  cameraPlayerNegativeMovementThreshold: 0.1
   otherPlayerController: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
   teleport: {fileID: 0}
 --- !u!114 &7813769206215940170
