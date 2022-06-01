@@ -149,8 +149,6 @@ public class ShopScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
         other.GetComponent<PlayerController>().PlayerCanShop(true);

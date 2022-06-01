@@ -21,13 +21,6 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private Animator animator;
-
-    private PlayerDrill drillScript;
-    
-    [Header("Player Restrictions")] 
-    [SerializeField] [Range(0.9f, 1.0f)] private float cameraPlayerPositiveMovementThreshold = 0.9f;
-    [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
     
     [SerializeField] private PlayerController otherPlayerController;
     [SerializeField] private GameObject teleport;
@@ -39,8 +32,10 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     
     private Vector3 velocity;
+    
     private Vector3 playerMovementInput;
     private Vector3 gamePadLookRotation;
+    
     private Vector2 lookRotation;
     private Vector2 mousePosition;
 
@@ -76,7 +71,6 @@ public class PlayerController : MonoBehaviour
         source.loop = true;
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        drillScript = drill.GetComponent<PlayerDrill>();
         UI = playerInput.actions.FindActionMap("UI");
         defaultMap = playerInput.actions.FindActionMap("Player");
         pauseMenuUI = GameObject.Find("UI");
@@ -84,16 +78,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (UI_PausMenu.GameIsPause == false)
+        if (!UI_PausMenu.GameIsPause)
         {
             PlayerMovement();
-            ShootOrDrill();
         }
-        if (TownPortal.IsTeleporting == false)
+        if (!TownPortal.IsTeleporting)
         {
             RestrictMovement();
         }
-        if (uiEnabled == false && playerInput.currentActionMap.name.Equals("UI"))
+        if (!uiEnabled && playerInput.currentActionMap.name.Equals("UI"))
         {
             playerInput.SwitchCurrentActionMap("Player");
         }
@@ -148,119 +141,36 @@ public class PlayerController : MonoBehaviour
         currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
         currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
 
-        Vector3 otherPlayerVelocity = otherPlayerController.GetPlayerVelocity();
+        Vector3 otherPlayerVelocity = otherPlayerController.PlayerVelocity;
         
         if (currentPlayerCameraView.x <= 0.05 || currentPlayerCameraView.x >= 0.95f)
         {
             if (otherPlayerVelocity.x > 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
+                otherPlayerController.PlayerVelocity = new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z);
             }
 
             if (otherPlayerVelocity.x < 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z));
+                otherPlayerController.PlayerVelocity = new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z);
             }
         }
         if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
         {
             if (otherPlayerVelocity.z > 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, -otherPlayerVelocity.z));
+                otherPlayerController.PlayerVelocity = new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y,
+                    -otherPlayerVelocity.z);
             }
             if (otherPlayerVelocity.z < 0.0f)
             {
-                otherPlayerController.SetPlayerVelocity(new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z));
+                otherPlayerController.PlayerVelocity = new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z);
             }
         }
         
         Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
         
         transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
-    }
-
-    private void ShootOrDrill()
-    {
-        if (isShooting)
-        {
-            drillScript.Shoot(true);
-            drillScript.DrillInUse(true);
-            drillScript.Drill(false);
-            animator.SetBool("IsShooting", true);
-            //animator.SetBool("Idle", false);
-            return;
-        }
-
-        if (isDrilling)
-        {
-            drillScript.Shoot(false);
-            drillScript.Drill(true);
-            drillScript.DrillInUse(true);
-            animator.SetBool("IsShooting", true);
-            //animator.SetBool("Idle", false);
-            return;
-        }
-
-        drillScript.DrillInUse(false);
-        drillScript.Shoot(false);
-        drillScript.Drill(false);
-
-
-        animator.SetBool("IsShooting", false);
-        //animator.SetBool("Idle", true);
-                
-
-
-            
-        
-    }
-
-    private void PlayerMovement()
-    {
-        if (movementEnabled)
-        {
-            UpdatePlayer();
-            AnimatePlayer();
-            FixOverlapPenetration();
-        }
-        else
-        {
-            velocity = Vector3.zero;
-        }
-    }
-
-    private void UpdatePlayer()
-    {
-        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
-        {
-            UpdatePlayerRotationKeyBoardAndMouse();
-        }
-
-        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
-        {
-            UpdatePlayerRotationGamePad();
-        }
-        transform.position += velocity * movementAcceleration * Time.deltaTime;
-    }
-
-    private void AnimatePlayer()
-    {
-        if (velocity != Vector3.zero)
-        {
-            animator.SetBool("Idle", false);
-            animator.SetBool("Moving", true);
-
-            float velocityInDirectionOfWherePlayerIsFacing = Vector3.Dot(transform.forward, velocity.normalized);
-            float velocityInDirectionOfPlayersSides = Vector3.Dot(transform.right, velocity.normalized);
-
-            animator.SetFloat("ForwardAndBackwardMovement", velocityInDirectionOfWherePlayerIsFacing);
-            animator.SetFloat("SidewaysMovement", velocityInDirectionOfPlayersSides);
-        }
-        else
-        {
-            animator.SetBool("Moving", false);
-            animator.SetBool("Idle", true);
-        }
     }
     
     private void FixOverlapPenetration()
@@ -284,15 +194,48 @@ public class PlayerController : MonoBehaviour
                 boxCollider.transform.rotation, wallLayerMask);
         }
     }
-    
-    public void SetPlayerVelocity(Vector3 newPlayerVelocity)
+
+    private void PlayerMovement()
     {
-        velocity = newPlayerVelocity;
+        if (movementEnabled)
+        {
+            UpdatePlayer();
+            FixOverlapPenetration();
+        }
+        else
+        {
+            velocity = Vector3.zero;
+        }
     }
 
-    public Vector3 GetPlayerVelocity()
+    private void UpdatePlayer()
     {
-        return velocity;
+        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
+        {
+            UpdatePlayerRotationKeyBoardAndMouse();
+        }
+
+        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
+        {
+            UpdatePlayerRotationGamePad();
+        }
+        transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+
+    public Vector3 PlayerVelocity
+    {
+        get { return velocity; }
+        set { velocity = value; }
+    }
+
+    public bool IsShooting
+    {
+        get { return isShooting; }
+    }
+
+    public bool IsDrilling
+    {
+        get { return isDrilling; }
     }
 
     public bool IsUseButtonPressed()
@@ -310,7 +253,6 @@ public class PlayerController : MonoBehaviour
         get { return insideShield; }
         set { insideShield = value; }
     }
-
     
     public void ShootInput(InputAction.CallbackContext shootValue)
     {
@@ -348,7 +290,6 @@ public class PlayerController : MonoBehaviour
     public void PlayerCanShop(bool value)
     {
         playerCanShop = value;
-        
     }
 
     public bool IsPauseMenuOpen()
