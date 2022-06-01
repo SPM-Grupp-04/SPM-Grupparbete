@@ -4419,9 +4419,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a890ddc57edc0949abccc98cd221a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlueCrystals: {fileID: 9139550402273916060}
-  RedCrystals: {fileID: 8827728522396725083}
-  GreenCrystals: {fileID: 1204259301495521706}
+  BlueCrystals: {fileID: 0}
+  RedCrystals: {fileID: 0}
+  GreenCrystals: {fileID: 0}
 --- !u!1 &7368729970230198823
 GameObject:
   m_ObjectHideFlags: 0
@@ -6264,11 +6264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225176714699, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225176714699, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225176714699, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_LocalScale.y
@@ -6280,7 +6280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225210147290, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225210147291, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_Pivot.x
@@ -6312,11 +6312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225210147291, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -872
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225210147291, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -580
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1198420225210147291, guid: fcf55607ab9cbd14bb37e9166ca0b09a, type: 3}
       propertyPath: m_LocalPosition.x
