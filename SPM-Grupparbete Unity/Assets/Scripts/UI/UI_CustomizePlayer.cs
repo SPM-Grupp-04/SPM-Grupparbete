@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,23 @@ public class UI_CustomizePlayer : MonoBehaviour
     [SerializeField] private Slider blue;
     [SerializeField] private Slider green;
     // Update is called once per frame
+
+    private void Start()
+    {
+        Color color = materialPlayerOne.material.color;
+        color.r = red.value;
+        color.g = green.value;
+        color.b = blue.value;
+        materialPlayerOne.material.color = color;
+        
+        color = materialPlayerTwo.material.color;
+        color.r = red.value;
+        color.g = green.value;
+        color.b = blue.value;
+        materialPlayerTwo.material.color = color;
+        
+    }
+
     public void EditMaterial(string player)
     {
         if (player.Equals("PlayerOne"))
