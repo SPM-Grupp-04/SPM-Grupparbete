@@ -116,7 +116,7 @@ public class PlayerDynamite : MonoBehaviour
     {
         DisableDynamiteFuse();
 
-        Explode();
+        ExplodeDynamite();
     }
 
     private void DisableDynamiteFuse()
@@ -128,7 +128,7 @@ public class PlayerDynamite : MonoBehaviour
         dynamiteFuseParticleSystem.Stop();
     }
     
-    private void Explode()
+    private void ExplodeDynamite()
     {
         dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
         
