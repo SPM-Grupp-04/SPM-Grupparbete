@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using EnemyAI;
 using EnemyAI.EnemyAIHandler;
-using Unity.Jobs.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
@@ -30,23 +26,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        foreach (var enemyAI in enemyAIHandler.units)
+        /*foreach (var enemyAI in enemyAIHandler.units)
         {
-            enemyAI.gameObject.SetActive(false);
-        }
+            pool.Release(enemyAI);
+        }*/
 
         this.enabled = false;
     }
     
-    private void OnEnable()
-    {
-        foreach (var enemyAI in enemyAIHandler.units)
-        {
-            enemyAI.gameObject.SetActive(true);
-        }
-        //timer = totalAllowedSpawnTime;
-    }
-
+   
     private void Awake()
     {
         timer = totalAllowedSpawnTime;
@@ -75,6 +63,7 @@ public class EnemySpawner : MonoBehaviour
             for (int j = 0; j < prioListMatchingObjektOrder[i] * totalAllowedEnimesAtSpawner; j++) // 50,28,22
             {
                 CreateEnemy();
+                pool.Release(enemy);
             }
         }
     }
@@ -124,10 +113,11 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-   private void OnTakeEnemyAIFromPool(BaseEnemyAI meeleEnemyAI)
+   private void OnTakeEnemyAIFromPool(BaseEnemyAI BaseEnemyAI)
     {
-        meeleEnemyAI.transform.position = SpawnPos;
-        meeleEnemyAI.gameObject.SetActive(true);
+        BaseEnemyAI.transform.position = SpawnPos;
+        BaseEnemyAI.gameObject.SetActive(true);
+      
     }
 
 
