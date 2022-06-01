@@ -134,11 +134,17 @@ public class ShopScript : MonoBehaviour
         
         playerOne = GameObject.Find("Players/Player1");
         playerTwo = GameObject.Find("Players/Player2");
-        playerControllerOne = playerOne.GetComponent<PlayerController>();
-        playerControllerTwo = playerTwo.GetComponent<PlayerController>();
+        if (playerOne != null)
+        {
+            playerControllerOne = playerOne.GetComponent<PlayerController>();
+            playerOneDrill = GameObject.Find("Players/Player1/Drill");
+        }
 
-        playerOneDrill = GameObject.Find("Players/Player1/Drill");
-        playerTwoDrill = GameObject.Find("Players/Player2/Drill");
+        if (playerTwo != null)
+        {
+            playerControllerTwo = playerTwo.GetComponent<PlayerController>();
+            playerTwoDrill = GameObject.Find("Players/Player2/Drill");
+        }
         
         shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
@@ -156,13 +162,20 @@ public class ShopScript : MonoBehaviour
     
     private void Update()
     {
-        if (playerOne.activeInHierarchy)
+        if (playerOne != null)
         {
-            PlayerOneOpenShop();
+            if (playerOne.activeInHierarchy)
+            {
+                PlayerOneOpenShop();
+            }
         }
-        if (playerTwo.activeInHierarchy)
+        
+        if(playerTwo != null)
         {
-            PlayerTwoOpenShop();
+            if (playerTwo.activeInHierarchy)
+            {
+                PlayerTwoOpenShop();
+            }
         }
     }
 
@@ -200,8 +213,15 @@ public class ShopScript : MonoBehaviour
 
     private void SetPlayerMovement(bool value)
     {
-        playerControllerOne.SetMovementStatus(value);
-        playerControllerTwo.SetMovementStatus(value);
+        if (playerOne != null)
+        {
+            playerControllerOne.SetMovementStatus(value);
+            
+        }
+        if(playerTwo != null)
+        {
+            playerControllerTwo.SetMovementStatus(value);
+        }
     }
 
 
