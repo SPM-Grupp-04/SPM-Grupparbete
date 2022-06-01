@@ -13,9 +13,14 @@ namespace EnemyAI.MeeleAI
         [SerializeField] private float chasingRange;
         [SerializeField] private float hitRange;
         [SerializeField] private MeleeWepon meleeWeapon;
-  
+        [SerializeField] private Animator animator;
+      
         private IObjectPool<BaseEnemyAI> pool;
+       
+       
         private NavMeshAgent agent;
+      
+        
         public Vector3 target = new Vector3(100, 0, 100);
         public float distanceToTarget = 100;
         public Vector3 playerPos = new Vector3(100, 0, 100);
@@ -23,11 +28,11 @@ namespace EnemyAI.MeeleAI
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+         
         }
 
         void Start()
         {
-            animator = GetComponent<Animator>();
             animator.speed = Random.Range(0.9f, 1.3f);
             base.Start();
             base.randomNumber = Random.Range(1, 10);
@@ -43,41 +48,34 @@ namespace EnemyAI.MeeleAI
         {
             SetUpTree();
 
-            if (currentHealth <= 1)
+            if (currentHealth < 1)
             {
-                if (this.pool != null)
-                {
-                    currentHealth = startingHealth;
-                    agent.speed = 0;
-                    StartCoroutine(WaitBeforeDie());
-                }
-                else
-                {
-                    Debug.Log("Pool is null");
-                    agent.speed = 0;
-                    StartCoroutine(waitbeforeDieWithoutPool());
-                }
+                agent.speed = 0;
+                animator.SetTrigger("Die");
             }
+          
+            
         }
-
-        private IEnumerator waitbeforeDieWithoutPool()
+        
+        public void DieAnimationEvent()
         {
-            animator.SetTrigger("Die");
-            yield return new WaitForSeconds(2);
+            currentHealth = startingHealth;
+            if (this.pool != null)
+            {
+                pool.Release(this);
+               
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                
+            }
             agent.speed = movementSpeed;
-            gameObject.SetActive(false);
+           
         }
+        
 
-        private IEnumerator WaitBeforeDie()
-        {
-            animator.SetTrigger("Die");
-            yield return new WaitForSeconds(2);
-            agent.speed = movementSpeed;
-            pool.Release(this);
-        }
-
-
- 
+        
 
         protected override TreeNode SetUpTree()
         {
