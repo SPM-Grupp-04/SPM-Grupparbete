@@ -23,15 +23,17 @@ namespace EnemyAI.RangedAI
 
         public override NodeState Evaluate()
         {
-            if (distanceToTarget > 0.2f)
+            if (distanceToTarget > 15f)
             {
                 agent.isStopped = false;
                 agent.SetDestination(target);
+                animator.SetBool("Run",true);
 
                 return NodeState.RUNNING;
             }
             else
             {
+                animator.SetBool("Run",false);
                 agent.isStopped = true;
                 state = NodeState.SUCCESS;
                 return state;
