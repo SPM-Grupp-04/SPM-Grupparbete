@@ -58,7 +58,7 @@ public class PlayerDynamite : MonoBehaviour
     
     private float particleSystemCountdown;
     private float explosionCountdown;
-    
+
     private bool hasExploded;
 
     private void Start()
@@ -111,6 +111,15 @@ public class PlayerDynamite : MonoBehaviour
         } while (particleSystemCountdown > 0.0f);
         DestroyGameObjects();
     }
+
+    private IEnumerator ReduceExplosionLightTime()
+    {
+        do
+        {
+            explosionLightTime -= Time.deltaTime;
+            yield return null;
+        } while (explosionLightTime > 0.0f);
+    }
     
     private void ExplodeDynamiteAndDisableDynamiteFuse()
     {
@@ -135,6 +144,14 @@ public class PlayerDynamite : MonoBehaviour
         dynamiteExplosionAudioSource.Play();
         
         dynamiteExplosionLight.enabled = true;
+
+        StartCoroutine(ReduceExplosionLightTime());
+
+        if (explosionLightTime > 0.0f)
+        {
+            dynamiteExplosionLight.intensity -= Mathf.Lerp(dynamiteExplosionLight.intensity, 0.0f,
+                explosionLightTime / explosionLightDuration);
+        }
 
         capsuleCollider.enabled = false;
         
