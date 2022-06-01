@@ -11,7 +11,7 @@ public class PlayerSetColor : MonoBehaviour
         skinnedMeshRenderer = GameObject.Find("Players/" + this.name + "/Character2_New/player_model_low_new").GetComponent<SkinnedMeshRenderer>();
         if (this.name == "Player1")
         {
-            Debug.Log(PlayerStatistics.Instance.playerOneColor);
+            
             Color color = skinnedMeshRenderer.material.color;
             if (PlayerStatistics.Instance.playerOneColor.Length == 0)
             {

@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayCrystalPickUpSound()
     {
-        Debug.Log(sourceFour.isPlaying + " source four");
+        
         if (!sourceFour.isPlaying)
         {
             sourceFour.Play();
