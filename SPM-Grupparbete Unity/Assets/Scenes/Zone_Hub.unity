@@ -3018,6 +3018,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776939262}
     m_Modifications:
+    - target: {fileID: 7108937813637650074, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
+      propertyPath: cmVirtualCamera
+      value: 
+      objectReference: {fileID: 1281837431}
+    - target: {fileID: 7108937813637650074, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
+      propertyPath: playerOneCamera
+      value: 
+      objectReference: {fileID: 1120053274}
+    - target: {fileID: 7108937813637650074, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
+      propertyPath: playerTwoCamera
+      value: 
+      objectReference: {fileID: 823237969}
     - target: {fileID: 8081826606758027632, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
       propertyPath: playerOne
       value: 
@@ -3724,7 +3736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 534.0924
+      value: 534.09283
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}

@@ -38,8 +38,6 @@ public class PlayerDynamite : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
 
     [SerializeField] private Light dynamiteExplosionLight;
-    
-    [SerializeField] private Light dynamiteFuseLight;
 
     [SerializeField] private AudioSource dynamiteExplosionAudioSource;
 
@@ -133,8 +131,6 @@ public class PlayerDynamite : MonoBehaviour
 
     private void DisableDynamiteFuse()
     {
-        dynamiteFuseLight.enabled = false;
-        
         dynamiteFuseAudioSource.Stop();
         
         dynamiteFuseParticleSystem.Stop();
