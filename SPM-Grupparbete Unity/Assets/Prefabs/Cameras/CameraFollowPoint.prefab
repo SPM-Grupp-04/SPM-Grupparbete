@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8081826606758027639}
   - component: {fileID: 8081826606758027632}
+  - component: {fileID: 7108937813637650074}
   m_Layer: 0
   m_Name: CameraFollowPoint
   m_TagString: Untagged
@@ -49,3 +50,18 @@ MonoBehaviour:
   virtualCameraTwoPlayers: {fileID: 0}
   virtualCameraPlayerOne: {fileID: 0}
   virtualCameraPlayerTwo: {fileID: 0}
+--- !u!114 &7108937813637650074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8081826606758027633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2547b311b6fff4d9c8abda594e661c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cmVirtualCamera: {fileID: 0}
+  playerOneCamera: {fileID: 0}
+  playerTwoCamera: {fileID: 0}
