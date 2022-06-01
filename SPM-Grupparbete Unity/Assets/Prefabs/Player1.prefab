@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 8649910836036510376}
   - component: {fileID: 3195174938462010407}
   - component: {fileID: 41274958454490615}
+  - component: {fileID: 8533666772503130515}
   m_Layer: 6
   m_Name: Player1
   m_TagString: Player
@@ -1142,6 +1143,8 @@ MonoBehaviour:
     componentsCollectedMask: 0
     componentsCollectedNumber: 0
     shieldCooldownModifer: 1
+    playerOneColor: []
+    playerTwoColor: []
   playerName: PlayerOne
   animator: {fileID: 222274269}
   source: {fileID: 41274958454490615}
@@ -1399,6 +1402,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8533666772503130515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965090648212624896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16982008942817a4ebb9860a295de7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3892232982317716013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,7 +2277,7 @@ PrefabInstance:
     - target: {fileID: -4636322696383155830, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec463760ee3095f4f8f05f9d880d40ba, type: 2}
+      objectReference: {fileID: 2100000, guid: 2f1d16c90e2e14f40bac83b66b3c861f, type: 2}
     - target: {fileID: -4356640572006695698, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -1.1384773
@@ -2549,6 +2564,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9100739779572155053, guid: 910aec50d0754564a8ac060d9c037fa2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f1d16c90e2e14f40bac83b66b3c861f, type: 2}
     - target: {fileID: 9100739779572155054, guid: 910aec50d0754564a8ac060d9c037fa2, type: 3}
       propertyPath: m_Name
       value: ElectricityEffect

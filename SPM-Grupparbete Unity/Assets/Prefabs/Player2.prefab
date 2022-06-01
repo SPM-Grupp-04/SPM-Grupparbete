@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 3438931142091801704}
   - component: {fileID: 351573301382161162}
   - component: {fileID: 5900485362087750162}
+  - component: {fileID: 2658564440435736475}
   m_Layer: 6
   m_Name: Player2
   m_TagString: Player
@@ -1154,6 +1155,8 @@ MonoBehaviour:
     componentsCollectedMask: 0
     componentsCollectedNumber: 0
     shieldCooldownModifer: 1
+    playerOneColor: []
+    playerTwoColor: []
   playerName: PlayerTwo
   animator: {fileID: 3432154670100536797}
   source: {fileID: 5900485362087750162}
@@ -1411,6 +1414,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2658564440435736475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965090648212624896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16982008942817a4ebb9860a295de7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3892232982317716013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,7 +2221,7 @@ PrefabInstance:
     - target: {fileID: -4636322696383155830, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 61fabc7bf016510489d269032ec60fe2, type: 2}
+      objectReference: {fileID: 2100000, guid: ae61e2449f6f7a24fb5a2e778bdcd705, type: 2}
     - target: {fileID: -3716249737285104615, guid: d3904990f4e771e4bb92aaf57b997bb7, type: 3}
       propertyPath: m_Layer
       value: 6
