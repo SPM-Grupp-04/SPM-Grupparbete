@@ -21,6 +21,7 @@ public class TownPortal : MonoBehaviour
     private GameObject playerOne;
     private GameObject playerTwo;
     private GameObject drone;
+    private GameObject droneOne;
     private GameObject copyOfParticleSystem;
     private GameObject transEnable;
 
@@ -34,7 +35,7 @@ public class TownPortal : MonoBehaviour
         playerTwo = GameObject.Find("Player2");
         
 //        Debug.Log(playerOne + " PlayerOne" + playerTwo + " PlayerTwo");
-        
+        droneOne = GameObject.Find("Drone (1)");
         drone = GameObject.Find("Drone");
         transEnable = GameObject.Find("Trans");
         gameObject.SetActive(false);
@@ -81,6 +82,11 @@ public class TownPortal : MonoBehaviour
             if (drone.activeInHierarchy)
             {
                 drone.transform.position = new Vector3(playerOne.transform.position.x,
+                    playerOne.transform.position.y +3, playerOne.transform.position.z);
+            }
+            if (droneOne.activeInHierarchy)
+            {
+                droneOne.transform.position = new Vector3(playerOne.transform.position.x,
                     playerOne.transform.position.y +3, playerOne.transform.position.z);
             }
 
