@@ -159,8 +159,11 @@ public class EnemyDynamite : MonoBehaviour
         Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, playerColliders, enemyLayerMask);
         foreach (Collider enemyObject in playerColliders)
         {
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
-            EventSystem.current.FireEvent(damageEvent);
+            if (enemyObject != null)
+            {
+                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
+                EventSystem.current.FireEvent(damageEvent);   
+            }
         }
 
         fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
