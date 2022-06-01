@@ -16,17 +16,36 @@ public class UI_ChangeColorPlayerHud : MonoBehaviour
     void Start()
     {
         Color color = playerOneHud.color;
-        color.r = PlayerStatistics.Instance.playerOneColor[0];
-        color.g = PlayerStatistics.Instance.playerOneColor[1];
-        color.b = PlayerStatistics.Instance.playerOneColor[2];
+        if (PlayerStatistics.Instance.playerOneColor.Length == 0)
+        {
+            color.r = 0.15f;
+            color.g = 0.75f;
+            color.b = 0.75f;
+        }
+        else
+        {
+            
+            color.r = PlayerStatistics.Instance.playerOneColor[0];
+            color.g = PlayerStatistics.Instance.playerOneColor[1];
+            color.b = PlayerStatistics.Instance.playerOneColor[2];
+        }
         playerOneHud.color = color;
         playerOneFillOH.color = color;
         playerOneFillHP.color = color;
-
-        color = playerTwoHud.color;
-        color.r = PlayerStatistics.Instance.playerTwoColor[0];
-        color.g = PlayerStatistics.Instance.playerTwoColor[1];
-        color.b = PlayerStatistics.Instance.playerTwoColor[2];
+        
+        if (PlayerStatistics.Instance.playerTwoColor.Length == 0)
+        {
+            color.r = 0.75f;
+            color.g = 0.75f;
+            color.b = 0.15f;
+        }
+        else
+        {
+            
+            color.r = PlayerStatistics.Instance.playerTwoColor[0];
+            color.g = PlayerStatistics.Instance.playerTwoColor[1];
+            color.b = PlayerStatistics.Instance.playerTwoColor[2];
+        }
         playerTwoHud.color = color;
         playerTwoFillOH.color = color;
         playerTwoFillHP.color = color;
