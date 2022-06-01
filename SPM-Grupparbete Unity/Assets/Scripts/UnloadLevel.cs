@@ -8,17 +8,21 @@ using UnityEngine.UI;
 
 public class UnloadLevel : MonoBehaviour
 {
+    private GameObject players;
     private GameObject playerOne;
     private GameObject playerTwo;
     private GameObject drone;
+    private GameObject droneOne;
     private GameObject teleportBackPos;
     private GameObject Trans;
    
     private void Start()
     {
-        playerOne = GameObject.Find("Player1");
-        playerTwo = GameObject.Find("Player2");
+        players = GameObject.Find("Players");
+        playerOne = players.transform.Find("Player1").gameObject;
+        playerTwo = players.transform.Find("Player2").gameObject;
         drone = GameObject.Find("Drone");
+        droneOne = GameObject.Find("Drone (1)");
         teleportBackPos = GameObject.Find("TownPortal");
         
     }
@@ -48,6 +52,12 @@ public class UnloadLevel : MonoBehaviour
         {
             drone.transform.position = new Vector3(teleportPosition.x,
                 drone.transform.position.y, teleportPosition.z);
+        }
+        
+        if (droneOne != null)
+        {
+            droneOne.transform.position = new Vector3(teleportPosition.x,
+                droneOne.transform.position.y, teleportPosition.z);
         }
        
         

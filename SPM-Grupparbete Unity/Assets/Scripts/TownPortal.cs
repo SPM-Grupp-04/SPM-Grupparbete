@@ -19,6 +19,7 @@ public class TownPortal : MonoBehaviour
     [Header("Private")] [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject camera;
 
+    private GameObject players;
     private GameObject playerOne;
     private GameObject playerTwo;
     private GameObject drone;
@@ -32,8 +33,9 @@ public class TownPortal : MonoBehaviour
 
     private void Start()
     {
-        playerOne = GameObject.Find("Player1");
-        playerTwo = GameObject.Find("Player2");
+        players = GameObject.Find("Players");
+        playerOne = players.transform.Find("Player1").gameObject;
+        playerTwo = players.transform.Find("Player2").gameObject;
         
 //        Debug.Log(playerOne + " PlayerOne" + playerTwo + " PlayerTwo");
         droneOne = GameObject.Find("Drone (1)");
@@ -74,10 +76,20 @@ public class TownPortal : MonoBehaviour
                 playerOne.transform.position =
                     new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition); // Hamnar på 800/0/550
             }
+            else
+            {
+                playerOne.transform.position =
+                    new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition);
+            }
 
             if (playerTwo.activeInHierarchy)
             {
                 playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition + 1);
+            }
+            else
+            {
+                playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition + 1);
+
             }
 
             if (drone.activeInHierarchy)
