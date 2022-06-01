@@ -10,6 +10,8 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     private static CameraShake instance;
+
+    private CinemachineBrain cmBrain;
     
     public static CameraShake Instance { 
         get 
@@ -17,10 +19,6 @@ public class CameraShake : MonoBehaviour
             return instance;
         }
     }
-
-    [SerializeField] private CinemachineVirtualCamera cmVirtualCamera;
-    [SerializeField] private CinemachineVirtualCamera playerOneCamera;
-    [SerializeField] private CinemachineVirtualCamera playerTwoCamera;
 
     private CinemachineVirtualCamera activeCamera;
 
@@ -41,6 +39,8 @@ public class CameraShake : MonoBehaviour
         {
             instance = this;
         }
+        
+        cmBrain = FindObjectOfType<CinemachineBrain>();
     }
 
     private void Update()
@@ -74,16 +74,6 @@ public class CameraShake : MonoBehaviour
 
     private void FindActiveCamera()
     {
-        if (cmVirtualCamera.isActiveAndEnabled)
-        {
-            activeCamera = cmVirtualCamera;
-        } else if (playerOneCamera.isActiveAndEnabled)
-        {
-            activeCamera = playerOneCamera;
-        }
-        else if (playerTwoCamera.isActiveAndEnabled)
-        {
-            activeCamera = playerTwoCamera;
-        }
+        activeCamera = cmBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
     }
 }
