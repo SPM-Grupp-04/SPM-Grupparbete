@@ -59,6 +59,7 @@ namespace EnemyAI.MeeleAI
         
         public void DieAnimationEvent()
         {
+            currentHealth = startingHealth;
             if (this.pool != null)
             {
                 pool.Release(this);
@@ -70,7 +71,7 @@ namespace EnemyAI.MeeleAI
                 
             }
             agent.speed = movementSpeed;
-            currentHealth = startingHealth;
+           
         }
         
 
