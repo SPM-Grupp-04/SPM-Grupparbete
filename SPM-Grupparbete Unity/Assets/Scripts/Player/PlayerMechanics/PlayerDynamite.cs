@@ -20,7 +20,7 @@ public class PlayerDynamite : MonoBehaviour
     [SerializeField] private LayerMask enemyLayerMask;
 
     [Header("Explosion Light")] 
-    [SerializeField] private float explosionLightDuration = 5.0f;
+    [SerializeField] private float explosionLightDuration = 1.0f;
     
     [Header("Particle System")]
     [SerializeField] private float particleSystemPlayDuration = 5.0f;
@@ -54,8 +54,6 @@ public class PlayerDynamite : MonoBehaviour
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
 
-    private float explosionLightTime;
-    
     private float particleSystemCountdown;
     private float explosionCountdown;
 
@@ -66,7 +64,6 @@ public class PlayerDynamite : MonoBehaviour
         fallingRocksSpawner = FallingRocksSpawner.Instance;
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
-        explosionLightTime = explosionLightDuration;
         dynamiteFuseAudioSource.Play();
     }
 
@@ -114,11 +111,17 @@ public class PlayerDynamite : MonoBehaviour
 
     private IEnumerator ReduceExplosionLightTime()
     {
+        float t = 0;
         do
         {
-            explosionLightTime -= Time.deltaTime;
+            t += Time.deltaTime * (1.0f / explosionLightDuration);
+            dynamiteExplosionLight.intensity = Mathf.Lerp(200.0f, 
+                0.0f,
+                t);
             yield return null;
-        } while (explosionLightTime > 0.0f);
+        } while (t < 1.0f);
+
+        dynamiteExplosionLight.intensity = 0.0f;
     }
     
     private void ExplodeDynamiteAndDisableDynamiteFuse()
@@ -146,12 +149,6 @@ public class PlayerDynamite : MonoBehaviour
         dynamiteExplosionLight.enabled = true;
 
         StartCoroutine(ReduceExplosionLightTime());
-
-        if (explosionLightTime > 0.0f)
-        {
-            dynamiteExplosionLight.intensity -= Mathf.Lerp(dynamiteExplosionLight.intensity, 0.0f,
-                explosionLightTime / explosionLightDuration);
-        }
 
         capsuleCollider.enabled = false;
         
