@@ -14864,18 +14864,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9005655306301937368, guid: 6890f559acc365d49a98294804986265, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9005655306335374025, guid: 6890f559acc365d49a98294804986265, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9005655306335374025, guid: 6890f559acc365d49a98294804986265, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6890f559acc365d49a98294804986265, type: 3}
 --- !u!114 &1430316756 stripped
@@ -14887,6 +14875,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345a9ca22ce16724f8c7d7c38c6ba562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1430316757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4515129029738111361, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 1430316755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1430316758 stripped
@@ -17447,11 +17446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.9999881
+      value: -0.0001950264
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 534.0976
+      value: 534.0924
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
@@ -25191,7 +25190,7 @@ PrefabInstance:
     - target: {fileID: 7803596126732349853, guid: d97d3edffd49e904f96ee6f9315be7c7, type: 3}
       propertyPath: progressText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1430316757}
     - target: {fileID: 7803596126732349853, guid: d97d3edffd49e904f96ee6f9315be7c7, type: 3}
       propertyPath: loadingScreen
       value: 

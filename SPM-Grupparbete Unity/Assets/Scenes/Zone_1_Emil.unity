@@ -18228,6 +18228,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7803596126732349853, guid: d97d3edffd49e904f96ee6f9315be7c7, type: 3}
+      propertyPath: Slider
+      value: 
+      objectReference: {fileID: 1234095708}
+    - target: {fileID: 7803596126732349853, guid: d97d3edffd49e904f96ee6f9315be7c7, type: 3}
+      propertyPath: progressText
+      value: 
+      objectReference: {fileID: 7368729970608807086}
+    - target: {fileID: 7803596126732349853, guid: d97d3edffd49e904f96ee6f9315be7c7, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1203262771}
     - target: {fileID: 7876168679945338900, guid: d97d3edffd49e904f96ee6f9315be7c7, type: 3}
       propertyPath: m_Size.z
       value: 0.0051647075
@@ -102625,6 +102637,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 028cef38af61fad4abca9f72d0c1ab13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7368729970608807086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4515129029738111361, guid: 6890f559acc365d49a98294804986265, type: 3}
+  m_PrefabInstance: {fileID: 7368729970608807084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8043463475365818443
