@@ -19,6 +19,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] [Range(1.0f, 15.0f)] private float shopAreaRadius = 5.0f;
     [SerializeField] private bool shopIsFree;
     private GameObject playerUI;
+    private GameObject playerCD;
     
     private Collider[] shopColliders;
     private SphereCollider shopCollider;
@@ -82,6 +83,7 @@ public class ShopScript : MonoBehaviour
     private void Start()
     {
         playerUI = GameObject.Find("UI/PlayerUI");
+        playerCD = GameObject.Find("UI/Cooldowns");
 
         shopCostsArray = new List<int[]>() {healCost, weaponCost, speedCost, discoCost, drillLevel1Cost, drillLevel2Cost, drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost, droneCost};
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
@@ -212,6 +214,7 @@ public class ShopScript : MonoBehaviour
     private void OpenShopInterface()
     {
         playerUI.SetActive(false);
+        playerCD.SetActive(false);
         shopInterfaceBackground.SetActive(true);
     }
     
@@ -221,6 +224,7 @@ public class ShopScript : MonoBehaviour
         doOnce = false;
         shopInterfaceBackground.SetActive(false);
         playerUI.SetActive(true);
+        playerCD.SetActive(true);
 
     }
     

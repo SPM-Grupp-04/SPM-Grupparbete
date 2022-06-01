@@ -28,6 +28,7 @@ public class PlayerStatistics
     public Dictionary<string, bool> buttonDictionary;
     public float[] playerOneColor;
     public float[] playerTwoColor;
+    
 
 
 
