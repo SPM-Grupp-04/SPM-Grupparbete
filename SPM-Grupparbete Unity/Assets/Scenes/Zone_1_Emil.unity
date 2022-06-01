@@ -21248,6 +21248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone
       objectReference: {fileID: 0}
+    - target: {fileID: 8524379718836166416, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8524379718836166426, guid: b2c12f018ef70114aa17f9f425af5640, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -46167,15 +46171,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerMaxHealth
-      value: 35
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerOneHealth
-      value: 35
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980724, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: playerStatistics.playerTwoHealth
-      value: 35
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7611822900590980725, guid: 77f66bae8b0c6104ea75fcdd254e4771, type: 3}
       propertyPath: m_Name
@@ -54985,7 +54989,7 @@ PrefabInstance:
     - target: {fileID: 2971810965652456986, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
       propertyPath: progressText
       value: 
-      objectReference: {fileID: 1969212843}
+      objectReference: {fileID: 0}
     - target: {fileID: 2971810965652456986, guid: 856f71a0461332f4faf962a9bfb35b86, type: 3}
       propertyPath: loadingScreen
       value: 
@@ -70630,7 +70634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: totalAllowedEnimesAtSpawner
-      value: 30
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5897041474299505381, guid: 726df17cdc839704eadc0a73d76c952d, type: 3}
       propertyPath: prioListMatchingObjektOrder.Array.size
@@ -93253,17 +93257,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7424582255688393629, guid: e255b5c39211ac547918986801d4d810, type: 3}
   m_PrefabInstance: {fileID: 1967604244}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1969212843 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9005655304805623872, guid: 6890f559acc365d49a98294804986265, type: 3}
-  m_PrefabInstance: {fileID: 7368729970608807084}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1970176848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102175,6 +102168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 2965090648212624896, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2965090648212625145, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -102223,10 +102220,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4336789392064378132, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5868905720494507359, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1961297525}
+    - target: {fileID: 6157434112349066898, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7708049037048568331, guid: 6bc265d1dfc2c274bb4477015019638a, type: 3}
       propertyPath: teleport
       value: 

@@ -33,6 +33,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private int[] weaponCost = new int[3];
     [SerializeField] private int[] speedCost = new int[3];
     [SerializeField] private int[] discoCost = new int[3];
+    [SerializeField] private int[] droneCost = new int [3];
     
     [Header("Cost Drill Upgrades")]
     [SerializeField] private int[] drillLevel1Cost = new int[3];
@@ -56,6 +57,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField] private Button healthThreeButton;
     [SerializeField] private Button drill2Button;
     [SerializeField] private Button drill3Button;
+    [SerializeField] private Button droneButton;
 
 
     [Header("Images for upgrades")] [SerializeField]
@@ -81,7 +83,7 @@ public class ShopScript : MonoBehaviour
     {
         playerUI = GameObject.Find("UI/PlayerUI");
 
-        shopCostsArray = new List<int[]>() {healCost, weaponCost, speedCost, discoCost, drillLevel1Cost, drillLevel2Cost, drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost};
+        shopCostsArray = new List<int[]>() {healCost, weaponCost, speedCost, discoCost, drillLevel1Cost, drillLevel2Cost, drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost, droneCost};
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
         if (buttonDictionary == null)
         {
@@ -106,6 +108,8 @@ public class ShopScript : MonoBehaviour
             weaponCost = new int[3];
             speedCost = new int[3];
             discoCost = new int[3];
+            droneCost = new int[3];
+
 
             drillLevel1Cost = new int[3];
             drillLevel2Cost = new int[3];
@@ -114,6 +118,7 @@ public class ShopScript : MonoBehaviour
             healthLevel1Cost = new int[3];
             healthLevel2Cost = new int[3];
             healthLevel3Cost = new int[3];
+            
 
             shopAreaRadius *= 100;
 
@@ -380,11 +385,26 @@ public class ShopScript : MonoBehaviour
             UpdateShop(weaponButton);
         }
     }
+
+    public void DroneUpgrade()
+    {
+        if (GlobalControl.Instance.playerStatistics.BlueCrystals >= droneCost[0]
+            && GlobalControl.Instance.playerStatistics.RedCrystals >= droneCost[1]
+            && GlobalControl.Instance.playerStatistics.GreenCrystals >= droneCost[2])
+        {
+            m_PlayerState.m_LocalPlayerData.BlueCrystals -= droneCost[0];
+            m_PlayerState.m_LocalPlayerData.RedCrystals -= droneCost[1];
+            m_PlayerState.m_LocalPlayerData.GreenCrystals -= droneCost[2];
+            DisableShopButton(droneButton);
+            UpdateShop(droneButton);
+        }
+    }
+    
     private void DisableShopButton(Button button)
     {
         button.interactable = false;
         buttonDictionary[button.name] = true;
-       ShowUpgradedSprite(button);
+        ShowUpgradedSprite(button);
         
     }
 
@@ -415,6 +435,9 @@ public class ShopScript : MonoBehaviour
                 break;
             case "Health3Button":
                 button.GetComponent<Image>().sprite = upgradeImage[4];
+                break;
+            case "DroneButton":
+                button.GetComponent<Image>().sprite = upgradeImage[8];
                 break;
         }
     }

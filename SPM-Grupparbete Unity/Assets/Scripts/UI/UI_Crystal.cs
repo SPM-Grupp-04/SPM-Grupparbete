@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,11 @@ public class UI_Crystal : MonoBehaviour
 
 
     [SerializeField]
-    private Text BlueCrystals;
+    private TextMeshProUGUI BlueCrystals;
     [SerializeField]
-    private Text RedCrystals;
+    private TextMeshProUGUI RedCrystals;
     [SerializeField]
-    private Text GreenCrystals;
+    private TextMeshProUGUI GreenCrystals;
 
 
 
