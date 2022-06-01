@@ -38,11 +38,12 @@ namespace EnemyAI
 
         [SerializeField] private float currentHealth = 50;
 
-        
+
         public void tryToHitPlayer()
         {
             meleeWeapon.HitPlayer();
         }
+
         protected override TreeNode SetUpTree()
         {
             var agentTransform = agent.transform;
@@ -92,8 +93,14 @@ namespace EnemyAI
             if (currentHealth < 1)
             {
                 agent.speed = 0;
-                StartCoroutine(waitbeforeDieWithoutPool());
+                animator.SetTrigger("Die");
+                //StartCoroutine(waitbeforeDieWithoutPool());
             }
+        }
+
+        public void DieAnimationEvent()
+        {
+            gameObject.SetActive(false);
         }
 
         public float GetCurrentHealth()
