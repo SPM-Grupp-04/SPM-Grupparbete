@@ -20,6 +20,9 @@ public class EnemyDynamite : MonoBehaviour
     private LayerMask groundLayerMask;
 
     [SerializeField] private LayerMask enemyLayerMask;
+    
+    [Header("Explosion Light")] 
+    [SerializeField] private float explosionLightDuration = 1.0f;
 
     [Header("Particle System")] [SerializeField]
     private float particleSystemPlayDuration = 5.0f;
@@ -111,6 +114,21 @@ public class EnemyDynamite : MonoBehaviour
 
         DestroyGameObjects();
     }
+    
+    private IEnumerator ReduceExplosionLightTime()
+    {
+        float t = 0;
+        do
+        {
+            t += Time.deltaTime * (1.0f / explosionLightDuration);
+            dynamiteExplosionLight.intensity = Mathf.Lerp(200.0f, 
+                0.0f,
+                t);
+            yield return null;
+        } while (t < 1.0f);
+
+        dynamiteExplosionLight.intensity = 0.0f;
+    }
 
     private void ExplodeDynamiteAndDisableDynamiteFuse()
     {
@@ -133,6 +151,8 @@ public class EnemyDynamite : MonoBehaviour
         dynamiteExplosionAudioSource.Play();
 
         dynamiteExplosionLight.enabled = true;
+        
+        StartCoroutine(ReduceExplosionLightTime());
 
         capsuleCollider.enabled = false;
 
