@@ -43,16 +43,20 @@ namespace EnemyAI.RangedAI
             
             agentT.LookAt(target);
 
-            if (rangedAI.timer < 0)
+            // Set Animation. 
+            
+            /*if (rangedAI.timer < 0)
             {
-                var shootEventInfo = new ShootEventInfo(firePoint,
+                /*var shootEventInfo = new ShootEventInfo(firePoint,
                     this.throwableObject, throwUpForce, throwForce);
-                EventSystem.current.FireEvent(shootEventInfo);
+                EventSystem.current.FireEvent(shootEventInfo);#1#
                 rangedAI.timer = ThrowCd;
-            }
+            }*/
             
             state = NodeState.RUNNING;
             return state;
         }
+        
+        
     }
 }

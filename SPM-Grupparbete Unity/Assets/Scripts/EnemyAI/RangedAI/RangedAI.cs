@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using BehaviorTree;
+using EgilEventSystem;
+using EgilScripts.DieEvents;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
@@ -84,6 +86,12 @@ namespace EnemyAI.RangedAI
             return TopTreeNode;
         }
 
+        public void AttackPlayerRange()
+        {
+            var shootEventInfo = new ShootEventInfo(firePoint,
+                this.throwabelObject, throwUpForce, throwForce);
+            EventSystem.current.FireEvent(shootEventInfo);
+        }
 
         public override void SetPool(IObjectPool<BaseEnemyAI> pool)
         {
