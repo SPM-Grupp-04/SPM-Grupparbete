@@ -91,14 +91,17 @@ namespace EnemyAI.MeeleAI
             MeeleAttackTreeNode meeleAttackTreeNode =
                 new MeeleAttackTreeNode(playerPos, agent, animator, meleeWeapon);
             // 
-        
+            MeeleAIIdleNode meeleAIIdleNode = new MeeleAIIdleNode(animator);
+            
             // Setting up sequence.
             Sequence chaseSequence = new Sequence(new List<TreeNode> {inChaseRange, chaseTreeNodeMelee});
      
             Sequence shootSequence = new Sequence(new List<TreeNode> {inMeleeRange, meeleAttackTreeNode});
 
+            Sequence idleSequance = new Sequence(new List<TreeNode> {meeleAIIdleNode});
+            
             // Choosing one of de sequence taking the first one that has returned Success/Running. Order is important 
-            TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence});
+            TopTreeNode = new Selector(new List<TreeNode> {shootSequence, chaseSequence,idleSequance });
         
             return TopTreeNode;
         }
