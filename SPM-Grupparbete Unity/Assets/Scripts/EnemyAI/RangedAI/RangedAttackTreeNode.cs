@@ -10,9 +10,9 @@ namespace EnemyAI.RangedAI
     {
         private readonly NavMeshAgent agent;
         private readonly Vector3 target;
-        private readonly Transform firePoint;
+       
 
-        private readonly GameObject throwableObject;
+        
         private Vector3 currentVelocity;
 
 
@@ -21,19 +21,16 @@ namespace EnemyAI.RangedAI
         private readonly float throwUpForce;
         private readonly float throwForce;
         private readonly RangedAI rangedAI;
+        private Animator animator;
 
 
-        public RangedAttackTreeNode(Transform firePoint,Vector3 target, NavMeshAgent agent,
-            GameObject throwableObject, float throwUpForce, float throwForce, RangedAI rangedAI)
+        public RangedAttackTreeNode( NavMeshAgent agent
+           , RangedAI rangedAI, Vector3 target, Animator animator)
         {
-            this.firePoint = firePoint;
-            this.agent = agent;
             this.target = target;
-            this.throwableObject = throwableObject;
-            
+            this.agent = agent;
             this.rangedAI = rangedAI;
-            this.throwUpForce = throwUpForce;
-            this.throwForce = throwForce;
+            this.animator = animator;
         }
 
         public override NodeState Evaluate()
@@ -42,7 +39,9 @@ namespace EnemyAI.RangedAI
             Transform agentT = agent.transform;
             
             agentT.LookAt(target);
-
+            
+            animator.SetTrigger("Throw");
+            
             // Set Animation. 
             
             /*if (rangedAI.timer < 0)

@@ -23,7 +23,7 @@ namespace EnemyAI.RangedAI
         [Header("Throw Weapon settings")] [SerializeField]
         private GameObject throwabelObject;
 
-        [SerializeField] private float throwCooldown;
+        
         [SerializeField] private float throwUpForce;
         [SerializeField] private float throwForce = 30;
         [SerializeField] private Transform firePoint;
@@ -31,13 +31,13 @@ namespace EnemyAI.RangedAI
         public Vector3 target = new Vector3(100, 0, 100);
         public float distanceToTargetPlayer = 100;
         public Vector3 playerPos = new Vector3(100, 0, 100);
-        public float timer;
+       
 
         void Start()
         {
             movementSpeed = 4;
             base.Start();
-            timer = 0;
+           
             
             currentHealth = startingHealth;
             agent = GetComponent<NavMeshAgent>();
@@ -50,17 +50,28 @@ namespace EnemyAI.RangedAI
             SetUpTree();
             if (currentHealth < 1)
             {
-                if (pool != null)
-                {
-                    pool.Release(this);
-                }
-                else
-                {
-                    gameObject.SetActive(false);
-                }
-                return;
+                agent.speed = 0;
+              animator.SetTrigger("Die");
             }
-            timer -= Time.deltaTime;
+            
+        }
+        
+        public void DieAnimationEvent()
+        {
+            currentHealth = startingHealth;
+            if (this.pool != null)
+            {
+                pool.Release(this);
+               
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                
+            }
+            agent.speed = movementSpeed;
+            currentHealth = startingHealth;
+
         }
 
         protected override TreeNode SetUpTree()
@@ -75,9 +86,9 @@ namespace EnemyAI.RangedAI
                 new RangeTreeNodeRange(target, distanceToTargetPlayer, rangedAttackRange, animator);
 
             RangedAttackTreeNode rangedAttackTreeNode =
-                new RangedAttackTreeNode(firePoint,playerPos, agent,
-                    throwabelObject, throwUpForce, throwForce, this);
-        
+                new RangedAttackTreeNode(this.agent,this,this.target, animator 
+                      );
+           
             Sequence chaseSequence = new Sequence(new List<TreeNode> {chasingRangeTreeNodeMelee, chaseTreeNodeMelee});
             Sequence shootSequence = new Sequence(new List<TreeNode> {shootingRangeTreeNodeMelee, rangedAttackTreeNode});
 

@@ -5355,14 +5355,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f146a1f21d162c4eba395ef1b98de78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDelay: 3
-  explosionRadius: 7.5
+  explosionDelay: 1.3
+  explosionRadius: 4
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 7304
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  explosionLightDuration: 1
   particleSystemPlayDuration: 5
   dynamiteExplosionPrefab: {fileID: 4889733576662073570, guid: df678191f18aa8347a1a0a7e9f2bbdda, type: 3}
   capsuleCollider: {fileID: -2474082930302201402}
