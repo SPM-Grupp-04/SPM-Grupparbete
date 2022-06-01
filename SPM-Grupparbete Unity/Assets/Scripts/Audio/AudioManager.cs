@@ -32,17 +32,19 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
+        if (index > backgroundMusic.Length - 1)
+        {
+            index = 0;
+        }
+        
         if (!sourceOne.isPlaying && inCombat == false)
         {
             index++;
             sourceOne.clip = backgroundMusic[index];
             sourceOne.Play();
             
-        }
-
-        if (index > backgroundMusic.Length - 1)
-        {
-            index = 0;
         }
         
     }
