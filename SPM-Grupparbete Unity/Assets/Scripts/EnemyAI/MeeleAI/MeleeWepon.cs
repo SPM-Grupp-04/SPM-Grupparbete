@@ -24,18 +24,20 @@ public class MeleeWepon : MonoBehaviour
         var damageEvent = new DealDamageEventInfo(otherP, 1);
         EventSystem.current.FireEvent(damageEvent);
     }
-    
+
 
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-       // Debug.Log("Count");
+        // Debug.Log("Count");
         navMeshAgent.isStopped = true;
 
-        //animator.SetBool("Run", false);
+        if (navMeshAgent.velocity.magnitude > 0.1f)
+        {
+            animator.SetBool("Run", false);
+        } 
+
         animator.SetTrigger("Attack");
         otherP = other.gameObject;
     }
-
-  
 }
