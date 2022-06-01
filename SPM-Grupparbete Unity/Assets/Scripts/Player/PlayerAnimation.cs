@@ -19,7 +19,7 @@ public class PlayerAnimation : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
     
-    void Update()
+    private void Update()
     {
         AnimatePlayer();
     }

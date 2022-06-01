@@ -373,7 +373,7 @@ public class PlayerDrill : MonoBehaviour
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
                 break;
             default:
-                laserDistance = 20f;
+                laserDistance = 10f;
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
                 break;
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,7 @@ public class TownPortal : MonoBehaviour
 
     public GameObject loadingScreen;
 
-    public Text progressText;
+    public TextMeshProUGUI progressText;
 
     [Header("Private")] [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject camera;
