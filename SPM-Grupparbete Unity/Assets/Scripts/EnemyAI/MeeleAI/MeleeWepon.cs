@@ -33,7 +33,12 @@ public class MeleeWepon : MonoBehaviour
         navMeshAgent.isStopped = true;
 
         //animator.SetBool("Run", false);
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attacking", true);
         otherP = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        animator.SetBool("Attacking", false);
     }
 }
