@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -9,7 +10,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] combatMusic;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource sourceOne, sourceTwo, sourceThree, sourceFour;
-    [SerializeField] private AudioClip pickUp;  
+     
     
     
     
@@ -48,12 +49,21 @@ public class AudioManager : MonoBehaviour
 
     public void PlayCrystalSound()
     {
-        sourceThree.Play();
+        if (!sourceThree.isPlaying)
+        {
+            sourceThree.Play();
+        }
+        
     }
 
     public void PlayCrystalPickUpSound()
     {
-        //sourceFour.PlayOneShot(pickUp);
+        Debug.Log(sourceFour.isPlaying + " source four");
+        if (!sourceFour.isPlaying)
+        {
+            sourceFour.Play();
+        }
+        
     }
 
     public void CombatMusic()
