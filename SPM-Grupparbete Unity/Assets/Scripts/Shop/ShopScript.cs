@@ -134,11 +134,17 @@ public class ShopScript : MonoBehaviour
         
         playerOne = GameObject.Find("Players/Player1");
         playerTwo = GameObject.Find("Players/Player2");
-        playerControllerOne = playerOne.GetComponent<PlayerController>();
-        playerControllerTwo = playerTwo.GetComponent<PlayerController>();
+        if (playerOne != null)
+        {
+            playerControllerOne = playerOne.GetComponent<PlayerController>();
+            playerOneDrill = GameObject.Find("Players/Player1/Drill");
+        }
 
-        playerOneDrill = GameObject.Find("Players/Player1/Drill");
-        playerTwoDrill = GameObject.Find("Players/Player2/Drill");
+        if (playerTwo != null)
+        {
+            playerControllerTwo = playerTwo.GetComponent<PlayerController>();
+            playerTwoDrill = GameObject.Find("Players/Player2/Drill");
+        }
         
         shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
