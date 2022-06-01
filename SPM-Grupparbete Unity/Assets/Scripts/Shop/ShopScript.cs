@@ -162,13 +162,20 @@ public class ShopScript : MonoBehaviour
     
     private void Update()
     {
-        if (playerOne.activeInHierarchy)
+        if (playerOne != null)
         {
-            PlayerOneOpenShop();
+            if (playerOne.activeInHierarchy)
+            {
+                PlayerOneOpenShop();
+            }
         }
-        if (playerTwo.activeInHierarchy)
+        
+        if(playerTwo != null)
         {
-            PlayerTwoOpenShop();
+            if (playerTwo.activeInHierarchy)
+            {
+                PlayerTwoOpenShop();
+            }
         }
     }
 
@@ -206,8 +213,15 @@ public class ShopScript : MonoBehaviour
 
     private void SetPlayerMovement(bool value)
     {
-        playerControllerOne.SetMovementStatus(value);
-        playerControllerTwo.SetMovementStatus(value);
+        if (playerOne != null)
+        {
+            playerControllerOne.SetMovementStatus(value);
+            
+        }
+        if(playerTwo != null)
+        {
+            playerControllerTwo.SetMovementStatus(value);
+        }
     }
 
 
