@@ -147,7 +147,6 @@ public class ShopScript : MonoBehaviour
         if (!Utility.LayerMaskExtensions.IsInLayerMask(other.gameObject, playerLayerMask))
             return;
         other.GetComponent<PlayerController>().PlayerCanShop(true);
-        UpdateShop(drill1Button);
     }
     
     private void Update()
@@ -167,6 +166,7 @@ public class ShopScript : MonoBehaviour
         if (playerControllerOne.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
         {
             OpenShopInterface();
+            UpdateShop(drill1Button);
             SetPlayerMovement(false);
         }
         else if (!playerControllerOne.IsShopOpen() && shopInterfaceBackground.activeInHierarchy)
@@ -181,6 +181,7 @@ public class ShopScript : MonoBehaviour
         if (playerControllerTwo.IsShopOpen() && !shopInterfaceBackground.activeInHierarchy)
         {
             OpenShopInterface();
+            UpdateShop(drill1Button);
             SetPlayerMovement(false);
 
         }
