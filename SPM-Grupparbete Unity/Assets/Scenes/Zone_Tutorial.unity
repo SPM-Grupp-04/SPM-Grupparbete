@@ -10057,6 +10057,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056368703}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1057443227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6678234336721546453, guid: 5c657d55e2edff34cbf2ff23d9089369, type: 3}
+  m_PrefabInstance: {fileID: 1410547076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1057443232
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057443227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &1066202674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15186,6 +15208,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3174497932447392748, guid: 9605ccea798083d48a2b9cfccbba1678, type: 3}
   m_PrefabInstance: {fileID: 1444251641}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1451142382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 147182725001385659, guid: e1135c05bd2be894b9a9c33065d95acd, type: 3}
+  m_PrefabInstance: {fileID: 1677971953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1451142387
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451142382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1460620964
 GameObject:
   m_ObjectHideFlags: 0
@@ -17446,11 +17490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0001950264
+      value: 1.0000906
       objectReference: {fileID: 0}
     - target: {fileID: 9127701535878169643, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 534.0924
+      value: 534.0925
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7848a9f0723da489b79fb6e43d3ccc, type: 3}
@@ -23650,6 +23694,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1143518565}
     m_Modifications:
+    - target: {fileID: 7108937813637650074, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
+      propertyPath: cmVirtualCamera
+      value: 
+      objectReference: {fileID: 1133766448}
+    - target: {fileID: 7108937813637650074, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
+      propertyPath: playerOneCamera
+      value: 
+      objectReference: {fileID: 1342627954}
+    - target: {fileID: 7108937813637650074, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
+      propertyPath: playerTwoCamera
+      value: 
+      objectReference: {fileID: 1732429841}
     - target: {fileID: 8081826606758027632, guid: 2691a932caeb9c74fa05fcac00f0ec63, type: 3}
       propertyPath: playerOne
       value: 

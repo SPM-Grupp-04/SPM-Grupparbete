@@ -19,6 +19,10 @@ public class CameraShake : MonoBehaviour
     }
 
     [SerializeField] private CinemachineVirtualCamera cmVirtualCamera;
+    [SerializeField] private CinemachineVirtualCamera playerOneCamera;
+    [SerializeField] private CinemachineVirtualCamera playerTwoCamera;
+
+    private CinemachineVirtualCamera activeCamera;
 
     private float cameraShakeTime;
     private float totalCameraShakeTime;
@@ -37,22 +41,11 @@ public class CameraShake : MonoBehaviour
         {
             instance = this;
         }
-        cmBasicMultiChannelPerlin =
-            cmVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-    }
-
-    public void ShakeCamera(float magnitude, float duration)
-    {
-        cmBasicMultiChannelPerlin.m_AmplitudeGain = magnitude;
-
-        startMagnitude = magnitude;
-        totalCameraShakeTime = duration;
-        cameraShakeTime = duration;
     }
 
     private void Update()
     {
-        if (cmVirtualCamera != null)
+        if (activeCamera != null)
         {
             if (cameraShakeTime > 0.0f)
             {
@@ -63,6 +56,34 @@ public class CameraShake : MonoBehaviour
                         Mathf.Lerp(startMagnitude, 0.0f, 1.0f - (cameraShakeTime / totalCameraShakeTime));
                 }
             }
+        }
+    }
+    
+    public void ShakeCamera(float magnitude, float duration)
+    {
+        
+        FindActiveCamera();
+        
+        cmBasicMultiChannelPerlin = activeCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cmBasicMultiChannelPerlin.m_AmplitudeGain = magnitude;
+
+        startMagnitude = magnitude;
+        totalCameraShakeTime = duration;
+        cameraShakeTime = duration;
+    }
+
+    private void FindActiveCamera()
+    {
+        if (cmVirtualCamera.isActiveAndEnabled)
+        {
+            activeCamera = cmVirtualCamera;
+        } else if (playerOneCamera.isActiveAndEnabled)
+        {
+            activeCamera = playerOneCamera;
+        }
+        else if (playerTwoCamera.isActiveAndEnabled)
+        {
+            activeCamera = playerTwoCamera;
         }
     }
 }
