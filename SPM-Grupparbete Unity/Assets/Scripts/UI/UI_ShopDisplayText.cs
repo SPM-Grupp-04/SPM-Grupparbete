@@ -45,7 +45,8 @@ public class UI_ShopDisplayText : MonoBehaviour
      * drillLevel3Cost, 6
      * healthLevel1Cost, 7
      * healthLevel2Cost, 8
-     * healthLevel3Cost} 9
+     * healthLevel3Cost, 9
+     * droneCost, 10
      */
 
     public void DisplayText(GameObject gameObject)
@@ -99,10 +100,15 @@ public class UI_ShopDisplayText : MonoBehaviour
                 SetPriceShopText(9);
                 body = "Player gets 30 extra HP";
                 break;
+            case "DroneButton":
+                header = "Drone";
+                SetPriceShopText(10);
+                body = "Players get a drone that mines and shoots";
+                break;
         }
         
         
-        textHeader.fontSize = 60;
+        textHeader.fontSize = 40;
         textHeader.text += header + "\n";
         
         textCostBlue.fontSize = 35;
