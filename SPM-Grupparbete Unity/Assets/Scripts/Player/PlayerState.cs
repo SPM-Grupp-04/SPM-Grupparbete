@@ -76,6 +76,7 @@ public class PlayerState : MonoBehaviour, IDamagable
                 StartCoroutine(WaitForAnimation(gameObject));
             }
         }
+        animator.SetBool("IsDead", false);
     }
 
     
