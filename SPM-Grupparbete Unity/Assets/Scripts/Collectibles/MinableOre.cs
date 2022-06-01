@@ -32,7 +32,7 @@ public class MinableOre : DestroyableObjectBase
             uiObjectHp.ObjectTakeDamage(amount);
             if (materialHP <= 0)
             {
-                DestoryObject();
+                DestroyObject();
             }
         }
     }
@@ -43,10 +43,10 @@ public class MinableOre : DestroyableObjectBase
     }
 
 
-    private void DestoryObject()
+    private void DestroyObject()
     {
 
-        //audioManager.PlayCrystalSound();
+        audioManager.PlayCrystalSound();
         
         for (int i = 0; i < collecitbleCrystals; i++)
         {

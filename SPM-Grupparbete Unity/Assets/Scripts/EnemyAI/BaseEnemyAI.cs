@@ -16,7 +16,8 @@ namespace EnemyAI
         public float movementSpeed;
         public float currentHealth;
         public float startingHealth;
-        protected Animator animator;
+       // protected Animator animator;
+        
     
     
         public abstract void SetPool(IObjectPool<BaseEnemyAI> pool);

@@ -135,13 +135,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321417716326435050}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2981154951467568445}
-  m_RootOrder: 2
+  m_Father: {fileID: 4959427538119283954}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -215,7 +215,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6238514124470351299}
+  - {fileID: 7923414350240071923}
   m_Father: {fileID: 2981154951467568445}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -346,13 +348,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3126964833263092767}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2981154951467568445}
-  m_RootOrder: 1
+  m_Father: {fileID: 4959427538119283954}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -429,8 +431,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4959427538119283954}
-  - {fileID: 6238514124470351299}
-  - {fileID: 7923414350240071923}
   m_Father: {fileID: 5803280787094169848}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -88.774, z: 0}
@@ -600,7 +600,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2.7
   m_Center: {x: 0.000000029802322, y: 0.42889816, z: -0.00000008940697}
 --- !u!65 &6270097400504094495
 BoxCollider:
@@ -628,8 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentNumber: 2
-  canvas: {fileID: 0}
-  text: {fileID: 0}
+  canvas: {fileID: 4392319337850485682}
+  text: {fileID: 5119424081418764611}
   vfx: {fileID: 3021664043916480916}
   animator: {fileID: 3632645281234480782}
 --- !u!95 &3632645281234480782

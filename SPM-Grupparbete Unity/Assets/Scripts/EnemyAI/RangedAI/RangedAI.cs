@@ -25,7 +25,7 @@ namespace EnemyAI.RangedAI
         [SerializeField] private float throwUpForce;
         [SerializeField] private float throwForce = 30;
         [SerializeField] private Transform firePoint;
-
+        [SerializeField] private Animator animator;
         public Vector3 target = new Vector3(100, 0, 100);
         public float distanceToTargetPlayer = 100;
         public Vector3 playerPos = new Vector3(100, 0, 100);
@@ -36,7 +36,7 @@ namespace EnemyAI.RangedAI
             movementSpeed = 4;
             base.Start();
             timer = 0;
-            animator = GetComponent<Animator>();
+            
             currentHealth = startingHealth;
             agent = GetComponent<NavMeshAgent>();
             agent.speed = movementSpeed;

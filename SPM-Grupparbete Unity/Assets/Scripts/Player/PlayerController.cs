@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private GameObject drill;
     [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private AudioClip drillSound, laserSound;
     [SerializeField] private Animator animator;
 
     private PlayerDrill drillScript;
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(0.01f, 0.1f)] private float cameraPlayerNegativeMovementThreshold = 0.1f;
     
     [SerializeField] private PlayerController otherPlayerController;
-   [SerializeField] private GameObject teleport;
+    [SerializeField] private GameObject teleport;
     
     private Collider[] penetrationColliders = new Collider[2];
 
@@ -189,39 +188,31 @@ public class PlayerController : MonoBehaviour
             drillScript.Drill(false);
             animator.SetBool("IsShooting", true);
             //animator.SetBool("Idle", false);
-
-            if (!source.isPlaying)
-            {
-                PlayLaserWeaponSound();
-            }
+            return;
         }
-        else
+
+        if (isDrilling)
         {
-            if (isDrilling)
-            {
-                drillScript.Shoot(false);
-                drillScript.Drill(true);
-                drillScript.DrillInUse(true);
-                animator.SetBool("IsShooting", true);
-                //animator.SetBool("Idle", false);
-
-                if (!source.isPlaying)
-                {
-                    PlayDrillSound();
-                }
-            }
-            else
-            {
-                drillScript.DrillInUse(false);
-                drillScript.Shoot(false);
-                drillScript.Drill(false);
-                StopSound();
-
-                animator.SetBool("IsShooting", false);
-                //animator.SetBool("Idle", true);
-
-            }
+            drillScript.Shoot(false);
+            drillScript.Drill(true);
+            drillScript.DrillInUse(true);
+            animator.SetBool("IsShooting", true);
+            //animator.SetBool("Idle", false);
+            return;
         }
+
+        drillScript.DrillInUse(false);
+        drillScript.Shoot(false);
+        drillScript.Drill(false);
+
+
+        animator.SetBool("IsShooting", false);
+        //animator.SetBool("Idle", true);
+                
+
+
+            
+        
     }
 
     private void PlayerMovement()
@@ -414,21 +405,5 @@ public class PlayerController : MonoBehaviour
         return hitInfo.point;
     }
     
-    private void PlayLaserWeaponSound()
-    {
-        source.clip = laserSound;
-        source.Play();
-    }
-
-    private void PlayDrillSound()
-    {
-        source.clip = drillSound;
-        source.Play();
-    }
-
-    private void StopSound()
-    {
-        source.Stop();
-        source.clip = null;
-    }
+  
 }
