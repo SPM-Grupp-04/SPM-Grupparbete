@@ -14,7 +14,6 @@ public class LaunchArcMesh : MonoBehaviour
     [SerializeField] [Range(1.0f, 10.0f)] private float velocity = 1.0f;
     [SerializeField] private float angle = 45.0f;
     [SerializeField] [Range(1.0f, 5.0f)] private float trajectoryArcIncreaseSpeed = 2.0f;
-    [SerializeField] private float trajectoryArcAngleIncreaseSpeed = 1.0f;
     [SerializeField] private int lineSegments = 10;
 
     [SerializeField] private LayerMask collisionLayerMask;
@@ -22,8 +21,8 @@ public class LaunchArcMesh : MonoBehaviour
     private DynamiteThrow dynamiteThrowScript;
     
     private Mesh trajectoryMesh;
-
-    private bool isDynamiteThrowModeEntered;
+    private MeshRenderer trajectoryMeshRenderer;
+    
     private bool increaseDynamiteArc;
     private bool keepDynamiteArcLength;
     
@@ -32,6 +31,35 @@ public class LaunchArcMesh : MonoBehaviour
 
     private Vector3 newTrajectoryPoint;
 
+    private void Awake()
+    {
+        trajectoryMesh = GetComponent<MeshFilter>().mesh;
+        trajectoryMeshRenderer = GetComponent<MeshRenderer>();
+        gravity = Mathf.Abs(Physics.gravity.y);
+        dynamiteThrowScript = GetComponent<DynamiteThrow>();
+    }
+    
+    private void Update()
+    {
+        if (increaseDynamiteArc)
+        {
+            TrajectoryArcIncrease();
+        }
+        else
+        {
+            TrajectoryArcDecrease();
+        }
+
+        if (velocity > 1.0f)
+        {
+            RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());   
+        }
+        else
+        {
+            DisableTrajectoryArc();
+        }
+    }
+    
     public float GetLaunchVelocity()
     {
         return velocity;
@@ -44,39 +72,10 @@ public class LaunchArcMesh : MonoBehaviour
         return localDirection.normalized;
     }
 
-    private void Awake()
-    {
-        trajectoryMesh = GetComponent<MeshFilter>().mesh;
-        gravity = Mathf.Abs(Physics.gravity.y);
-        dynamiteThrowScript = GetComponent<DynamiteThrow>();
-    }
-    
-    private void Update()
-    {
-        if (isDynamiteThrowModeEntered)
-        {
-            RenderThrowTrajectoryMesh(CalculateThrowTrajectoryArray());
-            if (increaseDynamiteArc)
-            {
-                TrajectoryArcIncrease();
-            }
-            else
-            {
-                TrajectoryArcDecrease();
-            }
-        } 
-        else if (velocity <= 1.0f)
-        {
-            isDynamiteThrowModeEntered = false;
-            DisableTrajectoryArc();
-        }
-    }
-
     public void TrajectoryInput(InputAction.CallbackContext trajectoryInputValue)
     {
         if (trajectoryInputValue.performed)
         {
-            isDynamiteThrowModeEntered = true;
             increaseDynamiteArc = true;
         }
         else if (trajectoryInputValue.canceled)
@@ -100,12 +99,12 @@ public class LaunchArcMesh : MonoBehaviour
 
     private void DisableTrajectoryArc()
     {
-        velocity = 1.0f;
-        trajectoryMesh.Clear();
+        trajectoryMeshRenderer.enabled = false;
     }
 
     private void RenderThrowTrajectoryMesh(Vector3[] trajectoryVerts)
     {
+        trajectoryMeshRenderer.enabled = true;
         trajectoryMesh.Clear();
         Vector3[] vertices = new Vector3[(lineSegments + 1) * 2];
         int[] triangles = new int[lineSegments * 6 * 2];
@@ -160,11 +159,5 @@ public class LaunchArcMesh : MonoBehaviour
                           ((gravity * xDistance * xDistance) / 
                            (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
         return new Vector3(xDistance, yDistance);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(  transform.position  + (transform.forward * newTrajectoryPoint.magnitude), 0.1f);
     }
 }

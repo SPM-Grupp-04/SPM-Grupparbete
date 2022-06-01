@@ -42,7 +42,8 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private AudioSource drillSource, weaponSource;
     [SerializeField] private AudioSource sourceOverHeat;
     [SerializeField] private AudioClip drillSound, weaponSound, overHeatSound;
-    
+
+    private PlayerController playerController;
     
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -77,6 +78,7 @@ public class PlayerDrill : MonoBehaviour
         drillPoint = transform.Find("DrillPoint").gameObject;
         laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
         lr = GetComponent<LineRenderer>();
+        playerController = GetComponentInParent<PlayerController>();
         DrillDamage();
         WeaponLevel();
         laserHit.transform.parent = null;
@@ -86,6 +88,11 @@ public class PlayerDrill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!UI_PausMenu.GameIsPause)
+        {
+            ShootOrDrill();
+        }
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -124,6 +131,30 @@ public class PlayerDrill : MonoBehaviour
                 
             }
         }
+    }
+    
+    private void ShootOrDrill()
+    {
+        if (playerController.IsShooting)
+        {
+            Shoot(true);
+            DrillInUse(true);
+            Drill(false);
+            return;
+        }
+
+        if (playerController.IsDrilling)
+        {
+            Shoot(false);
+            Drill(true);
+            DrillInUse(true);
+            return;
+        }
+
+        DrillInUse(false);
+        Shoot(false);
+        Drill(false);
+        
     }
     
     private void DrillObject()
@@ -342,7 +373,7 @@ public class PlayerDrill : MonoBehaviour
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
                 break;
             default:
-                laserDistance = 20f;
+                laserDistance = 10f;
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
                 break;
         }

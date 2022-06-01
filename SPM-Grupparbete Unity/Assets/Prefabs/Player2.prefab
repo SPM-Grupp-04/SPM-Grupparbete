@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 2965090648212625150}
   - component: {fileID: 2965090648212625151}
   - component: {fileID: 7708049037048568331}
+  - component: {fileID: 7813769206215940170}
   - component: {fileID: 2965090648212625145}
   - component: {fileID: 6385055751904336009}
   - component: {fileID: 5868905720494507359}
@@ -830,6 +831,18 @@ MonoBehaviour:
   cameraPlayerNegativeMovementThreshold: 0.1
   otherPlayerController: {fileID: 7708049037048568331, guid: 12b3235f123dd2348b39f7427e294e9e, type: 3}
   teleport: {fileID: 0}
+--- !u!114 &7813769206215940170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965090648212624896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a8db760999bb843a413b9cc85734ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2965090648212625145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,7 +1402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5711041550793873810}
   m_LocalRotation: {x: -0.00000002107342, y: 0.00000005960463, z: 0.00000002107342, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1, z: 0.8}
+  m_LocalPosition: {x: 0.6, y: 1, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
