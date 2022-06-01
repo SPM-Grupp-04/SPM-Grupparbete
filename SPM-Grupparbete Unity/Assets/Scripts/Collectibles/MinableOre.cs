@@ -13,6 +13,16 @@ public class MinableOre : DestroyableObjectBase
     [SerializeField] GameObject uiHP;
     [SerializeField] [Range(1, 3)] private int collecitbleCrystals = 1;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private ParticleSystem wallParticles;
+    
+    private Vector3 startPos;
+    private float timer;
+    private Vector3 randomPos;
+    
+    private float time = 0.2f;
+    private float distance = 0.05f;
+    private float delayBetweenShakes = 0f;
+
 
     UI_ObjectHP uiObjectHp;
 
@@ -21,7 +31,8 @@ public class MinableOre : DestroyableObjectBase
         requiredWeaponLevel = oreRequierdWeaponLevel;
         materialHP = oreMaterialHP;
         uiObjectHp = uiHP.GetComponent<UI_ObjectHP>();
-        
+        startPos = transform.position;
+
     }
 
     public override void ReduceMaterialHP(int amount)
@@ -34,6 +45,10 @@ public class MinableOre : DestroyableObjectBase
             {
                 DestroyObject();
             }
+        }
+        else
+        {
+            Begin();
         }
     }
 
@@ -59,4 +74,44 @@ public class MinableOre : DestroyableObjectBase
     {
         return oreMaterialHP;
     }
+    
+    private void OnValidate()
+    {
+        if (delayBetweenShakes > time)
+            delayBetweenShakes = time;
+    }
+ 
+    public void Begin()
+    {
+        StopAllCoroutines();
+        wallParticles.Play();
+        StartCoroutine(Shake());
+    }
+ 
+    private IEnumerator Shake()
+    {
+        timer = 0f;
+        
+        while (timer < time)
+        {
+            timer += Time.deltaTime;
+ 
+            randomPos = startPos + (Random.insideUnitSphere * distance);
+ 
+            transform.position = randomPos;
+            
+ 
+            if (delayBetweenShakes > 0f)
+            {
+                yield return new WaitForSeconds(delayBetweenShakes);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+        //wallParticles.Stop();
+        transform.position = startPos;
+    }
+
 }
