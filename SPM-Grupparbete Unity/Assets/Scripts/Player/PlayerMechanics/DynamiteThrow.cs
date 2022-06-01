@@ -8,10 +8,17 @@ using UnityEngine.InputSystem;
 
 public class DynamiteThrow : MonoBehaviour
 {
-    [SerializeField] private GameObject dynamitePrefab;
-    [SerializeField] private LaunchArcMesh launchArcMesh;
+    [Header("Cooldown Properties")]
     [SerializeField] private float coolDownTime = 5f;
     [SerializeField] private UI_Cooldowns uiCooldowns;
+
+    [Header("Overheat Properties")] 
+    [SerializeField] private float overheatAmount = 75.0f;
+    
+    [Header("Components")]
+    [SerializeField] private GameObject dynamitePrefab;
+    [SerializeField] private LaunchArcMesh launchArcMesh;
+    
     private float nextFireTime = 5f;
 
     [SerializeField] private PlayerDrill playerDrillScript;
@@ -38,7 +45,7 @@ public class DynamiteThrow : MonoBehaviour
             GameObject thrownDynamite = Instantiate(dynamitePrefab, transform.position, transform.rotation);
             thrownDynamite.GetComponent<Rigidbody>().velocity = launchArcMesh.GetLaunchAngle() * launchArcMesh.GetLaunchVelocity();
             nextFireTime = 0;
-            playerDrillScript.IncreaseOverheatAmount(50.0f);
+            playerDrillScript.IncreaseOverheatAmount(overheatAmount);
         }
     }
 }
