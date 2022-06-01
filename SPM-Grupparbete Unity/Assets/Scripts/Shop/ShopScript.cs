@@ -75,6 +75,8 @@ public class ShopScript : MonoBehaviour
     private GameObject playerOne;
     private GameObject playerTwo;
 
+    private GameObject playersParent;
+
     private PlayerController playerControllerOne;
     private PlayerController playerControllerTwo;
 
@@ -84,6 +86,7 @@ public class ShopScript : MonoBehaviour
     {
         playerUI = GameObject.Find("UI/PlayerUI");
         playerCD = GameObject.Find("UI/Cooldowns");
+        playersParent = GameObject.Find("Players");
 
         shopCostsArray = new List<int[]>() {healCost, weaponCost, speedCost, discoCost, drillLevel1Cost, drillLevel2Cost, drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost, droneCost};
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
@@ -254,14 +257,20 @@ public class ShopScript : MonoBehaviour
             if (m_PlayerState.m_LocalPlayerData.BlueCrystals >= healCost[0])
             {
                 m_PlayerState.Heal();
-                if (!playerOne.activeInHierarchy)
+                if (playerOne == null)
                 {
-                    playerOne.SetActive(true);
+                    GameObject playerOneTemp = playersParent.transform.Find("Player1").gameObject;
+                    playerOneTemp.SetActive(true);
+                    playerOneTemp.transform.position = playerTwo.transform.position;
+
                 }
 
-                if (!playerTwo.activeInHierarchy)
+                if (playerTwo == null)
                 {
-                    playerTwo.SetActive(true);
+                    GameObject playerTwoTemp = playersParent.transform.Find("Player2").gameObject;
+                    playerTwoTemp.SetActive(true);
+                    playerTwoTemp.transform.position = playerOne.transform.position;
+                    
                 }
                 m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCost[0];
                 healButton.interactable = false;
