@@ -9,16 +9,16 @@ using Cinemachine;
 
 public class CameraShake : MonoBehaviour
 {
-    private static CameraShake instance;
-
-    private CinemachineBrain cmBrain;
-    
     public static CameraShake Instance { 
         get 
         {
             return instance;
         }
     }
+    
+    private static CameraShake instance;
+
+    private CinemachineBrain cmBrain;
 
     private CinemachineVirtualCamera activeCamera;
 
@@ -28,6 +28,19 @@ public class CameraShake : MonoBehaviour
     private float startMagnitude;
 
     private CinemachineBasicMultiChannelPerlin cmBasicMultiChannelPerlin;
+
+    public void ShakeCamera(float magnitude, float duration)
+    {
+        
+        FindActiveCamera();
+        
+        cmBasicMultiChannelPerlin = activeCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cmBasicMultiChannelPerlin.m_AmplitudeGain = magnitude;
+
+        startMagnitude = magnitude;
+        totalCameraShakeTime = duration;
+        cameraShakeTime = duration;
+    }
 
     private void Awake()
     {
@@ -57,19 +70,6 @@ public class CameraShake : MonoBehaviour
                 }
             }
         }
-    }
-    
-    public void ShakeCamera(float magnitude, float duration)
-    {
-        
-        FindActiveCamera();
-        
-        cmBasicMultiChannelPerlin = activeCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        cmBasicMultiChannelPerlin.m_AmplitudeGain = magnitude;
-
-        startMagnitude = magnitude;
-        totalCameraShakeTime = duration;
-        cameraShakeTime = duration;
     }
 
     private void FindActiveCamera()

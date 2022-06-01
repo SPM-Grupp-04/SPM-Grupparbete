@@ -31,18 +31,6 @@ public class LaunchArcMesh : MonoBehaviour
 
     private Vector3 newTrajectoryPoint;
 
-    public float GetLaunchVelocity()
-    {
-        return velocity;
-    }
-
-    public Vector3 GetLaunchAngle()
-    {
-        Quaternion rotation = Quaternion.AngleAxis(angle, transform.forward);
-        Vector3 localDirection = rotation * transform.forward + transform.up;
-        return localDirection.normalized;
-    }
-
     private void Awake()
     {
         trajectoryMesh = GetComponent<MeshFilter>().mesh;
@@ -70,6 +58,18 @@ public class LaunchArcMesh : MonoBehaviour
         {
             DisableTrajectoryArc();
         }
+    }
+    
+    public float GetLaunchVelocity()
+    {
+        return velocity;
+    }
+
+    public Vector3 GetLaunchAngle()
+    {
+        Quaternion rotation = Quaternion.AngleAxis(angle, transform.forward);
+        Vector3 localDirection = rotation * transform.forward + transform.up;
+        return localDirection.normalized;
     }
 
     public void TrajectoryInput(InputAction.CallbackContext trajectoryInputValue)

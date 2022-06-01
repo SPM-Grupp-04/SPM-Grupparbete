@@ -91,16 +91,6 @@ public class PlayerController : MonoBehaviour
             playerInput.SwitchCurrentActionMap("Player");
         }
     }
-    
-    private void OnEnable()
-    {
-        playerInput.actions["SwitchMap"].performed += SwitchActionMap;
-    }
-
-    private void OnDisable()
-    {
-        playerInput.actions["SwitchMap"].performed -= SwitchActionMap;
-    }
 
     public void SwitchActionMap(InputAction.CallbackContext SwitchMap)
     {
@@ -133,93 +123,6 @@ public class PlayerController : MonoBehaviour
         {
             pauseMenuUI.GetComponent<UI_PausMenu>().Pause();
         }
-    }
-
-    private void RestrictMovement()
-    {
-        Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
-        currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
-        currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
-
-        Vector3 otherPlayerVelocity = otherPlayerController.PlayerVelocity;
-        
-        if (currentPlayerCameraView.x <= 0.05 || currentPlayerCameraView.x >= 0.95f)
-        {
-            if (otherPlayerVelocity.x > 0.0f)
-            {
-                otherPlayerController.PlayerVelocity = new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z);
-            }
-
-            if (otherPlayerVelocity.x < 0.0f)
-            {
-                otherPlayerController.PlayerVelocity = new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z);
-            }
-        }
-        if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
-        {
-            if (otherPlayerVelocity.z > 0.0f)
-            {
-                otherPlayerController.PlayerVelocity = new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y,
-                    -otherPlayerVelocity.z);
-            }
-            if (otherPlayerVelocity.z < 0.0f)
-            {
-                otherPlayerController.PlayerVelocity = new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z);
-            }
-        }
-        
-        Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
-        
-        transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
-    }
-    
-    private void FixOverlapPenetration()
-    {
-        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-            boxCollider.transform.rotation, wallLayerMask);
-
-        while (colliderCount > 0)
-        {
-            for (int i = 0; i < colliderCount; i++)
-            {
-                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
-                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
-                        out var direction, out var distance))
-                {
-                    Vector3 separationVector = direction * distance;
-                    transform.position += separationVector + separationVector.normalized * colliderMargin;
-                }
-            }
-            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
-                boxCollider.transform.rotation, wallLayerMask);
-        }
-    }
-
-    private void PlayerMovement()
-    {
-        if (movementEnabled)
-        {
-            UpdatePlayer();
-            FixOverlapPenetration();
-        }
-        else
-        {
-            velocity = Vector3.zero;
-        }
-    }
-
-    private void UpdatePlayer()
-    {
-        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
-        {
-            UpdatePlayerRotationKeyBoardAndMouse();
-        }
-
-        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
-        {
-            UpdatePlayerRotationGamePad();
-        }
-        transform.position += velocity * movementAcceleration * Time.deltaTime;
     }
 
     public Vector3 PlayerVelocity
@@ -346,5 +249,101 @@ public class PlayerController : MonoBehaviour
         return hitInfo.point;
     }
     
+    private void RestrictMovement()
+    {
+        Vector3 currentPlayerCameraView = mainCamera.WorldToViewportPoint(transform.position);
+        currentPlayerCameraView.x = Mathf.Clamp01(currentPlayerCameraView.x);
+        currentPlayerCameraView.y = Mathf.Clamp01(currentPlayerCameraView.y);
+
+        Vector3 otherPlayerVelocity = otherPlayerController.PlayerVelocity;
+        
+        if (currentPlayerCameraView.x <= 0.05 || currentPlayerCameraView.x >= 0.95f)
+        {
+            if (otherPlayerVelocity.x > 0.0f)
+            {
+                otherPlayerController.PlayerVelocity = new Vector3(-otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z);
+            }
+
+            if (otherPlayerVelocity.x < 0.0f)
+            {
+                otherPlayerController.PlayerVelocity = new Vector3(+otherPlayerVelocity.x, otherPlayerVelocity.y, otherPlayerVelocity.z);
+            }
+        }
+        if (currentPlayerCameraView.y <= 0.05f || currentPlayerCameraView.y >= 0.95f)
+        {
+            if (otherPlayerVelocity.z > 0.0f)
+            {
+                otherPlayerController.PlayerVelocity = new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y,
+                    -otherPlayerVelocity.z);
+            }
+            if (otherPlayerVelocity.z < 0.0f)
+            {
+                otherPlayerController.PlayerVelocity = new Vector3(otherPlayerVelocity.x, otherPlayerVelocity.y, +otherPlayerVelocity.z);
+            }
+        }
+        
+        Vector3 currentPlayerPosInWorldPoint = mainCamera.ViewportToWorldPoint(currentPlayerCameraView);
+        
+        transform.position = new Vector3(currentPlayerPosInWorldPoint.x, transform.position.y, currentPlayerPosInWorldPoint.z);
+    }
+    
+    private void FixOverlapPenetration()
+    {
+        int colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+            boxCollider.transform.rotation, wallLayerMask);
+
+        while (colliderCount > 0)
+        {
+            for (int i = 0; i < colliderCount; i++)
+            {
+                if (Physics.ComputePenetration(boxCollider, boxCollider.transform.position, boxCollider.transform.rotation,
+                        penetrationColliders[i], penetrationColliders[i].gameObject.transform.position, penetrationColliders[i].gameObject.transform.rotation,
+                        out var direction, out var distance))
+                {
+                    Vector3 separationVector = direction * distance;
+                    transform.position += separationVector + separationVector.normalized * colliderMargin;
+                }
+            }
+            colliderCount = Physics.OverlapBoxNonAlloc(transform.position, boxCollider.size / 2, penetrationColliders,
+                boxCollider.transform.rotation, wallLayerMask);
+        }
+    }
+
+    private void PlayerMovement()
+    {
+        if (movementEnabled)
+        {
+            UpdatePlayer();
+            FixOverlapPenetration();
+        }
+        else
+        {
+            velocity = Vector3.zero;
+        }
+    }
+
+    private void UpdatePlayer()
+    {
+        if (playerInput.currentControlScheme.Equals(KeyboardAndMouseControlScheme))
+        {
+            UpdatePlayerRotationKeyBoardAndMouse();
+        }
+
+        if (playerInput.currentControlScheme.Equals(GamepadControlScheme))
+        {
+            UpdatePlayerRotationGamePad();
+        }
+        transform.position += velocity * movementAcceleration * Time.deltaTime;
+    }
+    
+    private void OnEnable()
+    {
+        playerInput.actions["SwitchMap"].performed += SwitchActionMap;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions["SwitchMap"].performed -= SwitchActionMap;
+    }
   
 }
