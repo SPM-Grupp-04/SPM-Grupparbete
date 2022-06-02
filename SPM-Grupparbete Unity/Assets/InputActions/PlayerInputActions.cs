@@ -109,15 +109,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""EnterDynamiteThrowMode"",
-                    ""type"": ""Button"",
-                    ""id"": ""0a6c6e6f-4221-430c-816c-77e0f2210986"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""87d8f1e3-1346-44b2-9a5b-991b9747d3fd"",
@@ -148,15 +139,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Shield"",
                     ""type"": ""Button"",
                     ""id"": ""b7275ac2-e73d-4a35-8dab-7e6832e3dde1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ThrowDynamite"",
-                    ""type"": ""Button"",
-                    ""id"": ""dc2ed2d0-0cfd-4cb1-9485-d4130f4c0bcd"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -371,12 +353,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""15df9ba3-00f1-4fec-bcd7-7521d7408a3f"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": ""Hold"",
+                    ""id"": ""c1462fac-da3c-4467-b9a4-e9f04b66285c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""EnterDynamiteThrowMode"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""TrajectoryIncrease"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -443,17 +425,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Shield"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""62afb796-adc1-46f2-a40c-5de88e1257b0"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ThrowDynamite"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1123,12 +1094,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_TrajectoryIncrease = m_Player.FindAction("TrajectoryIncrease", throwIfNotFound: true);
-        m_Player_EnterDynamiteThrowMode = m_Player.FindAction("EnterDynamiteThrowMode", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Navigate = m_Player.FindAction("Navigate", throwIfNotFound: true);
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
-        m_Player_ThrowDynamite = m_Player.FindAction("ThrowDynamite", throwIfNotFound: true);
         m_Player_SwitchMap = m_Player.FindAction("SwitchMap", throwIfNotFound: true);
         m_Player_SpawnTeleport = m_Player.FindAction("SpawnTeleport", throwIfNotFound: true);
         // UI
@@ -1213,12 +1182,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Load;
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_TrajectoryIncrease;
-    private readonly InputAction m_Player_EnterDynamiteThrowMode;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_Navigate;
     private readonly InputAction m_Player_Shield;
-    private readonly InputAction m_Player_ThrowDynamite;
     private readonly InputAction m_Player_SwitchMap;
     private readonly InputAction m_Player_SpawnTeleport;
     public struct PlayerActions
@@ -1234,12 +1201,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Load => m_Wrapper.m_Player_Load;
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @TrajectoryIncrease => m_Wrapper.m_Player_TrajectoryIncrease;
-        public InputAction @EnterDynamiteThrowMode => m_Wrapper.m_Player_EnterDynamiteThrowMode;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @Navigate => m_Wrapper.m_Player_Navigate;
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
-        public InputAction @ThrowDynamite => m_Wrapper.m_Player_ThrowDynamite;
         public InputAction @SwitchMap => m_Wrapper.m_Player_SwitchMap;
         public InputAction @SpawnTeleport => m_Wrapper.m_Player_SpawnTeleport;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1278,9 +1243,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @TrajectoryIncrease.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTrajectoryIncrease;
                 @TrajectoryIncrease.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTrajectoryIncrease;
                 @TrajectoryIncrease.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTrajectoryIncrease;
-                @EnterDynamiteThrowMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
-                @EnterDynamiteThrowMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
-                @EnterDynamiteThrowMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterDynamiteThrowMode;
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
@@ -1293,9 +1255,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Shield.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
                 @Shield.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
                 @Shield.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
-                @ThrowDynamite.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
-                @ThrowDynamite.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
-                @ThrowDynamite.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowDynamite;
                 @SwitchMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
                 @SwitchMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
                 @SwitchMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchMap;
@@ -1333,9 +1292,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @TrajectoryIncrease.started += instance.OnTrajectoryIncrease;
                 @TrajectoryIncrease.performed += instance.OnTrajectoryIncrease;
                 @TrajectoryIncrease.canceled += instance.OnTrajectoryIncrease;
-                @EnterDynamiteThrowMode.started += instance.OnEnterDynamiteThrowMode;
-                @EnterDynamiteThrowMode.performed += instance.OnEnterDynamiteThrowMode;
-                @EnterDynamiteThrowMode.canceled += instance.OnEnterDynamiteThrowMode;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -1348,9 +1304,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Shield.started += instance.OnShield;
                 @Shield.performed += instance.OnShield;
                 @Shield.canceled += instance.OnShield;
-                @ThrowDynamite.started += instance.OnThrowDynamite;
-                @ThrowDynamite.performed += instance.OnThrowDynamite;
-                @ThrowDynamite.canceled += instance.OnThrowDynamite;
                 @SwitchMap.started += instance.OnSwitchMap;
                 @SwitchMap.performed += instance.OnSwitchMap;
                 @SwitchMap.canceled += instance.OnSwitchMap;
@@ -1538,12 +1491,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnLoad(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnTrajectoryIncrease(InputAction.CallbackContext context);
-        void OnEnterDynamiteThrowMode(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnNavigate(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
-        void OnThrowDynamite(InputAction.CallbackContext context);
         void OnSwitchMap(InputAction.CallbackContext context);
         void OnSpawnTeleport(InputAction.CallbackContext context);
     }

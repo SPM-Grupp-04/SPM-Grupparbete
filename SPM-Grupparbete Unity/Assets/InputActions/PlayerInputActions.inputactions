@@ -87,15 +87,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EnterDynamiteThrowMode",
-                    "type": "Button",
-                    "id": "0a6c6e6f-4221-430c-816c-77e0f2210986",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "87d8f1e3-1346-44b2-9a5b-991b9747d3fd",
@@ -126,15 +117,6 @@
                     "name": "Shield",
                     "type": "Button",
                     "id": "b7275ac2-e73d-4a35-8dab-7e6832e3dde1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ThrowDynamite",
-                    "type": "Button",
-                    "id": "dc2ed2d0-0cfd-4cb1-9485-d4130f4c0bcd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -349,12 +331,12 @@
                 },
                 {
                     "name": "",
-                    "id": "15df9ba3-00f1-4fec-bcd7-7521d7408a3f",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "Hold",
+                    "id": "c1462fac-da3c-4467-b9a4-e9f04b66285c",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "EnterDynamiteThrowMode",
+                    "groups": "Keyboard&Mouse",
+                    "action": "TrajectoryIncrease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -421,17 +403,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Shield",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "62afb796-adc1-46f2-a40c-5de88e1257b0",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "ThrowDynamite",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
