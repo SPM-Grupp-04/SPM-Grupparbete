@@ -16,24 +16,24 @@ public class EnemyDynamite : MonoBehaviour
     [SerializeField] [Range(1.0f, 20.0f)] private float explosionRadius = 7.5f;
     [SerializeField] [Range(1.0f, 35.0f)] private float explosionDamage = 15.0f;
 
-    [Header("Explosion Layer Masks")] [SerializeField]
-    private LayerMask groundLayerMask;
+    [Header("Explosion Layer Masks")] 
+    [SerializeField] private LayerMask groundLayerMask;
 
     [SerializeField] private LayerMask enemyLayerMask;
     
     [Header("Explosion Light")] 
     [SerializeField] private float explosionLightDuration = 1.0f;
 
-    [Header("Particle System")] [SerializeField]
-    private float particleSystemPlayDuration = 5.0f;
+    [Header("Particle System")] 
+    [SerializeField] private float particleSystemPlayDuration = 5.0f;
 
     private float particleSystemCountdown;
     private float explosionCountdown;
 
     private bool hasExploded;
 
-    [Header("Components")] [SerializeField]
-    private GameObject dynamiteExplosionPrefab;
+    [Header("Components")] 
+    [SerializeField] private GameObject dynamiteExplosionPrefab;
 
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private Rigidbody sphereRigidBody;
@@ -45,8 +45,6 @@ public class EnemyDynamite : MonoBehaviour
     [SerializeField] private Light dynamiteExplosionLight;
 
     [SerializeField] private AudioSource dynamiteExplosionAudioSource;
-
-    [SerializeField] private AudioSource dynamiteFuseAudioSource;
 
     private Collider[] playerColliders = new Collider[2];
 
@@ -62,7 +60,6 @@ public class EnemyDynamite : MonoBehaviour
         fallingRocksSpawner = FallingRocksSpawner.Instance;
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
-        dynamiteFuseAudioSource.Play();
     }
 
     void FixedUpdate()
@@ -134,8 +131,6 @@ public class EnemyDynamite : MonoBehaviour
     private void DisableDynamiteFuse()
     {
         dynamiteFuseLight.enabled = false;
-
-        dynamiteFuseAudioSource.Stop();
     }
 
     private void Explode()
