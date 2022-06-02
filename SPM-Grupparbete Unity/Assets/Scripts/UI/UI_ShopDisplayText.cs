@@ -58,45 +58,45 @@ public class UI_ShopDisplayText : MonoBehaviour
             case "HealButton":
                 header = "Heal";
                 SetPriceShopText(0);
-                body = "This heals the player, many HP";
+                body = "This heals the player and revives dead robots";
                 break;
             case "WeaponButton":
                 header = "Weapon Upgrade";
                 SetPriceShopText(1);
-                body = "This makes laser go far";
+                body = "Weapon reaches even further";
                 break;
             case "SpeedButton":
                 header = "Speed Upgrade";
                 SetPriceShopText(2);
-                body = "This makes players gor wroom";
+                body = "This makes the players go faster";
                 break;
             case "DrillButton":
-                header = "Drill Upgrade";
+                header = "Drill One";
                 SetPriceShopText(4);
-                body = "This makes drill go brrrr";
+                body = "Upgrades the drill so you can get through blue wall";
                 break;
             case "DrillButton2":
-                header = "Drill 2";
+                header = "Drill Two";
                 SetPriceShopText(5);
-                body = "This makes drill go even more BBBRRRRRRRR";
+                body = "Upgrades the drill so you can mine the red crystals and walls";
                 break;
             case "DrillButton3":
-                header = "Drill 3";
+                header = "Drill Three";
                 SetPriceShopText(6);
-                body = "This makes drill go even more BBBRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR";
+                body = "With this upgrade you will be able to mine the green crystals and walls";
                 break;
             case "Health1Button":
-                header = "Health 1";
+                header = "Health One";
                 SetPriceShopText(7);
                 body = "Player gets 10 extra HP";
                 break;
             case "Health2Button":
-                header = "Health 2";
+                header = "Health Two";
                 SetPriceShopText(8);
                 body = "Player gets 20 extra HP";
                 break;
             case "Health3Button":
-                header = "Health 3";
+                header = "Health Three";
                 SetPriceShopText(9);
                 body = "Player gets 30 extra HP";
                 break;
