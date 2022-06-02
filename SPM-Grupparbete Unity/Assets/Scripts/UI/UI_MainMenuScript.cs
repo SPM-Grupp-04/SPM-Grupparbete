@@ -54,7 +54,7 @@ using UnityEngine.EventSystems;
         {
             
             StartCoroutine(LoadAsynchronusly(sceneToLoad));
-            
+            playerStats.ResetPlayerStatistics();
         }
 
         public void Quit()

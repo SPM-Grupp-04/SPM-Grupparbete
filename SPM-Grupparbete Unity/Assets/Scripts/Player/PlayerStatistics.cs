@@ -59,6 +59,11 @@ public class PlayerStatistics
         }
     }
 
+    public void ResetPlayerStatistics()
+    {
+        instance = new PlayerStatistics();
+    }
+
 
 
 }
