@@ -23,7 +23,7 @@ namespace Utility
             if (victorNumber >= 5)
             {
                 animator.enabled = true;
-             Debug.Log("Hallo");
+           
                 Time.timeScale = 0;
                 animator.SetTrigger("CloseDoor");
             }
@@ -44,6 +44,7 @@ namespace Utility
 
         public void SendToCreditScene()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(4);
         }
 
