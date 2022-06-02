@@ -292,8 +292,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: -0.12, z: 0}
+  m_Radius: 0.3
+  m_Center: {x: 0, y: -0.21, z: 0}
 --- !u!1 &8996644487487078773
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,8 +341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f146a1f21d162c4eba395ef1b98de78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDelay: 3
-  explosionRadius: 7.5
+  explosionDelay: 2
+  explosionRadius: 5
   explosionDamage: 15
   groundLayerMask:
     serializedVersion: 2
@@ -468,15 +468,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43c6d6021686c4b439cc5aa1d7388069, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43c6d6021686c4b439cc5aa1d7388069, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43c6d6021686c4b439cc5aa1d7388069, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43c6d6021686c4b439cc5aa1d7388069, type: 3}
       propertyPath: m_LocalPosition.x
