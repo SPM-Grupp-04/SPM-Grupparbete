@@ -2,8 +2,26 @@ fileFormatVersion: 2
 guid: c93cfc10c0c78994cb8607a00d695e32
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Elevator1
+    second: {fileID: 2100000, guid: 9f0bd99882e78e244b9e20c9360431fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Galler
+    second: {fileID: 2100000, guid: 9933bd739653c9c42bcd82298c990758, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hub_Wall_Floor
+    second: {fileID: 2100000, guid: fd1a8530fb47ae44ba3e047e0a047183, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +106,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.5
+    globalScale: 50
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
