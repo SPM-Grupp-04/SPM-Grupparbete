@@ -149,7 +149,7 @@ public class EnemyDynamite : MonoBehaviour
         
         foreach (Collider enemyObject in playerColliders)
         {
-            if (enemyObject != null)
+            if (enemyObject != null && !enemyObject.GetComponent<PlayerController>().InsideShield)
             {
                 var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, explosionDamage);
                 EventSystem.current.FireEvent(damageEvent);   
