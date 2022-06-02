@@ -1554,19 +1554,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 7666623249729998697}
-  rockToThrow: {fileID: 7467092179448219033, guid: d0c21e217aa831646988b1c43d19ea14, type: 3}
+  rockToThrow: {fileID: 7646669235002524932, guid: e0039f4711ec35b4fa675358fe1aed68, type: 3}
   animator: {fileID: 7666623249729998698}
   lineRenderer: {fileID: 2928163713158931680}
   lineRendererTwo: {fileID: 2928163713159613182}
   rockThrowPosition: {fileID: 2928163713559858329}
   firePoint: {fileID: 2928163714414702610}
   firePointTwo: {fileID: 2928163713033930847}
-  checkForMeleeAttackFOV: 3
+  checkForMeleeAttackFOV: 5
   checkForLaserFOV: 15
   checkForRangeAttackFOV: 20
   checkIfIShouldMoveToPlayerFOV: 30
-  laserAttackRange: 0
-  throwForce: 30
+  laserAttackRange: 8
+  throwForce: 15
   throwUpForce: 2
   waypoints:
   - {fileID: 0}
