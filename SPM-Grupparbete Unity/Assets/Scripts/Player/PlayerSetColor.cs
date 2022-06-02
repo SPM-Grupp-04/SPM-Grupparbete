@@ -12,7 +12,7 @@ public class PlayerSetColor : MonoBehaviour
         if (this.name == "Player1")
         {
             Color color = skinnedMeshRenderer.material.color;
-            if (PlayerStatistics.Instance.playerOneColor == null)
+            if (PlayerStatistics.Instance.playerOneColor == null || PlayerStatistics.Instance.playerOneColor.Length == 0)
             {
                 color.r = 0.15f;
                 color.g = 0.75f;
@@ -30,7 +30,7 @@ public class PlayerSetColor : MonoBehaviour
         else
         {   
             Color color = skinnedMeshRenderer.material.color;
-            if (PlayerStatistics.Instance.playerTwoColor == null)
+            if (PlayerStatistics.Instance.playerTwoColor == null || PlayerStatistics.Instance.playerTwoColor.Length == 0)
             {
                 color.r = 0.75f;
                 color.g = 0.75f;
