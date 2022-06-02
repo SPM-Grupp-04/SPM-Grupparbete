@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!244 &-8921999006488493098
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: 28f097a5a584b7a449a1501b87197c09
-  m_EffectName: Attenuation
-  m_MixLevel: cad87bf86ade64c4a94bf779c6279294
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &-8764055488202761405
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -345,7 +331,6 @@ AudioMixerController:
     name: VolumeControl
   m_AudioMixerGroupViews:
   - guids:
-    - ef491a9c5d8054c47adea6de636cbcc1
     - e0a53bd3b6d53694fa789f3d10c869f6
     - a215d91da5eae86418df60585ec84a4b
     - e57e941685d77f446afdecba5ec0ebfb
@@ -374,7 +359,6 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 7c2e77b3757c40d4694e2a5ede9fb2a9
   m_Children:
-  - {fileID: 5393946063359533256}
   - {fileID: 2173928358223785198}
   - {fileID: 5412683874146711352}
   - {fileID: -427010372331295900}
@@ -435,7 +419,7 @@ AudioMixerSnapshotController:
     0b43f5088729ac54d9edbf6b068229a6: -24.162651
     22024b88159c1ed40b7271ef4b5ac3a6: -22.00363
     e1528b7a2a2786b478f43ff8171e13d3: -24.900742
-    914d182c61ee07a4da070fdf831c7e01: -51.098442
+    914d182c61ee07a4da070fdf831c7e01: -44.307575
     e047cccc48822b749adf5495428f4b33: -40.607674
     82555b7df867d0d4185f700c51cda76a: -80
     62eee6be1180f2142abd74097de978e1: -27.169544
@@ -540,25 +524,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!243 &5393946063359533256
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Enemies
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: ef491a9c5d8054c47adea6de636cbcc1
-  m_Children: []
-  m_Volume: 67e70843a62903f408f8d52ab86ab454
-  m_Pitch: 0fe78df8299e9d94593db870750b9b3e
-  m_Send: 00000000000000000000000000000000
-  m_Effects:
-  - {fileID: -8921999006488493098}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
 --- !u!243 &5412683874146711352
 AudioMixerGroupController:
   m_ObjectHideFlags: 0

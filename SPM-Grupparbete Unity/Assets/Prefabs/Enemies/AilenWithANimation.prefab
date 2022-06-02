@@ -517,6 +517,7 @@ GameObject:
   - component: {fileID: 4736492482025062305}
   - component: {fileID: 4736492482025062304}
   - component: {fileID: 8621888504284002617}
+  - component: {fileID: 7610987150569200191}
   m_Layer: 7
   m_Name: AilenWithANimation
   m_TagString: Enemy
@@ -631,7 +632,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8119148383959461208, guid: a009776a98b2bac43870ee56512a5ad6, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5aebe69e35698dd4084b7e40c0f57ff5, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -717,6 +718,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7610987150569200191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5582791183511601909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9741dcb8497c5b4a871c480faea69ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioOne: {fileID: 8300000, guid: a2862daabc28fe24d80b56ed9cc7c747, type: 3}
+  audioTwo: {fileID: 8300000, guid: 90c15a78f7b1e9243976b648576f8ee5, type: 3}
+  audioThree: {fileID: 8300000, guid: c048591f5f4bed6469e362d89a61c6ee, type: 3}
 --- !u!1 &5674085065593037230
 GameObject:
   m_ObjectHideFlags: 0
