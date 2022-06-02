@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Utility
 {
@@ -11,14 +12,39 @@ namespace Utility
         {
             victorNumber = GlobalControl.Instance.playerStatistics.componentsCollectedNumber;
             animator = GetComponent<Animator>();
+            animator.enabled = false;
+
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
+            if(!other.gameObject.CompareTag("Player")) {return;}
             
-            Time.timeScale = 0;
-            animator.SetBool("doorOpen",victorNumber >= 5 );
+            if (victorNumber >= 5)
+            {
+                animator.enabled = true;
+             Debug.Log("Hallo");
+                Time.timeScale = 0;
+                animator.SetTrigger("CloseDoor");
+            }
+        }
+
+        /*private void OnCollisionEnter(Collision collision)
+        {
+            if(!collision.gameObject.CompareTag("Player")) {return;}
             
+            if (victorNumber >= 5)
+            {
+             
+                Time.timeScale = 0;
+                animator.SetBool("doorOpen",true );   
+            }
+            
+        }*/
+
+        public void SendToCreditScene()
+        {
+            SceneManager.LoadScene(4);
         }
 
         /*
