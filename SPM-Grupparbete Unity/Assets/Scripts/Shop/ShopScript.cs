@@ -428,6 +428,10 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.GreenCrystals -= droneCost[2];
             DisableShopButton(droneButton);
             UpdateShop(droneButton);
+            GameObject drones = GameObject.Find("Drones");
+            drones.transform.Find("Drone").GetComponent<SetDroneToActive>().SetDronesActive();
+            drones.transform.Find("Drone (1)").GetComponent<SetDroneToActive>().SetDronesActive();
+
         }
     }
     
