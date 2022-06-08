@@ -20,7 +20,7 @@ public class PlayerDynamite : MonoBehaviour
     [SerializeField] private LayerMask enemyLayerMask;
 
     [Header("Explosion Light")] 
-    [SerializeField] private float explosionLightDuration = 5.0f;
+    [SerializeField] private float explosionLightDuration = 1.0f;
     
     [Header("Particle System")]
     [SerializeField] private float particleSystemPlayDuration = 5.0f;
@@ -54,11 +54,9 @@ public class PlayerDynamite : MonoBehaviour
     private Vector3 capsulePoint1;
     private Vector3 capsulePoint2;
 
-    private float explosionLightTime;
-    
     private float particleSystemCountdown;
     private float explosionCountdown;
-    
+
     private bool hasExploded;
 
     private void Start()
@@ -66,7 +64,6 @@ public class PlayerDynamite : MonoBehaviour
         fallingRocksSpawner = FallingRocksSpawner.Instance;
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
-        explosionLightTime = explosionLightDuration;
         dynamiteFuseAudioSource.Play();
     }
 
@@ -111,12 +108,27 @@ public class PlayerDynamite : MonoBehaviour
         } while (particleSystemCountdown > 0.0f);
         DestroyGameObjects();
     }
+
+    private IEnumerator ReduceExplosionLightTime()
+    {
+        float t = 0;
+        do
+        {
+            t += Time.deltaTime * (1.0f / explosionLightDuration);
+            dynamiteExplosionLight.intensity = Mathf.Lerp(200.0f, 
+                0.0f,
+                t);
+            yield return null;
+        } while (t < 1.0f);
+
+        dynamiteExplosionLight.intensity = 0.0f;
+    }
     
     private void ExplodeDynamiteAndDisableDynamiteFuse()
     {
         DisableDynamiteFuse();
 
-        Explode();
+        ExplodeDynamite();
     }
 
     private void DisableDynamiteFuse()
@@ -128,13 +140,15 @@ public class PlayerDynamite : MonoBehaviour
         dynamiteFuseParticleSystem.Stop();
     }
     
-    private void Explode()
+    private void ExplodeDynamite()
     {
         dynamiteExplosion = Instantiate(dynamiteExplosionPrefab, transform.position, Quaternion.identity);
         
         dynamiteExplosionAudioSource.Play();
         
         dynamiteExplosionLight.enabled = true;
+
+        StartCoroutine(ReduceExplosionLightTime());
 
         capsuleCollider.enabled = false;
         

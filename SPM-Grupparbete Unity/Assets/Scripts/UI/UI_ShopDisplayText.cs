@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_ShopDisplayText : MonoBehaviour
 {
-    [SerializeField] private Text textHeader;
-    [SerializeField] private Text textCostBlue;
-    [SerializeField] private Text textCostRed;
-    [SerializeField] private Text textCostGreen;
-    [SerializeField] private Text textBody;
+    [SerializeField] private TextMeshProUGUI textHeader;
+    [SerializeField] private TextMeshProUGUI textCostBlue;
+    [SerializeField] private TextMeshProUGUI textCostRed;
+    [SerializeField] private TextMeshProUGUI textCostGreen;
+    [SerializeField] private TextMeshProUGUI textBody;
     [SerializeField] private GameObject shop;
     private ShopScript shopScript;
     List<int[]> shopCostsArray;
@@ -44,7 +45,8 @@ public class UI_ShopDisplayText : MonoBehaviour
      * drillLevel3Cost, 6
      * healthLevel1Cost, 7
      * healthLevel2Cost, 8
-     * healthLevel3Cost} 9
+     * healthLevel3Cost, 9
+     * droneCost, 10
      */
 
     public void DisplayText(GameObject gameObject)
@@ -98,20 +100,25 @@ public class UI_ShopDisplayText : MonoBehaviour
                 SetPriceShopText(9);
                 body = "Player gets 30 extra HP";
                 break;
+            case "DroneButton":
+                header = "Drone";
+                SetPriceShopText(10);
+                body = "Players get a drone that mines and shoots";
+                break;
         }
         
         
-        textHeader.fontSize = 70;
+        textHeader.fontSize = 40;
         textHeader.text += header + "\n";
         
-        textCostBlue.fontSize = 40;
+        textCostBlue.fontSize = 35;
         textCostBlue.text += costBlue + "\n";
-        textCostRed.fontSize = 40;
+        textCostRed.fontSize = 35;
         textCostRed.text += costRed + "\n";
-        textCostGreen.fontSize = 40;
+        textCostGreen.fontSize = 35;
         textCostGreen.text += costGreen + "\n";
         
-        textBody.fontSize = 25;
+        textBody.fontSize = 35;
         textBody.text += body;
     }
 

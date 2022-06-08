@@ -14,7 +14,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (collision.transform.tag.Equals("Currency"))
         {
             collision.gameObject.GetComponent<OreCollection>().CollectOre();
-            //audioManager.PlayCrystalPickUpSound();
+            audioManager.PlayCrystalPickUpSound();
             switch (collision.gameObject.GetComponent<OreCollection>().GetName())
             {
                 case "Blue":

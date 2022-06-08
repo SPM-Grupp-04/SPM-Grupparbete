@@ -14,16 +14,13 @@ public class PlayerDrill : MonoBehaviour
     private PlayerStatistics playerStatistics = PlayerStatistics.Instance;
 
     [SerializeField] private LayerMask igenoreMask;
-
-    
     [SerializeField] private float overHeatAmount = 0;
     [SerializeField] private float overHeatIncreaseAmount = 0.5f;
     [SerializeField] private float overHeatDecreaseAmount = 1f;
     [SerializeField] private float coolDownTimerStart = 2f;
     private int drillDamageOres = 1;
     private int drillDamageMonsters = 1;
-    
-    
+
     //[SerializeField] Material lrMaterial;
     private LineRenderer lr;
     [SerializeField] private Material[] beamMaterials;
@@ -42,7 +39,11 @@ public class PlayerDrill : MonoBehaviour
     [SerializeField] private float drillDistance = 3;
     [SerializeField] private float laserDistance = 10;
 
-    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioSource drillSource, weaponSource;
+    [SerializeField] private AudioSource sourceOverHeat;
+    [SerializeField] private AudioClip drillSound, weaponSound, overHeatSound;
+
+    private PlayerController playerController;
     
     private GameObject laserPoint;
     private GameObject drillPoint;
@@ -77,6 +78,7 @@ public class PlayerDrill : MonoBehaviour
         drillPoint = transform.Find("DrillPoint").gameObject;
         laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
         lr = GetComponent<LineRenderer>();
+        playerController = GetComponentInParent<PlayerController>();
         DrillDamage();
         WeaponLevel();
         laserHit.transform.parent = null;
@@ -86,6 +88,11 @@ public class PlayerDrill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!UI_PausMenu.GameIsPause)
+        {
+            ShootOrDrill();
+        }
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -126,11 +133,35 @@ public class PlayerDrill : MonoBehaviour
         }
     }
     
+    private void ShootOrDrill()
+    {
+        if (playerController.IsShooting)
+        {
+            Shoot(true);
+            DrillInUse(true);
+            Drill(false);
+            return;
+        }
+
+        if (playerController.IsDrilling)
+        {
+            Shoot(false);
+            Drill(true);
+            DrillInUse(true);
+            return;
+        }
+
+        DrillInUse(false);
+        Shoot(false);
+        Drill(false);
+        
+    }
+    
     private void DrillObject()
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        
+        PlayDrillSound();
         if (drillRing.isPlaying == false && drillEmission.isPlaying == false)
         {
             drillRing.Play();
@@ -151,14 +182,16 @@ public class PlayerDrill : MonoBehaviour
         drillHit.enabled = false;
         LaserBetweenPoints(transform.position, drillPoint.transform.position, 1);
     }
+
     
+
     private void ShootObject()
     {
         RaycastHit shootHit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         if (overHeatAmount <= 100 && canShoot && isShooting)
         {
-            
+            PlayWeaponSound();
             if (laserRing.isPlaying == false && laserEmission.isPlaying == false)
             {
                 laserRing.Play();
@@ -189,11 +222,7 @@ public class PlayerDrill : MonoBehaviour
         {
             if (timer <= 0 && canShoot)
             {
-                if (!source.isPlaying)
-                {
-                    source.Play();
-                }
-
+                PlayOverHeatSound();
                 lr.enabled = false;
                 canShoot = false;
                 timer = coolDownTimerStart;
@@ -251,6 +280,8 @@ public class PlayerDrill : MonoBehaviour
         {
             lr.enabled = false;
         }
+
+        weaponSource.Stop();
         laserEmission.Stop();
         laserEmission.Clear();
         laserRing.Stop();
@@ -265,6 +296,7 @@ public class PlayerDrill : MonoBehaviour
         {
             lr.enabled = false;
         }
+        drillSource.Stop();
         drillEmission.Stop();
         drillEmission.Clear();
         drillRing.Stop();
@@ -344,6 +376,33 @@ public class PlayerDrill : MonoBehaviour
                 laserDistance = 20f;
                 laserPoint.transform.localPosition = new Vector3(0,0.75f,laserDistance);
                 break;
+        }
+    }
+    
+    private void PlayDrillSound()
+    {
+        
+        if (!drillSource.isPlaying && isDrilling)
+        {
+            drillSource.Play();
+        }
+    }
+
+    private void PlayOverHeatSound()
+    {
+      
+            sourceOverHeat.PlayOneShot(overHeatSound);
+        
+    }
+
+
+
+    private void PlayWeaponSound()
+    {
+        
+        if (!weaponSource.isPlaying && isShooting)
+        {
+            weaponSource.Play();
         }
     }
 

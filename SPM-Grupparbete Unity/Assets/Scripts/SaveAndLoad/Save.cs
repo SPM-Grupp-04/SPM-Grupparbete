@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class Save : MonoBehaviour
         
         public GameObject loadingScreen;
         public Slider Slider;
-        public Text progressText;
+        public TextMeshProUGUI progressText;
         private void Awake()
         {
             goal = GetComponent<BoxCollider>();

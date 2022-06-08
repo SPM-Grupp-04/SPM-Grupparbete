@@ -1,6 +1,7 @@
  using System.Collections;
 using System.Collections.Generic;
  using System.IO;
+ using TMPro;
  using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
@@ -15,7 +16,7 @@ using UnityEngine.EventSystems;
 
     public GameObject loadingScreen;
     public Slider Slider;
-    public Text progressText;
+    public TextMeshProUGUI progressText;
 
    // [SerializeField] private GameObject settingsMenu;
     // Start is called before the first frame update

@@ -1,8 +1,6 @@
 //author: Simon Canb�ck, sica4801
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -20,7 +18,7 @@ public class ComponentPickupScript : MonoBehaviour
     void Start()
     {
         
-        text.enabled = false;
+        canvas.SetActive(false);
         //checks if the mask contains the value for the component
         if ((PlayerStatistics.Instance.componentsCollectedMask & (int)componentNumber) > 0)
             Destroy(gameObject);
@@ -34,26 +32,17 @@ public class ComponentPickupScript : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void OnTriggerStay(Collider collision)
     {
-        if (!collision.gameObject.CompareTag("Player") )
+        if (!collision.gameObject.CompareTag("Player"))
             return;
-        text.enabled = true;
+        canvas.SetActive(true);
         canvas.transform.rotation = Camera.main.transform.rotation;
         if (collision.gameObject.GetComponent<PlayerController>().IsUseButtonPressed())
         {
             //the mask now contains the value for the component
             PlayerStatistics.Instance.componentsCollectedMask |= (int)componentNumber;
             GlobalControl.Instance.playerStatistics.componentsCollectedMask = PlayerStatistics.Instance.componentsCollectedMask;
-            
-
-            // texten sätts på och av när animationen spelas, kolla på det.
-            //text.enabled = false;
             vfx.Play();
             
             StartCoroutine(Delay());
@@ -63,7 +52,8 @@ public class ComponentPickupScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        text.enabled = false;
+        
+        canvas.SetActive(false);
     }
 
     IEnumerator Delay()
