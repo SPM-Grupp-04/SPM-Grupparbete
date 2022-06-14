@@ -9,16 +9,18 @@ using Cinemachine;
 
 public class CameraShake : MonoBehaviour
 {
-    private static CameraShake instance;
-    
     public static CameraShake Instance { 
         get 
         {
             return instance;
         }
     }
+    
+    private static CameraShake instance;
 
-    [SerializeField] private CinemachineVirtualCamera cmVirtualCamera;
+    private CinemachineBrain cmBrain;
+
+    private CinemachineVirtualCamera activeCamera;
 
     private float cameraShakeTime;
     private float totalCameraShakeTime;
@@ -26,6 +28,19 @@ public class CameraShake : MonoBehaviour
     private float startMagnitude;
 
     private CinemachineBasicMultiChannelPerlin cmBasicMultiChannelPerlin;
+
+    public void ShakeCamera(float magnitude, float duration)
+    {
+        
+        FindActiveCamera();
+        
+        cmBasicMultiChannelPerlin = activeCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cmBasicMultiChannelPerlin.m_AmplitudeGain = magnitude;
+
+        startMagnitude = magnitude;
+        totalCameraShakeTime = duration;
+        cameraShakeTime = duration;
+    }
 
     private void Awake()
     {
@@ -37,22 +52,13 @@ public class CameraShake : MonoBehaviour
         {
             instance = this;
         }
-        cmBasicMultiChannelPerlin =
-            cmVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-    }
-
-    public void ShakeCamera(float magnitude, float duration)
-    {
-        cmBasicMultiChannelPerlin.m_AmplitudeGain = magnitude;
-
-        startMagnitude = magnitude;
-        totalCameraShakeTime = duration;
-        cameraShakeTime = duration;
+        
+        cmBrain = FindObjectOfType<CinemachineBrain>();
     }
 
     private void Update()
     {
-        if (cmVirtualCamera != null)
+        if (activeCamera != null)
         {
             if (cameraShakeTime > 0.0f)
             {
@@ -64,5 +70,10 @@ public class CameraShake : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void FindActiveCamera()
+    {
+        activeCamera = cmBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
     }
 }

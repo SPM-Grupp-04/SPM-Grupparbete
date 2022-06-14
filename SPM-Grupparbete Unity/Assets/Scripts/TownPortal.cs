@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,13 +14,15 @@ public class TownPortal : MonoBehaviour
 
     public GameObject loadingScreen;
 
-    public Text progressText;
+    public TextMeshProUGUI progressText;
 
     [Header("Private")] [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject camera;
 
+    private GameObject players;
     private GameObject playerOne;
     private GameObject playerTwo;
+    private GameObject drones;
     private GameObject drone;
     private GameObject droneOne;
     private GameObject copyOfParticleSystem;
@@ -31,12 +34,14 @@ public class TownPortal : MonoBehaviour
 
     private void Start()
     {
-        playerOne = GameObject.Find("Player1");
-        playerTwo = GameObject.Find("Player2");
+        players = GameObject.Find("Players");
+        playerOne = players.transform.Find("Player1").gameObject;
+        playerTwo = players.transform.Find("Player2").gameObject;
         
 //        Debug.Log(playerOne + " PlayerOne" + playerTwo + " PlayerTwo");
-        droneOne = GameObject.Find("Drone (1)");
-        drone = GameObject.Find("Drone");
+        drones = GameObject.Find("Drones");
+        droneOne = drones.transform.Find("Drone (1)").gameObject;
+        drone = drones.transform.Find("Drone").gameObject;
         transEnable = GameObject.Find("Trans");
         gameObject.SetActive(false);
     }
@@ -73,22 +78,28 @@ public class TownPortal : MonoBehaviour
                 playerOne.transform.position =
                     new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition); // Hamnar på 800/0/550
             }
+            else
+            {
+                playerOne.transform.position =
+                    new Vector3(HubZoneShopPosition, 3, HubZoneShopPosition);
+            }
 
             if (playerTwo.activeInHierarchy)
             {
                 playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition + 1);
             }
-
-            if (drone.activeInHierarchy)
+            else
             {
+                playerTwo.transform.position = new Vector3(HubZoneShopPosition + 1, 3, HubZoneShopPosition + 1);
+
+            }
+
                 drone.transform.position = new Vector3(playerOne.transform.position.x,
                     playerOne.transform.position.y +3, playerOne.transform.position.z);
-            }
-            if (droneOne.activeInHierarchy)
-            {
+            
                 droneOne.transform.position = new Vector3(playerOne.transform.position.x,
                     playerOne.transform.position.y +3, playerOne.transform.position.z);
-            }
+            
 
             StartCoroutine(waitUntillActivate());
         }
@@ -111,7 +122,7 @@ public class TownPortal : MonoBehaviour
             progressText.text = progress * 100f + "%";
             yield return null;
         }
-
+        loadingScreen.SetActive(false);
         StartCoroutine(FakeLoadTime());
     }
 

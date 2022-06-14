@@ -11,9 +11,8 @@ public class PlayerSetColor : MonoBehaviour
         skinnedMeshRenderer = GameObject.Find("Players/" + this.name + "/Character2_New/player_model_low_new").GetComponent<SkinnedMeshRenderer>();
         if (this.name == "Player1")
         {
-            
             Color color = skinnedMeshRenderer.material.color;
-            if (PlayerStatistics.Instance.playerOneColor.Length == 0)
+            if (PlayerStatistics.Instance.playerOneColor == null || PlayerStatistics.Instance.playerOneColor.Length == 0)
             {
                 color.r = 0.15f;
                 color.g = 0.75f;
@@ -29,9 +28,9 @@ public class PlayerSetColor : MonoBehaviour
             skinnedMeshRenderer.material.color = color;
         }
         else
-        {
+        {   
             Color color = skinnedMeshRenderer.material.color;
-            if (PlayerStatistics.Instance.playerTwoColor.Length == 0)
+            if (PlayerStatistics.Instance.playerTwoColor == null || PlayerStatistics.Instance.playerTwoColor.Length == 0)
             {
                 color.r = 0.75f;
                 color.g = 0.75f;

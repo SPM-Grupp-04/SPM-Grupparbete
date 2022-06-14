@@ -2,6 +2,7 @@
 //additional programming: Simon Canbäck, sica4801
 
 using System.Collections.Generic;
+
 [System.Serializable]
 public class PlayerStatistics
 {
@@ -13,7 +14,9 @@ public class PlayerStatistics
     public float playerOneAcceleration = 5.0f;
     public float playerTwoAcceleration = 5.0f;
     public bool playerOneDisco = false;
+
     public bool playerTwoDisco = false;
+
     // public string Scene;
     public float PosX, PosY, PosZ;
     public int Crystals;
@@ -28,9 +31,6 @@ public class PlayerStatistics
     public Dictionary<string, bool> buttonDictionary;
     public float[] playerOneColor;
     public float[] playerTwoColor;
-    
-
-
 
 
     private PlayerStatistics()
@@ -59,6 +59,14 @@ public class PlayerStatistics
         }
     }
 
+    public void ResetPlayerStatistics()
+    {
+        float[] playerOneSaveColor = playerOneColor;
+        float[] playerTwoSaveColor = playerTwoColor;
 
-
+        instance = new PlayerStatistics();
+        
+        instance.playerOneColor = playerOneSaveColor;
+        instance.playerTwoColor = playerTwoSaveColor;
+    }
 }

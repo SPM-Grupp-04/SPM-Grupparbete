@@ -75,6 +75,8 @@ public class ShopScript : MonoBehaviour
     private GameObject playerOne;
     private GameObject playerTwo;
 
+    private GameObject playersParent;
+
     private PlayerController playerControllerOne;
     private PlayerController playerControllerTwo;
 
@@ -84,6 +86,7 @@ public class ShopScript : MonoBehaviour
     {
         playerUI = GameObject.Find("UI/PlayerUI");
         playerCD = GameObject.Find("UI/Cooldowns");
+        playersParent = GameObject.Find("Players");
 
         shopCostsArray = new List<int[]>() {healCost, weaponCost, speedCost, discoCost, drillLevel1Cost, drillLevel2Cost, drillLevel3Cost, healthLevel1Cost, healthLevel2Cost, healthLevel3Cost, droneCost};
         buttonDictionary = PlayerStatistics.Instance.buttonDictionary;
@@ -134,11 +137,17 @@ public class ShopScript : MonoBehaviour
         
         playerOne = GameObject.Find("Players/Player1");
         playerTwo = GameObject.Find("Players/Player2");
-        playerControllerOne = playerOne.GetComponent<PlayerController>();
-        playerControllerTwo = playerTwo.GetComponent<PlayerController>();
+        if (playerOne != null)
+        {
+            playerControllerOne = playerOne.GetComponent<PlayerController>();
+            playerOneDrill = GameObject.Find("Players/Player1/Drill");
+        }
 
-        playerOneDrill = GameObject.Find("Players/Player1/Drill");
-        playerTwoDrill = GameObject.Find("Players/Player2/Drill");
+        if (playerTwo != null)
+        {
+            playerControllerTwo = playerTwo.GetComponent<PlayerController>();
+            playerTwoDrill = GameObject.Find("Players/Player2/Drill");
+        }
         
         shopCollider = GetComponent<SphereCollider>();
         m_PlayerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
@@ -156,13 +165,20 @@ public class ShopScript : MonoBehaviour
     
     private void Update()
     {
-        if (playerOne.activeInHierarchy)
+        if (playerOne != null)
         {
-            PlayerOneOpenShop();
+            if (playerOne.activeInHierarchy)
+            {
+                PlayerOneOpenShop();
+            }
         }
-        if (playerTwo.activeInHierarchy)
+        
+        if(playerTwo != null)
         {
-            PlayerTwoOpenShop();
+            if (playerTwo.activeInHierarchy)
+            {
+                PlayerTwoOpenShop();
+            }
         }
     }
 
@@ -200,8 +216,15 @@ public class ShopScript : MonoBehaviour
 
     private void SetPlayerMovement(bool value)
     {
-        playerControllerOne.SetMovementStatus(value);
-        playerControllerTwo.SetMovementStatus(value);
+        if (playerOne != null)
+        {
+            playerControllerOne.SetMovementStatus(value);
+            
+        }
+        if(playerTwo != null)
+        {
+            playerControllerTwo.SetMovementStatus(value);
+        }
     }
 
 
@@ -234,14 +257,20 @@ public class ShopScript : MonoBehaviour
             if (m_PlayerState.m_LocalPlayerData.BlueCrystals >= healCost[0])
             {
                 m_PlayerState.Heal();
-                if (!playerOne.activeInHierarchy)
+                if (playerOne == null)
                 {
-                    playerOne.SetActive(true);
+                    GameObject playerOneTemp = playersParent.transform.Find("Player1").gameObject;
+                    playerOneTemp.SetActive(true);
+                    playerOneTemp.transform.position = playerTwo.transform.position;
+
                 }
 
-                if (!playerTwo.activeInHierarchy)
+                if (playerTwo == null)
                 {
-                    playerTwo.SetActive(true);
+                    GameObject playerTwoTemp = playersParent.transform.Find("Player2").gameObject;
+                    playerTwoTemp.SetActive(true);
+                    playerTwoTemp.transform.position = playerOne.transform.position;
+                    
                 }
                 m_PlayerState.m_LocalPlayerData.BlueCrystals -= healCost[0];
                 healButton.interactable = false;
@@ -399,6 +428,10 @@ public class ShopScript : MonoBehaviour
             m_PlayerState.m_LocalPlayerData.GreenCrystals -= droneCost[2];
             DisableShopButton(droneButton);
             UpdateShop(droneButton);
+            GameObject drones = GameObject.Find("Drones");
+            drones.transform.Find("Drone").GetComponent<SetDroneToActive>().SetDronesActive();
+            drones.transform.Find("Drone (1)").GetComponent<SetDroneToActive>().SetDronesActive();
+
         }
     }
     

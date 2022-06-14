@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class UI_PlayerHealth : MonoBehaviour
     Color green = new Color(0, 103/255f, 0);
     Color yellow = new Color(103/255f, 103/255f, 0);
     Color red = new Color(103/255f, 0, 0);
+    
 
     private void Update()
     {
@@ -23,38 +25,21 @@ public class UI_PlayerHealth : MonoBehaviour
         ChangeHealthPlayerTwo(m_LocalPlayerDataTest.playerTwoHealth);
 
     }
+    
 
     private void ChangeHealthPlayerOne(float amount)
     {
+        sliderPlayerOne.maxValue = PlayerStatistics.Instance.playerMaxHealth;
+
         sliderPlayerOne.value = amount;
-        if (m_LocalPlayerDataTest.playerOneHealth >= 4)
-        {
-            barColourPlayerOne.color = green;
-        }
-        else if (m_LocalPlayerDataTest.playerOneHealth > 1 && m_LocalPlayerDataTest.playerOneHealth <= 3)
-        {
-            barColourPlayerOne.color = yellow;
-        }
-        else
-        {
-            barColourPlayerOne.color = red;
-        }
+        
    
     }
     private void ChangeHealthPlayerTwo(float amount)
     {
+        sliderPlayerTwo.maxValue = PlayerStatistics.Instance.playerMaxHealth;
+
         sliderPlayerTwo.value = amount;
-        if (m_LocalPlayerDataTest.playerTwoHealth >= 4)
-        {
-            barColourPlayerTwo.color = green;
-        }
-        else if (m_LocalPlayerDataTest.playerTwoHealth > 1 && m_LocalPlayerDataTest.playerTwoHealth <= 3)
-        {
-            barColourPlayerTwo.color = yellow;
-        }
-        else
-        {
-            barColourPlayerTwo.color = red;
-        }
+     
     }
 }

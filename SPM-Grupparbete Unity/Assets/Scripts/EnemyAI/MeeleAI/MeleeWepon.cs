@@ -40,4 +40,11 @@ public class MeleeWepon : MonoBehaviour
         animator.SetTrigger("Attack");
         otherP = other.gameObject;
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(!other.CompareTag("Player")) return;
+        
+        animator.SetBool("Run", true);
+    }
 }

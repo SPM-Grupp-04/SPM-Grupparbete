@@ -11,32 +11,32 @@ using UnityEngine.UI;
 
 public class EnemyDynamite : MonoBehaviour
 {
-    [Header("Explosion Properties")] [SerializeField] [Range(1.0f, 10.0f)]
-    private float explosionDelay = 3.0f;
-
+    [Header("Explosion Properties")] 
+    [SerializeField] [Range(1.0f, 10.0f)] private float explosionDelay = 3.0f;
     [SerializeField] [Range(1.0f, 20.0f)] private float explosionRadius = 7.5f;
+    [SerializeField] [Range(1.0f, 35.0f)] private float explosionDamage = 15.0f;
 
-    [Header("Explosion Layer Masks")] [SerializeField]
-    private LayerMask groundLayerMask;
+    [Header("Explosion Layer Masks")] 
+    [SerializeField] private LayerMask groundLayerMask;
 
     [SerializeField] private LayerMask enemyLayerMask;
     
     [Header("Explosion Light")] 
     [SerializeField] private float explosionLightDuration = 1.0f;
 
-    [Header("Particle System")] [SerializeField]
-    private float particleSystemPlayDuration = 5.0f;
+    [Header("Particle System")] 
+    [SerializeField] private float particleSystemPlayDuration = 5.0f;
 
     private float particleSystemCountdown;
     private float explosionCountdown;
 
     private bool hasExploded;
 
-    [Header("Components")] [SerializeField]
-    private GameObject dynamiteExplosionPrefab;
+    [Header("Components")] 
+    [SerializeField] private GameObject dynamiteExplosionPrefab;
 
-    [SerializeField] private CapsuleCollider capsuleCollider;
-    [SerializeField] private Rigidbody capsuleRigidBody;
+    [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private Rigidbody sphereRigidBody;
 
     [SerializeField] private MeshRenderer meshRenderer;
 
@@ -46,9 +46,7 @@ public class EnemyDynamite : MonoBehaviour
 
     [SerializeField] private AudioSource dynamiteExplosionAudioSource;
 
-    [SerializeField] private AudioSource dynamiteFuseAudioSource;
-
-    private Collider[] playerColliders;
+    private Collider[] playerColliders = new Collider[2];
 
     private FallingRocksSpawner fallingRocksSpawner;
 
@@ -60,13 +58,11 @@ public class EnemyDynamite : MonoBehaviour
     private void Start()
     {
         fallingRocksSpawner = FallingRocksSpawner.Instance;
-        playerColliders = new Collider[2];
         explosionCountdown = explosionDelay;
         particleSystemCountdown = particleSystemPlayDuration;
-        dynamiteFuseAudioSource.Play();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         ExplodeAfterDelayAndCollisionWithGround();
     }
@@ -83,14 +79,9 @@ public class EnemyDynamite : MonoBehaviour
 
     private bool DynamiteCollidedWithGround()
     {
-        capsulePoint1 = (capsuleCollider.center + Vector3.up * (capsuleCollider.height / 2 - capsuleCollider.radius)) +
-                        transform.position;
-        capsulePoint2 =
-            (capsuleCollider.center + Vector3.down * (capsuleCollider.height / 2 - capsuleCollider.radius)) +
-            transform.position;
-        Physics.CapsuleCast(capsulePoint2, capsulePoint1, capsuleCollider.radius, capsuleRigidBody.velocity.normalized,
-            out var capsuleCast, Mathf.Infinity, groundLayerMask);
-        return capsuleCast.collider;
+        Physics.SphereCast(transform.position, sphereCollider.radius, sphereRigidBody.velocity.normalized,
+            out var sphereCast, Mathf.Infinity, groundLayerMask);
+        return sphereCast.collider;
     }
 
     private IEnumerator DynamiteExplosion()
@@ -140,8 +131,6 @@ public class EnemyDynamite : MonoBehaviour
     private void DisableDynamiteFuse()
     {
         dynamiteFuseLight.enabled = false;
-
-        dynamiteFuseAudioSource.Stop();
     }
 
     private void Explode()
@@ -154,18 +143,24 @@ public class EnemyDynamite : MonoBehaviour
         
         StartCoroutine(ReduceExplosionLightTime());
 
-        capsuleCollider.enabled = false;
+        sphereCollider.enabled = false;
 
         Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, playerColliders, enemyLayerMask);
+        
         foreach (Collider enemyObject in playerColliders)
         {
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
-            EventSystem.current.FireEvent(damageEvent);
+            if (enemyObject != null && !enemyObject.GetComponent<PlayerController>().InsideShield)
+            {
+                var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, explosionDamage);
+                EventSystem.current.FireEvent(damageEvent);   
+            }
         }
 
         fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
         fallingRocksSpawner.SpawnRocks(true);
+        
         meshRenderer.enabled = false;
+        
     }
 
     private void DestroyGameObjects()

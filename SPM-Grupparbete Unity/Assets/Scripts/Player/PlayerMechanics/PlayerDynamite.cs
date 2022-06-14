@@ -14,6 +14,7 @@ public class PlayerDynamite : MonoBehaviour
     [Header("Explosion Properties")]
     [SerializeField] [Range(1.0f, 10.0f)] private float explosionDelay = 3.0f;
     [SerializeField] [Range(1.0f, 20.0f)] private float explosionRadius = 7.5f;
+    [SerializeField] [Range(1.0f, 35.0f)] private float explosionDamage = 15.0f;
     
     [Header("Explosion Layer Masks")]
     [SerializeField] private LayerMask groundLayerMask;
@@ -38,8 +39,6 @@ public class PlayerDynamite : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
 
     [SerializeField] private Light dynamiteExplosionLight;
-    
-    [SerializeField] private Light dynamiteFuseLight;
 
     [SerializeField] private AudioSource dynamiteExplosionAudioSource;
 
@@ -133,8 +132,6 @@ public class PlayerDynamite : MonoBehaviour
 
     private void DisableDynamiteFuse()
     {
-        dynamiteFuseLight.enabled = false;
-        
         dynamiteFuseAudioSource.Stop();
         
         dynamiteFuseParticleSystem.Stop();
@@ -153,15 +150,20 @@ public class PlayerDynamite : MonoBehaviour
         capsuleCollider.enabled = false;
         
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask);
+        
         foreach (Collider enemyObject in enemyColliders)
         {
-            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, 5);
+            var damageEvent = new DealDamageEventInfo(enemyObject.gameObject, explosionDamage);
             EventSystem.current.FireEvent(damageEvent);
         }
+        
         CameraShake.Instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration);
+        
         fallingRocksSpawner.SetFallingRockAreaPosition(transform.position);
         fallingRocksSpawner.SpawnRocks(true);
+        
         meshRenderer.enabled = false;
+        
     }
 
     private void DestroyGameObjects()

@@ -9,7 +9,7 @@ public class DropComponent : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         text.text = PlayerStatistics.Instance.componentsCollectedNumber + "/5";
     }

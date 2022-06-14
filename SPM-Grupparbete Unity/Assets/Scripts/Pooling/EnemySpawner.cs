@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
 {
     private ObjectPool<BaseEnemyAI> pool;
     private BaseEnemyAI enemy;
-    private Vector3 SpawnPos;
+    private Vector3 spawnPos;
     private BoxCollider boxCollider;
 
     private float totalProcent;
@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         boxCollider = GetComponent<BoxCollider>();
-        SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
+        spawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
 
         for (var i = 0; i < genericListOfBaseClassEnemyAI.Length; i++) // 2 gånger
         {
@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
         
         if (pool.CountActive < totalAllowedEnimesAtSpawner && timer > 0)
         {
-            SpawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
+            spawnPos = Random.insideUnitSphere + (transform.position * boxCollider.size.x * boxCollider.size.z);
             for (var i = 0; i < pool.CountInactive; i++)
             {
                 pool.Get();
@@ -115,7 +115,7 @@ public class EnemySpawner : MonoBehaviour
 
    private void OnTakeEnemyAIFromPool(BaseEnemyAI BaseEnemyAI)
     {
-        BaseEnemyAI.transform.position = SpawnPos;
+        BaseEnemyAI.transform.position = spawnPos;
         BaseEnemyAI.gameObject.SetActive(true);
       
     }

@@ -16,7 +16,7 @@ public class UI_ChangeColorPlayerHud : MonoBehaviour
     void Start()
     {
         Color color = playerOneHud.color;
-        if (PlayerStatistics.Instance.playerOneColor.Length == 0)
+        if (PlayerStatistics.Instance.playerOneColor == null || PlayerStatistics.Instance.playerOneColor.Length == 0)
         {
             color.r = 0.15f;
             color.g = 0.75f;
@@ -33,7 +33,7 @@ public class UI_ChangeColorPlayerHud : MonoBehaviour
         playerOneFillOH.color = color;
         playerOneFillHP.color = color;
         
-        if (PlayerStatistics.Instance.playerTwoColor.Length == 0)
+        if (PlayerStatistics.Instance.playerTwoColor == null || PlayerStatistics.Instance.playerTwoColor.Length == 0)
         {
             color.r = 0.75f;
             color.g = 0.75f;

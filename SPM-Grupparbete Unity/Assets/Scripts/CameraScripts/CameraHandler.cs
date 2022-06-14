@@ -32,7 +32,7 @@ public class CameraHandler : MonoBehaviour
     private Vector3 directionCtoA;
     private Vector3 directionCtoB;
     private const float FOVMULTIPLIER = 3.3f;
-    private const int FOVMIN = 25;
+    private const int FOVMIN = 35;
     private const int FOVMAX = 45;
 
     private Vector3 LenghtBetweenPlayers;

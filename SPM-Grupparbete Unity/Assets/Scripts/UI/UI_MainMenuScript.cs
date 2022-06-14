@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 {
     private PlayerStatistics playerStats = PlayerStatistics.Instance;
 
-    [SerializeField] private GameObject firstSelected;
+    [SerializeField] private Button firstSelected;
     [SerializeField] private int sceneToLoad = 0;
 
     public GameObject loadingScreen;
@@ -23,8 +23,7 @@ using UnityEngine.EventSystems;
     void Start()
     {
        // gameObject.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
+        firstSelected.Select();
     }
 
   
@@ -55,7 +54,7 @@ using UnityEngine.EventSystems;
         {
             
             StartCoroutine(LoadAsynchronusly(sceneToLoad));
-            
+            playerStats.ResetPlayerStatistics();
         }
 
         public void Quit()
